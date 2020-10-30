@@ -1,0 +1,94 @@
+version: '2.2'
+services:
+  ecc-consumer: 
+    image: rdlabengpa/ids_execution_core_container:v1.6.4
+    ports:
+      - 8090:8081  #Port for exposing HTTP endpoints 
+      - 8887:8887  #Exposed port for receiving data from the Data APP
+      - 8889:8889  #Exposed port for receiving data from another connector (REST)
+      - 8086:8086  #Exposed port for receiving data from another connector (WS)
+    environment:
+       - "SPRING_PROFILES_ACTIVE=docker"  
+       - DATA_APP_ENDPOINT=https://be-dataapp-consumer:8083/incoming-data-app/routerBodyBinary     #Data APP enpoint for consuming received data 
+      #- DATA_APP_ENDPOINT=https://be-dataapp-consumer:8083/incoming-data-app/routerHttpHeader 
+      #- DATA_APP_ENDPOINT=https://be-dataapp-consumer:8083/incoming-data-app/routerBodyFormData
+       - MULTIPART=mixed  #Data APP endpoint multipart/mixed content type
+      #- MULTIPART=http-header       #Data APP endpoint http-headers specifications 
+      #- MULTIPART=form   #Data APP enspoint multipart/form-data content type
+       - CLEARING_HOUSE=http://109.232.32.193:8280/data
+       - IDSCP=false
+       - WS_OVER_HTTPS=false
+       - REST_ENABLE_HTTPS=true
+       - UC_DATAAPP_URI=http://uc-dataapp-consumer:9552
+    volumes:
+      - ./ecc_resources:/config
+      - ./ecc_cert:/cert
+    hostname: ecc-consumer
+    extra_hosts:
+      - "ecc-producer:172.17.0.1"
+
+  uc-dataapp-consumer:
+    image: rdlabengpa/ids_uc_data_app:v0.0.2
+    ports:
+      - "9552:9552"
+      - "8043:43"
+    hostname: uc-dataapp-consumer
+
+  be-dataapp-consumer:
+    image: rdlabengpa/ids_be_data_app:v0.0.1
+    environment:
+       - "SPRING_PROFILES_ACTIVE=docker"  
+       - WS_OVER_HTTPS=false
+    ports:
+      - "8083:8083"
+      - "9000:9000"
+    hostname: be-dataapp-consumer
+    volumes:
+      - ./be-dataapp_resources:/config
+
+  ecc-producer: 
+    image: rdlabengpa/ids_execution_core_container:v1.6.4
+    ports:
+      - 8091:8081  #Port for exposing HTTP endpoints 
+      - 8888:8887  #Exposed port for receiving data from the Data APP
+      - 8890:8889  #Exposed port for receiving data from another connector (REST)
+      - 8087:8086  #Exposed port for receiving data from another connector (WS)
+    environment:
+       - "SPRING_PROFILES_ACTIVE=docker"  
+       - DATA_APP_ENDPOINT=https://be-dataapp-producer:8083/incoming-data-app/routerBodyBinary     #Data APP enpoint for consuming received data 
+      #- DATA_APP_ENDPOINT=https://be-dataapp-producer:8083/incoming-data-app/routerHttpHeader 
+      #- DATA_APP_ENDPOINT=https://be-dataapp-producer:8083/incoming-data-app/routerBodyFormData
+       - MULTIPART=mixed  #Data APP endpoint multipart/mixed content type
+      #- MULTIPART=http-header       #Data APP endpoint http-headers specifications 
+      #- MULTIPART=form   #Data APP enspoint multipart/form-data content type
+       - CLEARING_HOUSE=http://109.232.32.193:8280/data
+       - IDSCP=false
+       - WS_OVER_HTTPS=false
+       - REST_ENABLE_HTTPS=true
+       - UC_DATAAPP_URI=http://uc-dataapp-producer:9552
+    volumes:
+      - ./ecc_resources:/config
+      - ./ecc_cert:/cert
+    hostname: ecc-producer
+    extra_hosts:
+      - "ecc-consumer:172.17.0.1"
+
+  uc-dataapp-producer:
+    image: rdlabengpa/ids_uc_data_app:v0.0.2
+    ports:
+      - "9553:9552"
+      - "8044:43"
+    hostname: uc-dataapp-producer
+
+  be-dataapp-producer:
+    image:  rdlabengpa/ids_be_data_app:v0.0.1
+    environment:
+       - "SPRING_PROFILES_ACTIVE=docker"  
+       - WS_OVER_HTTPS=false
+    ports:
+      - "8084:8083"
+      - "9001:9000"
+    hostname: be-dataapp-producer  
+    volumes:
+      - ./be-dataapp_resources:/config
+
