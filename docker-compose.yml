@@ -19,7 +19,7 @@ services:
        - IDSCP=false
        - WS_OVER_HTTPS=false
        - REST_ENABLE_HTTPS=true
-       - UC_DATAAPP_URI=http://uc-dataapp-consumer:9552
+       - UC_DATAAPP_URI=http://uc-dataapp-consumer:9555
     volumes:
       - ./ecc_resources:/config
       - ./ecc_cert:/cert
@@ -30,7 +30,7 @@ services:
   uc-dataapp-consumer:
     image: rdlabengpa/ids_uc_data_app:v0.0.2
     ports:
-      - "9552:9552"
+      - "9552:9555"
       - "8043:43"
     hostname: uc-dataapp-consumer
 
@@ -65,7 +65,7 @@ services:
        - IDSCP=false
        - WS_OVER_HTTPS=false
        - REST_ENABLE_HTTPS=true
-       - UC_DATAAPP_URI=http://uc-dataapp-producer:9552
+       - UC_DATAAPP_URI=http://uc-dataapp-producer:9555
     volumes:
       - ./ecc_resources:/config
       - ./ecc_cert:/cert
@@ -76,7 +76,7 @@ services:
   uc-dataapp-producer:
     image: rdlabengpa/ids_uc_data_app:v0.0.2
     ports:
-      - "9553:9552"
+      - "9553:9555"
       - "8044:43"
     hostname: uc-dataapp-producer
 
