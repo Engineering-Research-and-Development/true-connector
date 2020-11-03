@@ -1,6 +1,6 @@
-#Usage control examples
+# Usage control examples
 
-##Time-Based Interval Rule
+## Time-Based Interval Rule
 
 The following rule describes the time interval in which it is allowed to access the resource with a specific identifier defined using the “target” property of the rule.
 
@@ -37,7 +37,7 @@ The snippet below is located an example of time-based rule: leftOperand is the s
 }
 ```
 
-##Modifier Rule
+## Modifier Rule
 
 ### Anonymize
 The following rule describes an example of modifier rule, anonymize, which will modify the payload response using json path. The current limitation is that the payload must be json string in order to be able to apply rules with modifiers.
@@ -195,7 +195,7 @@ The snippet below is located an example of spatial-based rule: the rightOperand 
 }
 ```
 
-##Purpose-Based Rule
+## Purpose-Based Rule
 
 The purpose-based class of rules allows or inhibits the usage of resources with an identifier defined in the target property based on message purpose.
 
@@ -224,7 +224,7 @@ In the snippet below is located an example of spatial-based rule: the rightOpera
 }
 ```
 
-##Complex Rule
+## Complex Rule
 
 Rules can be composed in order to create complex permission definitions. The following rule describes a complex based rule, which contains 3 simple rules: spatial, purpose and time interval based. All those simple rules must be evaluated as true in order to allow the usage of the resource. If any of the simple rules is evaluated as false, then the resource usage is inhibited.
 
