@@ -21,7 +21,7 @@ services:
        - REST_ENABLE_HTTPS=true
        - UC_DATAAPP_URI=http://uc-dataapp-consumer:9555
     volumes:
-      - ./ecc_resources:/config
+      - ./ecc_resources_consumer:/config
       - ./ecc_cert:/cert
     hostname: ecc-consumer
     extra_hosts:
