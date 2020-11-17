@@ -1,5 +1,20 @@
 # Usage control examples
 
+## Importing rule in UsageControl dataApp
+
+Until negotiation process is not implemented, provided UsageControl dataApp exposes endpoint for importing rules. Following endpoint can be found at:
+
+```
+http://{IPADDRESS}:9553/swagger-ui.html
+```
+
+Here, you can import rules, using endpoint
+
+```
+/odrl-policy-controller/addPolicyUsingPOST
+```
+
+
 ## Time-Based Interval Rule
 
 The following rule describes the time interval in which it is allowed to access the resource with a specific identifier defined using the “target” property of the rule.

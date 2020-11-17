@@ -204,9 +204,69 @@ The TRUE Connector supports is able to communicate with the ENG Clearing House f
 
 The TRUE Connector integrates some endpoints for interacting with an IDS Broker:
 
-* XXX
-* XXX
-* XXX
+### SelfDescription
+
+Self Description document, in json format, for connector, can be found at following URL - GET request
+
+```
+https://{IPADDRESS}:8091/selfDescription
+```
+
+### Registration request
+
+In order to register to broker, following endpoint can be used to send register request. 
+
+/selfRegistration/register
+
+```
+curl --location --request POST 'https://{IPADDRESS}:8888/selfRegistration/register' \
+--header 'Forward-To: http://broker_url/infrastructure'
+```
+
+### Update registration request
+In order to register update existing registration, following endpoint can be used to send update request. 
+
+/selfRegistration/update
+
+```
+curl --location --request POST 'https://{IPADDRESS}:8888/selfRegistration/update' \
+--header 'Forward-To: http://broker_url/infrastructure'
+```
+			
+### Delete registration request
+In order to delete broker registration, following endpoint can be used to send delete request. 
+
+/selfRegistration/delete
+
+```
+curl --location --request POST 'https://{IPADDRESS}:8888/selfRegistration/delete' \
+--header 'Forward-To: http://broker_url/infrastructure'
+```
+			
+### Passivate broker registration
+In order to passivate broker registration, following endpoint can be used to send passivate request. 
+
+/selfRegistration/passivate
+
+```
+curl --location --request POST 'https://{IPADDRESS}:8888/selfRegistration/passivate' \
+--header 'Forward-To: http://broker_url/infrastructure'
+```
+			
+### Query broker
+In order to query broker, following endpoint can be used to send register request. 
+
+/selfRegistration/query
+
+```
+curl --location --request POST 'https://{IPADDRESS}:8888/selfRegistration/query' \
+--header 'Forward-To: http://localhost:8080/infrastructure' \
+--header 'Content-Type: text/plain' \
+--data-raw 'PREFIX ids: <https://w3id.org/idsa/core/>
+SELECT ?connectorUri WHERE { ?connectorUri a ids:BaseConnector . } '
+```
+
+{ At the moment, broker supports only multipart/mixed requests, this means that connector will have to be configured to mulitpar/mixed configuration. }
 
 ## Usage Control
 The TRUE Connector integrates the [Fraunhofer MyData Framework](https://www.mydata-control.de/) for implementing the Usage Control. Details about the PMP and PEP components can be found [here](doc/USAGE_CONTROL_RULES.md). 
