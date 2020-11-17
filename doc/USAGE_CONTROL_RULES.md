@@ -2,7 +2,7 @@
 
 ## Importing rule in UsageControl dataApp
 
-Until negotiation process is not implemented, provided UsageControl dataApp exposes endpoint for importing rules. Following endpoint can be found at:
+Until negotiation process is implemented, provided UsageControl dataApp exposes endpoint for importing rules. Following endpoint can be found at:
 
 ```
 http://{IPADDRESS}:9553/swagger-ui.html
