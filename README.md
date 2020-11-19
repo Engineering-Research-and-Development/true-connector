@@ -1,11 +1,11 @@
 # TRUE CONNECTOR
-TRUE (TRUsted Engineering) Connector for the IDS (International Data Space) ecosystem
+**TRUE** (**TRU**sted **E**ngineering) **Connector** for the IDS (International Data Space) ecosystem
 
 The TRUE Connector is composed of three components:
 
-* Execution Core Container (ECC), open-source project designed by ENG. It is in charge of the data exchange through the IDS ecosystem representing data using the IDS Information Model and interacting with an external Identity Provider. It is also able to communicate with an IDS Broker for registering and querying information.
-* Back-End (BE) Data Application, open-source project designed by ENG. It represents a trivial data application for generating and consuming data on top of the ECC component.
-* Usage-Control (UC) Data Application, a customized version of the Fraunhofer IESE base application for integrating the MyData Framework (a Usage Control Framework designed and implemented by Fraunhofer IESE) in a connector.
+* **Execution Core Container (ECC)**, open-source project designed by ENG. It is in charge of the data exchange through the IDS ecosystem representing data using the IDS Information Model and interacting with an external Identity Provider. It is also able to communicate with an IDS Broker for registering and querying information.
+* **Back-End (BE) Data Application**, open-source project designed by ENG. It represents a trivial data application for generating and consuming data on top of the ECC component.
+* **Usage-Control (UC) Data Application**, a customized version of the Fraunhofer IESE base application for integrating the MyData Framework (a Usage Control Framework designed and implemented by Fraunhofer IESE) in a connector.
 
 ![TRUE Connector Architecture](doc/TRUE_Connector_Architecture.png?raw=true "TRUE Connector Architecture")
 
@@ -13,11 +13,11 @@ The TRUE Connector is composed of three components:
 
 The configuration should be performed customizing the following variables in the **docker-compose** file:
 
-* **DATA*_APP*_ENDPOINT=192.168.56.1:8083/incoming-data-app/dataAppIncomingMessageReceiver** DataAPP endpoint for receiveing data (F endpoint in the above picture)
+* **DATA_APP_ENDPOINT=192.168.56.1:8083/incoming-data-app/dataAppIncomingMessageReceiver** DataAPP endpoint for receiveing data (F endpoint in the above picture)
 * **MULTIPART=mixed** DataAPP endpoint Content Type (choose mixed for Multipart/mixed or form for Multipart/form-data or http-header for Multipart/http-header) 
-* Edit externayhgt5rl port if need (default values: **8086** for **web sockets IDSCP and WS over HTTPS**, **8090** for **http**, **8887** for **A endpoint** and  **8889** for **B endpoint**)
+* Edit external ports if need (default values: **8086** for **web sockets IDSCP and WS over HTTPS**, **8090** for **http**, **8887** for **A endpoint** and  **8889** for **B endpoint**)
 
-###Supported Identity Providers
+### Supported Identity Providers
 
 The TRUE Connector is able to interact with the following Identity Providers:
 
@@ -271,7 +271,7 @@ SELECT ?connectorUri WHERE { ?connectorUri a ids:BaseConnector . } '
 ## Usage Control
 The TRUE Connector integrates the [Fraunhofer MyData Framework](https://www.mydata-control.de/) for implementing the Usage Control. Details about the PMP and PEP components can be found [here](doc/USAGE_CONTROL_RULES.md). 
 
-##License
+## License
 The TRUE Connector components are released following different licenses:
 
 * **Execution Core Container**, open-source distributed under the license AGPLv3
