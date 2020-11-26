@@ -1,7 +1,7 @@
 version: '2.2'
 services:
-  ecc-consumer: 
-    image: rdlabengpa/ids_execution_core_container:v1.6.4
+  ecc-provider: 
+    image: rdlabengpa/ids_execution_core_container:v1.6.9
     ports:
       - 8090:8081  #Port for exposing HTTP endpoints 
       - 8887:8887  #Exposed port for receiving data from the Data APP
@@ -27,15 +27,15 @@ services:
     extra_hosts:
       - "ecc-producer:172.17.0.1"
 
-  uc-dataapp-consumer:
+  uc-dataapp-provider:
     image: rdlabengpa/ids_uc_data_app:v0.0.2
     ports:
       - "9552:9555"
       - "8043:43"
     hostname: uc-dataapp-consumer
 
-  be-dataapp-consumer:
-    image: rdlabengpa/ids_be_data_app:v0.0.1
+  be-dataapp-provider:
+    image: rdlabengpa/ids_be_data_app:v0.0.5
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - WS_OVER_HTTPS=false
@@ -45,9 +45,10 @@ services:
     hostname: be-dataapp-consumer
     volumes:
       - ./be-dataapp_resources:/config
+      - ./be-dataapp_data:/data
 
-  ecc-producer: 
-    image: rdlabengpa/ids_execution_core_container:v1.6.4
+  ecc-consumer: 
+    image: rdlabengpa/ids_execution_core_container:v1.6.9
     ports:
       - 8091:8081  #Port for exposing HTTP endpoints 
       - 8888:8887  #Exposed port for receiving data from the Data APP
@@ -73,15 +74,15 @@ services:
     extra_hosts:
       - "ecc-consumer:172.17.0.1"
 
-  uc-dataapp-producer:
+  uc-dataapp-consumer:
     image: rdlabengpa/ids_uc_data_app:v0.0.2
     ports:
       - "9553:9555"
       - "8044:43"
     hostname: uc-dataapp-producer
 
-  be-dataapp-producer:
-    image:  rdlabengpa/ids_be_data_app:v0.0.1
+  be-dataapp-consumer:
+    image:  rdlabengpa/ids_be_data_app:v0.0.5
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - WS_OVER_HTTPS=false
@@ -91,4 +92,5 @@ services:
     hostname: be-dataapp-producer  
     volumes:
       - ./be-dataapp_resources:/config
+      - ./be-dataapp_data:/data
 
