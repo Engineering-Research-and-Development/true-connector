@@ -27,7 +27,7 @@ The snippet below is located an example of time-based rule: leftOperand is the s
 	"@type": "ids:ContractAgreement",
 	"uid": "http://example.com/policy/restrict-access-interval",
 	"profile": "http://example.com/ids-profile",
-	"target": "http://mdm-connector.ids.isst.fraunhofer.de/artifact/1",
+	"target": "http://w3id.org/engrd/connector/artifact/1",
 	"provider": "http://example.com/party/my-party",
 	"consumer": "http://example.com/party/consumer-party",
 	"permission": [{
@@ -65,7 +65,7 @@ In the snippet below is located an example of modifier rule: replaceWith filed t
 	"@type": "ids:ContractAgreement",
 	"uid": "http://example.com/policy/anonymize-in-transit",
 	"profile": "http://example.com/ids-profile",
-	"target": "http://mdm-connector.ids.isst.fraunhofer.de/artifact/2",
+	"target": "http://w3id.org/engrd/connector/artifact/2",
 	"provider": "http://example.com/party/my-party",
 	"consumer": "http://example.com/party/consumer-party",
 	"permission": [
@@ -131,7 +131,7 @@ In the snippet below is located a running example of modifier rule: the jsonPath
 	"@type": "ids:ContractAgreement",
 	"uid": "http://example.com/policy/anonymize-in-transit-delete",
 	"profile": "http://example.com/ids-profile",
-	"target": "http://mdm-connector.ids.isst.fraunhofer.de/artifact/3",
+	"target": "http://w3id.org/engrd/connector/artifact/3",
 	"provider": "http://example.com/party/my-party",
 	"consumer": "http://example.com/party/consumer-party",
 	"permission": [{
@@ -193,7 +193,7 @@ The snippet below is located an example of spatial-based rule: the rightOperand 
 	"@type": "ids:ContractAgreement",
 	"uid": "http://example.com/policy/restrict-access-location",
 	"profile": "http://example.com/ids-profile",
-	"target": "http://mdm-connector.ids.isst.fraunhofer.de/artifact/4",
+	"target": "http://w3id.org/engrd/connector/artifact/4",
 	"provider": "http://example.com/party/my-party",
 	"consumer": "http://example.com/party/consumer-party",
 	"permission": [{
@@ -222,7 +222,7 @@ In the snippet below is located an example of spatial-based rule: the rightOpera
 	"@type": "ids:ContractAgreement",
 	"uid": "http://example.com/policy/restrict-access-purpose",
 	"profile": "http://example.com/ids-profile",
-	"target": "http://mdm-connector.ids.isst.fraunhofer.de/artifact/5",
+	"target": "http://w3id.org/engrd/connector/artifact/5",
 	"provider": "http://example.com/party/my-party",
 	"consumer": "http://example.com/party/consumer-party",
 	"permission": [{
@@ -251,7 +251,7 @@ In the snippet below is located an example of the complex rule: spatial rule def
    "@type":"ids:ContractAgreement",
    "uid":"http://example.com/policy/complex-policy",
    "profile":"http://example.com/ids-profile",
-   "target":"http://mdm-connector.ids.isst.fraunhofer.de/artifact/6",
+   "target":"http://w3id.org/engrd/connector/artifact/6",
    "provider":"http://example.com/party/my-party",
    "consumer":"http://example.com/party/consumer-party",
    "permission":[{
