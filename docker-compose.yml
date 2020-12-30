@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   ecc-provider: 
-    image: rdlabengpa/ids_execution_core_container:v1.6.9
+    image: rdlabengpa/ids_execution_core_container:v1.7.2
     ports:
       - 8090:8081  #Port for exposing HTTP endpoints 
       - 8887:8887  #Exposed port for receiving data from the Data APP
@@ -9,9 +9,8 @@ services:
       - 8086:8086  #Exposed port for receiving data from another connector (WS)
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
-       - DATA_APP_ENDPOINT=https://be-dataapp-provider:8083/incoming-data-app/routerBodyBinary     #Data APP enpoint for consuming received data 
-      #- DATA_APP_ENDPOINT=https://be-dataapp-provider:8083/incoming-data-app/routerHttpHeader 
-      #- DATA_APP_ENDPOINT=https://be-dataapp-provider:8083/incoming-data-app/routerBodyFormData
+      # for WSS communication, set DATA_APP_ENDPOINT to /incoming-data-app/routerBodyBinar
+       - DATA_APP_ENDPOINT=https://be-dataapp-provider:8083/data     #Data APP enpoint for consuming received data 
        - MULTIPART=mixed  #Data APP endpoint multipart/mixed content type
       #- MULTIPART=http-header       #Data APP endpoint http-headers specifications 
       #- MULTIPART=form   #Data APP enspoint multipart/form-data content type
@@ -33,10 +32,11 @@ services:
       - "8043:43"
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.0.5
+    image: rdlabengpa/ids_be_data_app:v0.0.8
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - WS_OVER_HTTPS=false
+       - DATA_APP_MULTIPART=mixed
     ports:
       - "8083:8083"
       - "9000:9000"
@@ -45,7 +45,7 @@ services:
       - ./be-dataapp_data:/data
 
   ecc-consumer: 
-    image: rdlabengpa/ids_execution_core_container:v1.6.9
+    image: rdlabengpa/ids_execution_core_container:v1.7.2
     ports:
       - 8091:8081  #Port for exposing HTTP endpoints 
       - 8888:8887  #Exposed port for receiving data from the Data APP
@@ -53,9 +53,8 @@ services:
       - 8087:8086  #Exposed port for receiving data from another connector (WS)
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
-       - DATA_APP_ENDPOINT=https://be-dataapp-consumer:8083/incoming-data-app/routerBodyBinary     #Data APP enpoint for consuming received data 
-      #- DATA_APP_ENDPOINT=https://be-dataapp-consumer:8083/incoming-data-app/routerHttpHeader 
-      #- DATA_APP_ENDPOINT=https://be-dataapp-consumer:8083/incoming-data-app/routerBodyFormData
+      # for WSS communication, set DATA_APP_ENDPOINT to /incoming-data-app/routerBodyBinary
+       - DATA_APP_ENDPOINT=https://be-dataapp-consumer:8083/data     #Data APP enpoint for consuming received data 
        - MULTIPART=mixed  #Data APP endpoint multipart/mixed content type
       #- MULTIPART=http-header       #Data APP endpoint http-headers specifications 
       #- MULTIPART=form   #Data APP enspoint multipart/form-data content type
@@ -77,10 +76,11 @@ services:
       - "8044:43"
 
   be-dataapp-consumer:
-    image:  rdlabengpa/ids_be_data_app:v0.0.5
+    image:  rdlabengpa/ids_be_data_app:v0.0.8
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - WS_OVER_HTTPS=false
+       - DATA_APP_MULTIPART=mixed
     ports:
       - "8084:8083"
       - "9001:9000"
