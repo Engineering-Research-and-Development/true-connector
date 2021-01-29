@@ -11,9 +11,9 @@ The TRUE Connector is composed of three components:
 
 ## How to Configurate and Run
 
-The configuration should be performed customizing the following variables in the **docker-compose** file:
+The configuration should be performed customizing the following variables in the **.env** file:
 
-* **DATA_APP_ENDPOINT=192.168.56.1:8083/incoming-data-app/dataAppIncomingMessageReceiver** DataAPP endpoint for receiveing data (F endpoint in the above picture)
+* **DATA_APP_ENDPOINT=192.168.56.1:8083/data** DataAPP endpoint for receiveing data (F endpoint in the above picture)
 * **MULTIPART=mixed** DataAPP endpoint Content Type (choose mixed for Multipart/mixed or form for Multipart/form-data or http-header for Multipart/http-header) 
 * Edit external ports if need (default values: **8086** for **web sockets IDSCP and WS over HTTPS**, **8090** for **http**, **8887** for **A endpoint** and  **8889** for **B endpoint**)
 
