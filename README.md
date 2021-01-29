@@ -32,19 +32,24 @@ Finally, run the application:
 *  Execute `docker-compose up &`
 
 ## Endpoints
-The Execution Core Container will use two protocols (http and https) as described by the Docker Compose File.
-It will expose the following endpoints (both over https):
-```
-* /incoming-data-app/multipartMessageBodyBinary to receive data (MultiPartMessage) with binary body from Data App (the A endpoint in the above picture)
-* /incoming-data-app/multipartMessageBodyFormData to receive data (MultiPartMessage) with form-data body from Data App (the A endpoint in the above picture)
-* /incoming-data-app/multipartMessageHttpHeader to receive data (MultiPartMessage) with http-header body from Data App (the A endpoint in the above picture)
-* /incoming-data-channel/receivedMessage to receive data (IDS Message) from a sender connector (the B endpoint in the above picture)
-```
-Furthermore, just for testing it will expose (http and https):
-```
-* /about/version returns business logic version 
-```
+The TRUE Connector will use two protocols (http and https) as described by the Docker Compose File.
+It will expose the following endpoints:
 
+```
+/proxy 
+```
+to receive data incomming request, and based on received request, forward request to Execution Core Connector (the P endpoint in the above picture)
+
+``` 
+/data 
+```
+to receive data (IDS Message) from a sender connector (the B endpoint in the above picture)
+Furthermore, just for testing it will expose (http and https):
+
+```
+/about/version 
+```
+returns business logic version 
 
 ## Configuration
 The ECC supports three different way to exchange data:
@@ -69,117 +74,173 @@ The sender DataApp should send a request using the following schema, specifying 
 ### REST endpoints
 #### Multipart/mixed - Example
 ```
-curl --location --request POST 'https://{IPADDRESS}:{A_ENDPOINT_PUBLIC_PORT}/incoming-data-app/multipartMessageBodyBinary' \
---header 'Content-Type: multipart/mixed; boundary=CQWZRdCCXr5aIuonjmRXF-QzcZ2Kyi4Dkn6' \
---header 'Forward-To: https://{RECEIVER_IP_ADDRESS}:{B_ENDPOINT_PUBLIC_PORT}/incoming-data-channel/receivedMessage' \
---data-raw '--CQWZRdCCXr5aIuonjmRXF-QzcZ2Kyi4Dkn6
-Content-Disposition: form-data; name="header"
-Content-Length: 333
-
-{
-  "@type" : "ids:ArtifactRequestMessage",
-  "issued" : "2019-05-27T13:09:42.306Z",
-  "issuerConnector" : "http://iais.fraunhofer.de/ids/mdm-connector",
-  "modelVersion" : "4.0.0",
-  "@id" : "https://w3id.org/idsa/autogen/artifactResponseMessage/eb3ab487-dfb0-4d18-b39a-585514dd044f",
-  "requestedArtifact" : "http://mdm-connector.ids.isst.fraunhofer.de/artifact/1"
-}
---CQWZRdCCXr5aIuonjmRXF-QzcZ2Kyi4Dkn6
-Content-Disposition: form-data; name="payload"
-Content-Length: 50
-{"catalog.offers.0.resourceEndpoints.path":"/pet2"}
-
-
---CQWZRdCCXr5aIuonjmRXF-QzcZ2Kyi4Dkn6--'
+curl --location --request POST 'https://{IPADDRESS}:{SENDER_DATA_APP_PORT}/proxy' \
+--header 'fizz: buzz' \
+--header 'Content-Type: text/plain' \
+--data-raw '{
+    "multipart": "mixed",
+    "Forward-To": "https://{RECEIVER_IP_ADDRESS}:{B_ENDPOINT_PUBLIC_PORT}/data",
+	 "message": {
+	  "@context" : {
+		"ids" : "https://w3id.org/idsa/core/"
+	  },
+	  "@type" : "ids:ArtifactRequestMessage",
+	  "ids:issued" : {
+		"@value" : "2020-11-25T16:43:27.051+01:00",
+		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+	  },
+	  "ids:modelVersion" : "4.0.0",
+	  "ids:issuerConnector" : {
+		"@id" : "http://w3id.org/engrd/connector/"
+	  },
+	  "ids:requestedArtifact" : {
+	   "@id" : "http://w3id.org/engrd/connector/artifact/1"
+	  }
+	},
+	"payload" : {
+		"catalog.offers.0.resourceEndpoints.path":"/pet2"
+		}
+}'
 ```
 
 Keeping the provided docker-compose will be:
 
 ```
-curl --location --request POST 'https://{IPADDRESS}:8888/incoming-data-app/multipartMessageBodyBinary' \
---header 'Content-Type: multipart/mixed; boundary=CQWZRdCCXr5aIuonjmRXF-QzcZ2Kyi4Dkn6' \
---header 'Forward-To: https://{RECEIVER_IP_ADDRESS}:8889/incoming-data-channel/receivedMessage' \
---data-raw '--CQWZRdCCXr5aIuonjmRXF-QzcZ2Kyi4Dkn6
-Content-Disposition: form-data; name="header"
-Content-Length: 333
-
-{
-  "@type" : "ids:ArtifactRequestMessage",
-  "issued" : "2019-05-27T13:09:42.306Z",
-  "issuerConnector" : "http://iais.fraunhofer.de/ids/mdm-connector",
-  "modelVersion" : "4.0.0",
-  "@id" : "https://w3id.org/idsa/autogen/artifactResponseMessage/eb3ab487-dfb0-4d18-b39a-585514dd044f",
-  "requestedArtifact" : "http://mdm-connector.ids.isst.fraunhofer.de/artifact/1"
-}
---CQWZRdCCXr5aIuonjmRXF-QzcZ2Kyi4Dkn6
-Content-Disposition: form-data; name="payload"
-Content-Length: 50
-{"catalog.offers.0.resourceEndpoints.path":"/pet2"}
-
-
---CQWZRdCCXr5aIuonjmRXF-QzcZ2Kyi4Dkn6--'
+curl --location --request POST 'https://{IPADDRESS}:8084/proxy' \
+--header 'fizz: buzz' \
+--header 'Content-Type: text/plain' \
+--data-raw '{
+    "multipart": "mixed",
+    "Forward-To": "https://{RECEIVER_IP_ADDRESS}:8889/data",
+	 "message": {
+	  "@context" : {
+		"ids" : "https://w3id.org/idsa/core/"
+	  },
+	  "@type" : "ids:ArtifactRequestMessage",
+	  "ids:issued" : {
+		"@value" : "2020-11-25T16:43:27.051+01:00",
+		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+	  },
+	  "ids:modelVersion" : "4.0.0",
+	  "ids:issuerConnector" : {
+		"@id" : "http://w3id.org/engrd/connector/"
+	  },
+	  "ids:requestedArtifact" : {
+	   "@id" : "http://w3id.org/engrd/connector/artifact/1"
+	  }
+	},
+	"payload" : {
+		"catalog.offers.0.resourceEndpoints.path":"/pet2"
+		}
+}'
 ```
 
 #### Multipart/form-data - Example
 ```
-curl --location --request POST 'https://{IPADDRESS}:{A_ENDPOINT_PUBLIC_PORT}/incoming-data-app/multipartMessageBodyFormData' \
---header 'Content-Type: multipart/mixed; boundary=CQWZRdCCXr5aIuonjmRXF-QzcZ2Kyi4Dkn6' \
---header 'Forward-To: https://{RECEIVER_IP_ADDRESS}:{B_ENDPOINT_PUBLIC_PORT}/incoming-data-channel/receivedMessage' \
---form 'header={
-  "@type" : "ids:ArtifactRequestMessage",
-  "issued" : "2019-05-27T13:09:42.306Z",
-  "issuerConnector" : "http://iais.fraunhofer.de/ids/mdm-connector",
-  "modelVersion" : "4.0.0",
-  "@id" : "https://w3id.org/idsa/autogen/artifactResponseMessage/eb3ab487-dfb0-4d18-b39a-585514dd044f",
-  "requestedArtifact" : "http://mdm-connector.ids.isst.fraunhofer.de/artifact/1"
-}' \
---form 'payload={"catalog.offers.0.resourceEndpoints.path":"/pet2"}'
+curl --location --request POST 'https://{IPADDRESS}:{SENDER_DATA_APP_PORT}/proxy' \
+--header 'fizz: buzz' \
+--header 'Content-Type: text/plain' \
+--data-raw '{
+    "multipart": "form",
+    "Forward-To": "https://{RECEIVER_IP_ADDRESS}:{B_ENDPOINT_PUBLIC_PORT}/data",
+	 "message": {
+	  "@context" : {
+		"ids" : "https://w3id.org/idsa/core/"
+	  },
+	  "@type" : "ids:ArtifactRequestMessage",
+	  "ids:issued" : {
+		"@value" : "2020-11-25T16:43:27.051+01:00",
+		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+	  },
+	  "ids:modelVersion" : "4.0.0",
+	  "ids:issuerConnector" : {
+		"@id" : "http://w3id.org/engrd/connector/"
+	  },
+	  "ids:requestedArtifact" : {
+	   "@id" : "http://w3id.org/engrd/connector/artifact/1"
+	  }
+	},
+	"payload" : {
+		"catalog.offers.0.resourceEndpoints.path":"/pet2"
+		}
+}'
 ```
 
 Keeping the provided docker-compose will be:
 
 ```
-curl --location --request POST 'https://{IPADDRESS}:8888/incoming-data-app/multipartMessageBodyFormData' \
---header 'Content-Type: multipart/mixed; boundary=CQWZRdCCXr5aIuonjmRXF-QzcZ2Kyi4Dkn6' \
---header 'Forward-To: https://{RECEIVER_IP_ADDRESS}:8889/incoming-data-channel/receivedMessage' \
---form 'header={
-  "@type" : "ids:ArtifactRequestMessage",
-  "issued" : "2019-05-27T13:09:42.306Z",
-  "issuerConnector" : "http://iais.fraunhofer.de/ids/mdm-connector",
-  "modelVersion" : "4.0.0",
-  "@id" : "https://w3id.org/idsa/autogen/artifactResponseMessage/eb3ab487-dfb0-4d18-b39a-585514dd044f",
-  "requestedArtifact" : "http://mdm-connector.ids.isst.fraunhofer.de/artifact/1"
-}' \
---form 'payload={"catalog.offers.0.resourceEndpoints.path":"/pet2"}'
+curl --location --request POST 'https://{IPADDRESS}:8084/proxy' \
+--header 'fizz: buzz' \
+--header 'Content-Type: text/plain' \
+--data-raw '{
+    "multipart": "form",
+    "Forward-To": "https://{RECEIVER_IP_ADDRESS}:8889/data",
+	 "message": {
+	  "@context" : {
+		"ids" : "https://w3id.org/idsa/core/"
+	  },
+	  "@type" : "ids:ArtifactRequestMessage",
+	  "ids:issued" : {
+		"@value" : "2020-11-25T16:43:27.051+01:00",
+		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+	  },
+	  "ids:modelVersion" : "4.0.0",
+	  "ids:issuerConnector" : {
+		"@id" : "http://w3id.org/engrd/connector/"
+	  },
+	  "ids:requestedArtifact" : {
+	   "@id" : "http://w3id.org/engrd/connector/artifact/1"
+	  }
+	},
+	"payload" : {
+		"catalog.offers.0.resourceEndpoints.path":"/pet2"
+		}
+}'
 ```
 
 #### Multipart/http-header - Example
 ```
-curl --location --request POST 'https://{IPADDRESS}:{A_ENDPOINT_PUBLIC_PORT}/incoming-data-app/multipartMessageHttpHeader' \
+curl --location --request POST 'https://{IPADDRESS}:{SENDER_DATA_APP_PORT}/proxy' \
+--header 'fizz: buzz' \
 --header 'Content-Type: text/plain' \
---header 'Forward-To: https://{RECEIVER_IP_ADDRESS}:{B_ENDPOINT_PUBLIC_PORT}/incoming-data-channel/receivedMessage' \
---header 'IDS-Messagetype: ids:ArtifactRequestMessage' \
---header 'IDS-Id: https://w3id.org/idsa/autogen/artifactResponseMessage/eb3ab487-dfb0-4d18-b39a-585514dd044f' \
---header 'IDS-Issued: 2019-05-27T13:09:42.306Z' \
---header 'IDS-IssuerConnector: http://iais.fraunhofer.de/ids/mdm-connector' \
---header 'IDS-ModelVersion: 4.0.0' \
---header 'IDS-RequestedArtifact: http://mdm-connector.ids.isst.fraunhofer.de/artifact/1' \
---data-raw '{"catalog.offers.0.resourceEndpoints.path":"/pet2"}'
+--data-raw '{
+    "multipart": "http-header",
+    "Forward-To": "https://{RECEIVER_IP_ADDRESS}:8889/data",
+	 "payload" : {
+		"catalog.offers.0.resourceEndpoints.path":"/pet2"
+		}
+	"messageAsHeaders": {
+        "IDS-RequestedArtifact":"http://w3id.org/engrd/connector/artifact/1",
+        "IDS-Messagetype":"ids:ArtifactRequestMessage",
+        "IDS-ModelVersion":"4.0.0",
+        "IDS-Issued":"2021-01-15T13:09:42.306Z",
+        "IDS-Id":"https://w3id.org/idsa/autogen/artifactResponseMessage/eb3ab487-dfb0-4d18-b39a-585514dd044f",
+        "IDS-IssuerConnector":"http://w3id.org/engrd/connector/"
+        }
+}'
 ```
 
 Keeping the provided docker-compose will be:
 
 ```
-curl --location --request POST 'https://{IPADDRESS}:8888/incoming-data-app/multipartMessageHttpHeader' \
+curl --location --request POST 'https://{IPADDRESS}:8084/proxy' \
+--header 'fizz: buzz' \
 --header 'Content-Type: text/plain' \
---header 'Forward-To: https://{RECEIVER_IP_ADDRESS}:8889/incoming-data-channel/receivedMessage' \
---header 'IDS-Messagetype: ids:ArtifactRequestMessage' \
---header 'IDS-Id: https://w3id.org/idsa/autogen/artifactResponseMessage/eb3ab487-dfb0-4d18-b39a-585514dd044f' \
---header 'IDS-Issued: 2019-05-27T13:09:42.306Z' \
---header 'IDS-IssuerConnector: http://iais.fraunhofer.de/ids/mdm-connector' \
---header 'IDS-ModelVersion: 4.0.0' \
---header 'IDS-RequestedArtifact: http://mdm-connector.ids.isst.fraunhofer.de/artifact/1' \
---data-raw '{"catalog.offers.0.resourceEndpoints.path":"/pet2"}'
+--data-raw '{
+    "multipart": "http-header",
+    "Forward-To": "https://{RECEIVER_IP_ADDRESS}:8889/data",
+	 "payload" : {
+		"catalog.offers.0.resourceEndpoints.path":"/pet2"
+		},
+	"messageAsHeaders": {
+        "IDS-RequestedArtifact":"http://w3id.org/engrd/connector/artifact/1",
+        "IDS-Messagetype":"ids:ArtifactRequestMessage",
+        "IDS-ModelVersion":"4.0.0",
+        "IDS-Issued":"2021-01-15T13:09:42.306Z",
+        "IDS-Id":"https://w3id.org/idsa/autogen/artifactResponseMessage/eb3ab487-dfb0-4d18-b39a-585514dd044f",
+        "IDS-IssuerConnector":"http://w3id.org/engrd/connector/"
+        }
+}'
 ```
 An examples of Multipart Message data (aligned to the IDS Information Model) can be found in the examples folder.
 
@@ -190,7 +251,30 @@ The data will be sent to the Data App using a body request as specified by the M
 On the following link, information regarding WebSocket Message Streamer implementation can be found here [WebSocket Message Streamer library](https://github.com/Engineering-Research-and-Development/market4.0-websocket_message_streamer).
 
 #### Web Socket over HTTPS
-Follow the REST endpoint examples, taking care to use *wss://{RECEIVER_IP_ADDRESS}:{WS_PUBLIC_PORT}* in the Forward-To header.
+Configuration needed to support WSS flow, in .ev file:
+
+```
+PROVIDER_DATA_APP_ENDPOINT=https://be-dataapp-provider:9000/incoming-data-app/routerBodyBinary
+PROVIDER_WS_OVER_HTTPS=true
+PROVIDER_WS_INTERNAL=true
+
+CONSUMER_WS_OVER_HTTPS=true
+CONSUMER_WS_INTERNAL=true
+```
+
+For exchanging data/resources over WSS, following request can be used
+
+```
+curl --location --request POST 'https://{IPADDRESS}:{SENDER_DATA_APP_PORT}/proxy' \
+--header 'fizz: buzz' \
+--header 'Content-Type: text/plain' \
+--data-raw '{
+    "multipart": "wss",
+    "Forward-To": "wss://ecc-provider:8086/data",
+    "Forward-To-Internal": "wss://ecc-consumer:8887",
+    "requestedArtifact" : "REQUESTED_ARTIFACT"
+}'
+```
 
 #### IDSCP
 Follow the REST endpoint examples, taking care to use *idscp://{RECEIVER_IP_ADDRESS}:{WS_PUBLIC_PORT}* in the Forward-To header.
@@ -209,8 +293,19 @@ The TRUE Connector integrates some endpoints for interacting with an IDS Broker:
 Self Description document, in json format, for connector, can be found at following URL - GET request
 
 ```
-https://{IPADDRESS}:8091/selfDescription
+https://{IPADDRESS}:8091/
 ```
+or 
+
+```
+http://{IPADDRESS}:8091/
+```
+depending on 
+
+```
+REST_ENABLE_HTTPS=true
+```
+configured in .env file.
 
 ### Registration request
 
