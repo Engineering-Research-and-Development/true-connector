@@ -13,9 +13,9 @@ The TRUE Connector is composed of three components:
 
 The configuration should be performed customizing the following variables in the **.env** file:
 
-* **DATA_APP_ENDPOINT=192.168.56.1:8083/data** DataAPP endpoint for receiveing data (F endpoint in the above picture)
-* **MULTIPART=mixed** DataAPP endpoint Content Type (choose mixed for Multipart/mixed or form for Multipart/form-data or http-header for Multipart/http-header) 
-* Edit external ports if need (default values: **8086** for **web sockets IDSCP and WS over HTTPS**, **8090** for **http**, **8887** for **A endpoint** and  **8889** for **B endpoint**)
+* **DATA_APP_ENDPOINT=192.168.56.1:8084/data** DataAPP endpoint for receiveing data (F endpoint in the above picture)
+* **MULTIPART=mixed** DataAPP endpoint Content Type (choose *mixed* for Multipart/mixed or *form* for Multipart/form-data or *http-header* for Multipart/http-header) 
+* Edit external ports if need (default values: **8086** for **web sockets IDSCP and WS over HTTPS**, **8090** for **http**, **8889** for **B endpoint**)
 
 ### Supported Identity Providers
 
@@ -63,218 +63,40 @@ The reachability could be verified using the following endpoints:
 
 *  **http://{IP_ADDRESS}:{HTTP_PUBLIC_PORT}/about/version**
 
-Keeping the provided docker-compose will be:
+Keeping the provided docker-compose, for Data Provider URL will be:
 
 *  **http://{IP_ADDRESS}:8090/about/version**
 
+For Data Consumer, with provided docker-compose file:
 
-The sender DataApp should send a request using the following schema, specifying in the Forward-To header the destination connector URL:
+*  **http://{IP_ADDRESS}:8091/about/version**
+
 
 ## How to Exchange Data
-### REST endpoints
-#### Multipart/mixed - Example
-```
-curl --location --request POST 'https://{IPADDRESS}:{SENDER_DATA_APP_PORT}/proxy' \
---header 'fizz: buzz' \
---header 'Content-Type: text/plain' \
---data-raw '{
-    "multipart": "mixed",
-    "Forward-To": "https://{RECEIVER_IP_ADDRESS}:{B_ENDPOINT_PUBLIC_PORT}/data",
-	 "message": {
-	  "@context" : {
-		"ids" : "https://w3id.org/idsa/core/"
-	  },
-	  "@type" : "ids:ArtifactRequestMessage",
-	  "ids:issued" : {
-		"@value" : "2020-11-25T16:43:27.051+01:00",
-		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-	  },
-	  "ids:modelVersion" : "4.0.0",
-	  "ids:issuerConnector" : {
-		"@id" : "http://w3id.org/engrd/connector/"
-	  },
-	  "ids:requestedArtifact" : {
-	   "@id" : "http://w3id.org/engrd/connector/artifact/1"
-	  }
-	},
-	"payload" : {
-		"catalog.offers.0.resourceEndpoints.path":"/pet2"
-		}
-}'
-```
 
-Keeping the provided docker-compose will be:
+For details on request samples please check following link [Backend DataApp Usage](https://github.com/Engineering-Research-and-Development/market4.0-data_app_test_BE/blob/master/README.md)
+
+Be sure to use correct configuration/ports for sender and receiver Data App and Execution Core Container (check .env file).
+
+Default values:
 
 ```
-curl --location --request POST 'https://{IPADDRESS}:8084/proxy' \
---header 'fizz: buzz' \
---header 'Content-Type: text/plain' \
---data-raw '{
-    "multipart": "mixed",
-    "Forward-To": "https://{RECEIVER_IP_ADDRESS}:8889/data",
-	 "message": {
-	  "@context" : {
-		"ids" : "https://w3id.org/idsa/core/"
-	  },
-	  "@type" : "ids:ArtifactRequestMessage",
-	  "ids:issued" : {
-		"@value" : "2020-11-25T16:43:27.051+01:00",
-		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-	  },
-	  "ids:modelVersion" : "4.0.0",
-	  "ids:issuerConnector" : {
-		"@id" : "http://w3id.org/engrd/connector/"
-	  },
-	  "ids:requestedArtifact" : {
-	   "@id" : "http://w3id.org/engrd/connector/artifact/1"
-	  }
-	},
-	"payload" : {
-		"catalog.offers.0.resourceEndpoints.path":"/pet2"
-		}
-}'
+DataApp URL: https://{IPADDRESS}:8084/proxy 
+"Forward-To": "https://{RECEIVER_IP_ADDRESS}:8889/data",
 ```
 
-#### Multipart/form-data - Example
-```
-curl --location --request POST 'https://{IPADDRESS}:{SENDER_DATA_APP_PORT}/proxy' \
---header 'fizz: buzz' \
---header 'Content-Type: text/plain' \
---data-raw '{
-    "multipart": "form",
-    "Forward-To": "https://{RECEIVER_IP_ADDRESS}:{B_ENDPOINT_PUBLIC_PORT}/data",
-	 "message": {
-	  "@context" : {
-		"ids" : "https://w3id.org/idsa/core/"
-	  },
-	  "@type" : "ids:ArtifactRequestMessage",
-	  "ids:issued" : {
-		"@value" : "2020-11-25T16:43:27.051+01:00",
-		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-	  },
-	  "ids:modelVersion" : "4.0.0",
-	  "ids:issuerConnector" : {
-		"@id" : "http://w3id.org/engrd/connector/"
-	  },
-	  "ids:requestedArtifact" : {
-	   "@id" : "http://w3id.org/engrd/connector/artifact/1"
-	  }
-	},
-	"payload" : {
-		"catalog.offers.0.resourceEndpoints.path":"/pet2"
-		}
-}'
-```
-
-Keeping the provided docker-compose will be:
+For WSS flow:
 
 ```
-curl --location --request POST 'https://{IPADDRESS}:8084/proxy' \
---header 'fizz: buzz' \
---header 'Content-Type: text/plain' \
---data-raw '{
-    "multipart": "form",
-    "Forward-To": "https://{RECEIVER_IP_ADDRESS}:8889/data",
-	 "message": {
-	  "@context" : {
-		"ids" : "https://w3id.org/idsa/core/"
-	  },
-	  "@type" : "ids:ArtifactRequestMessage",
-	  "ids:issued" : {
-		"@value" : "2020-11-25T16:43:27.051+01:00",
-		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-	  },
-	  "ids:modelVersion" : "4.0.0",
-	  "ids:issuerConnector" : {
-		"@id" : "http://w3id.org/engrd/connector/"
-	  },
-	  "ids:requestedArtifact" : {
-	   "@id" : "http://w3id.org/engrd/connector/artifact/1"
-	  }
-	},
-	"payload" : {
-		"catalog.offers.0.resourceEndpoints.path":"/pet2"
-		}
-}'
+DataApp URL: https://{IPADDRESS}:8084/proxy
+"multipart": "wss",
+"Forward-To": "wss://ecc-provider:8086/data",
+"Forward-To-Internal": "wss://ecc-consumer:8887",
 ```
 
-#### Multipart/http-header - Example
-```
-curl --location --request POST 'https://{IPADDRESS}:{SENDER_DATA_APP_PORT}/proxy' \
---header 'fizz: buzz' \
---header 'Content-Type: text/plain' \
---data-raw '{
-    "multipart": "http-header",
-    "Forward-To": "https://{RECEIVER_IP_ADDRESS}:8889/data",
-	 "payload" : {
-		"catalog.offers.0.resourceEndpoints.path":"/pet2"
-		}
-	"messageAsHeaders": {
-        "IDS-RequestedArtifact":"http://w3id.org/engrd/connector/artifact/1",
-        "IDS-Messagetype":"ids:ArtifactRequestMessage",
-        "IDS-ModelVersion":"4.0.0",
-        "IDS-Issued":"2021-01-15T13:09:42.306Z",
-        "IDS-Id":"https://w3id.org/idsa/autogen/artifactResponseMessage/eb3ab487-dfb0-4d18-b39a-585514dd044f",
-        "IDS-IssuerConnector":"http://w3id.org/engrd/connector/"
-        }
-}'
-```
-
-Keeping the provided docker-compose will be:
-
-```
-curl --location --request POST 'https://{IPADDRESS}:8084/proxy' \
---header 'fizz: buzz' \
---header 'Content-Type: text/plain' \
---data-raw '{
-    "multipart": "http-header",
-    "Forward-To": "https://{RECEIVER_IP_ADDRESS}:8889/data",
-	 "payload" : {
-		"catalog.offers.0.resourceEndpoints.path":"/pet2"
-		},
-	"messageAsHeaders": {
-        "IDS-RequestedArtifact":"http://w3id.org/engrd/connector/artifact/1",
-        "IDS-Messagetype":"ids:ArtifactRequestMessage",
-        "IDS-ModelVersion":"4.0.0",
-        "IDS-Issued":"2021-01-15T13:09:42.306Z",
-        "IDS-Id":"https://w3id.org/idsa/autogen/artifactResponseMessage/eb3ab487-dfb0-4d18-b39a-585514dd044f",
-        "IDS-IssuerConnector":"http://w3id.org/engrd/connector/"
-        }
-}'
-```
-An examples of Multipart Message data (aligned to the IDS Information Model) can be found in the examples folder.
-
-The receiver connector will receive the request to the specified "*Forward-To*" URL, process data and finally send data to the *DATA_APP_ENDPOINT* as specified in its docker-compose. 
-The data will be sent to the Data App using a body request as specified by the MULTIPART environment variable in the docker-compose.
 ### WebSocket and IDSCP
 
 On the following link, information regarding WebSocket Message Streamer implementation can be found here [WebSocket Message Streamer library](https://github.com/Engineering-Research-and-Development/market4.0-websocket_message_streamer).
-
-#### Web Socket over HTTPS
-Configuration needed to support WSS flow, in .ev file:
-
-```
-PROVIDER_DATA_APP_ENDPOINT=https://be-dataapp-provider:9000/incoming-data-app/routerBodyBinary
-PROVIDER_WS_OVER_HTTPS=true
-PROVIDER_WS_INTERNAL=true
-
-CONSUMER_WS_OVER_HTTPS=true
-CONSUMER_WS_INTERNAL=true
-```
-
-For exchanging data/resources over WSS, following request can be used
-
-```
-curl --location --request POST 'https://{IPADDRESS}:{SENDER_DATA_APP_PORT}/proxy' \
---header 'fizz: buzz' \
---header 'Content-Type: text/plain' \
---data-raw '{
-    "multipart": "wss",
-    "Forward-To": "wss://ecc-provider:8086/data",
-    "Forward-To-Internal": "wss://ecc-consumer:8887",
-    "requestedArtifact" : "REQUESTED_ARTIFACT"
-}'
-```
 
 #### IDSCP
 Follow the REST endpoint examples, taking care to use *idscp://{RECEIVER_IP_ADDRESS}:{WS_PUBLIC_PORT}* in the Forward-To header.
@@ -306,6 +128,23 @@ depending on
 REST_ENABLE_HTTPS=true
 ```
 configured in .env file.
+
+In order to set different values for connector, based on connector role (Data Consumer/Data Provider), follwoing file and properties needs to be modified:
+
+```
+ecc_resources_consumer/application-docker.properties
+or 
+ecc_resources_provider/application-docker.properties
+```
+
+and following properties:
+
+```
+application.selfdescription.description=Data Connector description
+application.selfdescription.title=Data Connector title
+application.selfdescription.curator=http://curatorURI.com
+application.selfdescription.maintainer=http://maintainerURI.com
+```
 
 ### Registration request
 
