@@ -1,24 +1,22 @@
 version: '2.2'
 services:
   ecc-provider: 
-    image: rdlabengpa/ids_execution_core_container:v1.7.2
+    image: rdlabengpa/ids_execution_core_container:v1.7.3
     ports:
-      - 8090:8081  #Port for exposing HTTP endpoints 
-      - 8887:8887  #Exposed port for receiving data from the Data APP
+      - "${PROVIDER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
       - 8889:8889  #Exposed port for receiving data from another connector (REST)
       - 8086:8086  #Exposed port for receiving data from another connector (WS)
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
-      # for WSS communication, set DATA_APP_ENDPOINT to /incoming-data-app/routerBodyBinar
-       - DATA_APP_ENDPOINT=https://be-dataapp-provider:8083/data     #Data APP enpoint for consuming received data 
-       - MULTIPART=mixed  #Data APP endpoint multipart/mixed content type
-      #- MULTIPART=http-header       #Data APP endpoint http-headers specifications 
-      #- MULTIPART=form   #Data APP enspoint multipart/form-data content type
-       - CLEARING_HOUSE=http://109.232.32.193:8280/data
-       - IDSCP=false
-       - WS_OVER_HTTPS=false
-       - REST_ENABLE_HTTPS=true
-       - UC_DATAAPP_URI=http://uc-dataapp-provider:9555
+       - DATA_APP_ENDPOINT=${PROVIDER_DATA_APP_ENDPOINT}      #Data APP enpoint for consuming received data 
+       - MULTIPART=${PROVIDER_MULTIPART}                      #Data APP endpoint multipart/mixed content type
+       - REST_ENABLE_HTTPS=${REST_ENABLE_HTTPS}
+       - IDSCP=${PROVIDER_IDSCP}
+       - WS_OVER_HTTPS=${PROVIDER_WS_OVER_HTTPS}
+       - WS_INTERNAL=${PROVIDER_WS_INTERNAL}
+       - UC_DATAAPP_URI=${PROVIDER_UC_DATAAPP_URI}
+       - CLEARING_HOUSE=${CLEARING_HOUSE}
+       - PUBLIC_PORT=${PROVIDER_PORT}
     volumes:
       - ./ecc_resources_provider:/config
       - ./ecc_cert:/cert
@@ -32,11 +30,10 @@ services:
       - "8043:43"
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.0.8
+    image: rdlabengpa/ids_be_data_app:v0.0.9
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
-       - WS_OVER_HTTPS=false
-       - DATA_APP_MULTIPART=mixed
+       - DATA_APP_MULTIPART=${PROVIDER_MULTIPART}
     ports:
       - "8083:8083"
       - "9000:9000"
@@ -45,24 +42,22 @@ services:
       - ./be-dataapp_data:/data
 
   ecc-consumer: 
-    image: rdlabengpa/ids_execution_core_container:v1.7.2
+    image: rdlabengpa/ids_execution_core_container:v1.7.3
     ports:
-      - 8091:8081  #Port for exposing HTTP endpoints 
-      - 8888:8887  #Exposed port for receiving data from the Data APP
+      - "${CONSUMER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
       - 8890:8889  #Exposed port for receiving data from another connector (REST)
       - 8087:8086  #Exposed port for receiving data from another connector (WS)
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
-      # for WSS communication, set DATA_APP_ENDPOINT to /incoming-data-app/routerBodyBinary
-       - DATA_APP_ENDPOINT=https://be-dataapp-consumer:8083/data     #Data APP enpoint for consuming received data 
-       - MULTIPART=mixed  #Data APP endpoint multipart/mixed content type
-      #- MULTIPART=http-header       #Data APP endpoint http-headers specifications 
-      #- MULTIPART=form   #Data APP enspoint multipart/form-data content type
-       - CLEARING_HOUSE=http://109.232.32.193:8280/data
-       - IDSCP=false
-       - WS_OVER_HTTPS=false
-       - REST_ENABLE_HTTPS=true
-       - UC_DATAAPP_URI=http://uc-dataapp-consumer:9555
+       - DATA_APP_ENDPOINT=${CONSUMER_DATA_APP_ENDPOINT}    #Data APP enpoint for consuming received data 
+       - MULTIPART=${CONSUMER_MULTIPART}                    #Data APP endpoint multipart/mixed content type
+       - REST_ENABLE_HTTPS=${REST_ENABLE_HTTPS}
+       - IDSCP=${CONSUMER_IDSCP}
+       - WS_OVER_HTTPS=${CONSUMER_WS_OVER_HTTPS}
+       - WS_INTERNAL=${CONSUMER_WS_INTERNAL}
+       - CLEARING_HOUSE=${CLEARING_HOUSE}
+       - UC_DATAAPP_URI=${CONSUMER_UC_DATAAPP_URI}
+       - PUBLIC_PORT=${CONSUMER_PORT}
     volumes:
       - ./ecc_resources_consumer:/config
       - ./ecc_cert:/cert
@@ -76,11 +71,10 @@ services:
       - "8044:43"
 
   be-dataapp-consumer:
-    image:  rdlabengpa/ids_be_data_app:v0.0.8
+    image:  rdlabengpa/ids_be_data_app:v0.0.9
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
-       - WS_OVER_HTTPS=false
-       - DATA_APP_MULTIPART=mixed
+       - DATA_APP_MULTIPART=${CONSUMER_MULTIPART}
     ports:
       - "8084:8083"
       - "9001:9000"
