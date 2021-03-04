@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   ecc-provider: 
-    image: rdlabengpa/ids_execution_core_container:v1.7.4
+    image: rdlabengpa/ids_execution_core_container:v1.7.5
     ports:
       - "${PROVIDER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
       - 8889:8889  #Exposed port for receiving data from another connector (REST)
@@ -17,6 +17,7 @@ services:
        - UC_DATAAPP_URI=${PROVIDER_UC_DATAAPP_URI}
        - CLEARING_HOUSE=${CLEARING_HOUSE}
        - PUBLIC_PORT=${PROVIDER_PORT}
+       - BROKER_URL=${BROKER_URL}
     volumes:
       - ./ecc_resources_provider:/config
       - ./ecc_cert:/cert
@@ -42,7 +43,7 @@ services:
       - ./be-dataapp_data:/data
 
   ecc-consumer: 
-    image: rdlabengpa/ids_execution_core_container:v1.7.4
+    image: rdlabengpa/ids_execution_core_container:v1.7.5
     ports:
       - "${CONSUMER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
       - 8890:8889  #Exposed port for receiving data from another connector (REST)
@@ -58,6 +59,7 @@ services:
        - CLEARING_HOUSE=${CLEARING_HOUSE}
        - UC_DATAAPP_URI=${CONSUMER_UC_DATAAPP_URI}
        - PUBLIC_PORT=${CONSUMER_PORT}
+       - BROKER_URL=${BROKER_URL}
     volumes:
       - ./ecc_resources_consumer:/config
       - ./ecc_cert:/cert
