@@ -18,6 +18,7 @@ services:
        - CLEARING_HOUSE=${CLEARING_HOUSE}
        - PUBLIC_PORT=${PROVIDER_PORT}
        - BROKER_URL=${BROKER_URL}
+       - DISABLE_SSL_VALIDATION=${DISABLE_SSL_VALIDATION}
     volumes:
       - ./ecc_resources_provider:/config
       - ./ecc_cert:/cert
@@ -60,6 +61,7 @@ services:
        - UC_DATAAPP_URI=${CONSUMER_UC_DATAAPP_URI}
        - PUBLIC_PORT=${CONSUMER_PORT}
        - BROKER_URL=${BROKER_URL}
+       - DISABLE_SSL_VALIDATION=${DISABLE_SSL_VALIDATION}
     volumes:
       - ./ecc_resources_consumer:/config
       - ./ecc_cert:/cert
