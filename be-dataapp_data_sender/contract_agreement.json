@@ -1,0 +1,32 @@
+{
+	"@context": "http://www.w3.org/ns/odrl.jsonld",
+	"@type": "ids:ContractAgreement",
+	"uid": "http://example.com/policy/restrict-access-interval",
+	"profile": "http://example.com/ids-profile",
+	"target": "http://mdm-connector.ids.isst.fraunhofer.de/artifact/1",
+	"provider": "http://example.com/party/my-party",
+	"consumer": "http://example.com/party/consumer-party",
+	"permission": [
+		{
+			"action": "ids:use",
+			"constraint": [
+				{
+					"leftOperand": "ids:datetime",
+					"operator": "gt",
+					"rightOperand": {
+						"@value": "2021-01-01T00:00:00Z",
+						"@type": "xsd:datetime"
+					}
+				},
+				{
+					"leftOperand": "ids:datetime",
+					"operator": "lt",
+					"rightOperand": {
+						"@value": "2021-12-31T00:00:00Z",
+						"@type": "xsd:datetime"
+					}
+				}
+			]
+		}
+	]
+}
