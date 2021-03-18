@@ -302,6 +302,12 @@ SELECT ?connectorUri WHERE { ?connectorUri a ids:BaseConnector . } '
 ## Usage Control
 The TRUE Connector integrates the [Fraunhofer MyData Framework](https://www.mydata-control.de/) for implementing the Usage Control. Details about the PMP and PEP components can be found [here](doc/USAGE_CONTROL_RULES.md). 
 
+## Contract Negotiation - simple flow
+
+For simple contract negotiation flow, with ContractAgreement read from file, please check following link
+[Data App Contract Negotiation](https://github.com/Engineering-Research-and-Development/market4.0-data_app_test_BE/blob/master/README.md#markdown-header-Contract-Negotiation-simple-flow) 
+
+
 ## License
 The TRUE Connector components are released following different licenses:
 

@@ -32,7 +32,7 @@ services:
       - "8043:43"
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.0.9
+    image: rdlabengpa/ids_be_data_app:v0.0.10
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - DATA_APP_MULTIPART=${PROVIDER_MULTIPART}
@@ -41,7 +41,7 @@ services:
       - "9000:9000"
     volumes:
       - ./be-dataapp_resources:/config
-      - ./be-dataapp_data:/data
+      - ./be-dataapp_data_receiver:/data
 
   ecc-consumer: 
     image: rdlabengpa/ids_execution_core_container:v1.7.5
@@ -75,7 +75,7 @@ services:
       - "8044:43"
 
   be-dataapp-consumer:
-    image:  rdlabengpa/ids_be_data_app:v0.0.9
+    image:  rdlabengpa/ids_be_data_app:v0.0.10
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - DATA_APP_MULTIPART=${CONSUMER_MULTIPART}
@@ -84,5 +84,5 @@ services:
       - "9001:9000"
     volumes:
       - ./be-dataapp_resources:/config
-      - ./be-dataapp_data:/data
+      - ./be-dataapp_data_sender:/data
 
