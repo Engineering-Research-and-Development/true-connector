@@ -99,7 +99,7 @@ DataApp URL: https://{IPADDRESS}:8084/proxy
 On the following link, information regarding WebSocket Message Streamer implementation can be found here [WebSocket Message Streamer library](https://github.com/Engineering-Research-and-Development/market4.0-websocket_message_streamer).
 
 #### IDSCP2
-Follow the REST endpoint or WS examples, put the server hostname/ip address in the Forward-To header.
+Follow the REST endpoint or WS examples, put the server hostname/ip address in the Forward-To header (*wss/https://{RECEIVER_IP_ADDRESS/Hostname}:{WS_PUBLIC_PORT}*).
 
 
 ## Clearing House
