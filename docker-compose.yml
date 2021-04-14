@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   ecc-provider: 
-    image: rdlabengpa/ids_execution_core_container:v1.7.6
+    image: rdlabengpa/ids_execution_core_container:v1.8.0
     ports:
       - "${PROVIDER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
       - 8889:8889  #Exposed port for receiving data from another connector (REST)
@@ -11,7 +11,7 @@ services:
        - DATA_APP_ENDPOINT=${PROVIDER_DATA_APP_ENDPOINT}      #Data APP enpoint for consuming received data 
        - MULTIPART=${PROVIDER_MULTIPART}                      #Data APP endpoint multipart/mixed content type
        - REST_ENABLE_HTTPS=${REST_ENABLE_HTTPS}
-       - IDSCP=${PROVIDER_IDSCP}
+       - IDSCP2=${PROVIDER_IDSCP2}
        - WS_OVER_HTTPS=${PROVIDER_WS_OVER_HTTPS}
        - WS_INTERNAL=${PROVIDER_WS_INTERNAL}
        - UC_DATAAPP_URI=${PROVIDER_UC_DATAAPP_URI}
@@ -19,6 +19,8 @@ services:
        - PUBLIC_PORT=${PROVIDER_PORT}
        - BROKER_URL=${BROKER_URL}
        - DISABLE_SSL_VALIDATION=${DISABLE_SSL_VALIDATION}
+       - CACHE_TOKEN=${CACHE_TOKEN}
+       - FETCH_TOKEN_ON_STARTUP=${FETCH_TOKEN_ON_STARTUP}
        - TZ=Europe/Rome                
     volumes:
       - ./ecc_resources_provider:/config
@@ -33,7 +35,7 @@ services:
       - "8043:43"
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.0.10
+    image: rdlabengpa/ids_be_data_app:v0.0.12
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - DATA_APP_MULTIPART=${PROVIDER_MULTIPART}
@@ -45,7 +47,7 @@ services:
       - ./be-dataapp_data_receiver:/data
 
   ecc-consumer: 
-    image: rdlabengpa/ids_execution_core_container:v1.7.6
+    image: rdlabengpa/ids_execution_core_container:v1.8.0
     ports:
       - "${CONSUMER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
       - 8890:8889  #Exposed port for receiving data from another connector (REST)
@@ -55,7 +57,7 @@ services:
        - DATA_APP_ENDPOINT=${CONSUMER_DATA_APP_ENDPOINT}    #Data APP enpoint for consuming received data 
        - MULTIPART=${CONSUMER_MULTIPART}                    #Data APP endpoint multipart/mixed content type
        - REST_ENABLE_HTTPS=${REST_ENABLE_HTTPS}
-       - IDSCP=${CONSUMER_IDSCP}
+       - IDSCP2=${CONSUMER_IDSCP2}
        - WS_OVER_HTTPS=${CONSUMER_WS_OVER_HTTPS}
        - WS_INTERNAL=${CONSUMER_WS_INTERNAL}
        - CLEARING_HOUSE=${CLEARING_HOUSE}
@@ -63,6 +65,8 @@ services:
        - PUBLIC_PORT=${CONSUMER_PORT}
        - BROKER_URL=${BROKER_URL}
        - DISABLE_SSL_VALIDATION=${DISABLE_SSL_VALIDATION}
+       - CACHE_TOKEN=${CACHE_TOKEN}
+       - FETCH_TOKEN_ON_STARTUP=${FETCH_TOKEN_ON_STARTUP}
        - TZ=Europe/Rome                
     volumes:
       - ./ecc_resources_consumer:/config
@@ -77,7 +81,7 @@ services:
       - "8044:43"
 
   be-dataapp-consumer:
-    image:  rdlabengpa/ids_be_data_app:v0.0.10
+    image:  rdlabengpa/ids_be_data_app:v0.0.12
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - DATA_APP_MULTIPART=${CONSUMER_MULTIPART}
