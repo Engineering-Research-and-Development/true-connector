@@ -58,6 +58,13 @@ The ECC supports three different way to exchange data:
 *  **IDSCP2** enabled if *IDSCP2=true* and *WS_INTERNAL=false* (use https on the edge) or *IDSCP2=true* and *WS_INTERNAL=true* (use WS on the edge)
 *  **Web Socket over HTTPS** enabled if *WS_OVER_HTTPS=true* and *IDSCP2=false*
 
+For trusted data exchange define in *.env* the SSL settings:
+
+*  KEYSTORE-NAME=changeit(JKS format)
+*  KEY-PASSWORD=changeit
+*  KEYSTORE-PASSWORD=changeit
+*  ALIAS=changeit
+
 ## How to Test
 The reachability could be verified using the following endpoints:
 
@@ -100,6 +107,7 @@ On the following link, information regarding WebSocket Message Streamer implemen
 
 #### IDSCP2
 Follow the REST endpoint or WS examples, put the server hostname/ip address in the Forward-To header (*wss/https://{RECEIVER_IP_ADDRESS/Hostname}:{WS_PUBLIC_PORT}*).
+* **AISECv2** put the certificates (keyStore and trustStore) in the *cert* folder,edit related settings (*IDSCP2 AISEC DAPS settings* section in env file)
 
 
 ## Clearing House
