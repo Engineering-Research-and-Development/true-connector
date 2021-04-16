@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   ecc-provider: 
-    image: rdlabengpa/ids_execution_core_container:v1.8.0
+    image: rdlabengpa/ids_execution_core_container:v1.8.1
     ports:
       - "${PROVIDER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
       - 8889:8889  #Exposed port for receiving data from another connector (REST)
@@ -21,6 +21,16 @@ services:
        - DISABLE_SSL_VALIDATION=${DISABLE_SSL_VALIDATION}
        - CACHE_TOKEN=${CACHE_TOKEN}
        - FETCH_TOKEN_ON_STARTUP=${FETCH_TOKEN_ON_STARTUP}
+       - SERVER_SSL_ENABLED=${SERVER_SSL_ENABLED}
+       - KEYSTORE_NAME=${KEYSTORE_NAME}
+       - KEY_PASSWORD=${KEY_PASSWORD}
+       - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
+       - ALIAS=${ALIAS}
+       - DAPS_KEYSTORE_NAME=${DAPS_KEYSTORE_NAME}
+       - DAPS_KEYSTORE_PASSWORD=${DAPS_KEYSTORE_PASSWORD}
+       - DAPS_KEYSTORE_ALIAS=${DAPS_KEYSTORE_ALIAS}
+       - DAPS_TRUSTORE_NAME=${DAPS_TRUSTORE_NAME}
+       - DAPS_TRUSTORE_PASSWORD=${DAPS_TRUSTORE_PASSWORD}
        - TZ=Europe/Rome                
     volumes:
       - ./ecc_resources_provider:/config
@@ -47,7 +57,7 @@ services:
       - ./be-dataapp_data_receiver:/data
 
   ecc-consumer: 
-    image: rdlabengpa/ids_execution_core_container:v1.8.0
+    image: rdlabengpa/ids_execution_core_container:v1.8.1
     ports:
       - "${CONSUMER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
       - 8890:8889  #Exposed port for receiving data from another connector (REST)
@@ -67,6 +77,16 @@ services:
        - DISABLE_SSL_VALIDATION=${DISABLE_SSL_VALIDATION}
        - CACHE_TOKEN=${CACHE_TOKEN}
        - FETCH_TOKEN_ON_STARTUP=${FETCH_TOKEN_ON_STARTUP}
+       - SERVER_SSL_ENABLED=${SERVER_SSL_ENABLED}
+       - KEYSTORE_NAME=${KEYSTORE_NAME}
+       - KEY_PASSWORD=${KEY_PASSWORD}
+       - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
+       - ALIAS=${ALIAS}
+       - DAPS_KEYSTORE_NAME=${DAPS_KEYSTORE_NAME}
+       - DAPS_KEYSTORE_PASSWORD=${DAPS_KEYSTORE_PASSWORD}
+       - DAPS_KEYSTORE_ALIAS=${DAPS_KEYSTORE_ALIAS}
+       - DAPS_TRUSTORE_NAME=${DAPS_TRUSTORE_NAME}
+       - DAPS_TRUSTORE_PASSWORD=${DAPS_TRUSTORE_PASSWORD}
        - TZ=Europe/Rome                
     volumes:
       - ./ecc_resources_consumer:/config
