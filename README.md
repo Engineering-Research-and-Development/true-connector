@@ -15,7 +15,7 @@ The configuration should be performed customizing the following variables in the
 
 * **DATA_APP_ENDPOINT=192.168.56.1:8084/data** DataAPP endpoint for receiveing data (F endpoint in the above picture)
 * **MULTIPART=mixed** DataAPP endpoint Content Type (choose *mixed* for Multipart/mixed or *form* for Multipart/form-data or *http-header* for Multipart/http-header) 
-* Edit external ports if need (default values: **8086** for **web sockets IDSCP and WS over HTTPS**, **8090** for **http**, **8889** for **B endpoint**)
+* Edit external ports if need (default values: **8086** for **WS over HTTPS**, **8090** for **http**, **8889** for **B endpoint**, **29292** for **IDSCP2**)
 
 ### Supported Identity Providers
 
@@ -54,9 +54,16 @@ returns business logic version
 ## Configuration
 The ECC supports three different way to exchange data:
 
-*  **REST endpoints** enabled if *IDSCP=false* and *WS_OVER_HTTPS=false*
-*  **IDSCP** enabled if *IDSCP=true* and *WS_OVER_HTTPS=false*
-*  **Web Socket over HTTPS** enabled if *WS_OVER_HTTPS=true* and *IDSCP=false*
+*  **REST endpoints** enabled if *IDSCP2=false* and *WS_OVER_HTTPS=false*
+*  **IDSCP2** enabled if *IDSCP2=true* and *WS_INTERNAL=false* (use https on the edge) or *IDSCP2=true* and *WS_INTERNAL=true* (use WS on the edge)
+*  **Web Socket over HTTPS** enabled if *WS_OVER_HTTPS=true* and *IDSCP2=false*
+
+For trusted data exchange define in *.env* the SSL settings:
+
+*  KEYSTORE-NAME=changeit(JKS format)
+*  KEY-PASSWORD=changeit
+*  KEYSTORE-PASSWORD=changeit
+*  ALIAS=changeit
 
 ## How to Test
 The reachability could be verified using the following endpoints:
@@ -94,12 +101,13 @@ DataApp URL: https://{IPADDRESS}:8084/proxy
 "Forward-To-Internal": "wss://ecc-consumer:8887",
 ```
 
-### WebSocket and IDSCP
+### WebSocket 
 
 On the following link, information regarding WebSocket Message Streamer implementation can be found here [WebSocket Message Streamer library](https://github.com/Engineering-Research-and-Development/market4.0-websocket_message_streamer).
 
-#### IDSCP
-Follow the REST endpoint examples, taking care to use *idscp://{RECEIVER_IP_ADDRESS}:{WS_PUBLIC_PORT}* in the Forward-To header.
+#### IDSCP2
+Follow the REST endpoint or WS examples, put the server hostname/ip address in the Forward-To header (*wss/https://{RECEIVER_IP_ADDRESS/Hostname}:{WS_PUBLIC_PORT}*).
+* **AISECv2** put the certificates (keyStore and trustStore) in the *cert* folder,edit related settings (*IDSCP2 AISEC DAPS settings* section in env file)
 
 
 ## Clearing House
