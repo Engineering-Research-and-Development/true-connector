@@ -9,11 +9,12 @@ services:
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - DATA_APP_ENDPOINT=${PROVIDER_DATA_APP_ENDPOINT}      #Data APP enpoint for consuming received data 
-       - MULTIPART=${PROVIDER_MULTIPART}                      #Data APP endpoint multipart/mixed content type
+       - MULTIPART_EDGE=${PROVIDER_MULTIPART_EDGE}                      #Data APP endpoint multipart/mixed content type
+       - MULTIPART_ECC=${PROVIDER_MULTIPART_ECC} 
        - REST_ENABLE_HTTPS=${REST_ENABLE_HTTPS}
        - IDSCP2=${PROVIDER_IDSCP2}
-       - WS_OVER_HTTPS=${PROVIDER_WS_OVER_HTTPS}
-       - WS_INTERNAL=${PROVIDER_WS_INTERNAL}
+       - WS_EDGE=${PROVIDER_WS_EDGE}
+       - WS_ECC=${PROVIDER_WS_ECC}
        - UC_DATAAPP_URI=${PROVIDER_UC_DATAAPP_URI}
        - CLEARING_HOUSE=${CLEARING_HOUSE}
        - PUBLIC_PORT=${PROVIDER_PORT}
@@ -50,7 +51,7 @@ services:
     image: rdlabengpa/ids_be_data_app:v0.0.12
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
-       - DATA_APP_MULTIPART=${PROVIDER_MULTIPART}
+       - DATA_APP_MULTIPART=${PROVIDER_MULTIPART_EDGE}
        - SERVER_SSL_ENABLED=${SERVER_SSL_ENABLED}
        - KEYSTORE_NAME=${KEYSTORE_NAME}
        - KEY_PASSWORD=${KEY_PASSWORD}
@@ -74,11 +75,12 @@ services:
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - DATA_APP_ENDPOINT=${CONSUMER_DATA_APP_ENDPOINT}    #Data APP enpoint for consuming received data 
-       - MULTIPART=${CONSUMER_MULTIPART}                    #Data APP endpoint multipart/mixed content type
+       - MULTIPART_EDGE=${CONSUMER_MULTIPART_EDGE}          #Data APP endpoint multipart/mixed content type
+       - MULTIPART_ECC=${CONSUMER_MULTIPART_ECC}
        - REST_ENABLE_HTTPS=${REST_ENABLE_HTTPS}
        - IDSCP2=${CONSUMER_IDSCP2}
-       - WS_OVER_HTTPS=${CONSUMER_WS_OVER_HTTPS}
-       - WS_INTERNAL=${CONSUMER_WS_INTERNAL}
+       - WS_EDGE=${CONSUMER_WS_EDGE}
+       - WS_ECC=${CONSUMER_WS_ECC}
        - CLEARING_HOUSE=${CLEARING_HOUSE}
        - UC_DATAAPP_URI=${CONSUMER_UC_DATAAPP_URI}
        - PUBLIC_PORT=${CONSUMER_PORT}
@@ -115,7 +117,7 @@ services:
     image:  rdlabengpa/ids_be_data_app:v0.0.12
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
-       - DATA_APP_MULTIPART=${CONSUMER_MULTIPART}
+       - DATA_APP_MULTIPART=${CONSUMER_MULTIPART_EDGE}
        - SERVER_SSL_ENABLED=${SERVER_SSL_ENABLED}
        - KEYSTORE_NAME=${KEYSTORE_NAME}
        - KEY_PASSWORD=${KEY_PASSWORD}
@@ -129,4 +131,3 @@ services:
       - ./be-dataapp_resources:/config
       - ./be-dataapp_data_sender:/data
       - ./ecc_cert:/cert
-
