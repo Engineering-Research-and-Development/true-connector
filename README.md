@@ -14,7 +14,8 @@ The TRUE Connector is composed of three components:
 The configuration should be performed customizing the following variables in the **.env** file:
 
 * **DATA_APP_ENDPOINT=192.168.56.1:8084/data** DataAPP endpoint for receiveing data (F endpoint in the above picture)
-* **MULTIPART=mixed** DataAPP endpoint Content Type (choose *mixed* for Multipart/mixed or *form* for Multipart/form-data or *http-header* for Multipart/http-header) 
+* **MULTIPART_EDGE=mixed** DataAPP A-endpoint Content Type (choose *mixed* for Multipart/mixed or *form* for Multipart/form-data or *http-header* for Multipart/http-header) 
+* **MULTIPART_ECC=mixed** Execution Core Container B-endpoint Content Type (choose *mixed* for Multipart/mixed or *form* for Multipart/form-data or *http-header* for Multipart/http-header) 
 * Edit external ports if need (default values: **8086** for **WS over HTTPS**, **8090** for **http**, **8889** for **B endpoint**, **29292** for **IDSCP2**)
 
 ### Supported Identity Providers
@@ -54,9 +55,9 @@ returns business logic version
 ## Configuration
 The ECC supports three different way to exchange data:
 
-*  **REST endpoints** enabled if *IDSCP2=false* and *WS_OVER_HTTPS=false*
-*  **IDSCP2** enabled if *IDSCP2=true* and *WS_INTERNAL=false* (use https on the edge) or *IDSCP2=true* and *WS_INTERNAL=true* (use WS on the edge)
-*  **Web Socket over HTTPS** enabled if *WS_OVER_HTTPS=true* and *IDSCP2=false*
+*  **REST endpoints** enabled if *WS_EDGE=false* and *WS_ECC=false*
+*  **IDSCP2** enabled if *IDSCP2=true* and *WS_EDGE=true* (use websocket on the edge, false for REST on the edge) and  *WS_ECC=true* (use ws on between connectors, false for REST between connectors)
+*  **Web Socket over HTTPS** enabled if *WS_EDGE=true* and *WS_ECC=true* and *IDSCP2=false* for configuration which uses web socker on the edge and between connectors.
 
 For trusted data exchange define in *.env* the SSL settings:
 

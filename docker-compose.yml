@@ -10,11 +10,11 @@ services:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - DATA_APP_ENDPOINT=${PROVIDER_DATA_APP_ENDPOINT}      #Data APP enpoint for consuming received data 
        - MULTIPART_EDGE=${PROVIDER_MULTIPART_EDGE}                      #Data APP endpoint multipart/mixed content type
-       - MULTIPART_ECC=${PROVIDER_MULTIPART_ECC} 
+       - MULTIPART_ECC=${MULTIPART_ECC} 
        - REST_ENABLE_HTTPS=${REST_ENABLE_HTTPS}
        - IDSCP2=${PROVIDER_IDSCP2}
        - WS_EDGE=${PROVIDER_WS_EDGE}
-       - WS_ECC=${PROVIDER_WS_ECC}
+       - WS_ECC=${WS_ECC}
        - UC_DATAAPP_URI=${PROVIDER_UC_DATAAPP_URI}
        - CLEARING_HOUSE=${CLEARING_HOUSE}
        - PUBLIC_PORT=${PROVIDER_PORT}
@@ -76,11 +76,11 @@ services:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - DATA_APP_ENDPOINT=${CONSUMER_DATA_APP_ENDPOINT}    #Data APP enpoint for consuming received data 
        - MULTIPART_EDGE=${CONSUMER_MULTIPART_EDGE}          #Data APP endpoint multipart/mixed content type
-       - MULTIPART_ECC=${CONSUMER_MULTIPART_ECC}
+       - MULTIPART_ECC=${MULTIPART_ECC}
        - REST_ENABLE_HTTPS=${REST_ENABLE_HTTPS}
        - IDSCP2=${CONSUMER_IDSCP2}
        - WS_EDGE=${CONSUMER_WS_EDGE}
-       - WS_ECC=${CONSUMER_WS_ECC}
+       - WS_ECC=${WS_ECC}
        - CLEARING_HOUSE=${CLEARING_HOUSE}
        - UC_DATAAPP_URI=${CONSUMER_UC_DATAAPP_URI}
        - PUBLIC_PORT=${CONSUMER_PORT}
