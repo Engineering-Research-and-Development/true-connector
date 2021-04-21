@@ -22,9 +22,10 @@ The configuration should be performed customizing the following variables in the
 
 The TRUE Connector is able to interact with the following Identity Providers:
 
-* **AISECv1** put the certificate in the *cert* folder, edit related settings (i.e., *application.keyStoreName*, *application.keyStorePassword*) and set the *application.dapsVersion* (in the *resources/application-docker.properties*) to *v1*
-* **AISECv2** put the certificate in the *cert* folder,edit related settings (i.e., *application.keyStoreName*, *application.keyStorePassword*) and set the *application.dapsVersion* (in the *resources/application-docker.properties*) to *v2*
-* **ORBITER** put the certificate in the *cert* folder, edit related settings (i.e., *application.daps.orbiter.privateKey*, *application.daps.orbiter.password*) and set the *application.dapsVersion* (in the *resources/application-docker.properties*) to *orbiter*
+* **AISECv1** put the certificate in the *cert* folder, edit related settings (i.e., *application.keyStoreName*, *application.keyStorePassword*) (in the *.env*) and set the *application.dapsVersion* (in the *resources/application-docker.properties*) to *v1*
+* **AISECv2** put the certificate in the *cert* folder,edit related settings (i.e., *application.keyStoreName*, *application.keyStorePassword*) (in the *.env*) and set the *application.dapsVersion* (in the *resources/application-docker.properties*) to *v2*
+* **ORBITER** put the certificate in the *cert* folder, edit related settings (i.e., *application.daps.orbiter.privateKey*, *application.daps.orbiter.password*) (in the *.env*) and set the *application.dapsVersion* (in the *resources/application-docker.properties*) to *orbiter*
+
 
 The *application.dapsUrl* (in the *resources/application-docker.properties*) property must be set properly in order to address the right DAPS server.
 
