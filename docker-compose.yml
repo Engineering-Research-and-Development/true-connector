@@ -12,7 +12,7 @@ services:
        - MULTIPART_EDGE=${PROVIDER_MULTIPART_EDGE}                      #Data APP endpoint multipart/mixed content type
        - MULTIPART_ECC=${MULTIPART_ECC} 
        - REST_ENABLE_HTTPS=${REST_ENABLE_HTTPS}
-       - IDSCP2=${PROVIDER_IDSCP2}
+       - IDSCP2=${IDSCP2}
        - WS_EDGE=${PROVIDER_WS_EDGE}
        - WS_ECC=${WS_ECC}
        - UC_DATAAPP_URI=${PROVIDER_UC_DATAAPP_URI}
@@ -78,7 +78,7 @@ services:
        - MULTIPART_EDGE=${CONSUMER_MULTIPART_EDGE}          #Data APP endpoint multipart/mixed content type
        - MULTIPART_ECC=${MULTIPART_ECC}
        - REST_ENABLE_HTTPS=${REST_ENABLE_HTTPS}
-       - IDSCP2=${CONSUMER_IDSCP2}
+       - IDSCP2=${IDSCP2}
        - WS_EDGE=${CONSUMER_WS_EDGE}
        - WS_ECC=${WS_ECC}
        - CLEARING_HOUSE=${CLEARING_HOUSE}

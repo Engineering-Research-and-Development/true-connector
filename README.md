@@ -57,8 +57,8 @@ returns business logic version
 The ECC supports three different way to exchange data:
 
 *  **REST endpoints** enabled if *WS_EDGE=false* and *WS_ECC=false*
-*  **IDSCP2** enabled if *IDSCP2=true* and *WS_EDGE=true* (use websocket on the edge, false for REST on the edge) and  *WS_ECC=true* (use ws on between connectors, false for REST between connectors)
-*  **Web Socket over HTTPS** enabled if *WS_EDGE=true* and *WS_ECC=true* and *IDSCP2=false* for configuration which uses web socker on the edge and between connectors.
+*  **IDSCP2** enabled if *IDSCP2=true* and WS_ECC = false </br>For *WS_EDGE=true* (use websocket on the edge, false for REST on the edge) 
+*  **Web Socket over HTTPS** enabled if *WS_EDGE=true* and *WS_ECC=true* and *IDSCP2=false* for configuration which uses web socket on the edge and between connectors.
 
 For trusted data exchange define in *.env* the SSL settings:
 
