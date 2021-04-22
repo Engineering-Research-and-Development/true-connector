@@ -44,7 +44,7 @@ The snippet below is located an example of time-based rule: leftOperand is the s
 					"leftOperand": "ids:datetime",
 					"operator": "lt",
 					"rightOperand": {
-						"@value": "2020-10-31T23:59:59Z",
+						"@value": "2021-10-31T23:59:59Z",
 						"@type": "xsd:datetime"
 					}
 				}]
