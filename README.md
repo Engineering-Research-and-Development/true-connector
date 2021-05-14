@@ -17,6 +17,14 @@ The configuration should be performed customizing the following variables in the
 * **MULTIPART_EDGE=mixed** DataAPP A-endpoint Content Type (choose *mixed* for Multipart/mixed or *form* for Multipart/form-data or *http-header* for Multipart/http-header) 
 * **MULTIPART_ECC=mixed** Execution Core Container B-endpoint Content Type (choose *mixed* for Multipart/mixed or *form* for Multipart/form-data or *http-header* for Multipart/http-header) 
 * Edit external ports if need (default values: **8086** for **WS over HTTPS**, **8090** for **http**, **8889** for **B endpoint**, **29292** for **IDSCP2**)
+* Forward-To protocol validation can be changed by editing **application.validateProtocol**. Default value is *true* and Forward-To URL must be set like http(https,wss)://example.com, if you choose *false* Forward-To URL can be set like http(https,wss)://example.com or just example.com and the protocol chosen (from application.properties)will be automatically set (it will be overwritten! example: http://example.com will be wss://example if you chose wss in the properties).
+* For websocket configuration, in DataApp resource folders, configure *config.properties* file, set following fields
+
+```
+server.ssl.key-password=changeit
+server.ssl.key-store=/cert/ssl-server.jks
+```
+Or leave default values, if certificate and its password are correct.
 
 ### Supported Identity Providers
 
