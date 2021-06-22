@@ -5,7 +5,7 @@
 Until negotiation process is implemented, provided UsageControl dataApp exposes endpoint for importing rules. Following endpoint can be found at:
 
 ```
-http://{IPADDRESS}:9553/swagger-ui.html
+http://{IPADDRESS}:9555/swagger-ui.html
 ```
 
 Here, you can import rules, using endpoint
