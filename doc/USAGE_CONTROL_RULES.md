@@ -19,38 +19,9 @@ Here, you can import rules, using endpoint
 
 The following rule describes the time interval in which it is allowed to access the resource with a specific identifier defined using the “target” property of the rule.
 
-The snippet below is located an example of time-based rule: leftOperand is the start date and rightOperand represents the end date, in the specific case the message can be consumed only from 1st October 2020 to 31st of October 2020.
+The snippet below is located an example of time-based rule: leftOperand is the start date and rightOperand represents the end date, in the specific case the message can be consumed only from 15th June 2021 to 31st December 2021.
 
-```
-{
-	"@context": "http://www.w3.org/ns/odrl.jsonld",
-	"@type": "ids:ContractAgreement",
-	"uid": "http://example.com/policy/restrict-access-interval",
-	"profile": "http://example.com/ids-profile",
-	"target": "http://w3id.org/engrd/connector/artifact/1",
-	"provider": "http://example.com/party/my-party",
-	"consumer": "http://example.com/party/consumer-party",
-	"permission": [{
-			"action": "ids:use",
-			"constraint": [{
-					"leftOperand": "ids:datetime",
-					"operator": "gt",
-					"rightOperand": {
-						"@value": "2020-10-01T00:00:00Z",
-						"@type": "xsd:datetime"
-					}
-				},
-				{
-					"leftOperand": "ids:datetime",
-					"operator": "lt",
-					"rightOperand": {
-						"@value": "2021-10-31T23:59:59Z",
-						"@type": "xsd:datetime"
-					}
-				}]
-		}]
-}
-```
+[Time-Based Interval Rule](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app/blob/master/src/main/resources/policy-examples/0.0.3/1%20restrict-access-interval.json)
 
 ## Modifier Rule
 
@@ -59,42 +30,8 @@ The following rule describes an example of modifier rule, anonymize, which will 
 
 In the snippet below is located an example of modifier rule: replaceWith filed tells which string will be used to replace the current value (dateOfBirth will be replaced with xxxx).
 
-```
-{
-	"@context": "http://www.w3.org/ns/odrl.jsonld",
-	"@type": "ids:ContractAgreement",
-	"uid": "http://example.com/policy/anonymize-in-transit",
-	"profile": "http://example.com/ids-profile",
-	"target": "http://w3id.org/engrd/connector/artifact/2",
-	"provider": "http://example.com/party/my-party",
-	"consumer": "http://example.com/party/consumer-party",
-	"permission": [
-		{
-			"action": "ids:use",
-			"preobligation": [{
-					"action": [{
-							"rdf:value": {
-								"@id": "ids:anonymize"
-							},
-							"refinement": [
-								{
-									"leftOperand": "ids:modificationMethod",
-									"operator": "eq",
-									"rightOperand": {
-										"@value": "http://example.com/anonymize/replace",
-										"@type": "xsd:anyURI"
-									},
-									"replaceWith": {
-										"@value": "xxxx",
-										"@type": "xsd:string"
-									},
-									"jsonPath": "$.dateOfBirth"
-								}]
-						}]
-				}]
-		}]
-}
-```
+[Anonymize field in transit Rule](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app/blob/master/src/main/resources/policy-examples/0.0.3/3%20anonymize-in-transit-replace.json)
+
 
 Example of payload, on which policy will be applied:
 
@@ -125,38 +62,8 @@ The following rule describes another example of modifier rule, delete, which wil
 
 In the snippet below is located a running example of modifier rule: the jsonPath field will be used to evaluate and remove following the specified object (dateOfBirth) from the payload.
 
-```
-{
-	"@context": "http://www.w3.org/ns/odrl.jsonld",
-	"@type": "ids:ContractAgreement",
-	"uid": "http://example.com/policy/anonymize-in-transit-delete",
-	"profile": "http://example.com/ids-profile",
-	"target": "http://w3id.org/engrd/connector/artifact/3",
-	"provider": "http://example.com/party/my-party",
-	"consumer": "http://example.com/party/consumer-party",
-	"permission": [{
-			"action": "ids:use",
-			"preobligation": [{
-					"action": [{
-							"rdf:value": {
-								"@id": "ids:anonymize"
-							},
-							"refinement": [
-								{
-									"leftOperand": "ids:modificationMethod",
-									"operator": "eq",
-									"rightOperand": {
-										"@value": "http://example.com/anonymize/delete",
-										"@type": "xsd:anyURI"
-									},
-									"jsonPath": "$.dateOfBirth"
-								}]
-						}]
-				}]
-		}]
-}
+[Delete field in transit Rule](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app/blob/master/src/main/resources/policy-examples/0.0.3/33%20anonymize-in-transit-delete.json)
 
-```
 
 Example of payload, on which policy will be applied:
 
@@ -187,28 +94,8 @@ The following rule describes a location-based rule, which allows or inhibits the
 The snippet below is located an example of spatial-based rule: the rightOperand contains value IT, which tells that the resource can be consumed only by connectors that are located in Italy
 
 
-```
-{
-	"@context": "http://www.w3.org/ns/odrl.jsonld",
-	"@type": "ids:ContractAgreement",
-	"uid": "http://example.com/policy/restrict-access-location",
-	"profile": "http://example.com/ids-profile",
-	"target": "http://w3id.org/engrd/connector/artifact/4",
-	"provider": "http://example.com/party/my-party",
-	"consumer": "http://example.com/party/consumer-party",
-	"permission": [{
-			"action": "ids:use",
-			"constraint": [{
-					"leftOperand": "https://w3id.org/idsa/core/absoluteSpatialPosition",
-					"operator": "eq",
-					"rightOperand": {
-						"@value": "IT",
-						"@type": "xsd:anyURI"
-					}
-				}]
-		}]
-}
-```
+[Spatial - Based Rule - Location](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app/blob/master/src/main/resources/policy-examples/0.0.3/4%20restrict-access-location.json)
+
 
 ## Purpose-Based Rule
 
@@ -216,79 +103,14 @@ The purpose-based class of rules allows or inhibits the usage of resources with 
 
 In the snippet below is located an example of spatial-based rule: the rightOperand contains the value http://example.com/ids-purpose:Marketing, which tells that the resource is available for messages that have a purpose defined as Marketing.
 
-```
-{
-	"@context": "http://www.w3.org/ns/odrl.jsonld",
-	"@type": "ids:ContractAgreement",
-	"uid": "http://example.com/policy/restrict-access-purpose",
-	"profile": "http://example.com/ids-profile",
-	"target": "http://w3id.org/engrd/connector/artifact/5",
-	"provider": "http://example.com/party/my-party",
-	"consumer": "http://example.com/party/consumer-party",
-	"permission": [{
-			"action": "ids:use",
-			"constraint": [{
-					"leftOperand": "https://w3id.org/idsa/core/purpose",
-					"operator": "eq",
-					"rightOperand": {
-						"@value": "http://example.com/ids-purpose:Marketing",
-						"@type": "xsd:anyURI"
-					}
-				}]
-		}]
-}
-```
+[Purpose - Based Rule](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app/blob/master/src/main/resources/policy-examples/0.0.3/5%20restrict-access-purpose.json)
+
 
 ## Complex Rule
 
-Rules can be composed in order to create complex permission definitions. The following rule describes a complex based rule, which contains 3 simple rules: spatial, purpose and time interval based. All those simple rules must be evaluated as true in order to allow the usage of the resource. If any of the simple rules is evaluated as false, then the resource usage is inhibited.
+Rules can be composed in order to create complex permission definitions. The following rule describes a complex based rule, which contains 2 simple rules: spatial and time interval based. All those simple rules must be evaluated as true in order to allow the usage of the resource. If any of the simple rules is evaluated as false, then the resource usage is inhibited.
 
-In the snippet below is located an example of the complex rule: spatial rule defines that the connector must be in Italy, the purpose-based one defines that the message purpose must be http://example.com/ids-purpose:Marketing and time base rule defines that the resource can be consumed only from October 1st, 2020, until October 31st, 2020.
+In the snippet below is located an example of the complex rule: spatial rule defines that the connector must be in Serbia and time base rule defines that the resource can be consumed only from 15th June 2021 until 31st December 2021.
 
-```
-{
-   "@context":"http://www.w3.org/ns/odrl.jsonld",
-   "@type":"ids:ContractAgreement",
-   "uid":"http://example.com/policy/complex-policy",
-   "profile":"http://example.com/ids-profile",
-   "target":"http://w3id.org/engrd/connector/artifact/6",
-   "provider":"http://example.com/party/my-party",
-   "consumer":"http://example.com/party/consumer-party",
-   "permission":[{
-         "action":"ids:use",
-         "constraint":[{
-               "leftOperand":"https://w3id.org/idsa/core/absoluteSpatialPosition",
-               "operator":"eq",
-               "rightOperand":{
-                  "@value":"IT",
-                  "@type":"xsd:anyURI"
-               }
-            },
-            {
-               "leftOperand":"https://w3id.org/idsa/core/purpose",
-               "operator":"eq",
-               "rightOperand":{
-                  "@value":"http://example.com/ids-purpose:Marketing",
-                  "@type":"xsd:anyURI"
-               }
-            },
-            {
-               "leftOperand":"ids:datetime",
-               "operator":"gt",
-               "rightOperand":{
-                  "@value":"2020-10-01T00:00:00Z",
-                  "@type":"xsd:datetime"
-               }
-            },
-            {
-               "leftOperand":"ids:datetime",
-               "operator":"lt",
-               "rightOperand":{
-                  "@value":"2020-10-31T00:00:00Z",
-                  "@type":"xsd:datetime"
-               }
-            }]
-      }]
-}
-```
+[Complex Rule](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app/blob/master/src/main/resources/policy-examples/0.0.3/6%20restrict-access-complex-interval-location.json)
 
