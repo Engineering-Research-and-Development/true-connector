@@ -78,15 +78,15 @@ For trusted data exchange define in *.env* the SSL settings:
 ## How to Test
 The reachability could be verified using the following endpoints:
 
-*  **http://{IP_ADDRESS}:{HTTP_PUBLIC_PORT}/about/version**
+*  **https://{IP_ADDRESS}:{HTTP_PUBLIC_PORT}/about/version**
 
 Keeping the provided docker-compose, for Data Provider URL will be:
 
-*  **http://{IP_ADDRESS}:8090/about/version**
+*  **https://{IP_ADDRESS}:8090/about/version**
 
 For Data Consumer, with provided docker-compose file:
 
-*  **http://{IP_ADDRESS}:8091/about/version**
+*  **https://{IP_ADDRESS}:8091/about/version**
 
 
 ## How to Exchange Data
