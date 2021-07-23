@@ -1,0 +1,13 @@
+name: Mirroring repository
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Pull enteee/git-sync-mirror
+        run: sudo docker pull enteee/git-sync-mirror
