@@ -13,10 +13,7 @@ jobs:
         run: sudo docker pull enteee/git-sync-mirror
         
       - name: Run enteee/git-sync-mirror
-        run: docker run --rm --env SRC_REPO=https://github.com/Engineering-Research-and-Development/true-connector --env DST_REPO=https://github.com/International-Data-Spaces-Association/true-connector --env DST_REPO_TOKEN=${{secrets.IDSA_MIRRORING}} --env SLEEP_TIME=30s enteee/git-sync-mirror
+        run: docker run --rm --env SRC_REPO=https://github.com/Engineering-Research-and-Development/true-connector --env DST_REPO=https://github.com/International-Data-Spaces-Association/true-connector --env DST_REPO_TOKEN=${{secrets.IDSA_MIRRORING}} --env ONCE=true enteee/git-sync-mirror
         
       - name: Wait for mirroring
         run: sleep 120
-        
-      - name: Stop enteee/git-sync-mirror
-        run: sudo docker stop $(docker ps -a -q)
