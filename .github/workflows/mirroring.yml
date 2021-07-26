@@ -14,6 +14,3 @@ jobs:
         
       - name: Run enteee/git-sync-mirror
         run: docker run --rm --env SRC_REPO=https://github.com/Engineering-Research-and-Development/true-connector --env DST_REPO=https://github.com/International-Data-Spaces-Association/true-connector --env DST_REPO_TOKEN=${{secrets.IDSA_MIRRORING}} --env ONCE=true enteee/git-sync-mirror
-        
-      - name: Wait for mirroring
-        run: sleep 120
