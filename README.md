@@ -10,9 +10,29 @@ The TRUE Connector is composed of three components:
 ![TRUE Connector Architecture](doc/TRUE_Connector_Architecture.png?raw=true "TRUE Connector Architecture")
 
 
-# Table of Contents
-ADD THIS PART ONCE OTHER THINGS ARE COMPLETED
+## Table of Contents
 
+* [Introduction](#introduction)
+  * [Default configuration](#defaultconfiguration)
+  * [Starting and stopping containers](#startstop)
+* [Endpoints](#endpoints)
+* [Connector reachability](#reachability)
+* [How to Exchange Data](#exchangedata) 
+* [Modifying configuration](#modifyconfiguration) 
+  * [Enable hostname validation](#hosnamevalidation)
+  * [SSL/HTTPS](#ssl)
+  * [DAPS](#daps)
+  * [Change message format](#messageformat)
+  * [WebSocket configuration (WSS)](#wss)
+  * [IDSCPv2](#idscpv2)
+* [Advanced configuration](#advancedconfiguration)
+  * [Supported Identity Providers](#identityproviders)
+  * [Validate protocol](#validateprotocol)
+* [Clearing House](#clearinghouse)
+* [Broker](#broker)
+* [Usage Control](#usagecontrol)
+* [Contract Negotiation](#contractnegotiation)
+* [License](#license)
 
 ## Introduction  <a name="introduction"></a>
 
@@ -131,8 +151,7 @@ With default configuration, you can use following curl command, to get data from
 
 <details>
   <summary>Multipart Mixed request</summary>
-	
-	```
+
 	curl --location --request POST 'https://localhost:8084/proxy' \
 	--header 'fizz: buzz' \
 	--header 'Content-Type: text/plain' \
@@ -161,7 +180,7 @@ With default configuration, you can use following curl command, to get data from
 	        "catalog.offers.0.resourceEndpoints.path":"/pet2"
 	        }
 	}'
-	```
+
 </details>
 
 *NOTE*: even that this curl command is exported from Postman, it is noticed several times, that when oyou try to import it back in Postman, there are some problems during this process, which results in ommiting request body, and then request fill fail - cannot find body to create request.</br>
@@ -188,7 +207,8 @@ DataApp URL: https://localhost:8084/proxy
 "Forward-To-Internal": "wss://ecc-consumer:8887",
 ```
 
-#### IDSCP2 <a name="idscp"></a>
+For IDSCPv2: 
+
 Follow the REST endpoint or WS examples, put the server hostname/ip address in the Forward-To header (*wss/https://{RECEIVER_IP_ADDRESS/Hostname}:{WS_PUBLIC_PORT}*).
 * **AISECv2** put the certificates (keyStore and trustStore) in the *cert* folder,edit related settings (*IDSCP2 AISEC DAPS settings* section in env file)
 
@@ -229,7 +249,6 @@ If you want to use http and not https, simply disable following property
 ```
 SERVER_SSL_ENABLED=false
 ```
-
 
 ### DAPS <a name="daps"></a>
 
@@ -366,16 +385,16 @@ The TRUE Connector supports is able to communicate with the ENG Clearing House f
 Information on how TRUE Connector can interact with Broker, can be found on following link [Broker](BROKER.md)
 
 
-## Usage Control
+## Usage Control <a name="usagecontrol"></a>
 The TRUE Connector integrates the [Fraunhofer MyData Framework](https://www.mydata-control.de/) for implementing the Usage Control. Details about the PMP and PEP components can be found [here](doc/USAGE_CONTROL_RULES.md). 
 
-## Contract Negotiation - simple flow
+## Contract Negotiation - simple flow <a name="contractnegotiation"></a>
 
 For simple contract negotiation flow, with ContractAgreement read from file, please check following link
 [Data App Contract Negotiation](https://github.com/Engineering-Research-and-Development/market4.0-data_app_test_BE/blob/master/README.md#markdown-header-Contract-Negotiation-simple-flow) 
 
 
-## License
+## License <a name="license"></a>
 The TRUE Connector components are released following different licenses:
 
 * **Execution Core Container**, open-source distributed under the license AGPLv3
