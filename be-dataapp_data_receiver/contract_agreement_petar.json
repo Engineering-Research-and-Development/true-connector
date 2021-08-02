@@ -1,0 +1,39 @@
+{    
+   "@context": {
+      "ids":"https://w3id.org/idsa/core/",
+      "idsc" : "https://w3id.org/idsa/code/"
+   },    
+  "@type": "ids:ContractAgreement",    
+  "@id": "https://w3id.org/idsa/autogen/contract/restrict-access-interval",    
+  "profile": "http://example.com/ids-profile",    
+  "ids:target": {
+      "@id":"http://w3id.org/engrd/connector/artifact/petar"
+   },    
+  "ids:provider": "http://example.com/party/my-party",    
+  "ids:consumer": "http://example.com/party/consumer-party",    
+  "ids:permission": [{    
+      "ids:action": [{
+        "@id":"idsc:USE"
+      }],     
+      "ids:constraint": [{    
+        "@type":"ids:Constraint",  
+        "ids:leftOperand": "idsc:POLICY_EVALUATION_TIME",  
+        "ids:operator": "idsc:TEMPORAL_EQUALS",  
+        "ids:rightOperand": { 
+         "@type": "ids:interval", 
+         "@value": { 
+             "ids:begin": {
+               "@value": "2021-03-01T00:00:00Z",
+               "@type": "xsd:datetimeStamp"
+            }, 
+            "ids:end": {
+               "@value": "2021-03-31T00:00:00Z",
+               "@type": "xsd:datetimeStamp"
+            } 
+         } 
+        }, 
+        "ids:pipEndpoint": { "@id": "https//pip.com/policy_evaluation_time" } 
+      }     
+] 
+  }] 
+} 
