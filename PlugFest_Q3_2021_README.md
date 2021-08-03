@@ -79,9 +79,107 @@ Assuming you are running docker instance on local machine. If not, please update
 
 In POST request, upload policy from [here](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app/blob/master/src/main/resources/policy-examples/0.0.2/1%20restrict-access-interval.json)
 
+<details>
+  <summary>Multipart form - Contract Request Message</summary>
+
+	curl --location --request POST 'https://localhost:8084/proxy' \
+	--header 'Content-Type: application/json' \
+	--data-raw '{
+	"multipart": "form",
+	"Forward-To": "https://217.172.12.215:8889/data",
+	"messageType": "ContractRequestMessage",
+	"requestedArtifact": "http://w3id.org/engrd/connector/artifact/{id}"
+	'
+
+</details>
+
+### Contract Agreement request
+
+Example of Contract Agreement Message:
+Payload should be ContractAgreement, obtained from previous response (ContractRequestMessage)
+
+<details>
+  <summary>Multipart form - Contract Agreement request</summary>
+
+	curl --location --request POST 'https://localhost:8084/proxy' \
+	--header 'Content-Type: application/json' \
+	--data-raw '{
+	"multipart": "form",
+	"Forward-To": "https://217.172.12.215:8889/data",
+	"messageType": "ContractAgreementMessage",
+	"requestedArtifact": "http://w3id.org/engrd/connector/artifact/{id}",
+	"payload": {
+		"@context": {
+			"ids": "https://w3id.org/idsa/core/",
+			"idsc": "https://w3id.org/idsa/code/"
+		},
+		"@type": "ids:ContractAgreement",
+		"@id": "https://w3id.org/idsa/autogen/contract/restrict-access-interval-{id}",
+		"profile": "http://example.com/ids-profile",
+		"ids:target": {
+			"@id": "http://w3id.org/engrd/connector/artifact/{id}"
+		},
+		"ids:provider": "http://example.com/party/my-party",
+		"ids:consumer": "http://example.com/party/consumer-party",
+		"ids:permission": [
+			{
+				"ids:action": [
+					{
+						"@id": "idsc:USE"
+					}
+				],
+				"ids:constraint": [
+					{
+						"@type": "ids:Constraint",
+						"ids:leftOperand": "idsc:POLICY_EVALUATION_TIME",
+						"ids:operator": "idsc:TEMPORAL_EQUALS",
+						"ids:rightOperand": {
+							"@type": "ids:interval",
+							"@value": {
+								"ids:begin": {
+									"@value": "2021-03-01T00:00:00Z",
+									"@type": "xsd:datetimeStamp"
+								},
+								"ids:end": {
+									"@value": "2021-03-31T00:00:00Z",
+									"@type": "xsd:datetimeStamp"
+								}
+							}
+						},
+						"ids:pipEndpoint": {
+							"@id": "https//pip.com/policy_evaluation_time"
+						}
+					}
+				]
+			}
+		]
+	}
+	}'
+
+</details>
+
+When following request is sent, response will be MessageProcessedNotificationMessage, without payload.
+
+
 ### Get offered resource
 
 In order to get resource that TrueConnector offers, you need to send *ArtifactRequestMessage* to B-endpoint.
 
-TODO: update how to test once when we have new proxy request
-Prepare ArtifactRequestMessage, set requestedArtifact to be *http://w3id.org/engrd/connector/artifact/1* and
+*Note* change {id} with the correct value, representing resource requested.
+
+
+<details>
+  <summary>Multipart Form - Artifact Request Message</summary>
+
+	curl --location --request POST 'https://localhost:8084/proxy' \
+	--header 'Content-Type: application/json' \
+	--data-raw '{
+	    "multipart": "form",
+	    "Forward-To": "https://217.172.12.215:8889/data",
+	    "messageType":"ArtifactRequestMessage",
+	    "requestedArtifact": "http://w3id.org/engrd/connector/artifact/{id}"   
+	}'
+
+</details>
+
+Expected response is ArtifactResponseMessage, as header, and in payload - json document containing information about requested resource.
