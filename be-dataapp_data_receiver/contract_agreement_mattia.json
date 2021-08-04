@@ -4,7 +4,7 @@
       "idsc" : "https://w3id.org/idsa/code/"
    },    
   "@type": "ids:ContractAgreement",    
-  "@id": "https://w3id.org/idsa/autogen/contract/restrict-access-interval",    
+  "@id": "https://w3id.org/idsa/autogen/contract/restrict-access-interval-mattia",    
   "profile": "http://example.com/ids-profile",    
   "ids:target": {
       "@id":"http://w3id.org/engrd/connector/artifact/mattia"
@@ -23,11 +23,11 @@
          "@type": "ids:interval", 
          "@value": { 
              "ids:begin": {
-               "@value": "2021-03-01T00:00:00Z",
+               "@value": "2021-01-01T00:00:00Z",
                "@type": "xsd:datetimeStamp"
             }, 
             "ids:end": {
-               "@value": "2021-03-31T00:00:00Z",
+               "@value": "2021-12-31T00:00:00Z",
                "@type": "xsd:datetimeStamp"
             } 
          } 

@@ -1,0 +1,644 @@
+{
+  "@context" : {
+    "xsd" : "http://www.w3.org/2001/XMLSchema#",
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
+  },
+  "@type" : "ids:BaseConnector",
+  "@id" : "https://eng.it",
+  "ids:resourceCatalog" : [ {
+    "@type" : "ids:ResourceCatalog",
+    "@id" : "https://w3id.org/idsa/autogen/resourceCatalog/7c238d63-2567-4b11-af74-c8dff5c4a123",
+    "ids:requestedResource" : [ ],
+    "ids:offeredResource" : [ {
+      "@type" : "ids:TextResource",
+      "@id" : "https://w3id.org/idsa/autogen/textResource/01ccac17-7889-4461-bd30-b3a5aa2242a8",
+      "ids:language" : [ {
+        "@id" : "https://w3id.org/idsa/code/EN"
+      }, {
+        "@id" : "https://w3id.org/idsa/code/IT"
+      } ],
+      "ids:contentType" : {
+        "@id" : "https://w3id.org/idsa/code/SCHEMA_DEFINITION"
+      },
+      "ids:created" : {
+        "@value" : "2021-08-04T12:52:09.317+02:00",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      },
+      "ids:version" : "1.0.0",
+      "ids:temporalCoverage" : [ ],
+      "ids:resourceEndpoint" : [ ],
+      "ids:defaultRepresentation" : [ ],
+      "ids:paymentModality" : [ ],
+      "ids:title" : [ {
+        "@value" : "Resource Igor",
+        "@type" : "http://www.w3.org/2001/XMLSchema#string"
+      } ],
+      "ids:representation" : [ {
+        "@type" : "ids:TextRepresentation",
+        "@id" : "https://w3id.org/idsa/autogen/textRepresentation/86ed3741-8f99-4396-a7e4-5e4617b872a6",
+        "ids:instance" : [ {
+          "@type" : "ids:Artifact",
+          "@id" : "http://w3id.org/engrd/connector/artifact/igor",
+          "ids:fileName" : "igor.json",
+          "ids:creationDate" : {
+            "@value" : "2021-08-04T12:52:09.266+02:00",
+            "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+          }
+        } ],
+        "ids:created" : {
+          "@value" : "2021-08-04T12:52:09.248+02:00",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:mediaType" : {
+          "@type" : "ids:CustomMediaType",
+          "@id" : "https://w3id.org/idsa/autogen/customMediaType/07cfa03d-7692-456a-bb93-b551fc93d9b5",
+          "ids:filenameExtension" : "json"
+        }
+      } ],
+      "ids:contractOffer" : [ {
+        "@type" : "ids:ContractOffer",
+        "@id" : "https://w3id.org/idsa/autogen/contractOffer/2501e311-f93c-4f3a-8fae-cc23ddb0e5a1",
+        "ids:permission" : [ {
+          "@type" : "ids:Permission",
+          "@id" : "https://w3id.org/idsa/autogen/permission/658eb388-6980-40f9-8380-29f0789c7904",
+          "ids:target" : {
+            "@id" : "http://w3id.org/engrd/connector/artifact/igor"
+          },
+          "ids:action" : [ {
+            "@id" : "https://w3id.org/idsa/code/USE"
+          } ],
+          "ids:title" : [ ],
+          "ids:description" : [ ],
+          "ids:assigner" : [ {
+            "@id" : "https://plugfest.com"
+          } ],
+          "ids:constraint" : [ {
+            "@type" : "ids:Constraint",
+            "@id" : "https://w3id.org/idsa/autogen/constraint/b6a4a7f2-f5eb-4f66-9d7c-17a95a59dc85",
+            "ids:operator" : {
+              "@id" : "https://w3id.org/idsa/code/AFTER"
+            },
+            "ids:rightOperand" : {
+              "@value" : "2021-01-01T00:00:01Z",
+              "@type" : "xsd:datetime"
+            },
+            "ids:leftOperand" : {
+              "@id" : "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
+            }
+          }, {
+            "@type" : "ids:Constraint",
+            "@id" : "https://w3id.org/idsa/autogen/constraint/a99a7d53-c12f-47ca-9193-90b0e49095ca",
+            "ids:operator" : {
+              "@id" : "https://w3id.org/idsa/code/BEFORE"
+            },
+            "ids:rightOperand" : {
+              "@value" : "2021-12-31T23:59:00Z",
+              "@type" : "xsd:datetime"
+            },
+            "ids:leftOperand" : {
+              "@id" : "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
+            }
+          } ],
+          "ids:assignee" : [ {
+            "@id" : "https://eng.it"
+          } ],
+          "ids:postDuty" : [ ],
+          "ids:preDuty" : [ {
+            "@type" : "ids:Duty",
+            "@id" : "https://w3id.org/idsa/autogen/duty/26eb7450-70f7-4580-8a44-5657291d3ff1",
+            "ids:target" : {
+              "@id" : "http://w3id.org/engrd/connector/artifact/igor"
+            },
+            "ids:action" : [ {
+              "@id" : "https://w3id.org/idsa/code/ANONYMIZE"
+            } ],
+            "ids:title" : [ {
+              "@value" : "Anonymize date of birth",
+              "@type" : "http://www.w3.org/2001/XMLSchema#string"
+            } ],
+            "ids:description" : [ ],
+            "ids:assigner" : [ ],
+            "ids:constraint" : [ {
+              "@type" : "ids:Constraint",
+              "@id" : "https://w3id.org/idsa/autogen/constraint/4c735b44-4979-4d21-be82-010fc4a626ee",
+              "ids:operator" : {
+                "@id" : "https://w3id.org/idsa/code/EQUALS"
+              },
+              "ids:rightOperand" : {
+                "@value" : "http://example.com/anonymize/replace",
+                "@type" : "xsd:anyURI"
+              },
+              "ids:leftOperand" : {
+                "@id" : "https://w3id.org/idsa/code/PATH"
+              }
+            } ],
+            "ids:assignee" : [ ]
+          } ]
+        } ],
+        "ids:provider" : {
+          "@id" : "https://eng.it"
+        },
+        "ids:consumer" : {
+          "@id" : "https://plugfest.com"
+        },
+        "ids:contractDate" : {
+          "@value" : "2021-08-04T12:52:09.209+02:00",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:prohibition" : [ ],
+        "ids:obligation" : [ ]
+      } ],
+      "ids:sample" : [ ],
+      "ids:description" : [ {
+        "@value" : "Information about developer Igor",
+        "@type" : "http://www.w3.org/2001/XMLSchema#string"
+      } ],
+      "ids:keyword" : [ ],
+      "ids:theme" : [ ],
+      "ids:contentPart" : [ ],
+      "ids:resourcePart" : [ ],
+      "ids:sovereign" : {
+        "@id" : "https://eng.it"
+      },
+      "ids:spatialCoverage" : [ ],
+      "ids:modified" : {
+        "@value" : "2021-08-04T12:52:09.317+02:00",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      }
+    }, {
+      "@type" : "ids:TextResource",
+      "@id" : "https://w3id.org/idsa/autogen/textResource/4649ebdd-57a9-4792-a091-752f57950232",
+      "ids:language" : [ {
+        "@id" : "https://w3id.org/idsa/code/EN"
+      }, {
+        "@id" : "https://w3id.org/idsa/code/IT"
+      } ],
+      "ids:contentType" : {
+        "@id" : "https://w3id.org/idsa/code/SCHEMA_DEFINITION"
+      },
+      "ids:created" : {
+        "@value" : "2021-08-04T12:52:09.457+02:00",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      },
+      "ids:version" : "1.0.0",
+      "ids:temporalCoverage" : [ ],
+      "ids:resourceEndpoint" : [ ],
+      "ids:defaultRepresentation" : [ ],
+      "ids:paymentModality" : [ ],
+      "ids:title" : [ {
+        "@value" : "Resource David",
+        "@type" : "http://www.w3.org/2001/XMLSchema#string"
+      } ],
+      "ids:representation" : [ {
+        "@type" : "ids:TextRepresentation",
+        "@id" : "https://w3id.org/idsa/autogen/textRepresentation/afe9925c-fba3-4280-9d3b-a248673b0a26",
+        "ids:instance" : [ {
+          "@type" : "ids:Artifact",
+          "@id" : "http://w3id.org/engrd/connector/artifact/david",
+          "ids:fileName" : "david.json",
+          "ids:creationDate" : {
+            "@value" : "2021-08-04T12:52:09.429+02:00",
+            "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+          }
+        } ],
+        "ids:created" : {
+          "@value" : "2021-08-04T12:52:09.415+02:00",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:mediaType" : {
+          "@type" : "ids:CustomMediaType",
+          "@id" : "https://w3id.org/idsa/autogen/customMediaType/3355e23d-bf72-4d1a-80e8-15695ebd0d63",
+          "ids:filenameExtension" : "json"
+        }
+      } ],
+      "ids:contractOffer" : [ {
+        "@type" : "ids:ContractOffer",
+        "@id" : "https://w3id.org/idsa/autogen/contractOffer/6a8e32ff-71bc-49e9-80b5-087126c0d7b0",
+        "ids:permission" : [ {
+          "@type" : "ids:Permission",
+          "@id" : "https://w3id.org/idsa/autogen/permission/629d4a87-0e2d-4687-86ee-067b5cf92977",
+          "ids:target" : {
+            "@id" : "http://w3id.org/engrd/connector/artifact/david"
+          },
+          "ids:action" : [ {
+            "@id" : "https://w3id.org/idsa/code/USE"
+          } ],
+          "ids:title" : [ ],
+          "ids:description" : [ ],
+          "ids:assigner" : [ {
+            "@id" : "https://plugfest.com"
+          } ],
+          "ids:constraint" : [ {
+            "@type" : "ids:Constraint",
+            "@id" : "https://w3id.org/idsa/autogen/constraint/3bfa8e32-f8f8-4691-8c5e-25563745623f",
+            "ids:operator" : {
+              "@id" : "https://w3id.org/idsa/code/AFTER"
+            },
+            "ids:rightOperand" : {
+              "@value" : "2021-01-01T00:00:01Z",
+              "@type" : "xsd:datetime"
+            },
+            "ids:leftOperand" : {
+              "@id" : "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
+            }
+          }, {
+            "@type" : "ids:Constraint",
+            "@id" : "https://w3id.org/idsa/autogen/constraint/5288465d-8576-4b02-ab2c-ab33c4a95335",
+            "ids:operator" : {
+              "@id" : "https://w3id.org/idsa/code/BEFORE"
+            },
+            "ids:rightOperand" : {
+              "@value" : "2021-12-31T23:59:00Z",
+              "@type" : "xsd:datetime"
+            },
+            "ids:leftOperand" : {
+              "@id" : "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
+            }
+          } ],
+          "ids:assignee" : [ {
+            "@id" : "https://eng.it"
+          } ],
+          "ids:postDuty" : [ ],
+          "ids:preDuty" : [ null ]
+        } ],
+        "ids:provider" : {
+          "@id" : "https://eng.it"
+        },
+        "ids:consumer" : {
+          "@id" : "https://plugfest.com"
+        },
+        "ids:contractDate" : {
+          "@value" : "2021-08-04T12:52:09.397+02:00",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:prohibition" : [ ],
+        "ids:obligation" : [ ]
+      } ],
+      "ids:sample" : [ ],
+      "ids:description" : [ {
+        "@value" : "Information about developer David",
+        "@type" : "http://www.w3.org/2001/XMLSchema#string"
+      } ],
+      "ids:keyword" : [ ],
+      "ids:theme" : [ ],
+      "ids:contentPart" : [ ],
+      "ids:resourcePart" : [ ],
+      "ids:sovereign" : {
+        "@id" : "https://eng.it"
+      },
+      "ids:spatialCoverage" : [ ],
+      "ids:modified" : {
+        "@value" : "2021-08-04T12:52:09.457+02:00",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      }
+    }, {
+      "@type" : "ids:TextResource",
+      "@id" : "https://w3id.org/idsa/autogen/textResource/5f142d65-4654-41aa-a32f-0aac7ff383a1",
+      "ids:language" : [ {
+        "@id" : "https://w3id.org/idsa/code/EN"
+      }, {
+        "@id" : "https://w3id.org/idsa/code/IT"
+      } ],
+      "ids:contentType" : {
+        "@id" : "https://w3id.org/idsa/code/SCHEMA_DEFINITION"
+      },
+      "ids:created" : {
+        "@value" : "2021-08-04T12:52:09.566+02:00",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      },
+      "ids:version" : "1.0.0",
+      "ids:temporalCoverage" : [ ],
+      "ids:resourceEndpoint" : [ ],
+      "ids:defaultRepresentation" : [ ],
+      "ids:paymentModality" : [ ],
+      "ids:title" : [ {
+        "@value" : "Resource Gabriele",
+        "@type" : "http://www.w3.org/2001/XMLSchema#string"
+      } ],
+      "ids:representation" : [ {
+        "@type" : "ids:TextRepresentation",
+        "@id" : "https://w3id.org/idsa/autogen/textRepresentation/db036205-f009-480c-83ab-e614e0c73214",
+        "ids:instance" : [ {
+          "@type" : "ids:Artifact",
+          "@id" : "http://w3id.org/engrd/connector/artifact/gabriele",
+          "ids:fileName" : "gabriele.json",
+          "ids:creationDate" : {
+            "@value" : "2021-08-04T12:52:09.543+02:00",
+            "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+          }
+        } ],
+        "ids:created" : {
+          "@value" : "2021-08-04T12:52:09.533+02:00",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:mediaType" : {
+          "@type" : "ids:CustomMediaType",
+          "@id" : "https://w3id.org/idsa/autogen/customMediaType/847b3012-a626-45f2-9f77-2e75671ad12c",
+          "ids:filenameExtension" : "json"
+        }
+      } ],
+      "ids:contractOffer" : [ {
+        "@type" : "ids:ContractOffer",
+        "@id" : "https://w3id.org/idsa/autogen/contractOffer/5dc4b472-7d9c-4c99-926d-f1746a67d29a",
+        "ids:permission" : [ {
+          "@type" : "ids:Permission",
+          "@id" : "https://w3id.org/idsa/autogen/permission/c5cfc704-f3a6-45cc-84bc-225de76c8f28",
+          "ids:target" : {
+            "@id" : "http://w3id.org/engrd/connector/artifact/gabriele"
+          },
+          "ids:action" : [ {
+            "@id" : "https://w3id.org/idsa/code/USE"
+          } ],
+          "ids:title" : [ ],
+          "ids:description" : [ ],
+          "ids:assigner" : [ {
+            "@id" : "https://plugfest.com"
+          } ],
+          "ids:constraint" : [ {
+            "@type" : "ids:Constraint",
+            "@id" : "https://w3id.org/idsa/autogen/constraint/a3fa95e1-5857-434e-8704-69544b5279fb",
+            "ids:operator" : {
+              "@id" : "https://w3id.org/idsa/code/AFTER"
+            },
+            "ids:rightOperand" : {
+              "@value" : "2021-01-01T00:00:01Z",
+              "@type" : "xsd:datetime"
+            },
+            "ids:leftOperand" : {
+              "@id" : "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
+            }
+          }, {
+            "@type" : "ids:Constraint",
+            "@id" : "https://w3id.org/idsa/autogen/constraint/f63da032-f758-4964-b8a9-296c0b13bec0",
+            "ids:operator" : {
+              "@id" : "https://w3id.org/idsa/code/BEFORE"
+            },
+            "ids:rightOperand" : {
+              "@value" : "2021-12-31T23:59:00Z",
+              "@type" : "xsd:datetime"
+            },
+            "ids:leftOperand" : {
+              "@id" : "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
+            }
+          } ],
+          "ids:assignee" : [ {
+            "@id" : "https://eng.it"
+          } ],
+          "ids:postDuty" : [ ],
+          "ids:preDuty" : [ null ]
+        } ],
+        "ids:provider" : {
+          "@id" : "https://eng.it"
+        },
+        "ids:consumer" : {
+          "@id" : "https://plugfest.com"
+        },
+        "ids:contractDate" : {
+          "@value" : "2021-08-04T12:52:09.517+02:00",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:prohibition" : [ ],
+        "ids:obligation" : [ ]
+      } ],
+      "ids:sample" : [ ],
+      "ids:description" : [ {
+        "@value" : "Information about developer Gabriele",
+        "@type" : "http://www.w3.org/2001/XMLSchema#string"
+      } ],
+      "ids:keyword" : [ ],
+      "ids:theme" : [ ],
+      "ids:contentPart" : [ ],
+      "ids:resourcePart" : [ ],
+      "ids:sovereign" : {
+        "@id" : "https://eng.it"
+      },
+      "ids:spatialCoverage" : [ ],
+      "ids:modified" : {
+        "@value" : "2021-08-04T12:52:09.566+02:00",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      }
+    }, {
+      "@type" : "ids:TextResource",
+      "@id" : "https://w3id.org/idsa/autogen/textResource/977b46ae-7e4f-42b2-8280-658bea7101b6",
+      "ids:language" : [ {
+        "@id" : "https://w3id.org/idsa/code/EN"
+      }, {
+        "@id" : "https://w3id.org/idsa/code/IT"
+      } ],
+      "ids:contentType" : {
+        "@id" : "https://w3id.org/idsa/code/SCHEMA_DEFINITION"
+      },
+      "ids:created" : {
+        "@value" : "2021-08-04T12:52:09.617+02:00",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      },
+      "ids:version" : "1.0.0",
+      "ids:temporalCoverage" : [ ],
+      "ids:resourceEndpoint" : [ ],
+      "ids:defaultRepresentation" : [ ],
+      "ids:paymentModality" : [ ],
+      "ids:title" : [ {
+        "@value" : "Resource Mattia",
+        "@type" : "http://www.w3.org/2001/XMLSchema#string"
+      } ],
+      "ids:representation" : [ {
+        "@type" : "ids:TextRepresentation",
+        "@id" : "https://w3id.org/idsa/autogen/textRepresentation/94fe9c67-a84d-4f30-bb49-1c4808724db0",
+        "ids:instance" : [ {
+          "@type" : "ids:Artifact",
+          "@id" : "http://w3id.org/engrd/connector/artifact/mattia",
+          "ids:fileName" : "mattia.json",
+          "ids:creationDate" : {
+            "@value" : "2021-08-04T12:52:09.596+02:00",
+            "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+          }
+        } ],
+        "ids:created" : {
+          "@value" : "2021-08-04T12:52:09.583+02:00",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:mediaType" : {
+          "@type" : "ids:CustomMediaType",
+          "@id" : "https://w3id.org/idsa/autogen/customMediaType/c98c3125-4ccf-417d-ba12-4b174481a24a",
+          "ids:filenameExtension" : "json"
+        }
+      } ],
+      "ids:contractOffer" : [ null ],
+      "ids:sample" : [ ],
+      "ids:description" : [ {
+        "@value" : "Information about developer Mattia",
+        "@type" : "http://www.w3.org/2001/XMLSchema#string"
+      } ],
+      "ids:keyword" : [ ],
+      "ids:theme" : [ ],
+      "ids:contentPart" : [ ],
+      "ids:resourcePart" : [ ],
+      "ids:sovereign" : {
+        "@id" : "https://eng.it"
+      },
+      "ids:spatialCoverage" : [ ],
+      "ids:modified" : {
+        "@value" : "2021-08-04T12:52:09.617+02:00",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      }
+    }, {
+      "@type" : "ids:TextResource",
+      "@id" : "https://w3id.org/idsa/autogen/textResource/9392e83f-e150-4aa1-ba06-5c57de0df1b6",
+      "ids:language" : [ {
+        "@id" : "https://w3id.org/idsa/code/EN"
+      }, {
+        "@id" : "https://w3id.org/idsa/code/IT"
+      } ],
+      "ids:contentType" : {
+        "@id" : "https://w3id.org/idsa/code/SCHEMA_DEFINITION"
+      },
+      "ids:created" : {
+        "@value" : "2021-08-04T12:52:09.711+02:00",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      },
+      "ids:version" : "1.0.0",
+      "ids:temporalCoverage" : [ ],
+      "ids:resourceEndpoint" : [ ],
+      "ids:defaultRepresentation" : [ ],
+      "ids:paymentModality" : [ ],
+      "ids:title" : [ {
+        "@value" : "Resource Petar",
+        "@type" : "http://www.w3.org/2001/XMLSchema#string"
+      } ],
+      "ids:representation" : [ {
+        "@type" : "ids:TextRepresentation",
+        "@id" : "https://w3id.org/idsa/autogen/textRepresentation/64e93a83-5acb-4a7d-8d52-2bbfa09e5caa",
+        "ids:instance" : [ {
+          "@type" : "ids:Artifact",
+          "@id" : "http://w3id.org/engrd/connector/artifact/petar",
+          "ids:fileName" : "petar.json",
+          "ids:creationDate" : {
+            "@value" : "2021-08-04T12:52:09.691+02:00",
+            "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+          }
+        } ],
+        "ids:created" : {
+          "@value" : "2021-08-04T12:52:09.683+02:00",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:mediaType" : {
+          "@type" : "ids:CustomMediaType",
+          "@id" : "https://w3id.org/idsa/autogen/customMediaType/925812f0-581a-4dfb-9b69-c28a804171fb",
+          "ids:filenameExtension" : "json"
+        }
+      } ],
+      "ids:contractOffer" : [ {
+        "@type" : "ids:ContractOffer",
+        "@id" : "https://w3id.org/idsa/autogen/contractOffer/d5012779-56ab-4f82-b905-2750b5f10c49",
+        "ids:permission" : [ {
+          "@type" : "ids:Permission",
+          "@id" : "https://w3id.org/idsa/autogen/permission/7e955de1-dbee-45bb-a7ca-ad65a84431da",
+          "ids:target" : {
+            "@id" : "http://w3id.org/engrd/connector/artifact/petar"
+          },
+          "ids:action" : [ {
+            "@id" : "https://w3id.org/idsa/code/USE"
+          } ],
+          "ids:title" : [ ],
+          "ids:description" : [ ],
+          "ids:assigner" : [ {
+            "@id" : "https://plugfest.com"
+          } ],
+          "ids:constraint" : [ {
+            "@type" : "ids:Constraint",
+            "@id" : "https://w3id.org/idsa/autogen/constraint/8f6d8237-9334-4f3e-92c6-f72e9a35dfda",
+            "ids:operator" : {
+              "@id" : "https://w3id.org/idsa/code/AFTER"
+            },
+            "ids:rightOperand" : {
+              "@value" : "2021-01-01T00:00:01Z",
+              "@type" : "xsd:datetime"
+            },
+            "ids:leftOperand" : {
+              "@id" : "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
+            }
+          }, {
+            "@type" : "ids:Constraint",
+            "@id" : "https://w3id.org/idsa/autogen/constraint/affe5012-fbbb-47fa-8664-dfe059cc7ea6",
+            "ids:operator" : {
+              "@id" : "https://w3id.org/idsa/code/BEFORE"
+            },
+            "ids:rightOperand" : {
+              "@value" : "2021-07-31T23:59:00Z",
+              "@type" : "xsd:datetime"
+            },
+            "ids:leftOperand" : {
+              "@id" : "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
+            }
+          } ],
+          "ids:assignee" : [ {
+            "@id" : "https://eng.it"
+          } ],
+          "ids:postDuty" : [ ],
+          "ids:preDuty" : [ ]
+        } ],
+        "ids:provider" : {
+          "@id" : "https://eng.it"
+        },
+        "ids:consumer" : {
+          "@id" : "https://plugfest.com"
+        },
+        "ids:contractDate" : {
+          "@value" : "2021-08-04T12:52:09.672+02:00",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:prohibition" : [ ],
+        "ids:obligation" : [ ]
+      } ],
+      "ids:sample" : [ ],
+      "ids:description" : [ {
+        "@value" : "Information about developer Petar",
+        "@type" : "http://www.w3.org/2001/XMLSchema#string"
+      } ],
+      "ids:keyword" : [ ],
+      "ids:theme" : [ ],
+      "ids:contentPart" : [ ],
+      "ids:resourcePart" : [ ],
+      "ids:sovereign" : {
+        "@id" : "https://eng.it"
+      },
+      "ids:spatialCoverage" : [ ],
+      "ids:modified" : {
+        "@value" : "2021-08-04T12:52:09.711+02:00",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      }
+    } ]
+  } ],
+  "ids:extendedGuarantee" : [ ],
+  "ids:inboundModelVersion" : [ "4.0.0", "4.1.1" ],
+  "ids:hasDefaultEndpoint" : {
+    "@type" : "ids:ConnectorEndpoint",
+    "@id" : "https://217.172.12.215:8889",
+    "ids:endpointInformation" : [ ],
+    "ids:endpointDocumentation" : [ ],
+    "ids:accessURL" : {
+      "@id" : "https://217.172.12.215:8889/data"
+    }
+  },
+  "ids:outboundModelVersion" : "4.1.1",
+  "ids:maintainer" : {
+    "@id" : "https://www.eng.it/"
+  },
+  "ids:hasEndpoint" : [ ],
+  "ids:hasAgent" : [ ],
+  "ids:curator" : {
+    "@id" : "https://www.eng.it/"
+  },
+  "ids:securityProfile" : {
+    "@id" : "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE"
+  },
+  "ids:title" : [ {
+    "@value" : "PlugFest Q3 2021 - TRUEConnector provider",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+  "ids:description" : [ {
+    "@value" : "TRUEConnector - information about development team that build TRUEConnector",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ]
+}

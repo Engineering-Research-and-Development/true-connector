@@ -4,7 +4,7 @@
       "idsc" : "https://w3id.org/idsa/code/"
    },    
   "@type": "ids:ContractAgreement",    
-  "@id": "https://w3id.org/idsa/autogen/contract/restrict-access-interval",    
+  "@id": "https://w3id.org/idsa/autogen/contract/restrict-access-interval-david",    
   "profile": "http://example.com/ids-profile",    
   "ids:target": {
       "@id":"http://w3id.org/engrd/connector/artifact/david"
