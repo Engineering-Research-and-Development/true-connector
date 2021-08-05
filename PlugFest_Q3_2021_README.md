@@ -60,10 +60,13 @@ If you do not want to use hostname validation, leave this property to false and 
 TRUSTORE_NAME=
 ```
 
-
 ## TrueConnector as Data Provider
 
 TRUE Connector will be deployed in our environment, with public accessible address as Data Provider.
+
+## TrueConnector as Data Consumer
+
+A single entry point ```http://localhost:8084/proxy``` is provided. It allows to use always the same service for each kind of request (Contract Negotiation, Contract Agreement request, Get offered resource) changing only the body, as explained in the following sections.
 
 ### Contract negotiation
 
@@ -77,7 +80,7 @@ http://localhost:9553/swagger-ui.html#/odrl-policy-controller
 
 Assuming you are running docker instance on local machine. If not, please update hostname to match your scenario.
 
-In POST request, upload policy from [here](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app/blob/master/src/main/resources/policy-examples/0.0.2/1%20restrict-access-interval.json)
+In POST request, upload policy from [here](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app/blob/master/src/main/resources/policy-examples/0.0.3/1%20restrict-access-interval.json)
 
 <details>
   <summary>Multipart form - Contract Request Message</summary>
