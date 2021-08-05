@@ -65,6 +65,32 @@ TRUSTORE_NAME=
 
 TRUE Connector will be deployed in our environment, with public accessible address as Data Provider.
 
+### Proxy endpoint
+
+Our simple/sample DataApp exposes "proxy" endpoint. This endpoint, available at *https://localhost:8084/proxy* (Consumer DataApp) wraps up logic for creating IDS Message and sending request to Consumer Execution Core Container. Currently supported messages are:
+
+| IDS Message |  Expected result message |
+| ------- |   -------- |
+| ArtifactRequestMessage | ArtifactResponseMessage |
+| ContractRequestMessage |  ContractAgreementMessage |
+| ContractAgreementMessage | ContractAgreementMessage |
+| DescriptionRequestMessage |  DescriptionResponseMessage |
+
+Example for one of message types looks like:
+
+```
+	curl --location --request POST 'https://localhost:8084/proxy' \
+	--header 'Content-Type: application/json' \
+	--data-raw '{
+	    "multipart": "form",
+	    "Forward-To": "https://217.172.12.215:8889/data",
+	    "messageType":"ArtifactRequestMessage",
+	    "requestedArtifact": "http://w3id.org/engrd/connector/artifact/{id}"   
+	}'
+	
+```
+
+
 ### Contract negotiation
 
 If mandatory, for other connectors, you can perform contract negotiation with other connector (not TRUE Connector) or with TRUE Connector. There is default contract offer that will be sent if ContractRequestMessage is received. It will allow consuming of resource in year 2021.
@@ -77,7 +103,7 @@ http://localhost:9553/swagger-ui.html#/odrl-policy-controller
 
 Assuming you are running docker instance on local machine. If not, please update hostname to match your scenario.
 
-In POST request, upload policy from [here](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app/blob/master/src/main/resources/policy-examples/0.0.2/1%20restrict-access-interval.json)
+In POST request, upload policy from [here](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app/blob/master/src/main/resources/policy-examples/0.0.3/1%20restrict-access-interval.json)
 
 <details>
   <summary>Multipart form - Contract Request Message</summary>
@@ -89,7 +115,7 @@ In POST request, upload policy from [here](https://github.com/Engineering-Resear
 	"Forward-To": "https://217.172.12.215:8889/data",
 	"messageType": "ContractRequestMessage",
 	"requestedArtifact": "http://w3id.org/engrd/connector/artifact/{id}"
-	'
+	}'
 
 </details>
 
@@ -107,7 +133,6 @@ Payload should be ContractAgreement, obtained from previous response (ContractRe
 	"multipart": "form",
 	"Forward-To": "https://217.172.12.215:8889/data",
 	"messageType": "ContractAgreementMessage",
-	"requestedArtifact": "http://w3id.org/engrd/connector/artifact/{id}",
 	"payload": {
 		"@context": {
 			"ids": "https://w3id.org/idsa/core/",
