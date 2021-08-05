@@ -60,12 +60,17 @@ If you do not want to use hostname validation, leave this property to false and 
 TRUSTORE_NAME=
 ```
 
-
 ## TrueConnector as Data Provider
 
 TRUE Connector will be deployed in our environment, with public accessible address as Data Provider.
 
-### Proxy endpoint
+```
+https://217.172.12.215:8889/data
+
+```
+
+
+## TrueConnector as Data Consumer - proxy endpoint
 
 Our simple/sample DataApp exposes "proxy" endpoint. This endpoint, available at *https://localhost:8084/proxy* (Consumer DataApp) wraps up logic for creating IDS Message and sending request to Consumer Execution Core Container. Currently supported messages are:
 
