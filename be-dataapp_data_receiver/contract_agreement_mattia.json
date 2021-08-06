@@ -6,19 +6,19 @@
   "@type": "ids:ContractAgreement",    
   "@id": "https://w3id.org/idsa/autogen/contract/restrict-access-interval-mattia",    
   "profile": "http://example.com/ids-profile",    
-  "ids:target": {
-      "@id":"http://w3id.org/engrd/connector/artifact/mattia"
-   },    
-  "ids:provider": "http://example.com/party/my-party",    
-  "ids:consumer": "http://example.com/party/consumer-party",    
+  "ids:provider": "ecc-provider",    
+  "ids:consumer": "ecc-consumer",    
   "ids:permission": [{    
+      "ids:target": {
+          "@id":"http://w3id.org/engrd/connector/artifact/mattia"
+       },    
       "ids:action": [{
         "@id":"idsc:USE"
       }],     
       "ids:constraint": [{    
         "@type":"ids:Constraint",  
-        "ids:leftOperand": "idsc:POLICY_EVALUATION_TIME",  
-        "ids:operator": "idsc:TEMPORAL_EQUALS",  
+        "ids:leftOperand": { "@id": "idsc:POLICY_EVALUATION_TIME"},  
+        "ids:operator": { "@id": "idsc:TEMPORAL_EQUALS"},  
         "ids:rightOperand": { 
          "@type": "ids:interval", 
          "@value": { 
@@ -32,7 +32,7 @@
             } 
          } 
         }, 
-        "ids:pipEndpoint": { "@id": "https//pip.com/policy_evaluation_time" } 
+        "ids:pipEndpoint": { "@id": "https//example.com/pip/policy_evaluation_time" } 
       }     
 ] 
   }] 

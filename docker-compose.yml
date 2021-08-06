@@ -4,6 +4,7 @@ services:
     image: rdlabengpa/ids_execution_core_container:pf_q3_2021
     ports:
       - "${PROVIDER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
+      - 8887:8887  #Exposed port for receiving data from the Data APP
       - 8889:8889  #Exposed port for receiving data from another connector (REST)
       - 8086:8086  #Exposed port for receiving data from another connector (WS)
     environment:
@@ -40,7 +41,7 @@ services:
       - "ecc-consumer:172.17.0.1"
 
   uc-dataapp-provider:
-    image: rdlabengpa/ids_uc_data_app:v0.0.3
+    image: rdlabengpa/ids_uc_data_app:v0.0.4
     environment:
       - TZ=Europe/Rome 
     ports:
@@ -106,7 +107,7 @@ services:
       - "ecc-provider:172.17.0.1"
 
   uc-dataapp-consumer:
-    image: rdlabengpa/ids_uc_data_app:v0.0.3
+    image: rdlabengpa/ids_uc_data_app:v0.0.4
     environment:
       - TZ=Europe/Rome  
     ports:
