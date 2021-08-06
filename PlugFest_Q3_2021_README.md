@@ -70,7 +70,22 @@ https://217.172.12.215:8889/data
 ```
 
 
-## TrueConnector as Data Consumer - proxy endpoint
+## TrueConnector as Data Consumer 
+
+To start TRUE Connector as consumer, simpy execute following command
+
+```
+docker-compose -f docker-compose-consumer.yml up
+
+```
+
+into the folder where downloaded project is extracted.</br>
+*Note*: for Linux OS you might need to have administrative rights.
+
+In order to send message, you can read following chapters:
+
+
+### Proxy endpoint
 
 Our simple/sample DataApp exposes "proxy" endpoint. This endpoint, available at *https://localhost:8084/proxy* (Consumer DataApp) wraps up logic for creating IDS Message and sending request to Consumer Execution Core Container. Currently supported messages are:
 
@@ -94,7 +109,6 @@ Example for one of message types looks like:
 	}'
 	
 ```
-
 
 ### Contract negotiation
 
