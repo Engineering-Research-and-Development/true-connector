@@ -40,7 +40,7 @@ services:
       - "ecc-provider:172.17.0.1"
 
   uc-dataapp-consumer:
-    image: rdlabengpa/ids_uc_data_app:v0.0.2
+    image: rdlabengpa/ids_uc_data_app:v0.0.3
     environment:
       - TZ=Europe/Rome  
     ports:
