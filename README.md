@@ -53,14 +53,13 @@ ecc_resources_provider - directory containing property file for provider ECC adv
 TRUE Connector comes pre-configured with following:
 
 * hostname validation disabled
-* secure http communication between all components (dataApp - ECC, ECC-ECC, and ECC-dataApp)
+* secure https communication between all components (dataApp - ECC, ECC-ECC, and ECC-dataApp), using self-signed certificate
 * multipart mixed format of the message between all components
-* DapsInteraction enabled
-* AISEC DAPS v2 for fetching DAT
-* validate protocol in Forward-To header
-* Usage control enforced
+* DapsInteraction disabled
+* disagled validate protocol in Forward-To header
+* Usage control disabled
 
-If you wish to change this configuration, please check chapter xxx
+If you wish to change this configuration, please check chapter [Modifying configuration](#modifyconfiguration) 
 
 ### Starting and stopping containers <a name="startstop"></a>
 
@@ -183,7 +182,7 @@ With default configuration, you can use following curl command, to get data from
 
 </details>
 
-*NOTE*: even that this curl command is exported from Postman, it is noticed several times, that when oyou try to import it back in Postman, there are some problems during this process, which results in ommiting request body, and then request fill fail - cannot find body to create request.</br>
+*NOTE*: even that this curl command is exported from Postman, it is noticed several times, that when you try to import it back in Postman, there are some problems during this process, which results in omitting request body, and then request fill fail - cannot find body to create request.</br>
 If this happens, please check body of the request in Postman, and if body is empty, simply copy everything enclosed between</br>
 *--data-raw '* and *'*
 
@@ -347,10 +346,17 @@ IDSCP2=true
 
 ## Advanced configuration <a name="advancedconfiguration"></a>
 
-If you did not find which property to change by editing **.env** file, there is an option, to modify proeprty file directly, by editing one of the **application-docker.properties** files located in **ecc_resources_consumer** or **ecc_resources_provider** directories. There are comments present in property files, which describes impact and usage of some of the properties.'
+If you did not find which property to change by editing **.env** file, there is an option, to modify property file directly, by editing one of the **application-docker.properties** files located in **ecc_resources_consumer** or **ecc_resources_provider** directories. There are comments present in property files, which describes impact and usage of some of the properties.
 
 
 ### Supported Identity Providers <a name="identityproviders"></a>
+
+Since Identity provider is disabled by default, in order to enable it, set following property to true:
+
+```
+application.isEnabledDapsInteraction=true
+
+```
 
 The TRUE Connector is able to interact with the following Identity Providers:
 For each of 3 supported identity providers, you need to obtain certificate, in order to be able to get JWToken from DAPS server. Certificate needs to be copied into *ecc_cert* folder and modify *DAPS_KEYSTORE_NAME*, *DAPS_KEYSTORE_PASSWORD* and
@@ -367,18 +373,29 @@ edit related settings (i.e., *application.daps.orbiter.privateKey*, *application
 *application.dapsUrl* should point to Orbiter IDP server
 
 
+
 ### Validate protocol <a name="validateprotocol"></a>
 
-Forward-To protocol validation can be changed by editing *application-docker.properties* and modify **application.validateProtocol**. Default value is *true* and Forward-To URL must be set like http|https|wss://example.com, if you choose *false* Forward-To URL can be set like http(https,wss)://example.com or just example.com and the protocol chosen (from application.properties) will be automatically set (it will be overwritten!)</br>
+Forward-To protocol validation can be changed by editing *application-docker.properties* and modify **application.validateProtocol**. Default value is *false* and Forward-To URL will not be validated.
+Forward-To URL can be set like http(https,wss)://example.com or just example.com and the protocol chosen (from application.properties) will be automatically set (it will be overwritten!)</br>
 Example: http://example.com will be wss://example if you chose wss in the properties).
 
-For example, if validateProtocol is true, then Forward-To header must contain full URL, including protocol.</br>
+If validateProtocol is true, then Forward-To header must contain full URL, including protocol.</br>
 Forward-To=localhost:8890/data - this one will fail, since it lack of information is it http or https</br>
 Forward-To=https://localhost:8890/data - this one will work, since it has protocol information in URL.
 
+
 ## Clearing House <a name="clearinghouse"></a>
 
-The TRUE Connector supports is able to communicate with the ENG Clearing House for registering transactions. 
+The TRUE Connector supports is able to communicate with the ENG Clearing House for registering transactions.
+
+Since Clearing house is disabled by default, in order to enable it, set following property to true:
+
+```
+application.isEnabledClearingHouse=true
+
+```
+
 
 ## Broker <a name="broker"></a>
 
@@ -387,6 +404,13 @@ Information on how TRUE Connector can interact with Broker, can be found on foll
 
 ## Usage Control <a name="usagecontrol"></a>
 The TRUE Connector integrates the [Fraunhofer MyData Framework](https://www.mydata-control.de/) for implementing the Usage Control. Details about the PMP and PEP components can be found [here](doc/USAGE_CONTROL_RULES.md). 
+
+Since Usage Control is disabled by default, in order to enable it, set following property to true:
+
+```
+application.isEnabledUsageControl=true
+
+```
 
 ## Contract Negotiation - simple flow <a name="contractnegotiation"></a>
 
