@@ -9,145 +9,129 @@ The TRUE Connector is composed of three components:
 
 ![TRUE Connector Architecture](doc/TRUE_Connector_Architecture.png?raw=true "TRUE Connector Architecture")
 
-## How to Configurate and Run
 
-The configuration should be performed customizing the following variables in the **.env** file:
+## Table of Contents
 
-* **DATA_APP_ENDPOINT=192.168.56.1:8084/data** DataAPP endpoint for receiveing data (F endpoint in the above picture)
-* **MULTIPART_EDGE=mixed** DataAPP A-endpoint Content Type (choose *mixed* for Multipart/mixed or *form* for Multipart/form-data or *http-header* for Multipart/http-header) 
-* **MULTIPART_ECC=mixed** Execution Core Container B-endpoint Content Type (choose *mixed* for Multipart/mixed or *form* for Multipart/form-data or *http-header* for Multipart/http-header) 
-* Edit external ports if need (default values: **8086** for **WS over HTTPS**, **8090** for **http**, **8889** for **B endpoint**, **29292** for **IDSCP2**)
-* Forward-To protocol validation can be changed by editing **application.validateProtocol**. Default value is *true* and Forward-To URL must be set like http(https,wss)://example.com, if you choose *false* Forward-To URL can be set like http(https,wss)://example.com or just example.com and the protocol chosen (from application.properties)will be automatically set (it will be overwritten! example: http://example.com will be wss://example if you chose wss in the properties).
-* For websocket configuration, in DataApp resource folders, configure *config.properties* file, set following fields
+* [Introduction](#introduction)
+  * [Default configuration](#defaultconfiguration)
+  * [Starting and stopping containers](#startstop)
+* [Endpoints](#endpoints)
+* [Connector reachability](#reachability)
+* [How to Exchange Data](#exchangedata) 
+* [Modifying configuration](#modifyconfiguration) 
+  * [Enable hostname validation](#hosnamevalidation)
+  * [SSL/HTTPS](#ssl)
+  * [Change message format](#messageformat)
+  * [WebSocket configuration (WSS)](#wss)
+  * [IDSCPv2](#idscpv2)
+* [Advanced configuration](#advancedconfiguration)
+  * [Supported Identity Providers](#identityproviders)
+  * [Convert keystorage files](#convert_keystorage)
+  * [Validate protocol](#validateprotocol)
+  * [Clearing House](#clearinghouse)
+  * [Broker](#broker)
+  * [Usage Control](#usagecontrol)
+* [Contract Negotiation](#contractnegotiation)
+* [License](#license)
+
+## Introduction  <a name="introduction"></a>
+
+Once you clone or download repository, you will have following directory structure, with following directories:
 
 ```
-server.ssl.key-password=changeit
-server.ssl.key-store=/cert/ssl-server.jks
+be-dataapp_data_receiver - containing data needed for receiver/provider dataApp, files to share...
+be-dataapp_data_sender
+be-dataapp_resources - directory containing property file used for advanced configuration for both dataApps
+ecc_cert - directory used to store certificate files (DAPS certificate, HTTPS certificate, truststore...)
+ecc_resources_consumer - directory containing property file for consumer ECC advanced configuration 
+ecc_resources_provider - directory containing property file for provider ECC advanced configuration 
+
 ```
-Or leave default values, if certificate and its password are correct.
 
-### Supported Identity Providers
+### Default configuration <a name="defaultconfiguration"></a>
 
-The TRUE Connector is able to interact with the following Identity Providers:
+TRUE Connector comes pre-configured with following:
 
-* **AISECv1** put the certificate in the *cert* folder, edit related settings (i.e., *application.keyStoreName*, *application.keyStorePassword*) (in the *.env*) and set the *application.dapsVersion* (in the *resources/application-docker.properties*) to *v1*
-* **AISECv2** put the certificate in the *cert* folder,edit related settings (i.e., *application.keyStoreName*, *application.keyStorePassword*) (in the *.env*) and set the *application.dapsVersion* (in the *resources/application-docker.properties*) to *v2*
-* **ORBITER** put the certificate in the *cert* folder, edit related settings (i.e., *application.daps.orbiter.privateKey*, *application.daps.orbiter.password*) (in the *.env*) and set the *application.dapsVersion* (in the *resources/application-docker.properties*) to *orbiter*
+* Secure https communication between all components (dataApp - ECC, ECC-ECC, and ECC-dataApp), using self-signed certificate
+* multipart mixed format of the message between all components
+* DapsInteraction disabled
+* Disabled Usage control
+* Disabled Clearing House
+* Disabled validate protocol in Forward-To header
+* Disabled hostname validation
 
+If you wish to change this configuration, please check chapter [Modifying configuration](#modifyconfiguration) 
 
-The *application.dapsUrl* (in the *resources/application-docker.properties*) property must be set properly in order to address the right DAPS server.
+### Starting and stopping containers <a name="startstop"></a>
 
-Finally, run the application:
+To start docker container, open terminal and execute following command:
 
-*  Execute `docker-compose up &`
+```
+docker-compose up &
 
-## Endpoints
+```
+If you are running docker on Linux, you might need administrative rights (sudo)
+
+To check logs, execute following command:
+
+```
+docker-compose logs -f
+
+```
+
+Ctrl+C is used to exit from log inspection (you will be returned to the terminal).
+ 
+To stop containers, execute following:
+
+```
+docker-compose down -v
+```
+
+At this point, you should be able to use TRUE Connector and send messages. How to send messages, check following link [Send multipart mix request]():
+
+## Endpoints <a name="endpoints"></a>
 The TRUE Connector will use two protocols (http and https) as described by the Docker Compose File.
 It will expose the following endpoints:
 
 ```
 /proxy 
 ```
-to receive data incomming request, and based on received request, forward request to Execution Core Connector (the P endpoint in the above picture)
+
+to receive data incoming request, and based on received request, forward request to Execution Core Connector (the P endpoint in the above picture)
 
 ``` 
 /data 
 ```
+
 to receive data (IDS Message) from a sender connector (the B endpoint in the above picture)
 Furthermore, just for testing it will expose (http and https):
 
 ```
 /about/version 
 ```
-returns business logic version 
 
-## Configuration
-The ECC supports three different way to exchange data:
+returns business logic version .
 
-*  **REST endpoints** enabled if *WS_EDGE=false* and *WS_ECC=false*
-*  **IDSCP2** enabled if *IDSCP2=true* and WS_ECC = false </br>For *WS_EDGE=true* (use websocket on the edge, false for REST on the edge) 
-*  **Web Socket over HTTPS** enabled if *WS_EDGE=true* and *WS_ECC=true* and *IDSCP2=false* for configuration which uses web socket on the edge and between connectors.
+## Connector reachability <a name="reachability"></a>
 
-For trusted data exchange define in *.env* the SSL settings:
+Once docker containers are up and running, you can use following links to verify connectors are up and running, except checking log output.
 
-*  KEYSTORE-NAME=changeit(JKS format)
-*  KEY-PASSWORD=changeit
-*  KEYSTORE-PASSWORD=changeit
-*  ALIAS=changeit
-
-## How to Test
-The reachability could be verified using the following endpoints:
-
-*  **http://{IP_ADDRESS}:{HTTP_PUBLIC_PORT}/about/version**
+*  **https://{IP_ADDRESS}:{HTTP_PUBLIC_PORT}/about/version**
 
 Keeping the provided docker-compose, for Data Provider URL will be:
 
-*  **http://{IP_ADDRESS}:8090/about/version**
+*  **https://localhost:8090/about/version**
 
 For Data Consumer, with provided docker-compose file:
 
-*  **http://{IP_ADDRESS}:8091/about/version**
-
-
-## How to Exchange Data
-
-For details on request samples please check following link [Backend DataApp Usage](https://github.com/Engineering-Research-and-Development/market4.0-data_app_test_BE/blob/master/README.md)
-
-Be sure to use correct configuration/ports for sender and receiver Data App and Execution Core Container (check .env file).
-
-Default values:
-
-```
-DataApp URL: https://{IPADDRESS}:8084/proxy 
-"Forward-To": "https://{RECEIVER_IP_ADDRESS}:8889/data",
-```
-
-For WSS flow:
-
-```
-DataApp URL: https://{IPADDRESS}:8084/proxy
-"multipart": "wss",
-"Forward-To": "wss://ecc-provider:8086/data",
-"Forward-To-Internal": "wss://ecc-consumer:8887",
-```
-
-### WebSocket 
-
-On the following link, information regarding WebSocket Message Streamer implementation can be found here [WebSocket Message Streamer library](https://github.com/Engineering-Research-and-Development/market4.0-websocket_message_streamer).
-
-#### IDSCP2
-Follow the REST endpoint or WS examples, put the server hostname/ip address in the Forward-To header (*wss/https://{RECEIVER_IP_ADDRESS/Hostname}:{WS_PUBLIC_PORT}*).
-* **AISECv2** put the certificates (keyStore and trustStore) in the *cert* folder,edit related settings (*IDSCP2 AISEC DAPS settings* section in env file)
-
-
-## Clearing House
-
-The TRUE Connector supports is able to communicate with the ENG Clearing House for registering transactions. 
-
-## Broker
-
-The TRUE Connector integrates some endpoints for interacting with an IDS Broker:
-
-### SelfDescription
+*  **https://localhost:8091/about/version**
 
 Self Description document, in json format, for connector, can be found at following URL - GET request
 
-```
-https://{IPADDRESS}:8091/
-```
-or 
+https://localhost:8091/
 
-```
-http://{IPADDRESS}:8091/
-```
-depending on 
 
-```
-REST_ENABLE_HTTPS=true
-```
-configured in .env file.
-
-In order to set different values for connector, based on connector role (Data Consumer/Data Provider), follwoing file and properties needs to be modified:
+In order to set different values for connector, based on connector role (Data Consumer/Data Provider), following file and properties needs to be modified:
 
 ```
 ecc_resources_consumer/application-docker.properties
@@ -164,172 +148,314 @@ application.selfdescription.curator=http://curatorURI.com
 application.selfdescription.maintainer=http://maintainerURI.com
 ```
 
-### Registration request
-In order to register to broker, proxy endpoint can be used to send register request. 
+## How to Exchange Data <a name="exchangedata"></a>
 
-<i>Forward-To</i> needs to be BrokerURL.</br>
-<i>message</i> part or proxy request, ConnectorUpdateMessage as json must be created and set as value.</br>
-<i>payload</i> object of proxy request set self description json string of connector that we wish to register.
+With default configuration, you can use following curl command, to get data from Provider connector
 
-Example of ConnectorUpdateMessage:
+<details>
+  <summary>Multipart Mixed request</summary>
 
-```
-{
-  "@context" : {
-    "ids" : "https://w3id.org/idsa/core/",
-    "idsc" : "https://w3id.org/idsa/code/"
-  },
-  "@type" : "ids:ConnectorUpdateMessage",
-  "@id" : "https://w3id.org/idsa/autogen/connectorUpdateMessage/6d875403-cfea-4aad-979c-3515c2e71967",
-  "ids:modelVersion" : "4.0.0",
-  "ids:issued" : {
-    "@value" : "2021-03-09T12:59:36.780+01:00",
-    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-  },
-  "ids:senderAgent" : {
-    "@id" : "http://example.org"
-  },
-  "ids:issuerConnector" : {
-    "@id" : "https://eng.true-connector.com/"
-  },
-  "ids:affectedConnector" : {
-    "@id" : "https://eng.true-connector.com/"
-  }
-}
+	curl --location --request POST 'https://localhost:8084/proxy' \
+	--header 'fizz: buzz' \
+	--header 'Content-Type: text/plain' \
+	--data-raw '{
+	    "multipart": "mixed",
+	    "Forward-To": "https://ecc-provider:8889/data",
+	     "message": {
+	      "@context" : {
+	        "ids" : "https://w3id.org/idsa/core/"
+	      },
+	      "@type" : "ids:ArtifactRequestMessage",
+	      "@id" : "https://w3id.org/idsa/autogen/artifactRequestMessage/76481a41-8117-4c79-bdf4-9903ef8f825a",
+	      "ids:issued" : {
+	        "@value" : "2020-11-25T16:43:27.051+01:00",
+	        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+	      },
+	      "ids:modelVersion" : "4.0.0",
+	      "ids:issuerConnector" : {
+	        "@id" : "http://w3id.org/engrd/connector/"
+	      },
+	      "ids:requestedArtifact" : {
+	       "@id" : "http://w3id.org/engrd/connector/artifact/1"
+	      }
+	    },
+	    "payload" : {
+	        "catalog.offers.0.resourceEndpoints.path":"/pet2"
+	        }
+	}'
 
-```
+</details>
 
-### Update registration request
-In order to register update existing registration, proxy endpoint can be used to send update request.</br>
+*NOTE*: even that this curl command is exported from Postman, it is noticed several times, that when you try to import it back in Postman, there are some problems during this process, which results in omitting request body, and then request fill fail - cannot find body to create request.</br>
+If this happens, please check body of the request in Postman, and if body is empty, simply copy everything enclosed between</br>
+*--data-raw '* and *'*
 
-<i>Forward-To</i> needs to be BrokerURL.</br>
-<i>message</i> part or proxy request, ConnectorUpdateMessage as json must be created and set as value.</br>
-<i>payload</i> object of proxy request set self description json string of connector that we wish to register.
+For more details on request samples, please check following link [Backend DataApp Usage](https://github.com/Engineering-Research-and-Development/market4.0-data_app_test_BE/blob/master/README.md)
 
-			
-### Delete registration request
-In order to delete broker registration, proxy endpoint can be used to send delete request. 
+Be sure to use correct configuration/ports for sender and receiver Data App and Execution Core Container (check .env file).
 
-<i>Forward-To</i> needs to be BrokerURL.</br>
-<i>message</i> part or proxy request, ConnectorUnavailableMessage as json must be created and set as value.</br>
-<i>payload</i> object of proxy request set self description json string of connector that we wish to register.
-
-Example of ConnectorUnavailableMessage:
+Default values:
 
 ```
-{
-  "@context" : {
-    "ids" : "https://w3id.org/idsa/core/",
-    "idsc" : "https://w3id.org/idsa/code/"
-  },
-  "@type" : "ids:ConnectorUnavailableMessage",
-  "@id" : "http://industrialdataspace.org/connectorUnavailableMessage/911c7676-d5f2-4ae6-874c-73a26f865e12",
-  "ids:issued" : {
-    "@value" : "2021-03-09T13:00:36.045+01:00",
-    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-  },
-  "ids:senderAgent" : {
-    "@id" : "http://example.org"
-  },
-  "ids:modelVersion" : "4.0.0",
-  "ids:issuerConnector" : {
-    "@id" : "https://eng.true-connector.com/"
-  },
-  "ids:affectedConnector" : {
-    "@id" : "https://eng.true-connector.com/"
-  }
-}
-```
-			
-### Passivate broker registration
-In order to passivate broker registration, proxy endpoint can be used to send passivate request. 
-
-<i>Forward-To</i> needs to be BrokerURL.</br>
-<i>message</i> part or proxy request, ConnectorInactiveMessage as json must be created and set as value.</br>
-<i>payload</i> object of proxy request set self description json string of connector that we wish to register.
-
-Example of ConnectorInactiveMessage:
-
-```
-{
-  "@context" : {
-    "ids" : "https://w3id.org/idsa/core/",
-    "idsc" : "https://w3id.org/idsa/code/"
-  },
-  "@type" : "ids:ConnectorUnavailableMessage",
-  "@id" : "https://w3id.org/idsa/autogen/connectorInactiveMessage/8ea20fa1-7258-41c9-abc2-82c787d50ec3",
-  "ids:affectedConnector" : {
-    "@id" : "https://eng.true-connector.com/"
-  },
-  "ids:senderAgent" : {
-    "@id" : "http://example.org"
-  },
-  "ids:issued" : {
-    "@value" : "2021-03-09T13:01:55.255+01:00",
-    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-  },
-  "ids:modelVersion" : "4.0.0",
-  "ids:issuerConnector" : {
-    "@id" : "https://eng.true-connector.com/"
-  }
-}
-```
-			
-### Query broker
-In order to query broker, proxy endpoint can be used to send register request. 
-
-<i>Forward-To</i> needs to be BrokerURL.</br>
-<i>message</i> part or proxy request, QueryMessage as json must be created and set as value.</br>
-<i>payload</i> object of proxy request set query we wish to sent to Broker.
-
-Example of QueryMessage:
-
-```
-{
-  "@context" : {
-    "ids" : "https://w3id.org/idsa/core/",
-    "idsc" : "https://w3id.org/idsa/code/"
-  },
-  "@type" : "ids:QueryMessage",
-  "@id" : "https://w3id.org/idsa/autogen/queryMessage/1242e627-ef26-48ce-8deb-772e86750f9d",
-  "ids:queryScope" : {
-    "@id" : "idsc:ALL"
-  },
-  "ids:queryLanguage" : {
-    "@id" : "idsc:SPARQL"
-  },
-  "ids:issued" : {
-    "@value" : "2021-03-09T13:22:05.209+01:00",
-    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-  },
-  "ids:modelVersion" : "4.0.0",
-  "ids:issuerConnector" : {
-    "@id" : "http://connectorURI"
-  }
-}
+DataApp URL: https://localhost:8084/proxy 
+"Forward-To": "https://ecc-porvider:8889/data",
 ```
 
-Payload can be like following:
+For WSS flow:
 
 ```
-SELECT ?connectorUri WHERE { ?connectorUri a ids:BaseConnector . } '
+DataApp URL: https://localhost:8084/proxy
+"multipart": "wss",
+"Forward-To": "wss://ecc-provider:8086/data",
+"Forward-To-Internal": "wss://ecc-consumer:8887",
 ```
 
-{ At the moment, broker supports only multipart/mixed requests, this means that connector will have to be configured to mulitpar/mixed configuration. }
+For IDSCPv2: 
 
-## Usage Control
+Follow the REST endpoint or WS examples, put the server hostname/ip address in the Forward-To header (*wss/https://{RECEIVER_IP_ADDRESS/Hostname}:{WS_PUBLIC_PORT}*).
+* **AISECv2** put the certificates (keyStore and trustStore) in the *cert* folder,edit related settings (*IDSCP2 AISEC DAPS settings* section in env file)
+
+## Modifying configuration <a name="modifyconfiguration"></a>
+
+If you wish to change some configuration parameters for TRUE Connector, it can be done by editing **.env** file.
+
+### Enable hostname validation <a name="hosnamevalidation"></a>
+
+To enable hostname validation, set following property to false:
+
+```
+DISABLE_SSL_VALIDATION=false
+```
+By changing this property to false and enabling hostname validation, you will have to have valid truststore, with public keys from external systems (towards which you are making https calls) imported into truststore.
+Set truststore and its password by modifying following properties
+
+```
+TRUSTORE_NAME=truststore.p12
+TRUSTORE_PASSWORD=password
+```
+
+### SSL/HTTPS <a name="ssl"></a>
+
+If you have your own certificate that you wish to use for SSL configuration, you can apply it by changing:
+
+```
+#SSL settings
+KEYSTORE_NAME={your_certificate}
+KEY_PASSWORD={your_certificate_key}
+KEYSTORE_PASSWORD={your_certificate_password}
+ALIAS={your_certificate_alias}
+```
+
+If you want to use http and not https, simply disable following property
+
+```
+SERVER_SSL_ENABLED=false
+```
+
+### Change message format - Multipart/Mixed, Multipart/Form, Http-headers <a name="messageformat"></a>
+
+TRUE Connector can have different message formats between each component, and it can be modified by editing following properties:
+
+```
+# REST Communication type between ECC - mixed | form | http-header
+MULTIPART_ECC=mixed
+
+# mixed | form | http-header
+PROVIDER_MULTIPART_EDGE=mixed
+
+# mixed | form | http-header
+CONSUMER_MULTIPART_EDGE=mixed
+
+```
+There is only one property to configure communication between ECC, since Consumer ECC and Provider ECC must have same configuration in order to be able to exchange and interprete message in correct way.
+
+Message format between consumer DataApp and Consumer ECC (also called EDGE connection) can be independent from other configurations. Same is applied for EDGE connection between Provider ECC and Provider DataApp
+
+### WebSocket configuration (WSS) <a name="wss"></a>
+
+TRUE Connector can be configured to use WebSocket over HTTPS, for exchanging large files. WSS communication can be configured (independently of each other):
+
+```
+# Mandatory for WSS communication
+MULTIPART_ECC=mixed
+PROVIDER_MULTIPART_EDGE=mixed
+CONSUMER_MULTIPART_EDGE=mixed
+```
+
+* between Consumer DataApp and Consumer ECC
+
+```
+# For EDGE communication between Consumer ECC and Consumer DataApp
+CONSUMER_WS_EDGE=true
+
+```
+* between Consumer ECC and Provider ECC
+
+```
+# For WebSocket communication between ECC's
+WS_ECC=true
+```
+
+* between Provider DataApp and Provider ECC
+
+```
+# For EDGE communication between Provider DataApp and Provider ECC
+PROVIDER_WS_EDGE=true
+# In case of WSS configuration
+#PROVIDER_DATA_APP_ENDPOINT=https://be-dataapp-provider:9000/incoming-data-app/routerBodyBinary
+```
+
+To configure connector for WebSocket configuration, modify following:
+
+*be-dataapp-resources\config.properties*
+
+```
+server.ssl.key-password=changeit
+server.ssl.key-store=/cert/ssl-server.jks
+```
+
+With custom certificate or leave default one.
+*Note:* if using custom certificate, same certificate must be used in ECC and DataApp, in order to be able to do handshake between ECC and DataApp. Check [SSL/HTTPS](#ssl)
+
+On the following link, information regarding WebSocket Message Streamer implementation can be found here [WebSocket Message Streamer library](https://github.com/Engineering-Research-and-Development/market4.0-websocket_message_streamer).
+
+### IDSCPv2 configuration <a name="idscpv2"></a>
+
+TRUE Connector can exchange data using IDSCPv2 protocol, currently only between ECC's, not between DataApp and ECC. To do this, modify following properties:
+
+```
+# Enable WSS between ECC
+WS_ECC=false
+
+# Enable IDSCPv2 between ECC - set WS_ECC=false
+IDSCP2=true
+```
+
+## Advanced configuration <a name="advancedconfiguration"></a>
+
+If you did not find which property to change by editing **.env** file, there is an option, to modify property file directly, by editing one of the **application-docker.properties** files located in **ecc_resources_consumer** or **ecc_resources_provider** directories. There are comments present in property files, which describes impact and usage of some of the properties.
+
+
+### Supported Identity Providers <a name="identityproviders"></a>
+
+Since Identity provider is disabled by default, in order to enable it, set following application.property to true:
+
+```
+application.isEnabledDapsInteraction=true
+
+```
+
+The TRUE Connector is able to interact with the following Identity Providers:
+For each of 3 supported identity providers, you need to obtain certificate, in order to be able to get JWToken from DAPS server. Certificate needs to be copied into *ecc_cert* folder and modify *DAPS_KEYSTORE_NAME*, *DAPS_KEYSTORE_PASSWORD* and
+*DAPS_KEYSTORE_ALIAS* in *.env* file.
+
+* **AISECv1** additional step: edit *application-docker.properties* and modify 
+	*application.dapsVersion=v1* and 
+	*application.dapsUrl* should point to DAPS v1 server
+* **AISECv2** (default configuration)additional step: edit *application-docker.properties* and modify 
+	*application.dapsVersion=v2* and 
+	*application.dapsUrl* should point to DAPS v2 server
+* **ORBITER** put the certificates (private and public key) in the *ecc_cert* folder, 
+edit related settings (i.e., *application.daps.orbiter.privateKey*, *application.daps.orbiter.password*) and set the *application.dapsVersion* (in the *application-docker.properties*) to *orbiter*
+*application.dapsUrl* should point to Orbiter IDP server
+
+DAPS related configuration can be achieved by modifying following (.env file):
+
+```
+DAPS_KEYSTORE_NAME=daps-keystore.p12
+DAPS_KEYSTORE_PASSWORD=password
+DAPS_KEYSTORE_ALIAS=1
+```
+
+### Convert keystorage files <a name="convert_keystorage"></a>
+
+Change values for keystore file name, password and alias that matches Your keystore file. Keystore can be in jks format or p12. If you have some other certificate format (like pem for example), you can convert it by executing following commands from terminal:
+
+You should have 2 files, cert.pem, containing public key
+
+```
+-----BEGIN CERTIFICATE-----
+MIIDHzCCAgcCCQD0p/3nqCMT5zANBgkqhkiG9w0BAQ0FADBUMQswCQYDVQQGEwJF
+...
+ACsqRifEx7DKolsGyRM/zZWZZNkXNMCR1GfZv6yUNSVXQ5w=
+-----END CERTIFICATE-----
+
+```
+
+and privkey.key, containing private key
+
+```
+-----BEGIN PRIVATE KEY-----
+MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCzDmSOphiul2hh
+...
+RmSOiiYKXvxW1Z2VU3uKNVU=
+-----END PRIVATE KEY-----
+
+```
+
+You can use following command, to convert cert and key file to p12 keystorage file:
+
+```
+openssl pkcs12 -export -in cert.pem -inkey privkey.key -out certificate.p12 -name "alias"
+
+```
+
+Provide passwords when prompted.</br>
+Change alias to desired value.
+
+Once you have p12 file, you can use it as is in TRUEConnector, or you can convert it to jks with:
+
+```
+keytool -importkeystore -srckeystore certificate.p12 -srcstoretype pkcs12 -destkeystore cert.jks
+
+```
+
+TRUE Connector supports p12 format of certificate file, but if for some reason connector does not read file correct, you can try to convert it to jks format using provided command.
+
+### Validate protocol <a name="validateprotocol"></a>
+
+Forward-To protocol validation can be changed by editing *application-docker.properties* and modify **application.validateProtocol**. Default value is *false* and Forward-To URL will not be validated.
+Forward-To URL can be set like http(https,wss)://example.com or just example.com and the protocol chosen (from application-docker.properties) will be automatically set (it will be overwritten!)</br>
+Example: http://example.com will be wss://example if you chose wss in the properties).
+
+If validateProtocol is true, then Forward-To header must contain full URL, including protocol.</br>
+Forward-To=localhost:8890/data - this one will fail, since it lack of information is it http or https</br>
+Forward-To=https://localhost:8890/data - this one will work, since it has protocol information in URL.
+
+### Clearing House <a name="clearinghouse"></a>
+
+The TRUE Connector supports is able to communicate with the ENG Clearing House for registering transactions.
+
+Since Clearing house is disabled by default, in order to enable it, set following property to true:
+
+```
+application.isEnabledClearingHouse=true
+
+```
+
+### Broker <a name="broker"></a>
+
+Information on how TRUE Connector can interact with Broker, can be found on following link [Broker](BROKER.md)
+
+### Usage Control <a name="usagecontrol"></a>
 The TRUE Connector integrates the [Fraunhofer MyData Framework](https://www.mydata-control.de/) for implementing the Usage Control. Details about the PMP and PEP components can be found [here](doc/USAGE_CONTROL_RULES.md). 
 
-## Contract Negotiation - simple flow
+Since Usage Control is disabled by default, in order to enable it, set following property to true:
+
+```
+application.isEnabledUsageControl=true
+
+```
+
+## Contract Negotiation - simple flow <a name="contractnegotiation"></a>
 
 For simple contract negotiation flow, with ContractAgreement read from file, please check following link
 [Data App Contract Negotiation](https://github.com/Engineering-Research-and-Development/market4.0-data_app_test_BE/blob/master/README.md#markdown-header-Contract-Negotiation-simple-flow) 
 
 
-## License
+## License <a name="license"></a>
 The TRUE Connector components are released following different licenses:
 
 * **Execution Core Container**, open-source distributed under the license AGPLv3
 * **BE Data APP**, open-source distributed under the license AGPLv3
 * **UC Data APP**, TBC
-
