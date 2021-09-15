@@ -28,9 +28,9 @@ The TRUE Connector is composed of three components:
   * [Supported Identity Providers](#identityproviders)
   * [Convert keystorage files](#convert_keystorage)
   * [Validate protocol](#validateprotocol)
-* [Clearing House](#clearinghouse)
-* [Broker](#broker)
-* [Usage Control](#usagecontrol)
+  * [Clearing House](#clearinghouse)
+  * [Broker](#broker)
+  * [Usage Control](#usagecontrol)
 * [Contract Negotiation](#contractnegotiation)
 * [License](#license)
 
@@ -215,6 +215,9 @@ For IDSCPv2:
 Follow the REST endpoint or WS examples, put the server hostname/ip address in the Forward-To header (*wss/https://{RECEIVER_IP_ADDRESS/Hostname}:{WS_PUBLIC_PORT}*).
 * **AISECv2** put the certificates (keyStore and trustStore) in the *cert* folder,edit related settings (*IDSCP2 AISEC DAPS settings* section in env file)
 
+## Modifying configuration <a name="modifyconfiguration"></a>
+
+If you wish to change some configuration parameters for TRUE Connector, it can be done by editing **.env** file.
 
 ### Enable hostname validation <a name="hosnamevalidation"></a>
 
@@ -314,7 +317,6 @@ server.ssl.key-store=/cert/ssl-server.jks
 With custom certificate or leave default one.
 *Note:* if using custom certificate, same certificate must be used in ECC and DataApp, in order to be able to do handshake between ECC and DataApp. Check [SSL/HTTPS](#ssl)
 
-
 On the following link, information regarding WebSocket Message Streamer implementation can be found here [WebSocket Message Streamer library](https://github.com/Engineering-Research-and-Development/market4.0-websocket_message_streamer).
 
 ### IDSCPv2 configuration <a name="idscpv2"></a>
@@ -332,6 +334,7 @@ IDSCP2=true
 ## Advanced configuration <a name="advancedconfiguration"></a>
 
 If you did not find which property to change by editing **.env** file, there is an option, to modify property file directly, by editing one of the **application-docker.properties** files located in **ecc_resources_consumer** or **ecc_resources_provider** directories. There are comments present in property files, which describes impact and usage of some of the properties.
+
 
 ### Supported Identity Providers <a name="identityproviders"></a>
 
@@ -409,7 +412,6 @@ keytool -importkeystore -srckeystore certificate.p12 -srcstoretype pkcs12 -destk
 
 TRUE Connector supports p12 format of certificate file, but if for some reason connector does not read file correct, you can try to convert it to jks format using provided command.
 
-
 ### Validate protocol <a name="validateprotocol"></a>
 
 Forward-To protocol validation can be changed by editing *application-docker.properties* and modify **application.validateProtocol**. Default value is *false* and Forward-To URL will not be validated.
@@ -420,7 +422,7 @@ If validateProtocol is true, then Forward-To header must contain full URL, inclu
 Forward-To=localhost:8890/data - this one will fail, since it lack of information is it http or https</br>
 Forward-To=https://localhost:8890/data - this one will work, since it has protocol information in URL.
 
-## Clearing House <a name="clearinghouse"></a>
+### Clearing House <a name="clearinghouse"></a>
 
 The TRUE Connector supports is able to communicate with the ENG Clearing House for registering transactions.
 
@@ -431,11 +433,11 @@ application.isEnabledClearingHouse=true
 
 ```
 
-## Broker <a name="broker"></a>
+### Broker <a name="broker"></a>
 
 Information on how TRUE Connector can interact with Broker, can be found on following link [Broker](BROKER.md)
 
-## Usage Control <a name="usagecontrol"></a>
+### Usage Control <a name="usagecontrol"></a>
 The TRUE Connector integrates the [Fraunhofer MyData Framework](https://www.mydata-control.de/) for implementing the Usage Control. Details about the PMP and PEP components can be found [here](doc/USAGE_CONTROL_RULES.md). 
 
 Since Usage Control is disabled by default, in order to enable it, set following property to true:
