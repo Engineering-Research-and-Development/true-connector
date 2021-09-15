@@ -46,6 +46,8 @@ services:
     ports:
       - "9552:9555"
       - "8043:43"
+    volumes:
+      - ./policies:/policies
 
   be-dataapp-provider:
     image: rdlabengpa/ids_be_data_app:v0.0.16
@@ -112,6 +114,8 @@ services:
     ports:
       - "9553:9555"
       - "8044:43"
+    volumes:
+      - ./policies:/policies
 
   be-dataapp-consumer:
     image:  rdlabengpa/ids_be_data_app:v0.0.16
