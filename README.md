@@ -21,13 +21,12 @@ The TRUE Connector is composed of three components:
 * [Modifying configuration](#modifyconfiguration) 
   * [Enable hostname validation](#hosnamevalidation)
   * [SSL/HTTPS](#ssl)
-  * [DAPS](#daps)
-  * [Convert keystorage files](#convert_keystorage)
   * [Change message format](#messageformat)
   * [WebSocket configuration (WSS)](#wss)
   * [IDSCPv2](#idscpv2)
-* [Advanced configuration](#advancedconfiguration)
+ * [Advanced configuration](#advancedconfiguration)
   * [Supported Identity Providers](#identityproviders)
+  * [Convert keystorage files](#convert_keystorage)
   * [Validate protocol](#validateprotocol)
 * [Clearing House](#clearinghouse)
 * [Broker](#broker)
@@ -217,10 +216,6 @@ Follow the REST endpoint or WS examples, put the server hostname/ip address in t
 * **AISECv2** put the certificates (keyStore and trustStore) in the *cert* folder,edit related settings (*IDSCP2 AISEC DAPS settings* section in env file)
 
 
-## Modifying configuration <a name="modifyconfiguration"></a>
-
-If you wish to change some configuration parameters for TRUE Connector, it can be done by editing **.env** file.
-
 ### Enable hostname validation <a name="hosnamevalidation"></a>
 
 To enable hostname validation, set following property to false:
@@ -253,62 +248,6 @@ If you want to use http and not https, simply disable following property
 ```
 SERVER_SSL_ENABLED=false
 ```
-
-### DAPS <a name="daps"></a>
-
-DAPS related configuration can be achieved by modifying following:
-
-```
-DAPS_KEYSTORE_NAME=daps-keystore.p12
-DAPS_KEYSTORE_PASSWORD=password
-DAPS_KEYSTORE_ALIAS=1
-```
-
-### Convert keystorage files <a name="convert_keystorage"></a>
-
-Change values for keystore file name, password and alias that matches Your keystore file. Keystore can be in jks format or p12. If you have some other certificate format (like pem for example), you can convert it by executing following commands from terminal:
-
-You should have 2 files, cert.pem, containing public key
-
-```
------BEGIN CERTIFICATE-----
-MIIDHzCCAgcCCQD0p/3nqCMT5zANBgkqhkiG9w0BAQ0FADBUMQswCQYDVQQGEwJF
-...
-ACsqRifEx7DKolsGyRM/zZWZZNkXNMCR1GfZv6yUNSVXQ5w=
------END CERTIFICATE-----
-
-```
-
-and privkey.key, containing private key
-
-```
------BEGIN PRIVATE KEY-----
-MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCzDmSOphiul2hh
-...
-RmSOiiYKXvxW1Z2VU3uKNVU=
------END PRIVATE KEY-----
-
-```
-
-You can use following command, to convert cert and key file to p12 keystorage file:
-
-```
-openssl pkcs12 -export -in cert.pem -inkey privkey.key -out certificate.p12 -name "alias"
-
-```
-
-Provide passwords when prompted.</br>
-Change alias to desired value.
-
-Once you have p12 file, you can use it as is in TRUEConnector, or you can convert it to jks with:
-
-```
-keytool -importkeystore -srckeystore certificate.p12 -srcstoretype pkcs12 -destkeystore cert.jks
-
-```
-
-TRUE Connector supports p12 format of certificate file, but if for some reason connector does not read file correct, you can try to convert it to jks format using provided command.
-
 
 ### Change message format - Multipart/Mixed, Multipart/Form, Http-headers <a name="messageformat"></a>
 
@@ -394,10 +333,9 @@ IDSCP2=true
 
 If you did not find which property to change by editing **.env** file, there is an option, to modify property file directly, by editing one of the **application-docker.properties** files located in **ecc_resources_consumer** or **ecc_resources_provider** directories. There are comments present in property files, which describes impact and usage of some of the properties.
 
-
 ### Supported Identity Providers <a name="identityproviders"></a>
 
-Since Identity provider is disabled by default, in order to enable it, set following property to true:
+Since Identity provider is disabled by default, in order to enable it, set following application.property to true:
 
 ```
 application.isEnabledDapsInteraction=true
@@ -418,10 +356,64 @@ For each of 3 supported identity providers, you need to obtain certificate, in o
 edit related settings (i.e., *application.daps.orbiter.privateKey*, *application.daps.orbiter.password*) and set the *application.dapsVersion* (in the *application-docker.properties*) to *orbiter*
 *application.dapsUrl* should point to Orbiter IDP server
 
+DAPS related configuration can be achieved by modifying following (.env file):
+
+```
+DAPS_KEYSTORE_NAME=daps-keystore.p12
+DAPS_KEYSTORE_PASSWORD=password
+DAPS_KEYSTORE_ALIAS=1
+```
+
+### Convert keystorage files <a name="convert_keystorage"></a>
+
+Change values for keystore file name, password and alias that matches Your keystore file. Keystore can be in jks format or p12. If you have some other certificate format (like pem for example), you can convert it by executing following commands from terminal:
+
+You should have 2 files, cert.pem, containing public key
+
+```
+-----BEGIN CERTIFICATE-----
+MIIDHzCCAgcCCQD0p/3nqCMT5zANBgkqhkiG9w0BAQ0FADBUMQswCQYDVQQGEwJF
+...
+ACsqRifEx7DKolsGyRM/zZWZZNkXNMCR1GfZv6yUNSVXQ5w=
+-----END CERTIFICATE-----
+
+```
+
+and privkey.key, containing private key
+
+```
+-----BEGIN PRIVATE KEY-----
+MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCzDmSOphiul2hh
+...
+RmSOiiYKXvxW1Z2VU3uKNVU=
+-----END PRIVATE KEY-----
+
+```
+
+You can use following command, to convert cert and key file to p12 keystorage file:
+
+```
+openssl pkcs12 -export -in cert.pem -inkey privkey.key -out certificate.p12 -name "alias"
+
+```
+
+Provide passwords when prompted.</br>
+Change alias to desired value.
+
+Once you have p12 file, you can use it as is in TRUEConnector, or you can convert it to jks with:
+
+```
+keytool -importkeystore -srckeystore certificate.p12 -srcstoretype pkcs12 -destkeystore cert.jks
+
+```
+
+TRUE Connector supports p12 format of certificate file, but if for some reason connector does not read file correct, you can try to convert it to jks format using provided command.
+
+
 ### Validate protocol <a name="validateprotocol"></a>
 
 Forward-To protocol validation can be changed by editing *application-docker.properties* and modify **application.validateProtocol**. Default value is *false* and Forward-To URL will not be validated.
-Forward-To URL can be set like http(https,wss)://example.com or just example.com and the protocol chosen (from application.properties) will be automatically set (it will be overwritten!)</br>
+Forward-To URL can be set like http(https,wss)://example.com or just example.com and the protocol chosen (from application-docker.properties) will be automatically set (it will be overwritten!)</br>
 Example: http://example.com will be wss://example if you chose wss in the properties).
 
 If validateProtocol is true, then Forward-To header must contain full URL, including protocol.</br>
