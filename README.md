@@ -24,7 +24,7 @@ The TRUE Connector is composed of three components:
   * [Change message format](#messageformat)
   * [WebSocket configuration (WSS)](#wss)
   * [IDSCPv2](#idscpv2)
- * [Advanced configuration](#advancedconfiguration)
+* [Advanced configuration](#advancedconfiguration)
   * [Supported Identity Providers](#identityproviders)
   * [Convert keystorage files](#convert_keystorage)
   * [Validate protocol](#validateprotocol)
