@@ -22,6 +22,7 @@ The TRUE Connector is composed of three components:
   * [Enable hostname validation](#hosnamevalidation)
   * [SSL/HTTPS](#ssl)
   * [DAPS](#daps)
+  * [Convert keystorage files](#convert_keystorage)
   * [Change message format](#messageformat)
   * [WebSocket configuration (WSS)](#wss)
   * [IDSCPv2](#idscpv2)
@@ -259,9 +260,51 @@ DAPS_KEYSTORE_PASSWORD=password
 DAPS_KEYSTORE_ALIAS=1
 ```
 
+### Convert keystorage files <a name="convert_keystorage"></a>
+
 Change values for keystore file name, password and alias that matches Your keystore file. Keystore can be in jks format or p12. If you have some other certificate format (like pem for example), you can convert it by executing following commands from terminal:
 
-CONVERT PEM TO JKS OR p12
+You should have 2 files, cert.pem, containing public key
+
+```
+-----BEGIN CERTIFICATE-----
+MIIDHzCCAgcCCQD0p/3nqCMT5zANBgkqhkiG9w0BAQ0FADBUMQswCQYDVQQGEwJF
+...
+ACsqRifEx7DKolsGyRM/zZWZZNkXNMCR1GfZv6yUNSVXQ5w=
+-----END CERTIFICATE-----
+
+```
+
+and privkey.key, containing private key
+
+```
+-----BEGIN PRIVATE KEY-----
+MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCzDmSOphiul2hh
+...
+RmSOiiYKXvxW1Z2VU3uKNVU=
+-----END PRIVATE KEY-----
+
+```
+
+You can use following command, to convert cert and key file to p12 keysotrage file:
+
+```
+openssl pkcs12 -export -in cert.pem -inkey privkey.key -out certificate.p12 -name "alias"
+
+```
+
+Provide passwords when prompted.</br>
+Change alias to desired value.
+
+Once you have p12 file, you can use it as is in TRUEConnector, or you can convert it to jks with:
+
+```
+keytool -importkeystore -srckeystore certificate.p12 -srcstoretype pkcs12 -destkeystore cert.jks
+
+```
+
+TRUE Connector supports p12 format of certificate file, but if for some reason connector does not read file correct, you can try to convert it to jks format using provided command.
+
 
 ### Change message format - Multipart/Mixed, Multipart/Form, Http-headers <a name="messageformat"></a>
 
@@ -395,7 +438,6 @@ Since Clearing house is disabled by default, in order to enable it, set followin
 application.isEnabledClearingHouse=true
 
 ```
-
 
 ## Broker <a name="broker"></a>
 
