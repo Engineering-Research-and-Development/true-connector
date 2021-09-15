@@ -53,12 +53,13 @@ ecc_resources_provider - directory containing property file for provider ECC adv
 
 TRUE Connector comes pre-configured with following:
 
-* hostname validation disabled
-* secure https communication between all components (dataApp - ECC, ECC-ECC, and ECC-dataApp), using self-signed certificate
+* Secure https communication between all components (dataApp - ECC, ECC-ECC, and ECC-dataApp), using self-signed certificate
 * multipart mixed format of the message between all components
 * DapsInteraction disabled
-* disagled validate protocol in Forward-To header
-* Usage control disabled
+* Disabled Usage control
+* Disabled Clearing House
+* Disabled validate protocol in Forward-To header
+* Disabled hostname validation
 
 If you wish to change this configuration, please check chapter [Modifying configuration](#modifyconfiguration) 
 
@@ -70,7 +71,7 @@ To start docker container, open terminal and execute following command:
 docker-compose up &
 
 ```
-If you are running docker on linux, you might need administrative rights (sudo)
+If you are running docker on Linux, you might need administrative rights (sudo)
 
 To check logs, execute following command:
 
@@ -86,28 +87,31 @@ To stop containers, execute following:
 ```
 docker-compose down -v
 ```
+
 At this point, you should be able to use TRUE Connector and send messages. How to send messages, check following link [Send multipart mix request]():
 
-## Endpoints <a name="enpoints"></a>
+## Endpoints <a name="endpoints"></a>
 The TRUE Connector will use two protocols (http and https) as described by the Docker Compose File.
 It will expose the following endpoints:
 
 ```
 /proxy 
 ```
-to receive data incomming request, and based on received request, forward request to Execution Core Connector (the P endpoint in the above picture)
+
+to receive data incoming request, and based on received request, forward request to Execution Core Connector (the P endpoint in the above picture)
 
 ``` 
 /data 
 ```
+
 to receive data (IDS Message) from a sender connector (the B endpoint in the above picture)
 Furthermore, just for testing it will expose (http and https):
 
 ```
 /about/version 
 ```
-returns business logic version 
 
+returns business logic version .
 
 ## Connector reachability <a name="reachability"></a>
 
@@ -128,7 +132,7 @@ Self Description document, in json format, for connector, can be found at follow
 https://localhost:8091/
 
 
-In order to set different values for connector, based on connector role (Data Consumer/Data Provider), follwoing file and properties needs to be modified:
+In order to set different values for connector, based on connector role (Data Consumer/Data Provider), following file and properties needs to be modified:
 
 ```
 ecc_resources_consumer/application-docker.properties
@@ -286,7 +290,7 @@ RmSOiiYKXvxW1Z2VU3uKNVU=
 
 ```
 
-You can use following command, to convert cert and key file to p12 keysotrage file:
+You can use following command, to convert cert and key file to p12 keystorage file:
 
 ```
 openssl pkcs12 -export -in cert.pem -inkey privkey.key -out certificate.p12 -name "alias"
@@ -384,7 +388,6 @@ WS_ECC=false
 
 # Enable IDSCPv2 between ECC - set WS_ECC=false
 IDSCP2=true
-
 ```
 
 ## Advanced configuration <a name="advancedconfiguration"></a>
@@ -415,8 +418,6 @@ For each of 3 supported identity providers, you need to obtain certificate, in o
 edit related settings (i.e., *application.daps.orbiter.privateKey*, *application.daps.orbiter.password*) and set the *application.dapsVersion* (in the *application-docker.properties*) to *orbiter*
 *application.dapsUrl* should point to Orbiter IDP server
 
-
-
 ### Validate protocol <a name="validateprotocol"></a>
 
 Forward-To protocol validation can be changed by editing *application-docker.properties* and modify **application.validateProtocol**. Default value is *false* and Forward-To URL will not be validated.
@@ -426,7 +427,6 @@ Example: http://example.com will be wss://example if you chose wss in the proper
 If validateProtocol is true, then Forward-To header must contain full URL, including protocol.</br>
 Forward-To=localhost:8890/data - this one will fail, since it lack of information is it http or https</br>
 Forward-To=https://localhost:8890/data - this one will work, since it has protocol information in URL.
-
 
 ## Clearing House <a name="clearinghouse"></a>
 
@@ -442,7 +442,6 @@ application.isEnabledClearingHouse=true
 ## Broker <a name="broker"></a>
 
 Information on how TRUE Connector can interact with Broker, can be found on following link [Broker](BROKER.md)
-
 
 ## Usage Control <a name="usagecontrol"></a>
 The TRUE Connector integrates the [Fraunhofer MyData Framework](https://www.mydata-control.de/) for implementing the Usage Control. Details about the PMP and PEP components can be found [here](doc/USAGE_CONTROL_RULES.md). 
@@ -466,4 +465,3 @@ The TRUE Connector components are released following different licenses:
 * **Execution Core Container**, open-source distributed under the license AGPLv3
 * **BE Data APP**, open-source distributed under the license AGPLv3
 * **UC Data APP**, TBC
-
