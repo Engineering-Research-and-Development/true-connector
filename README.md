@@ -156,34 +156,17 @@ With default configuration, you can use following curl command, to get data from
   <summary>Multipart Mixed request</summary>
 
 	curl --location --request POST 'https://localhost:8084/proxy' \
-	--header 'fizz: buzz' \
 	--header 'Content-Type: text/plain' \
 	--data-raw '{
 	    "multipart": "mixed",
-	    "Forward-To": "https://ecc-provider:8889/data",
-	     "message": {
-	      "@context" : {
-	        "ids" : "https://w3id.org/idsa/core/"
-	      },
-	      "@type" : "ids:ArtifactRequestMessage",
-	      "@id" : "https://w3id.org/idsa/autogen/artifactRequestMessage/76481a41-8117-4c79-bdf4-9903ef8f825a",
-	      "ids:issued" : {
-	        "@value" : "2020-11-25T16:43:27.051+01:00",
-	        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-	      },
-	      "ids:modelVersion" : "4.0.0",
-	      "ids:issuerConnector" : {
-	        "@id" : "http://w3id.org/engrd/connector/"
-	      },
-	      "ids:requestedArtifact" : {
-	       "@id" : "http://w3id.org/engrd/connector/artifact/1"
-	      }
-	    },
+	    "Forward-To": "https://ecc-provider:8890/data",
+	    "messageType": "ArtifactRequestMessage" ,
+	    "requestedArtifact": "http://w3id.org/engrd/connector/artifact/1" ,
 	    "payload" : {
-	        "catalog.offers.0.resourceEndpoints.path":"/pet2"
-	        }
+			"catalog.offers.0.resourceEndpoints.path":"/pet2"
+			}
 	}'
-
+	
 </details>
 
 *NOTE*: even that this curl command is exported from Postman, it is noticed several times, that when you try to import it back in Postman, there are some problems during this process, which results in omitting request body, and then request fill fail - cannot find body to create request.</br>
