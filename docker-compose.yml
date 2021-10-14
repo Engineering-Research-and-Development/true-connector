@@ -37,7 +37,7 @@ services:
       - ./ecc_resources_provider:/config
       - ./ecc_cert:/cert
     extra_hosts:
-      - "ecc-consumer:172.17.0.1"
+      - "ecc-provider:172.17.0.1"
 
   uc-dataapp-provider:
     image: rdlabengpa/ids_uc_data_app:v0.0.4
@@ -105,7 +105,7 @@ services:
       - ./ecc_resources_consumer:/config
       - ./ecc_cert:/cert
     extra_hosts:
-      - "ecc-provider:172.17.0.1"
+      - "ecc-consumer:172.17.0.1"
 
   uc-dataapp-consumer:
     image: rdlabengpa/ids_uc_data_app:v0.0.4
