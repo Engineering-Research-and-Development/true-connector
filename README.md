@@ -435,6 +435,101 @@ application.isEnabledUsageControl=true
 For simple contract negotiation flow, with ContractAgreement read from file, please check following link
 [Data App Contract Negotiation](https://github.com/Engineering-Research-and-Development/market4.0-data_app_test_BE/blob/master/README.md#markdown-header-Contract-Negotiation-simple-flow) 
 
+If mandatory, for other connectors, you can perform contract negotiation with other connector (not TRUE Connector) or with TRUE Connector. There is default contract offer that will be sent if ContractRequestMessage is received. It will allow consuming of resource in year 2021.
+
+If you do not want to do contract negotiation, and you are using TRUE Connector "on both sides", there is "workaround", to upload Usage Control policy directly to Consumer Usage Control Data App. In order to achieve this, use following link:
+
+```
+http://localhost:9553/swagger-ui.html#/odrl-policy-controller
+```
+In POST request, upload policy from [here](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app/blob/master/src/main/resources/policy-examples/0.0.3/1%20restrict-access-interval.json)
+
+Assuming you are running docker instance on local machine. If not, please update hostname to match your scenario.
+
+**Contract Request Message**
+
+Contract Request Message is initial message sent in Contract Negotiation flow. It can contain requestedElement, if we know what artifact we are requesting, or without it, if we need to get whole self description document, and then analyze it and get element we are looking for.
+
+<details>
+  <summary>Multipart form - Contract Request Message</summary>
+
+	curl --location --request POST 'https://localhost:8084/proxy' \
+	--header 'Content-Type: application/json' \
+	--data-raw '{
+	"multipart": "form",
+	"Forward-To": "https://ecc-provider:8889/data",
+	"messageType": "ContractRequestMessage",
+	"requestedElement": "http://w3id.org/engrd/connector/artifact/{id}"
+	}'
+
+</details>
+
+**Contract Agreement request**
+
+Example of Contract Agreement Message:
+Payload should be ContractAgreement, obtained from previous response (ContractRequestMessage)
+
+<details>
+  <summary>Multipart form - Contract Agreement request</summary>
+
+	curl --location --request POST 'https://localhost:8084/proxy' \
+	--header 'Content-Type: application/json' \
+	--data-raw '{
+	"multipart": "form",
+	"Forward-To": "https://ecc-provider:8889/data",
+	"messageType": "ContractAgreementMessage",
+	"payload": {
+		"@context": {
+			"ids": "https://w3id.org/idsa/core/",
+			"idsc": "https://w3id.org/idsa/code/"
+		},
+		"@type": "ids:ContractAgreement",
+		"@id": "https://w3id.org/idsa/autogen/contract/restrict-access-interval-{id}",
+		"profile": "http://example.com/ids-profile",
+		"ids:target": {
+			"@id": "http://w3id.org/engrd/connector/artifact/{id}"
+		},
+		"ids:provider": "http://example.com/party/my-party",
+		"ids:consumer": "http://example.com/party/consumer-party",
+		"ids:permission": [
+			{
+				"ids:action": [
+					{
+						"@id": "idsc:USE"
+					}
+				],
+				"ids:constraint": [
+					{
+						"@type": "ids:Constraint",
+						"ids:leftOperand": "idsc:POLICY_EVALUATION_TIME",
+						"ids:operator": "idsc:TEMPORAL_EQUALS",
+						"ids:rightOperand": {
+							"@type": "ids:interval",
+							"@value": {
+								"ids:begin": {
+									"@value": "2021-03-01T00:00:00Z",
+									"@type": "xsd:datetimeStamp"
+								},
+								"ids:end": {
+									"@value": "2021-03-31T00:00:00Z",
+									"@type": "xsd:datetimeStamp"
+								}
+							}
+						},
+						"ids:pipEndpoint": {
+							"@id": "https//pip.com/policy_evaluation_time"
+						}
+					}
+				]
+			}
+		]
+	}
+	}'
+
+</details>
+
+When following request is sent, response will be MessageProcessedNotificationMessage, without payload.
+
 
 ## License <a name="license"></a>
 The TRUE Connector components are released following different licenses:
