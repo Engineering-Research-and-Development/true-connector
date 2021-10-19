@@ -3,35 +3,39 @@
 
 ## Introduction
 
-TrueConnector B-endpoint for handling IDS Messages is reachable at following address:
+TrueConnector B-endpoint, receiving POST requests, for handling IDS Messages is reachable at following address:
 
 ```
-https://217.172.12.215:8889/data
+http://193.109.207.194/eccb/data
 
 ```
 
-Configuration used for communication is xxxx.
+Configuration used for communication is multipart-form with HTTP.
 
 SelfDescritpion document can be reached at:
 
 ```
-https://217.172.12.215:8090/
+http://193.109.207.194/sd/
 
 ```
 
-Following SelfDescription document offers one resource, with id - *http://w3id.org/engrd/connector/artifact/1*
+**NOTE:** this URL for SelfDescription, is only for this use case, restrictions regarding environment we have deployed TRUEConnector, nad not serving on the root of the Connector.
+
+Following SelfDescription document offers several resource, with id - *http://w3id.org/engrd/connector/artifact/{name}*
 
 Usage control is enabled, and provider will wrap up payload with meta data needed for usage control enforcement.
 
 DAPS is enabled, and configured Identity Provider is AISEC DAPS v2.
 
-InfoModel compatibility is 4.0.0 and 4.1.1
+InfoModel compatibility is 4.0.0 and 4.1.0
 
 ## Setup
 
-Clone this repository and make changes described in [README.md](README.md) file.
+Clone this repository and start the docker using file docker-compose-consumer.yml.
 
-Some of things that needs to be checked/verified are:
+We tried to use zero configuration for this workshop. If you wish to make modifications, then please follow instructions provided in README.md file.
+
+If you decide to do this, points of interest might be:
 
  * all modifications are done by editing .env file, used by docker
  * provide valid DAPS certificate file, copy it to ecc_cert folder and update corresponding properties
@@ -65,8 +69,7 @@ TRUSTORE_NAME=
 TRUE Connector will be deployed in our environment, with public accessible address as Data Provider.
 
 ```
-https://217.172.12.215:8889/data
-
+http://193.109.207.194/eccb/data
 ```
 
 
@@ -87,7 +90,7 @@ In order to send message, you can read following chapters:
 
 ### Proxy endpoint
 
-Our simple/sample DataApp exposes "proxy" endpoint. This endpoint, available at *https://localhost:8084/proxy* (Consumer DataApp) wraps up logic for creating IDS Message and sending request to Consumer Execution Core Container. Currently supported messages are:
+Our simple/sample DataApp exposes "proxy" endpoint. This endpoint, available at *https://localhost:8084/proxy* (Consumer DataApp, running locally) wraps up logic for creating IDS Message and sending request to Consumer Execution Core Container. Currently supported messages are:
 
 | IDS Message |  Expected result message |
 | ------- |   -------- |
@@ -99,11 +102,11 @@ Our simple/sample DataApp exposes "proxy" endpoint. This endpoint, available at 
 Example for one of message types looks like:
 
 ```
-	curl --location --request POST 'https://localhost:8084/proxy' \
+	curl --location --request POST 'http://localhost:8084/proxy' \
 	--header 'Content-Type: application/json' \
 	--data-raw '{
 	    "multipart": "form",
-	    "Forward-To": "https://217.172.12.215:8889/data",
+	    "Forward-To": "http://193.109.207.194/eccb/data",
 	    "messageType":"ArtifactRequestMessage",
 	    "requestedArtifact": "http://w3id.org/engrd/connector/artifact/{id}"   
 	}'
@@ -127,11 +130,11 @@ In POST request, upload policy from [here](https://github.com/Engineering-Resear
 <details>
   <summary>Multipart form - Contract Request Message</summary>
 
-	curl --location --request POST 'https://localhost:8084/proxy' \
+	curl --location --request POST 'http://localhost:8084/proxy' \
 	--header 'Content-Type: application/json' \
 	--data-raw '{
 	"multipart": "form",
-	"Forward-To": "https://217.172.12.215:8889/data",
+	"Forward-To": "http://193.109.207.194/eccb/data",
 	"messageType": "ContractRequestMessage",
 	"requestedArtifact": "http://w3id.org/engrd/connector/artifact/{id}"
 	}'
@@ -146,11 +149,11 @@ Payload should be ContractAgreement, obtained from previous response (ContractRe
 <details>
   <summary>Multipart form - Contract Agreement request</summary>
 
-	curl --location --request POST 'https://localhost:8084/proxy' \
+	curl --location --request POST 'http://localhost:8084/proxy' \
 	--header 'Content-Type: application/json' \
 	--data-raw '{
 	"multipart": "form",
-	"Forward-To": "https://217.172.12.215:8889/data",
+	"Forward-To": "http://193.109.207.194/eccb/data",
 	"messageType": "ContractAgreementMessage",
 	"payload": {
 		"@context": {
@@ -215,11 +218,11 @@ In order to get resource that TrueConnector offers, you need to send *ArtifactRe
 <details>
   <summary>Multipart Form - Artifact Request Message</summary>
 
-	curl --location --request POST 'https://localhost:8084/proxy' \
+	curl --location --request POST 'http://localhost:8084/proxy' \
 	--header 'Content-Type: application/json' \
 	--data-raw '{
 	    "multipart": "form",
-	    "Forward-To": "https://217.172.12.215:8889/data",
+	    "Forward-To": "http://193.109.207.194/eccb/data",
 	    "messageType":"ArtifactRequestMessage",
 	    "requestedArtifact": "http://w3id.org/engrd/connector/artifact/{id}"   
 	}'

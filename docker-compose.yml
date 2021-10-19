@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   ecc-provider: 
-    image: rdlabengpa/ids_execution_core_container:pf_q3_2021
+    image: rdlabengpa/ids_execution_core_container:v1.9.0
     ports:
       - "${PROVIDER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
       - 8887:8887  #Exposed port for receiving data from the Data APP
@@ -38,7 +38,7 @@ services:
       - ./ecc_resources_provider:/config
       - ./ecc_cert:/cert
     extra_hosts:
-      - "ecc-consumer:172.17.0.1"
+      - "ecc-provider:172.17.0.1"
 
   uc-dataapp-provider:
     image: rdlabengpa/ids_uc_data_app:v0.0.4
@@ -47,6 +47,8 @@ services:
     ports:
       - "9552:9555"
       - "8043:43"
+    volumes:
+      - ./policies:/policies
 
   be-dataapp-provider:
     image: rdlabengpa/ids_be_data_app:pf_q3_2021
@@ -68,10 +70,10 @@ services:
       - ./ecc_cert:/cert
 
   ecc-consumer: 
-    image: rdlabengpa/ids_execution_core_container:pf_q3_2021
+    image: rdlabengpa/ids_execution_core_container:v1.9.0
     ports:
       - "${CONSUMER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
-      - 8890:8889  #Exposed port for receiving data from another connector (REST)
+      - 8891:8889  #Exposed port for receiving data from another connector (REST)
       - 8087:8086  #Exposed port for receiving data from another connector (WS)
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
@@ -104,7 +106,7 @@ services:
       - ./ecc_resources_consumer:/config
       - ./ecc_cert:/cert
     extra_hosts:
-      - "ecc-provider:172.17.0.1"
+      - "ecc-consumer:172.17.0.1"
 
   uc-dataapp-consumer:
     image: rdlabengpa/ids_uc_data_app:v0.0.4
@@ -113,6 +115,8 @@ services:
     ports:
       - "9553:9555"
       - "8044:43"
+    volumes:
+      - ./policies:/policies
 
   be-dataapp-consumer:
     image:  rdlabengpa/ids_be_data_app:pf_q3_2021
