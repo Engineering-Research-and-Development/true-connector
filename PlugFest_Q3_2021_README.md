@@ -19,7 +19,7 @@ http://193.109.207.194/sd/
 
 ```
 
-**NOTE:** this URL for SelfDescription, is only for this use case, restrictions regarding environment we have deployed TRUEConnector, nad not serving on the root of the Connector.
+**NOTE:** this URL for SelfDescription, is only for this use case, restrictions regarding environment we have deployed TRUEConnector, and not serving on the root of the Connector.
 
 Following SelfDescription document offers several resource, with id - *http://w3id.org/engrd/connector/artifact/{name}*
 
@@ -75,7 +75,7 @@ http://193.109.207.194/eccb/data
 
 ## TrueConnector as Data Consumer 
 
-To start TRUE Connector as consumer, simpy execute following command
+To start TRUE Connector as consumer, simply execute following command
 
 ```
 docker-compose -f docker-compose-consumer.yml up
@@ -90,7 +90,7 @@ In order to send message, you can read following chapters:
 
 ### Proxy endpoint
 
-Our simple/sample DataApp exposes "proxy" endpoint. This endpoint, available at *https://localhost:8084/proxy* (Consumer DataApp, running locally) wraps up logic for creating IDS Message and sending request to Consumer Execution Core Container. Currently supported messages are:
+Our simple/sample DataApp exposes "proxy" endpoint. This endpoint, available at *http://localhost:8084/proxy* (Consumer DataApp, running locally) wraps up logic for creating IDS Message and sending request to Consumer Execution Core Container. Currently supported messages are:
 
 | IDS Message |  Expected result message |
 | ------- |   -------- |
