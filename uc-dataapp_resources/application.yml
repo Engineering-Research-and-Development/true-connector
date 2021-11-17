@@ -1,0 +1,56 @@
+spring:
+  banner:
+    location: classpath:banner.txt
+  datasource:
+    url: jdbc:h2:file:~/ids-ucapp;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE
+    username: sa
+    password:
+    platform: hsqldb
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+      hbm2ddl:
+        auto: update
+
+server:
+  port: 9555
+
+mydata:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: false
+    properties:
+      hibernate:
+        ddl-auto: update
+        hbm2ddl:
+          auto: update
+  datasource:
+    jdbc-url: jdbc:h2:file:~/ids-ucapp-mydata;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE
+    username: sa
+    password:
+    platform: hsqldb
+    driver-class-name: org.h2.Driver
+  timezone: Europe/Berlin
+  solutionId: urn:solution:ids
+  pdp:
+    enable-whitelist: true
+    
+countryProvider:
+  whois:
+    server: whois.ripe.net
+    port: 43
+#    RS
+#    ipAddress: 87.116.161.249
+#   IT
+#   ipAddress: 87.11.10.20
+#   client or system
+  version: system
+  
+application:
+# Controls if the policies will be saved to file storage.
+# If you are using a persistance database to store the policies set it to false. (Default = true)
+  savePoliciesToFilestorage: true
+  odrlPolicyDirectory: /policies
