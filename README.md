@@ -159,7 +159,7 @@ With default configuration, you can use following curl command, to get data from
 	--header 'Content-Type: text/plain' \
 	--data-raw '{
 	    "multipart": "mixed",
-	    "Forward-To": "https://ecc-provider:8890/data",
+	    "Forward-To": "https://ecc-provider:8889/data",
 	    "messageType": "ArtifactRequestMessage" ,
 	    "requestedArtifact": "http://w3id.org/engrd/connector/artifact/1" ,
 	    "payload" : {
