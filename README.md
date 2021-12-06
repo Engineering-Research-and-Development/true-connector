@@ -17,8 +17,8 @@ The TRUE Connector is composed of three components:
   * [Starting and stopping containers](#startstop)
 * [Endpoints](#endpoints)
 * [Connector reachability](#reachability)
-* [How to Exchange Data](#exchangedata) 
-* [Modifying configuration](#modifyconfiguration) 
+* [How to Exchange Data](#exchangedata)
+* [Modifying configuration](#modifyconfiguration)
   * [Enable hostname validation](#hosnamevalidation)
   * [SSL/HTTPS](#ssl)
   * [Change message format](#messageformat)
@@ -32,6 +32,10 @@ The TRUE Connector is composed of three components:
   * [Broker](#broker)
   * [Usage Control](#usagecontrol)
 * [Contract Negotiation](#contractnegotiation)
+  * [Get offered resource](#get_offered_resource)
+  * [Contract Request Message](#contract_request_message)
+  * [Contract Agreement request](#contract_agreement_request)
+  * [Get offered resource after access is granted](#get_offered_resource_granted)
 * [License](#license)
 
 ## Introduction  <a name="introduction"></a>
@@ -43,8 +47,8 @@ be-dataapp_data_receiver - containing data needed for receiver/provider dataApp,
 be-dataapp_data_sender
 be-dataapp_resources - directory containing property file used for advanced configuration for both dataApps
 ecc_cert - directory used to store certificate files (DAPS certificate, HTTPS certificate, truststore...)
-ecc_resources_consumer - directory containing property file for consumer ECC advanced configuration 
-ecc_resources_provider - directory containing property file for provider ECC advanced configuration 
+ecc_resources_consumer - directory containing property file for consumer ECC advanced configuration
+ecc_resources_provider - directory containing property file for provider ECC advanced configuration
 
 ```
 
@@ -60,7 +64,7 @@ TRUE Connector comes pre-configured with following:
 * Disabled validate protocol in Forward-To header
 * Disabled hostname validation
 
-If you wish to change this configuration, please check chapter [Modifying configuration](#modifyconfiguration) 
+If you wish to change this configuration, please check chapter [Modifying configuration](#modifyconfiguration)
 
 ### Starting and stopping containers <a name="startstop"></a>
 
@@ -80,7 +84,7 @@ docker-compose logs -f
 ```
 
 Ctrl+C is used to exit from log inspection (you will be returned to the terminal).
- 
+
 To stop containers, execute following:
 
 ```
@@ -94,20 +98,20 @@ The TRUE Connector will use two protocols (http and https) as described by the D
 It will expose the following endpoints:
 
 ```
-/proxy 
+/proxy
 ```
 
 to receive data incoming request, and based on received request, forward request to Execution Core Connector (the P endpoint in the above picture)
 
-``` 
-/data 
+```
+/data
 ```
 
 to receive data (IDS Message) from a sender connector (the B endpoint in the above picture)
 Furthermore, just for testing it will expose (http and https):
 
 ```
-/about/version 
+/about/version
 ```
 
 returns business logic version .
@@ -135,7 +139,7 @@ In order to set different values for connector, based on connector role (Data Co
 
 ```
 ecc_resources_consumer/application-docker.properties
-or 
+or
 ecc_resources_provider/application-docker.properties
 ```
 
@@ -166,7 +170,7 @@ With default configuration, you can use following curl command, to get data from
 			"catalog.offers.0.resourceEndpoints.path":"/pet2"
 			}
 	}'
-	
+
 </details>
 
 *NOTE*: even that this curl command is exported from Postman, it is noticed several times, that when you try to import it back in Postman, there are some problems during this process, which results in omitting request body, and then request fill fail - cannot find body to create request.</br>
@@ -180,7 +184,7 @@ Be sure to use correct configuration/ports for sender and receiver Data App and 
 Default values:
 
 ```
-DataApp URL: https://localhost:8084/proxy 
+DataApp URL: https://localhost:8084/proxy
 "Forward-To": "https://ecc-porvider:8889/data",
 ```
 
@@ -193,7 +197,7 @@ DataApp URL: https://localhost:8084/proxy
 "Forward-To-Internal": "wss://ecc-consumer:8887",
 ```
 
-For IDSCPv2: 
+For IDSCPv2:
 
 Follow the REST endpoint or WS examples, put the server hostname/ip address in the Forward-To header (*wss/https://{RECEIVER_IP_ADDRESS/Hostname}:{WS_PUBLIC_PORT}*).
 * **AISECv2** put the certificates (keyStore and trustStore) in the *cert* folder,edit related settings (*IDSCP2 AISEC DAPS settings* section in env file)
@@ -332,13 +336,13 @@ The TRUE Connector is able to interact with the following Identity Providers:
 For each of 3 supported identity providers, you need to obtain certificate, in order to be able to get JWToken from DAPS server. Certificate needs to be copied into *ecc_cert* folder and modify *DAPS_KEYSTORE_NAME*, *DAPS_KEYSTORE_PASSWORD* and
 *DAPS_KEYSTORE_ALIAS* in *.env* file.
 
-* **AISECv1** additional step: edit *application-docker.properties* and modify 
-	*application.dapsVersion=v1* and 
+* **AISECv1** additional step: edit *application-docker.properties* and modify
+	*application.dapsVersion=v1* and
 	*application.dapsUrl* should point to DAPS v1 server
-* **AISECv2** (default configuration)additional step: edit *application-docker.properties* and modify 
-	*application.dapsVersion=v2* and 
+* **AISECv2** (default configuration)additional step: edit *application-docker.properties* and modify
+	*application.dapsVersion=v2* and
 	*application.dapsUrl* should point to DAPS v2 server
-* **ORBITER** put the certificates (private and public key) in the *ecc_cert* folder, 
+* **ORBITER** put the certificates (private and public key) in the *ecc_cert* folder,
 edit related settings (i.e., *application.daps.orbiter.privateKey*, *application.daps.orbiter.password*) and set the *application.dapsVersion* (in the *application-docker.properties*) to *orbiter*
 *application.dapsUrl* should point to Orbiter IDP server
 
@@ -421,7 +425,7 @@ application.isEnabledClearingHouse=true
 Information on how TRUE Connector can interact with Broker, can be found on following link [Broker](BROKER.md)
 
 ### Usage Control <a name="usagecontrol"></a>
-The TRUE Connector integrates the [Fraunhofer MyData Framework](https://www.mydata-control.de/) for implementing the Usage Control. Details about the PMP and PEP components can be found [here](doc/USAGE_CONTROL_RULES.md). 
+The TRUE Connector integrates the [Fraunhofer MyData Framework](https://www.mydata-control.de/) for implementing the Usage Control. Details about the PMP and PEP components can be found [here](doc/USAGE_CONTROL_RULES.md).
 
 Since Usage Control is disabled by default, in order to enable it, set following property to true:
 
@@ -432,8 +436,8 @@ application.isEnabledUsageControl=true
 
 ## Contract Negotiation - simple flow <a name="contractnegotiation"></a>
 
-For simple contract negotiation flow, with ContractAgreement read from file, please check following link
-[Data App Contract Negotiation](https://github.com/Engineering-Research-and-Development/market4.0-data_app_test_BE/blob/master/README.md#markdown-header-Contract-Negotiation-simple-flow) 
+Usage Control is disabled by default.
+If you want to enable it (mandatory for contract negotiation), please check ["Enabling usage control"](#usagecontrol).
 
 If mandatory, for other connectors, you can perform contract negotiation with other connector (not TRUE Connector) or with TRUE Connector. There is default contract offer that will be sent if ContractRequestMessage is received. It will allow consuming of resource in year 2021.
 
@@ -442,11 +446,36 @@ If you do not want to do contract negotiation, and you are using TRUE Connector 
 ```
 http://localhost:9553/swagger-ui.html#/odrl-policy-controller
 ```
-In POST request, upload policy from [here](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app/blob/master/src/main/resources/policy-examples/0.0.3/1%20restrict-access-interval.json)
+In POST request, upload policy from [here](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app/blob/master/src/main/resources/policy-examples/0.0.3/1%20restrict-access-interval.json).
 
 Assuming you are running docker instance on local machine. If not, please update hostname to match your scenario.
 
-**Contract Request Message**
+### Get offered resource <a name="get_offered_resource"></a>
+
+In order to get resource that TrueConnector offers, you need to send ArtifactRequestMessage to B-endpoint.
+
+We can query the resource with ArtifactRequestMessage:
+
+<details>
+  <summary>Multipart form - Artifact Request Message</summary>
+
+	curl --location --request POST 'https://localhost:8084/proxy' \
+	--header 'Content-Type: application/json' \
+	--data-raw '{
+		"multipart": "form",
+		"Forward-To": "https://ecc-provider:8889/data",
+		"messageType":"ArtifactRequestMessage",
+		"requestedArtifact": "http://w3id.org/engrd/connector/artifact/1"
+	}'
+
+</details>
+
+If Usage Control is active (in Docker scenario), our access to the resource will be denied. \
+If you recieve other response than RejectionMessage:\
+	1) Check if Usage Control is enabled.\
+	2) Check if there is an old policy existing in /policies folder. You should delete previously presisted *.policy files in this folder and restart Docker.
+
+### Contract Request Message <a name="contract_request_message"></a>
 
 Contract Request Message is initial message sent in Contract Negotiation flow. It can contain requestedElement, if we know what artifact we are requesting, or without it, if we need to get whole self description document, and then analyze it and get element we are looking for.
 
@@ -459,15 +488,107 @@ Contract Request Message is initial message sent in Contract Negotiation flow. I
 	"multipart": "form",
 	"Forward-To": "https://ecc-provider:8889/data",
 	"messageType": "ContractRequestMessage",
-	"requestedElement": "http://w3id.org/engrd/connector/artifact/{id}"
+	"requestedElement": "http://w3id.org/engrd/connector/artifact/1"
 	}'
 
 </details>
 
-**Contract Agreement request**
+If everything goes well, you will get response with body containing "@type" : "ids:ContractAgreementMessage" and payload containing "@type": "ids:ContractAgreement", as shown in example response.
 
-Example of Contract Agreement Message:
-Payload should be ContractAgreement, obtained from previous response (ContractRequestMessage)
+<details>
+  <summary>Contract Request Message - Response example</summary>
+
+	--NfiM38lAW4pGKxK4NRAqufpJFM40wz
+	Content-Disposition: form-data; name="header"
+	Content-Length: 1150
+	Content-Type: application/ld+json
+
+	{
+	  "@context" : {
+		"ids" : "https://w3id.org/idsa/core/",
+		"idsc" : "https://w3id.org/idsa/code/"
+	  },
+	  "@type" : "ids:ContractAgreementMessage",
+	  "@id" : "https://w3id.org/idsa/autogen/contractAgreementMessage/090de85d-455a-493f-b15c-1cab0d7df098",
+	  "ids:securityToken" : {
+		"@type" : "ids:DynamicAttributeToken",
+		"@id" : "https://w3id.org/idsa/autogen/dynamicAttributeToken/dbbca5d5-2d75-464f-9311-6aee63e18299",
+		"ids:tokenValue" : "DummyTokenValue",
+		"ids:tokenFormat" : {
+		  "@id" : "https://w3id.org/idsa/code/JWT"
+		}
+	  },
+	  "ids:issuerConnector" : {
+		"@id" : "https://w3id.org/engrd/connector/provider"
+	  },
+	  "ids:senderAgent" : {
+		"@id" : "https://w3id.org/engrd/connector/provider"
+	  },
+	  "ids:modelVersion" : "4.1.0",
+	  "ids:issued" : {
+		"@value" : "2021-12-03T16:37:54.102Z",
+		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+	  },
+	  "ids:recipientConnector" : [ {
+		"@id" : "http://w3id.org/engrd/connector"
+	  } ],
+	  "ids:recipientAgent" : [ ],
+	  "ids:correlationMessage" : {
+		"@id" : "https://w3id.org/idsa/autogen/contractRequestMessage/b780699f-9e79-4e31-812a-d957b0b5d645"
+	  }
+	}
+	--NfiM38lAW4pGKxK4NRAqufpJFM40wz
+	Content-Disposition: form-data; name="payload"
+	Content-Length: 1244
+
+	{
+	   "@context": {
+		  "ids":"https://w3id.org/idsa/core/",
+		  "idsc" : "https://w3id.org/idsa/code/"
+	   },
+	  "@type": "ids:ContractAgreement",
+	  "@id": "https://w3id.org/idsa/autogen/contract/restrict-access-interval",
+	  "profile": "http://example.com/ids-profile",
+	  "ids:provider": "ecc-provider",
+	  "ids:consumer": "ecc-consumer",
+	  "ids:permission": [{
+		  "ids:target": {
+			  "@id":"http://w3id.org/engrd/connector/artifact/1"
+		   },
+		  "ids:action": [{
+			"@id":"idsc:USE"
+		  }],
+		  "ids:constraint": [{
+			"@type":"ids:Constraint",
+			"ids:leftOperand": { "@id": "idsc:POLICY_EVALUATION_TIME"},
+			"ids:operator": { "@id": "idsc:TEMPORAL_EQUALS"},
+			"ids:rightOperand": {
+			 "@type": "ids:interval",
+			 "@value": {
+				 "ids:begin": {
+				   "@value": "2021-06-15T00:00:00Z",
+				   "@type": "xsd:datetimeStamp"
+				},
+				"ids:end": {
+				   "@value": "2021-12-31T00:00:00Z",
+				   "@type": "xsd:datetimeStamp"
+				}
+			 }
+			},
+			"ids:pipEndpoint": { "@id": "https//example.com/pip/policy_evaluation_time" }
+		  }
+	]
+	  }]
+	}
+	--NfiM38lAW4pGKxK4NRAqufpJFM40wz--
+
+</details>
+
+### Contract Agreement request <a name="contract_agreement_request"></a>
+
+**NOTE**: Payload part is taken as example. Be sure to replace with value you have recieved.
+In the following step of negotiation, we create Contract Agreement Message: in Payload of new message we put (copy & paste) payload (ContractAgreement) obtained from previous response from ContractRequestMessage.\
+**NOTE**: Be sure to check the end date. In current example it is valid until 2021-12-31.
 
 <details>
   <summary>Multipart form - Contract Agreement request</summary>
@@ -475,60 +596,181 @@ Payload should be ContractAgreement, obtained from previous response (ContractRe
 	curl --location --request POST 'https://localhost:8084/proxy' \
 	--header 'Content-Type: application/json' \
 	--data-raw '{
-	"multipart": "form",
-	"Forward-To": "https://ecc-provider:8889/data",
-	"messageType": "ContractAgreementMessage",
-	"payload": {
-		"@context": {
-			"ids": "https://w3id.org/idsa/core/",
-			"idsc": "https://w3id.org/idsa/code/"
-		},
-		"@type": "ids:ContractAgreement",
-		"@id": "https://w3id.org/idsa/autogen/contract/restrict-access-interval-{id}",
-		"profile": "http://example.com/ids-profile",
-		"ids:target": {
-			"@id": "http://w3id.org/engrd/connector/artifact/{id}"
-		},
-		"ids:provider": "http://example.com/party/my-party",
-		"ids:consumer": "http://example.com/party/consumer-party",
-		"ids:permission": [
-			{
-				"ids:action": [
-					{
-						"@id": "idsc:USE"
-					}
-				],
-				"ids:constraint": [
-					{
-						"@type": "ids:Constraint",
-						"ids:leftOperand": "idsc:POLICY_EVALUATION_TIME",
-						"ids:operator": "idsc:TEMPORAL_EQUALS",
-						"ids:rightOperand": {
-							"@type": "ids:interval",
-							"@value": {
-								"ids:begin": {
-									"@value": "2021-03-01T00:00:00Z",
-									"@type": "xsd:datetimeStamp"
-								},
-								"ids:end": {
-									"@value": "2021-03-31T00:00:00Z",
-									"@type": "xsd:datetimeStamp"
-								}
+		"multipart": "form",
+		"Forward-To": "https://ecc-provider:8889/data",
+		"messageType": "ContractAgreementMessage",
+		"requestedArtifact": "http://w3id.org/engrd/connector/artifact/1",
+		"payload" : {
+			"@context": {
+				"ids":"https://w3id.org/idsa/core/",
+				"idsc" : "https://w3id.org/idsa/code/"
+			},
+			"@type": "ids:ContractAgreement",
+			"@id": "https://w3id.org/idsa/autogen/contract/restrict-access-interval",
+			"profile": "http://example.com/ids-profile",
+			"ids:provider": "ecc-provider",
+			"ids:consumer": "ecc-consumer",
+			"ids:permission": [{
+				"ids:target": {
+					"@id":"http://w3id.org/engrd/connector/artifact/1"
+				},
+				"ids:action": [{
+					"@id":"idsc:USE"
+				}],
+				"ids:constraint": [{
+					"@type":"ids:Constraint",
+					"ids:leftOperand": {
+						"@id": "idsc:POLICY_EVALUATION_TIME"
+					},
+					"ids:operator": {
+						"@id": "idsc:TEMPORAL_EQUALS"
+					},
+					"ids:rightOperand": {
+						"@type": "ids:interval",
+						"@value": {
+							 "ids:begin": {
+								"@value": "2021-06-15T00:00:00Z",
+								"@type": "xsd:datetimeStamp"
+							},
+							"ids:end": {
+								"@value": "2021-12-31T00:00:00Z",
+								"@type": "xsd:datetimeStamp"
 							}
-						},
-						"ids:pipEndpoint": {
-							"@id": "https//pip.com/policy_evaluation_time"
 						}
+					},
+					"ids:pipEndpoint": {
+						"@id": "https//example.com/pip/policy_evaluation_time"
 					}
-				]
-			}
-		]
-	}
+				}]
+			}]
+		}
 	}'
 
 </details>
 
-When following request is sent, response will be MessageProcessedNotificationMessage, without payload.
+When following request is sent, response will be MessageProcessedNotificationMessage, without payload. This meands that contracts have exchanged and have been uploaded to Usage Control DataApp.\
+You can also check the Usage Control logs that the policy has been updated.
+
+<details>
+  <summary>Contract Request Message - Response example</summary>
+
+	--folW-L7KK2Sr0wN8b-ayPRgRB3QIh6-NC
+	Content-Disposition: form-data; name="header"
+	Content-Length: 1174
+	Content-Type: application/ld+json
+
+	{
+	  "@context" : {
+		"ids" : "https://w3id.org/idsa/core/",
+		"idsc" : "https://w3id.org/idsa/code/"
+	  },
+	  "@type" : "ids:MessageProcessedNotificationMessage",
+	  "@id" : "https://w3id.org/idsa/autogen/messageProcessedNotificationMessage/0fdd95e5-5c40-445c-8a51-96a618efa4a9",
+	  "ids:securityToken" : {
+		"@type" : "ids:DynamicAttributeToken",
+		"@id" : "https://w3id.org/idsa/autogen/dynamicAttributeToken/277438fb-995c-43b0-96c5-84051b4c8150",
+		"ids:tokenValue" : "DummyTokenValue",
+		"ids:tokenFormat" : {
+		  "@id" : "https://w3id.org/idsa/code/JWT"
+		}
+	  },
+	  "ids:issuerConnector" : {
+		"@id" : "https://w3id.org/engrd/connector/provider"
+	  },
+	  "ids:senderAgent" : {
+		"@id" : "https://w3id.org/engrd/connector/provider"
+	  },
+	  "ids:modelVersion" : "4.1.0",
+	  "ids:issued" : {
+		"@value" : "2021-12-03T16:40:27.269Z",
+		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+	  },
+	  "ids:recipientConnector" : [ {
+		"@id" : "http://w3id.org/engrd/connector"
+	  } ],
+	  "ids:recipientAgent" : [ ],
+	  "ids:correlationMessage" : {
+		"@id" : "https://w3id.org/idsa/autogen/contractAgreementMessage/501a66cb-3f63-46f6-be43-61cbde077c8a"
+	  }
+	}
+	--folW-L7KK2Sr0wN8b-ayPRgRB3QIh6-NC--
+
+</details>
+
+### Get offered resource after access is granted <a name="get_offered_resource_granted"></a>
+
+When you have finished negotiation, you can query for resource again to see if we get artifact data.
+
+<details>
+  <summary>Multipart Form - Artifact Request Message</summary>
+
+	curl --location --request POST 'http://localhost:8084/proxy' \
+	--header 'Content-Type: application/json' \
+	--data-raw '{
+	    "multipart": "form",
+	    "Forward-To": "http://ecc-provider:8889/data",
+	    "messageType":"ArtifactRequestMessage",
+	    "requestedArtifact": "http://w3id.org/engrd/connector/artifact/1"
+	}'
+
+</details>
+
+If you have done everything correctly, you should get response with requested artifact, like in our example.
+Expected response is ArtifactResponseMessage, as header, and in payload - json document containing information about requested resource.
+
+<details>
+  <summary>Artifact Request Message - Example response</summary>
+
+	--aDbue-EGZyC4BcMi99dnOgN5AEfBsGOQrcT
+	Content-Disposition: form-data; name="header"
+	Content-Length: 1148
+	Content-Type: application/ld+json
+
+	{
+	  "@context" : {
+		"ids" : "https://w3id.org/idsa/core/",
+		"idsc" : "https://w3id.org/idsa/code/"
+	  },
+	  "@type" : "ids:ArtifactResponseMessage",
+	  "@id" : "https://w3id.org/idsa/autogen/artifactResponseMessage/05f486c7-c1d3-4073-ae64-adef0de0257b",
+	  "ids:securityToken" : {
+		"@type" : "ids:DynamicAttributeToken",
+		"@id" : "https://w3id.org/idsa/autogen/dynamicAttributeToken/be20ab22-9af0-4c4b-9179-bf5e84147f86",
+		"ids:tokenValue" : "DummyTokenValue",
+		"ids:tokenFormat" : {
+		  "@id" : "https://w3id.org/idsa/code/JWT"
+		}
+	  },
+	  "ids:issuerConnector" : {
+		"@id" : "https://w3id.org/engrd/connector/provider"
+	  },
+	  "ids:senderAgent" : {
+		"@id" : "https://w3id.org/engrd/connector/provider"
+	  },
+	  "ids:modelVersion" : "4.1.0",
+	  "ids:issued" : {
+		"@value" : "2021-12-03T16:41:31.515Z",
+		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+	  },
+	  "ids:recipientConnector" : [ {
+		"@id" : "http://w3id.org/engrd/connector"
+	  } ],
+	  "ids:recipientAgent" : [ ],
+	  "ids:correlationMessage" : {
+		"@id" : "https://w3id.org/idsa/autogen/artifactRequestMessage/dacd7695-cf7c-43af-b80c-54931b803cfc"
+	  }
+	}
+	--aDbue-EGZyC4BcMi99dnOgN5AEfBsGOQrcT
+	Content-Disposition: form-data; name="payload"
+	Content-Length: 160
+
+
+	{"firstName":"John","lastName":"Doe","address":"591  Franklin Street, Pennsylvania","checksum":"ABC123 2021/12/03 17:41:31","dateOfBirth":"2021/12/03 17:41:31"}
+	--aDbue-EGZyC4BcMi99dnOgN5AEfBsGOQrcT--
+
+</details>
+
+The appeariance of "John Doe" signifies the successful exchange with this contract.
 
 
 ## License <a name="license"></a>
