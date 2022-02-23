@@ -31,8 +31,8 @@ The TRUE Connector is composed of three components:
   * [Clearing House](#clearinghouse)
   * [Broker](#broker)
   * [Usage Control](#usagecontrol)
-  * [Self Description API](#selfdescription)
 * [Contract Negotiation](#contractnegotiation)
+* [Self Description API](#selfdescription)
 * [License](#license)
 
 ## Introduction  <a name="introduction"></a>
