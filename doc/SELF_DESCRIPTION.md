@@ -1,4 +1,4 @@
-# Self Description examples
+# Self Description API
 
 The TRUE Connector will search for a Self Description document, by default named self_description.json, provided in the following property:
 
@@ -14,10 +14,6 @@ The Self Description logic can be accessed directly or by using the SwaggerUI
 https://{IPADDRESS}:{SELF_DESCRIPTION_PORT}/swagger-ui/index.html
 ```
 
-and should look like this:
-
-![SwaggerUI Home](doc/Swagger_Home.png?raw=true "SwaggerUI Home")
-
 
 ## Getting the Self Description
 
@@ -27,7 +23,13 @@ In order to get the Self Description you can send the following request:
 curl -X GET "https://{IPADDRESS}:{SELF_DESCRIPTION_PORT}/api/selfDescripton/" -H  "accept: application/json"
 ```
 
-![Self Description Controller](doc/Self_Description_Controller.png?raw=true "Self Description Controller")
+This returns the Self Description document as-is, to get a valid Self Description document please use:
+
+```
+curl -X GET "https://{IPADDRESS}:{SELF_DESCRIPTION_PORT}/" -H  "accept: application/json"
+```
+
+Which removes all properties that are not properly filled.
 
 The response should be something like this:
 
@@ -318,7 +320,6 @@ curl -X 'POST' \
 '
 ```
 
-![Offered Resource Controller](doc/Offered_Resource_Controller.png?raw=true "Offered Resource Controller")
 
 The response should be the self description document.
 
@@ -396,7 +397,6 @@ curl -X 'POST' \
 }'
 ```
 
-![Contract Offer Controller](doc/Contract_Offer_Controller.png?raw=true "Contract Offer Controller")
 
 The response should be the self description document.
 
@@ -474,7 +474,6 @@ curl -X 'POST' \
 }'
 ```
 
-![Contract Offer Controller](doc/Contract_Offer_Controller.png?raw=true "Contract Offer Controller")
 
 The response should be the self description document.
 
@@ -510,6 +509,5 @@ To add a resource representation to existing offered resource use the request:
 
 ```
 
-![Resource Representation Controller](doc/Resource_Representation_Controller.png?raw=true "Resource Representation Controller")
 
 The response should be the self description document.

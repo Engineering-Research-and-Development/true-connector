@@ -31,6 +31,7 @@ The TRUE Connector is composed of three components:
   * [Clearing House](#clearinghouse)
   * [Broker](#broker)
   * [Usage Control](#usagecontrol)
+  * [Self Description API](#selfdescription)
 * [Contract Negotiation](#contractnegotiation)
 * [License](#license)
 
@@ -452,7 +453,7 @@ application.isEnabledUsageControl=true
 For simple contract negotiation flow, with ContractAgreement read from file, please check following link
 [Data App Contract Negotiation](https://github.com/Engineering-Research-and-Development/market4.0-data_app_test_BE/blob/master/README.md#markdown-header-Contract-Negotiation-simple-flow) 
 
-## Self Description
+## Self Description API <a name="selfdescription"></a>
 
 To manage your Self Description Document please check following [link](doc/SELF_DESCRIPTION.md)
 
