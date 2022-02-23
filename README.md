@@ -435,7 +435,7 @@ application.isEnabledClearingHouse=true
 
 ### Broker <a name="broker"></a>
 
-Information on how TRUE Connector can interact with Broker, can be found on following link [Broker](BROKER.md)
+Information on how TRUE Connector can interact with Broker, can be found on following [link](doc/BROKER.md)
 
 ### Usage Control <a name="usagecontrol"></a>
 The TRUE Connector integrates the [Fraunhofer MyData Framework](https://www.mydata-control.de/) for implementing the Usage Control. Details about the PMP and PEP components can be found [here](doc/USAGE_CONTROL_RULES.md). 
@@ -451,6 +451,10 @@ application.isEnabledUsageControl=true
 
 For simple contract negotiation flow, with ContractAgreement read from file, please check following link
 [Data App Contract Negotiation](https://github.com/Engineering-Research-and-Development/market4.0-data_app_test_BE/blob/master/README.md#markdown-header-Contract-Negotiation-simple-flow) 
+
+## Self Description
+
+To manage your Self Description Document please check following [link](doc/SELF_DESCRIPTION.md)
 
 
 ## License <a name="license"></a>
