@@ -37,6 +37,7 @@ The TRUE Connector is composed of three components:
   * [Contract Request Message](#contract_request_message)
   * [Contract Agreement request](#contract_agreement_request)
   * [Get offered resource after access is granted](#get_offered_resource_granted)
+* [Self Description API](#selfdescription)
 * [License](#license)
 
 ## Introduction  <a name="introduction"></a>
@@ -423,7 +424,7 @@ application.isEnabledClearingHouse=true
 
 ### Broker <a name="broker"></a>
 
-Information on how TRUE Connector can interact with Broker, can be found on following link [Broker](BROKER.md)
+Information on how TRUE Connector can interact with Broker, can be found on following [link](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/BROKER.md)
 
 ### Usage Control <a name="usagecontrol"></a>
 The TRUE Connector integrates the [Fraunhofer MyData Framework](https://www.mydata-control.de/) for implementing the Usage Control. Details about the PMP and PEP components can be found [here](doc/USAGE_CONTROL_RULES.md).
@@ -1020,6 +1021,10 @@ Expected response is ArtifactResponseMessage, as header, and in payload - json d
 </details>
 
 The appeariance of "John Doe" signifies the successful exchange with this contract.
+
+## Self Description API <a name="selfdescription"></a>
+
+To manage your Self Description Document please check following [link](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/SELF_DESCRIPTION.md)
 
 
 ## License <a name="license"></a>
