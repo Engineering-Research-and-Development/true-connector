@@ -6,7 +6,7 @@
 TrueConnector B-endpoint, receiving POST requests, for handling IDS Messages is reachable at following address:
 
 ```
-http://193.109.207.194/eccb/data
+https://136.243.156.113:8889/data
 
 ```
 
@@ -15,11 +15,9 @@ Configuration used for communication is multipart-form with HTTP.
 SelfDescritpion document can be reached at:
 
 ```
-http://193.109.207.194/sd/
+https://136.243.156.113:8090
 
 ```
-
-**NOTE:** this URL for SelfDescription, is only for this use case, restrictions regarding environment we have deployed TRUEConnector, and not serving on the root of the Connector.
 
 Following SelfDescription document offers several resource, with id - *http://w3id.org/engrd/connector/artifact/{name}*
 
@@ -51,7 +49,7 @@ If you have trustsore configured, you can configure it via following properties:
 
 ```
  TRUSTORE_NAME={truststore_file}
- TRUSTORE_PASSWORD={trustire_password}
+ TRUSTORE_PASSWORD={trustore_password}
 
 ```
 
@@ -69,7 +67,7 @@ TRUSTORE_NAME=
 TRUE Connector will be deployed in our environment, with public accessible address as Data Provider.
 
 ```
-http://193.109.207.194/eccb/data
+https://136.243.156.113:8889/data
 ```
 
 
@@ -102,11 +100,11 @@ Our simple/sample DataApp exposes "proxy" endpoint. This endpoint, available at 
 Example for one of message types looks like:
 
 ```
-	curl --location --request POST 'http://localhost:8084/proxy' \
+	curl --location --request POST 'https://localhost:8084/proxy' \
 	--header 'Content-Type: application/json' \
 	--data-raw '{
 	    "multipart": "form",
-	    "Forward-To": "http://193.109.207.194/eccb/data",
+	    "Forward-To": "https://136.243.156.113:8889/data",
 	    "messageType":"ArtifactRequestMessage",
 	    "requestedArtifact": "http://w3id.org/engrd/connector/artifact/{id}"   
 	}'
@@ -130,11 +128,11 @@ In POST request, upload policy from [here](https://github.com/Engineering-Resear
 <details>
   <summary>Multipart form - Contract Request Message</summary>
 
-	curl --location --request POST 'http://localhost:8084/proxy' \
+	curl --location --request POST 'https://localhost:8084/proxy' \
 	--header 'Content-Type: application/json' \
 	--data-raw '{
 	"multipart": "form",
-	"Forward-To": "http://193.109.207.194/eccb/data",
+	"Forward-To": "https://136.243.156.113:8889/data",
 	"messageType": "ContractRequestMessage",
 	"requestedArtifact": "http://w3id.org/engrd/connector/artifact/{id}"
 	}'
@@ -149,11 +147,11 @@ Payload should be ContractAgreement, obtained from previous response (ContractRe
 <details>
   <summary>Multipart form - Contract Agreement request</summary>
 
-	curl --location --request POST 'http://localhost:8084/proxy' \
+	curl --location --request POST 'https://localhost:8084/proxy' \
 	--header 'Content-Type: application/json' \
 	--data-raw '{
 	"multipart": "form",
-	"Forward-To": "http://193.109.207.194/eccb/data",
+	"Forward-To": "https://136.243.156.113:8889/data",
 	"messageType": "ContractAgreementMessage",
 	"payload": {
 		"@context": {
@@ -218,11 +216,11 @@ In order to get resource that TrueConnector offers, you need to send *ArtifactRe
 <details>
   <summary>Multipart Form - Artifact Request Message</summary>
 
-	curl --location --request POST 'http://localhost:8084/proxy' \
+	curl --location --request POST 'https://localhost:8084/proxy' \
 	--header 'Content-Type: application/json' \
 	--data-raw '{
 	    "multipart": "form",
-	    "Forward-To": "http://193.109.207.194/eccb/data",
+	    "Forward-To": "https://136.243.156.113:8889/data",
 	    "messageType":"ArtifactRequestMessage",
 	    "requestedArtifact": "http://w3id.org/engrd/connector/artifact/{id}"   
 	}'
