@@ -134,7 +134,7 @@ In POST request, upload policy from [here](https://github.com/Engineering-Resear
 	"multipart": "form",
 	"Forward-To": "https://136.243.156.113:8889/data",
 	"messageType": "ContractRequestMessage",
-	"requestedArtifact": "http://w3id.org/engrd/connector/artifact/{id}"
+	"requestedElement": "http://w3id.org/engrd/connector/artifact/{id}"
 	}'
 
 </details>
