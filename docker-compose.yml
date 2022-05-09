@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   ecc-provider: 
-    image: rdlabengpa/ids_execution_core_container:v1.9.0
+    image: rdlabengpa/ids_execution_core_container:v1.9.3
     ports:
       - "${PROVIDER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
       - 8887:8887  #Exposed port for receiving data from the Data APP
@@ -41,7 +41,7 @@ services:
       - "ecc-provider:172.17.0.1"
 
   uc-dataapp-provider:
-    image: rdlabengpa/ids_uc_data_app:v0.0.4
+    image: rdlabengpa/ids_uc_data_app:v0.0.6
     environment:
       - TZ=Europe/Rome 
     ports:
@@ -49,9 +49,10 @@ services:
       - "8043:43"
     volumes:
       - ./policies:/policies
+      - ./uc-dataapp_resources:/config
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:pf_q3_2021
+    image: rdlabengpa/ids_be_data_app:v0.1.2
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - DATA_APP_MULTIPART=${PROVIDER_MULTIPART_EDGE}
@@ -60,6 +61,8 @@ services:
        - KEY_PASSWORD=${KEY_PASSWORD}
        - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
        - ALIAS=${ALIAS}
+       - ECC_HOSTNAME=ecc-provider
+       - ECC_PORT=8889
        - TZ=Europe/Rome 
     ports:
       - "8083:8083"
@@ -70,10 +73,10 @@ services:
       - ./ecc_cert:/cert
 
   ecc-consumer: 
-    image: rdlabengpa/ids_execution_core_container:v1.9.0
+    image: rdlabengpa/ids_execution_core_container:v1.9.3
     ports:
       - "${CONSUMER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
-      - 8891:8889  #Exposed port for receiving data from another connector (REST)
+      - 8890:8889  #Exposed port for receiving data from another connector (REST)
       - 8087:8086  #Exposed port for receiving data from another connector (WS)
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
@@ -109,7 +112,7 @@ services:
       - "ecc-consumer:172.17.0.1"
 
   uc-dataapp-consumer:
-    image: rdlabengpa/ids_uc_data_app:v0.0.4
+    image: rdlabengpa/ids_uc_data_app:v0.0.6
     environment:
       - TZ=Europe/Rome  
     ports:
@@ -117,9 +120,10 @@ services:
       - "8044:43"
     volumes:
       - ./policies:/policies
+      - ./uc-dataapp_resources:/config
 
   be-dataapp-consumer:
-    image:  rdlabengpa/ids_be_data_app:pf_q3_2021
+    image:  rdlabengpa/ids_be_data_app:v0.1.2
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - DATA_APP_MULTIPART=${CONSUMER_MULTIPART_EDGE}
@@ -128,6 +132,8 @@ services:
        - KEY_PASSWORD=${KEY_PASSWORD}
        - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
        - ALIAS=${ALIAS}
+       - ECC_HOSTNAME=ecc-consumer
+       - ECC_PORT=8887
        - TZ=Europe/Rome                
     ports:
       - "8084:8083"
