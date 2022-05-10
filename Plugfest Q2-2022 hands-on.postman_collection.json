@@ -6,8 +6,487 @@
 	},
 	"item": [
 		{
-			"name": "Contract Negotiation",
+			"name": "Local",
 			"item": [
+				{
+					"name": "Contract Negotiation Local",
+					"item": [
+						{
+							"name": "DescriptionRequestMessage",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "fizz",
+										"value": "buzz"
+									},
+									{
+										"key": "Content-Type",
+										"value": "text/plain",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"multipart\": \"form\",\n    \"Forward-To\": \"https://localhost:8889/data\",\n\t\"messageType\": \"DescriptionRequestMessage\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:8084/proxy",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"proxy"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ContractRequestMessage",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"multipart\": \"form\",\n\"Forward-To\": \"https://localhost:8889/data\",\n\"messageType\": \"ContractRequestMessage\",\n\"requestedElement\": \"http://w3id.org/engrd/connector/artifact/david\"\n}"
+								},
+								"url": {
+									"raw": "https://localhost:8084/proxy",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"proxy"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ContractAgreementMessage",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"multipart\": \"form\",\n\"Forward-To\": \"https://localhost:8889/data\",\n\"messageType\": \"ContractAgreementMessage\",\n\"payload\": {\n\t\"@context\": {\n\t\t\"ids\": \"https://w3id.org/idsa/core/\",\n\t\t\"idsc\": \"https://w3id.org/idsa/code/\"\n\t},\n\t\"@type\": \"ids:ContractAgreement\",\n\t\"@id\": \"https://w3id.org/idsa/autogen/contract/restrict-access-interval-david\",\n\t\"profile\": \"http://example.com/ids-profile\",\n\t\"ids:target\": {\n\t\t\"@id\": \"http://w3id.org/engrd/connector/artifact/david\"\n\t},\n\t\"ids:provider\": \"http://example.com/party/my-party\",\n\t\"ids:consumer\": \"http://example.com/party/consumer-party\",\n\t\"ids:permission\": [\n\t\t{\n\t\t\t\"ids:action\": [\n\t\t\t\t{\n\t\t\t\t\t\"@id\": \"idsc:USE\"\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"ids:constraint\": [\n\t\t\t\t{\n\t\t\t\t\t\"@type\": \"ids:Constraint\",\n\t\t\t\t\t\"ids:leftOperand\": \"idsc:POLICY_EVALUATION_TIME\",\n\t\t\t\t\t\"ids:operator\": \"idsc:TEMPORAL_EQUALS\",\n\t\t\t\t\t\"ids:rightOperand\": {\n\t\t\t\t\t\t\"@type\": \"ids:interval\",\n\t\t\t\t\t\t\"@value\": {\n\t\t\t\t\t\t\t\"ids:begin\": {\n\t\t\t\t\t\t\t\t\"@value\": \"2022-05-01T00:00:00Z\",\n\t\t\t\t\t\t\t\t\"@type\": \"xsd:datetimeStamp\"\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\"ids:end\": {\n\t\t\t\t\t\t\t\t\"@value\": \"2022-05-31T00:00:00Z\",\n\t\t\t\t\t\t\t\t\"@type\": \"xsd:datetimeStamp\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t\"ids:pipEndpoint\": {\n\t\t\t\t\t\t\"@id\": \"https//pip.com/policy_evaluation_time\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}\n}"
+								},
+								"url": {
+									"raw": "https://localhost:8084/proxy",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"proxy"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ArtifactRequestMessage",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Forward-To",
+										"value": "https://localhost:8889/data",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "header",
+											"value": "{\n    \"@context\": {\n        \"ids\": \"https://w3id.org/idsa/core/\",\n        \"idsc\": \"https://w3id.org/idsa/code/\"\n    },\n    \"@type\": \"ids:ArtifactRequestMessage\",\n    \"@id\": \"https://w3id.org/idsa/autogen/artifactRequestMessage/1ad40bbb-c79a-41a9-b19f-b6e47d6cbce7\",\n    \"ids:requestedArtifact\": {\n        \"@id\": \"http://w3id.org/engrd/connector/artifact/david\"\n    },\n    \"ids:issuerConnector\": {\n        \"@id\": \"http://w3id.org/engrd/connector\"\n    },\n    \"ids:modelVersion\": \"4.1.0\",\n    \"ids:issued\": {\n        \"@value\": \"2022-05-09T23:01:43.267Z\",\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\n    },\n    \"ids:correlationMessage\": {\n        \"@id\": \"http://w3id.org/artifactRequestMessage/1a421b8c-3407-44a8-aeb9-253f145c869a\"\n    },\n    \"ids:recipientConnector\": [],\n    \"ids:senderAgent\": {\n        \"@id\": \"http://sender.agent/sender\"\n    },\n    \"ids:recipientAgent\": [],\n    \"ids:securityToken\": {\n        \"@type\": \"ids:DynamicAttributeToken\",\n        \"@id\": \"https://w3id.org/idsa/autogen/dynamicAttributeToken/f65aa96a-3364-4e4d-8fd4-26db64f86a61\",\n        \"ids:tokenValue\": \"eyJ0eXAiOiJhdCtqd3QiLCJraWQiOiJUQ1VGZUNOYXphbEtIZzlLenJ6TElBelJXVE1ERFdTYTdMY005WndITXlvIiwiYWxnIjoiUlMyNTYifQ.eyJhdWQiOiJpZHNjOklEU19DT05ORUNUT1JTX0FMTCIsImlzcyI6Imh0dHBzOi8vZGFwcy5haXNlYy5mcmF1bmhvZmVyLmRlIiwic3ViIjoiOEI6REU6RUU6NEM6N0M6MkQ6N0I6OTM6NTE6MkY6RkQ6QTA6RDM6NTM6NEM6NTg6Q0E6OUQ6NzA6QzI6a2V5aWQ6Q0I6OEM6Qzc6QjY6ODU6Nzk6QTg6MjM6QTY6Q0I6MTU6QUI6MTc6NTA6MkY6RTY6NjU6NDM6NUQ6RTgiLCJuYmYiOjE2NTIxMzg0NzQsImlhdCI6MTY1MjEzODQ3NCwianRpIjoiTkRJMk9EZzBPVEl5TmpNMU16TXpNVGc0T1E9PSIsImV4cCI6MTY1MjE0MjA3NCwiY2xpZW50X2lkIjoiOEI6REU6RUU6NEM6N0M6MkQ6N0I6OTM6NTE6MkY6RkQ6QTA6RDM6NTM6NEM6NTg6Q0E6OUQ6NzA6QzI6a2V5aWQ6Q0I6OEM6Qzc6QjY6ODU6Nzk6QTg6MjM6QTY6Q0I6MTU6QUI6MTc6NTA6MkY6RTY6NjU6NDM6NUQ6RTgiLCJzZWN1cml0eVByb2ZpbGUiOiJpZHNjOkJBU0VfU0VDVVJJVFlfUFJPRklMRSIsInJlZmVycmluZ0Nvbm5lY3RvciI6Imh0dHA6Ly9wbHVnZmVzdDIwMjEuMDgubG9jYWxob3N0LmRlbW8iLCJAdHlwZSI6ImlkczpEYXRQYXlsb2FkIiwiQGNvbnRleHQiOiJodHRwczovL3czaWQub3JnL2lkc2EvY29udGV4dHMvY29udGV4dC5qc29ubGQiLCJ0cmFuc3BvcnRDZXJ0c1NoYTI1NiI6ImU0ZmEzYzVmOTA1Yjk5MDY2ZmQ3YTMyNzQyNzY3OTU2NDU4ZTIzMjA4YzdhMDEyMTBkNDI1M2I4OGU0MmZkMWYiLCJzY29wZXMiOlsiaWRzYzpJRFNfQ09OTkVDVE9SX0FUVFJJQlVURVNfQUxMIl19.EpYCM_JrTLremMggSj5ww2wJX_CiuzrGbwmxvVYJ1dYlJMniY6DM1-Ds6578nrAkhRyI_ACCsz-j6BnlxYXv8EEQGzVQD1SYuoOhCG0sW3mcVoK5EFYW7Ymy709AQMLSa9zpExM9XK74-Qq2l15WDAjF4wrfhBrTAfkqhekoyw5ZIwYthB34IWbS3I2-chJDker5-LSbKYa9fy11xuLPHRru-QBlNCtLeAZXophv9fTj6YFIqZDYOTDXTnikAT-9PfKYJJbxddwtzf0kkhXB0NBnAHgj9x2Z1NoQVqyV1kERCVU0C4PRQEdF15-cueVBPzp1OGXR6JsdYRcbiOLK9g\",\n        \"ids:tokenFormat\": {\n            \"@id\": \"https://w3id.org/idsa/code/JWT\"\n        }\n    }\n}\n",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://localhost:8887/incoming-data-app/multipartMessageBodyFormData",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8887",
+									"path": [
+										"incoming-data-app",
+										"multipartMessageBodyFormData"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ArtifactRequestMessage Example",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "fizz",
+										"value": "buzz"
+									},
+									{
+										"key": "Content-Type",
+										"value": "text/plain",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"multipart\": \"form\",\n    \"Forward-To\": \"https://localhost:8889/data\",\n\t\"messageType\": \"ArtifactRequestMessage\",\n\t\"requestedArtifact\" : \"http://w3id.org/engrd/connector/artifact/david\",\n\t\"payload\" : {\n\t\t\"catalog.offers.0.resourceEndpoints.path\":\"/pet2\"\n\t\t}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:8084/proxy",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"proxy"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Self Description",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:8090",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8090"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DescriptionRequestMessage",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "fizz",
+								"value": "buzz"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/plain",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"multipart\": \"form\",\n    \"Forward-To\": \"https://localhost:8889/data\",\n\t\"messageType\": \"DescriptionRequestMessage\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:8084/proxy",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"proxy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Demo Artifact/1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "fizz",
+								"value": "buzz"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"multipart\": \"form\",\n    \"Forward-To\": \"https://localhost:8889/data\",\n\t\"messageType\": \"ArtifactRequestMessage\",\n\t\"requestedArtifact\" : \"http://w3id.org/engrd/connector/artifact/1\",\n\t\"payload\" : {\n\t\t\"catalog.offers.0.resourceEndpoints.path\":\"/pet2\"\n\t\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:8084/proxy",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"proxy"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Remote",
+			"item": [
+				{
+					"name": "Contract Negotiation Remote",
+					"item": [
+						{
+							"name": "DescriptionRequestMessage",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "fizz",
+										"value": "buzz"
+									},
+									{
+										"key": "Content-Type",
+										"value": "text/plain",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"multipart\": \"form\",\n    \"Forward-To\": \"https://136.243.156.113:8889/data\",\n\t\"messageType\": \"DescriptionRequestMessage\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:8084/proxy",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"proxy"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ContractRequestMessage",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"multipart\": \"form\",\n\"Forward-To\": \"https://136.243.156.113:8889/data\",\n\"messageType\": \"ContractRequestMessage\",\n\"requestedElement\": \"http://w3id.org/engrd/connector/artifact/david\"\n}"
+								},
+								"url": {
+									"raw": "https://localhost:8084/proxy",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"proxy"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ContractAgreementMessage",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"multipart\": \"form\",\n\"Forward-To\": \"https://136.243.156.113:8889/data\",\n\"messageType\": \"ContractAgreementMessage\",\n\"payload\": {\n\t\"@context\": {\n\t\t\"ids\": \"https://w3id.org/idsa/core/\",\n\t\t\"idsc\": \"https://w3id.org/idsa/code/\"\n\t},\n\t\"@type\": \"ids:ContractAgreement\",\n\t\"@id\": \"https://w3id.org/idsa/autogen/contract/restrict-access-interval-david\",\n\t\"profile\": \"http://example.com/ids-profile\",\n\t\"ids:target\": {\n\t\t\"@id\": \"http://w3id.org/engrd/connector/artifact/david\"\n\t},\n\t\"ids:provider\": \"http://example.com/party/my-party\",\n\t\"ids:consumer\": \"http://example.com/party/consumer-party\",\n\t\"ids:permission\": [\n\t\t{\n\t\t\t\"ids:action\": [\n\t\t\t\t{\n\t\t\t\t\t\"@id\": \"idsc:USE\"\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"ids:constraint\": [\n\t\t\t\t{\n\t\t\t\t\t\"@type\": \"ids:Constraint\",\n\t\t\t\t\t\"ids:leftOperand\": \"idsc:POLICY_EVALUATION_TIME\",\n\t\t\t\t\t\"ids:operator\": \"idsc:TEMPORAL_EQUALS\",\n\t\t\t\t\t\"ids:rightOperand\": {\n\t\t\t\t\t\t\"@type\": \"ids:interval\",\n\t\t\t\t\t\t\"@value\": {\n\t\t\t\t\t\t\t\"ids:begin\": {\n\t\t\t\t\t\t\t\t\"@value\": \"2022-05-01T00:00:00Z\",\n\t\t\t\t\t\t\t\t\"@type\": \"xsd:datetimeStamp\"\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\"ids:end\": {\n\t\t\t\t\t\t\t\t\"@value\": \"2022-05-31T00:00:00Z\",\n\t\t\t\t\t\t\t\t\"@type\": \"xsd:datetimeStamp\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t\"ids:pipEndpoint\": {\n\t\t\t\t\t\t\"@id\": \"https//pip.com/policy_evaluation_time\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}\n}"
+								},
+								"url": {
+									"raw": "https://localhost:8084/proxy",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"proxy"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ArtifactRequestMessage",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Forward-To",
+										"value": "https://136.243.156.113:8889/data",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "header",
+											"value": "{\n    \"@context\": {\n        \"ids\": \"https://w3id.org/idsa/core/\",\n        \"idsc\": \"https://w3id.org/idsa/code/\"\n    },\n    \"@type\": \"ids:ArtifactRequestMessage\",\n    \"@id\": \"https://w3id.org/idsa/autogen/artifactRequestMessage/1ad40bbb-c79a-41a9-b19f-b6e47d6cbce7\",\n    \"ids:requestedArtifact\": {\n        \"@id\": \"http://w3id.org/engrd/connector/artifact/david\"\n    },\n    \"ids:issuerConnector\": {\n        \"@id\": \"http://w3id.org/engrd/connector\"\n    },\n    \"ids:modelVersion\": \"4.1.0\",\n    \"ids:issued\": {\n        \"@value\": \"2022-05-09T23:01:43.267Z\",\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\n    },\n    \"ids:correlationMessage\": {\n        \"@id\": \"http://w3id.org/artifactRequestMessage/1a421b8c-3407-44a8-aeb9-253f145c869a\"\n    },\n    \"ids:recipientConnector\": [],\n    \"ids:senderAgent\": {\n        \"@id\": \"http://sender.agent/sender\"\n    },\n    \"ids:recipientAgent\": [],\n    \"ids:securityToken\": {\n        \"@type\": \"ids:DynamicAttributeToken\",\n        \"@id\": \"https://w3id.org/idsa/autogen/dynamicAttributeToken/f65aa96a-3364-4e4d-8fd4-26db64f86a61\",\n        \"ids:tokenValue\": \"eyJ0eXAiOiJhdCtqd3QiLCJraWQiOiJUQ1VGZUNOYXphbEtIZzlLenJ6TElBelJXVE1ERFdTYTdMY005WndITXlvIiwiYWxnIjoiUlMyNTYifQ.eyJhdWQiOiJpZHNjOklEU19DT05ORUNUT1JTX0FMTCIsImlzcyI6Imh0dHBzOi8vZGFwcy5haXNlYy5mcmF1bmhvZmVyLmRlIiwic3ViIjoiOEI6REU6RUU6NEM6N0M6MkQ6N0I6OTM6NTE6MkY6RkQ6QTA6RDM6NTM6NEM6NTg6Q0E6OUQ6NzA6QzI6a2V5aWQ6Q0I6OEM6Qzc6QjY6ODU6Nzk6QTg6MjM6QTY6Q0I6MTU6QUI6MTc6NTA6MkY6RTY6NjU6NDM6NUQ6RTgiLCJuYmYiOjE2NTIxMzg0NzQsImlhdCI6MTY1MjEzODQ3NCwianRpIjoiTkRJMk9EZzBPVEl5TmpNMU16TXpNVGc0T1E9PSIsImV4cCI6MTY1MjE0MjA3NCwiY2xpZW50X2lkIjoiOEI6REU6RUU6NEM6N0M6MkQ6N0I6OTM6NTE6MkY6RkQ6QTA6RDM6NTM6NEM6NTg6Q0E6OUQ6NzA6QzI6a2V5aWQ6Q0I6OEM6Qzc6QjY6ODU6Nzk6QTg6MjM6QTY6Q0I6MTU6QUI6MTc6NTA6MkY6RTY6NjU6NDM6NUQ6RTgiLCJzZWN1cml0eVByb2ZpbGUiOiJpZHNjOkJBU0VfU0VDVVJJVFlfUFJPRklMRSIsInJlZmVycmluZ0Nvbm5lY3RvciI6Imh0dHA6Ly9wbHVnZmVzdDIwMjEuMDgubG9jYWxob3N0LmRlbW8iLCJAdHlwZSI6ImlkczpEYXRQYXlsb2FkIiwiQGNvbnRleHQiOiJodHRwczovL3czaWQub3JnL2lkc2EvY29udGV4dHMvY29udGV4dC5qc29ubGQiLCJ0cmFuc3BvcnRDZXJ0c1NoYTI1NiI6ImU0ZmEzYzVmOTA1Yjk5MDY2ZmQ3YTMyNzQyNzY3OTU2NDU4ZTIzMjA4YzdhMDEyMTBkNDI1M2I4OGU0MmZkMWYiLCJzY29wZXMiOlsiaWRzYzpJRFNfQ09OTkVDVE9SX0FUVFJJQlVURVNfQUxMIl19.EpYCM_JrTLremMggSj5ww2wJX_CiuzrGbwmxvVYJ1dYlJMniY6DM1-Ds6578nrAkhRyI_ACCsz-j6BnlxYXv8EEQGzVQD1SYuoOhCG0sW3mcVoK5EFYW7Ymy709AQMLSa9zpExM9XK74-Qq2l15WDAjF4wrfhBrTAfkqhekoyw5ZIwYthB34IWbS3I2-chJDker5-LSbKYa9fy11xuLPHRru-QBlNCtLeAZXophv9fTj6YFIqZDYOTDXTnikAT-9PfKYJJbxddwtzf0kkhXB0NBnAHgj9x2Z1NoQVqyV1kERCVU0C4PRQEdF15-cueVBPzp1OGXR6JsdYRcbiOLK9g\",\n        \"ids:tokenFormat\": {\n            \"@id\": \"https://w3id.org/idsa/code/JWT\"\n        }\n    }\n}\n",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://localhost:8887/incoming-data-app/multipartMessageBodyFormData",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8887",
+									"path": [
+										"incoming-data-app",
+										"multipartMessageBodyFormData"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ArtifactRequestMessage Example",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "fizz",
+										"value": "buzz"
+									},
+									{
+										"key": "Content-Type",
+										"value": "text/plain",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"multipart\": \"form\",\n    \"Forward-To\": \"https://136.243.156.113:8889/data\",\n\t\"messageType\": \"ArtifactRequestMessage\",\n\t\"requestedArtifact\" : \"http://w3id.org/engrd/connector/artifact/david\",\n\t\"payload\" : {\n\t\t\"catalog.offers.0.resourceEndpoints.path\":\"/pet2\"\n\t\t}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:8084/proxy",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8084",
+									"path": [
+										"proxy"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Self Description",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://136.243.156.113:8090",
+							"protocol": "https",
+							"host": [
+								"136",
+								"243",
+								"156",
+								"113"
+							],
+							"port": "8090"
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "DescriptionRequestMessage",
 					"protocolProfileBehavior": {
@@ -53,99 +532,7 @@
 					"response": []
 				},
 				{
-					"name": "ContractRequestMessage",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\"multipart\": \"form\",\n\"Forward-To\": \"https://136.243.156.113:8889/data\",\n\"messageType\": \"ContractRequestMessage\",\n\"requestedElement\": \"http://w3id.org/engrd/connector/artifact/david\"\n}"
-						},
-						"url": {
-							"raw": "https://localhost:8084/proxy",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "8084",
-							"path": [
-								"proxy"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ContractAgreementMessage",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\"multipart\": \"form\",\n\"Forward-To\": \"https://136.243.156.113:8889/data\",\n\"messageType\": \"ContractAgreementMessage\",\n\"payload\": {\n\t\"@context\": {\n\t\t\"ids\": \"https://w3id.org/idsa/core/\",\n\t\t\"idsc\": \"https://w3id.org/idsa/code/\"\n\t},\n\t\"@type\": \"ids:ContractAgreement\",\n\t\"@id\": \"https://w3id.org/idsa/autogen/contract/restrict-access-interval-david\",\n\t\"profile\": \"http://example.com/ids-profile\",\n\t\"ids:target\": {\n\t\t\"@id\": \"http://w3id.org/engrd/connector/artifact/david\"\n\t},\n\t\"ids:provider\": \"http://example.com/party/my-party\",\n\t\"ids:consumer\": \"http://example.com/party/consumer-party\",\n\t\"ids:permission\": [\n\t\t{\n\t\t\t\"ids:action\": [\n\t\t\t\t{\n\t\t\t\t\t\"@id\": \"idsc:USE\"\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"ids:constraint\": [\n\t\t\t\t{\n\t\t\t\t\t\"@type\": \"ids:Constraint\",\n\t\t\t\t\t\"ids:leftOperand\": \"idsc:POLICY_EVALUATION_TIME\",\n\t\t\t\t\t\"ids:operator\": \"idsc:TEMPORAL_EQUALS\",\n\t\t\t\t\t\"ids:rightOperand\": {\n\t\t\t\t\t\t\"@type\": \"ids:interval\",\n\t\t\t\t\t\t\"@value\": {\n\t\t\t\t\t\t\t\"ids:begin\": {\n\t\t\t\t\t\t\t\t\"@value\": \"2022-05-01T00:00:00Z\",\n\t\t\t\t\t\t\t\t\"@type\": \"xsd:datetimeStamp\"\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\"ids:end\": {\n\t\t\t\t\t\t\t\t\"@value\": \"2022-05-31T00:00:00Z\",\n\t\t\t\t\t\t\t\t\"@type\": \"xsd:datetimeStamp\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t\"ids:pipEndpoint\": {\n\t\t\t\t\t\t\"@id\": \"https//pip.com/policy_evaluation_time\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\n}\n}"
-						},
-						"url": {
-							"raw": "https://localhost:8084/proxy",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "8084",
-							"path": [
-								"proxy"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ArtifactRequestMessage",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Forward-To",
-								"value": "https://136.243.156.113:8889/data",
-								"type": "default"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "header",
-									"value": "{\n    \"@context\": {\n        \"ids\": \"https://w3id.org/idsa/core/\",\n        \"idsc\": \"https://w3id.org/idsa/code/\"\n    },\n    \"@type\": \"ids:ArtifactRequestMessage\",\n    \"@id\": \"https://w3id.org/idsa/autogen/artifactRequestMessage/1ad40bbb-c79a-41a9-b19f-b6e47d6cbce7\",\n    \"ids:requestedArtifact\": {\n        \"@id\": \"http://w3id.org/engrd/connector/artifact/david\"\n    },\n    \"ids:issuerConnector\": {\n        \"@id\": \"http://w3id.org/engrd/connector\"\n    },\n    \"ids:modelVersion\": \"4.1.0\",\n    \"ids:issued\": {\n        \"@value\": \"2022-05-09T23:01:43.267Z\",\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\n    },\n    \"ids:correlationMessage\": {\n        \"@id\": \"http://w3id.org/artifactRequestMessage/1a421b8c-3407-44a8-aeb9-253f145c869a\"\n    },\n    \"ids:recipientConnector\": [],\n    \"ids:senderAgent\": {\n        \"@id\": \"http://sender.agent/sender\"\n    },\n    \"ids:recipientAgent\": [],\n    \"ids:securityToken\": {\n        \"@type\": \"ids:DynamicAttributeToken\",\n        \"@id\": \"https://w3id.org/idsa/autogen/dynamicAttributeToken/f65aa96a-3364-4e4d-8fd4-26db64f86a61\",\n        \"ids:tokenValue\": \"eyJ0eXAiOiJhdCtqd3QiLCJraWQiOiJUQ1VGZUNOYXphbEtIZzlLenJ6TElBelJXVE1ERFdTYTdMY005WndITXlvIiwiYWxnIjoiUlMyNTYifQ.eyJhdWQiOiJpZHNjOklEU19DT05ORUNUT1JTX0FMTCIsImlzcyI6Imh0dHBzOi8vZGFwcy5haXNlYy5mcmF1bmhvZmVyLmRlIiwic3ViIjoiOEI6REU6RUU6NEM6N0M6MkQ6N0I6OTM6NTE6MkY6RkQ6QTA6RDM6NTM6NEM6NTg6Q0E6OUQ6NzA6QzI6a2V5aWQ6Q0I6OEM6Qzc6QjY6ODU6Nzk6QTg6MjM6QTY6Q0I6MTU6QUI6MTc6NTA6MkY6RTY6NjU6NDM6NUQ6RTgiLCJuYmYiOjE2NTIxMzg0NzQsImlhdCI6MTY1MjEzODQ3NCwianRpIjoiTkRJMk9EZzBPVEl5TmpNMU16TXpNVGc0T1E9PSIsImV4cCI6MTY1MjE0MjA3NCwiY2xpZW50X2lkIjoiOEI6REU6RUU6NEM6N0M6MkQ6N0I6OTM6NTE6MkY6RkQ6QTA6RDM6NTM6NEM6NTg6Q0E6OUQ6NzA6QzI6a2V5aWQ6Q0I6OEM6Qzc6QjY6ODU6Nzk6QTg6MjM6QTY6Q0I6MTU6QUI6MTc6NTA6MkY6RTY6NjU6NDM6NUQ6RTgiLCJzZWN1cml0eVByb2ZpbGUiOiJpZHNjOkJBU0VfU0VDVVJJVFlfUFJPRklMRSIsInJlZmVycmluZ0Nvbm5lY3RvciI6Imh0dHA6Ly9wbHVnZmVzdDIwMjEuMDgubG9jYWxob3N0LmRlbW8iLCJAdHlwZSI6ImlkczpEYXRQYXlsb2FkIiwiQGNvbnRleHQiOiJodHRwczovL3czaWQub3JnL2lkc2EvY29udGV4dHMvY29udGV4dC5qc29ubGQiLCJ0cmFuc3BvcnRDZXJ0c1NoYTI1NiI6ImU0ZmEzYzVmOTA1Yjk5MDY2ZmQ3YTMyNzQyNzY3OTU2NDU4ZTIzMjA4YzdhMDEyMTBkNDI1M2I4OGU0MmZkMWYiLCJzY29wZXMiOlsiaWRzYzpJRFNfQ09OTkVDVE9SX0FUVFJJQlVURVNfQUxMIl19.EpYCM_JrTLremMggSj5ww2wJX_CiuzrGbwmxvVYJ1dYlJMniY6DM1-Ds6578nrAkhRyI_ACCsz-j6BnlxYXv8EEQGzVQD1SYuoOhCG0sW3mcVoK5EFYW7Ymy709AQMLSa9zpExM9XK74-Qq2l15WDAjF4wrfhBrTAfkqhekoyw5ZIwYthB34IWbS3I2-chJDker5-LSbKYa9fy11xuLPHRru-QBlNCtLeAZXophv9fTj6YFIqZDYOTDXTnikAT-9PfKYJJbxddwtzf0kkhXB0NBnAHgj9x2Z1NoQVqyV1kERCVU0C4PRQEdF15-cueVBPzp1OGXR6JsdYRcbiOLK9g\",\n        \"ids:tokenFormat\": {\n            \"@id\": \"https://w3id.org/idsa/code/JWT\"\n        }\n    }\n}\n",
-									"type": "default"
-								}
-							]
-						},
-						"url": {
-							"raw": "https://localhost:8887/incoming-data-app/multipartMessageBodyFormData",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "8887",
-							"path": [
-								"incoming-data-app",
-								"multipartMessageBodyFormData"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ArtifactRequestMessage Example",
+					"name": "Demo Artifact/1",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -155,13 +542,12 @@
 							},
 							{
 								"key": "Content-Type",
-								"value": "text/plain",
-								"disabled": true
+								"value": "text/plain"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"multipart\": \"form\",\n    \"Forward-To\": \"https://136.243.156.113:8889/data\",\n\t\"messageType\": \"ArtifactRequestMessage\",\n\t\"requestedArtifact\" : \"http://w3id.org/engrd/connector/artifact/david\",\n\t\"payload\" : {\n\t\t\"catalog.offers.0.resourceEndpoints.path\":\"/pet2\"\n\t\t}\n}",
+							"raw": "{\n    \"multipart\": \"form\",\n    \"Forward-To\": \"https://136.243.156.113:8889/data\",\n\t\"messageType\": \"ArtifactRequestMessage\",\n\t\"requestedArtifact\" : \"http://w3id.org/engrd/connector/artifact/1\",\n\t\"payload\" : {\n\t\t\"catalog.offers.0.resourceEndpoints.path\":\"/pet2\"\n\t\t}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -183,106 +569,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "Self Description",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://136.243.156.113:8090",
-					"protocol": "https",
-					"host": [
-						"136",
-						"243",
-						"156",
-						"113"
-					],
-					"port": "8090"
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DescriptionRequestMessage",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "fizz",
-						"value": "buzz"
-					},
-					{
-						"key": "Content-Type",
-						"value": "text/plain",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"multipart\": \"form\",\n    \"Forward-To\": \"https://136.243.156.113:8889/data\",\n\t\"messageType\": \"DescriptionRequestMessage\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://localhost:8084/proxy",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "8084",
-					"path": [
-						"proxy"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Demo Artifact/1",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "fizz",
-						"value": "buzz"
-					},
-					{
-						"key": "Content-Type",
-						"value": "text/plain"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"multipart\": \"form\",\n    \"Forward-To\": \"https://136.243.156.113:8889/data\",\n\t\"messageType\": \"ArtifactRequestMessage\",\n\t\"requestedArtifact\" : \"http://w3id.org/engrd/connector/artifact/1\",\n\t\"payload\" : {\n\t\t\"catalog.offers.0.resourceEndpoints.path\":\"/pet2\"\n\t\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://localhost:8084/proxy",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "8084",
-					"path": [
-						"proxy"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }
