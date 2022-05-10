@@ -93,7 +93,7 @@
               "@id" : "https://w3id.org/idsa/code/BEFORE"
             },
             "ids:rightOperand" : {
-              "@value" : "2021-12-31T23:59:00Z",
+              "@value" : "2022-12-31T23:59:00Z",
               "@type" : "xsd:datetime"
             },
             "ids:leftOperand" : {
@@ -249,7 +249,7 @@
               "@id" : "https://w3id.org/idsa/code/BEFORE"
             },
             "ids:rightOperand" : {
-              "@value" : "2021-12-31T23:59:00Z",
+              "@value" : "2022-12-31T23:59:00Z",
               "@type" : "xsd:datetime"
             },
             "ids:leftOperand" : {
