@@ -59,7 +59,7 @@ ecc_resources_provider - directory containing property file for provider ECC adv
 TRUE Connector comes pre-configured with following:
 
 * Secure https communication between all components (dataApp - ECC, ECC-ECC, and ECC-dataApp), using self-signed certificate
-* multipart mixed format of the message between all components
+* multipart form format of the message between all components
 * DapsInteraction disabled
 * Disabled Usage control
 * Disabled Clearing House
@@ -93,7 +93,7 @@ To stop containers, execute following:
 docker-compose down -v
 ```
 
-At this point, you should be able to use TRUE Connector and send messages. How to send messages, check following link [Send multipart mix request]():
+At this point, you should be able to use TRUE Connector and send messages. How to send messages, check following link [Send multipart form request](#exchangedata):
 
 ## Endpoints <a name="endpoints"></a>
 The TRUE Connector will use two protocols (http and https) as described by the Docker Compose File.
@@ -159,12 +159,12 @@ application.selfdescription.maintainer=http://maintainerURI.com
 With default configuration, you can use following curl command, to get data from Provider connector
 
 <details>
-  <summary>Multipart Mixed request</summary>
+  <summary>Multipart Form request</summary>
 
 	curl --location --request POST 'https://localhost:8084/proxy' \
 	--header 'Content-Type: text/plain' \
 	--data-raw '{
-	    "multipart": "mixed",
+	    "multipart": "form",
 	    "Forward-To": "https://ecc-provider:8889/data",
 	    "messageType": "ArtifactRequestMessage" ,
 	    "requestedArtifact": "http://w3id.org/engrd/connector/artifact/1" ,
@@ -187,7 +187,7 @@ Default values:
 
 ```
 DataApp URL: https://localhost:8084/proxy
-"Forward-To": "https://ecc-porvider:8889/data",
+"Forward-To": "https://ecc-provider:8889/data",
 ```
 
 For WSS flow:
@@ -1025,6 +1025,28 @@ The appeariance of "John Doe" signifies the successful exchange with this contra
 ## Self Description API <a name="selfdescription"></a>
 
 To manage your Self Description Document please check following [link](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/SELF_DESCRIPTION.md)
+
+You can copy existing valid self-description.json document to following location
+**/ecc_resources_consumer** or **/ecc_resources_provider** folders, for consumer or provider</br>
+
+There is also possibility to change location of self_description.json document, which can be done by changing following property:
+
+```
+application.selfdescription.filelocation=
+
+```
+Be careful when changing this property, since it needs to be reflected inside docker container.
+
+When connector is starting up, it will look for file named *self_description.json* file, and if such file exists, it will load Self Description document from file, otherwise it will create default Self Description document, from properties:
+
+```
+application.selfdescription.description=
+application.selfdescription.title=
+application.selfdescription.curator=
+application.selfdescription.maintainer=
+```
+
+With single offered resource, artifact and contract offer.
 
 
 ## License <a name="license"></a>
