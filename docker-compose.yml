@@ -1,4 +1,4 @@
-version: '2.2'
+version: '3.1'
 services:
   ecc-provider: 
     image: rdlabengpa/ids_execution_core_container:v1.9.3
@@ -60,6 +60,7 @@ services:
       - "4433:443"
     volumes:
       - ./uc-dataapp_resources_provider:/etc
+      - ./ecc_cert/ssl-server.jks:/etc/ssl-server.jks
 
   be-dataapp-provider:
     image: rdlabengpa/ids_be_data_app:v0.1.2
@@ -142,6 +143,7 @@ services:
       - "4444:443"
     volumes:
       - ./uc-dataapp_resources_consumer:/etc
+      - ./ecc_cert/ssl-server.jks:/etc/ssl-server.jks
  
   be-dataapp-consumer:
     image:  rdlabengpa/ids_be_data_app:v0.1.2
