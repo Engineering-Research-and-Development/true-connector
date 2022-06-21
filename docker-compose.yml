@@ -50,7 +50,7 @@ services:
       - ./app_provider:/var/lib/postgresql/data
       
   uc-dataapp-provider:
-    image: rdlabengpa/platoon_uc_data_app:v1
+    image: rdlabengpa/ids_uc_data_app_platoon:v1
     depends_on:
       - postgres_provider
     environment:
@@ -133,7 +133,7 @@ services:
       - ./app_consumer:/var/lib/postgresql/data
 
   uc-dataapp-consumer:
-    image: rdlabengpa/platoon_uc_data_app:v1
+    image: rdlabengpa/ids_uc_data_app_platoon:v1
     depends_on:
       - postgres_consumer
     environment:
