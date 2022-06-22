@@ -50,17 +50,15 @@ services:
       - ./app_provider:/var/lib/postgresql/data
       
   uc-dataapp-provider:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.1
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.2
     depends_on:
       - postgres_provider
     environment:
       - TZ=Europe/Rome 
     ports:
       - "9552:8080"
-      - "4433:443"
     volumes:
       - ./uc-dataapp_resources_provider:/etc
-      - ./ecc_cert/ssl-server.jks:/etc/ssl-server.jks
 
   be-dataapp-provider:
     image: rdlabengpa/ids_be_data_app:v0.2.0
@@ -134,17 +132,15 @@ services:
       - ./app_consumer:/var/lib/postgresql/data
 
   uc-dataapp-consumer:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.1
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.2
     depends_on:
       - postgres_consumer
     environment:
       - TZ=Europe/Rome 
     ports:
       - "9553:8080"
-      - "4444:443"
     volumes:
       - ./uc-dataapp_resources_consumer:/etc
-      - ./ecc_cert/ssl-server.jks:/etc/ssl-server.jks
  
   be-dataapp-consumer:
     image:  rdlabengpa/ids_be_data_app:v0.2.0
