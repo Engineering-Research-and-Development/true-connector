@@ -15,7 +15,7 @@ services:
        - IDSCP2=${IDSCP2}
        - WS_EDGE=${PROVIDER_WS_EDGE}
        - WS_ECC=${WS_ECC}
-       - UC_DATAAPP_URI=${PROVIDER_UC_DATAAPP_URI}
+       - UC_DATAAPP_URI=http://uc-dataapp-provider:9555
        - CLEARING_HOUSE=${CLEARING_HOUSE}
        - PUBLIC_PORT=${PROVIDER_PORT}
        - BROKER_URL=${BROKER_URL}
@@ -87,7 +87,7 @@ services:
        - WS_EDGE=${CONSUMER_WS_EDGE}
        - WS_ECC=${WS_ECC}
        - CLEARING_HOUSE=${CLEARING_HOUSE}
-       - UC_DATAAPP_URI=${CONSUMER_UC_DATAAPP_URI}
+       - UC_DATAAPP_URI=http://uc-dataapp-consumer:9555
        - PUBLIC_PORT=${CONSUMER_PORT}
        - BROKER_URL=${BROKER_URL}
        - DISABLE_SSL_VALIDATION=${DISABLE_SSL_VALIDATION}
