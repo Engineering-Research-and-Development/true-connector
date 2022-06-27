@@ -1,0 +1,57 @@
+{
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
+  },
+  "@type" : "ids:ContractAgreement",
+  "@id" : "https://w3id.org/idsa/autogen/contractAgreement/3609d104-b8ba-45c7-80eb-c1b7ef35df30",
+  "ids:permission" : [ {
+    "@type" : "ids:Permission",
+    "@id" : "https://w3id.org/idsa/autogen/permission/5b181e5d-b717-455e-83c1-6efdac97450b",
+    "ids:target" : {
+      "@id" : "http://w3id.org/engrd/connector/artifact/1"
+    },
+    "ids:description" : [ {
+      "@value" : "Description of contract agreement",
+      "@type" : "http://www.w3.org/2001/XMLSchema#string"
+    } ],
+    "ids:action" : [ {
+      "@id" : "https://w3id.org/idsa/code/USE"
+    } ],
+    "ids:title" : [ {
+      "@value" : "Permission title for artifact 1",
+      "@type" : "http://www.w3.org/2001/XMLSchema#string"
+    } ],
+    "ids:constraint" : [ {
+      "@type" : "ids:Constraint",
+      "@id" : "https://w3id.org/idsa/autogen/constraint/fbdb7984-80ec-474f-97b7-f440e3553b81",
+      "ids:rightOperand" : {
+        "@value" : "IT",
+        "@type" : "anyURI"
+      },
+      "ids:pipEndpoint" : {
+        "@id" : "http://pip.endpoint.location"
+      },
+      "ids:leftOperand" : {
+        "@id" : "https://w3id.org/idsa/code/ABSOLUTE_SPATIAL_POSITION"
+      },
+      "ids:operator" : {
+        "@id" : "https://w3id.org/idsa/code/EQ"
+      }
+    } ]
+  } ],
+  "ids:provider" : {
+    "@id" : "http://w3id.org/engrd/connector/provider"
+  },
+  "ids:contractStart" : {
+    "@value" : "2022-06-24T14:19:44.485+02:00",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  },
+  "ids:consumer" : {
+    "@id" : "http://w3id.org/engrd/connector/consumer"
+  },
+  "ids:contractDate" : {
+    "@value" : "2022-06-24T14:19:44.484+02:00",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  }
+}

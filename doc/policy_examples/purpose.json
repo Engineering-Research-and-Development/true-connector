@@ -1,0 +1,57 @@
+{
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
+  },
+  "@type" : "ids:ContractAgreement",
+  "@id" : "https://w3id.org/idsa/autogen/contractAgreement/4f4a0460-58d0-474c-8d5b-05430b9f992a",
+  "ids:permission" : [ {
+    "@type" : "ids:Permission",
+    "@id" : "https://w3id.org/idsa/autogen/permission/f9eb9398-988a-47ee-bea6-97ee1eec2d61",
+    "ids:target" : {
+      "@id" : "http://w3id.org/engrd/connector/artifact/1"
+    },
+    "ids:description" : [ {
+      "@value" : "Description of contract agreement",
+      "@type" : "http://www.w3.org/2001/XMLSchema#string"
+    } ],
+    "ids:title" : [ {
+      "@value" : "Permission title for artifact 1",
+      "@type" : "http://www.w3.org/2001/XMLSchema#string"
+    } ],
+    "ids:constraint" : [ {
+      "@type" : "ids:Constraint",
+      "@id" : "https://w3id.org/idsa/autogen/constraint/c3234b91-d6c7-4fd3-8198-fe410ff5940f",
+      "ids:pipEndpoint" : {
+        "@id" : "http://pip.endpoint.purpose"
+      },
+      "ids:operator" : {
+        "@id" : "https://w3id.org/idsa/code/EQ"
+      },
+      "ids:rightOperand" : {
+        "@value" : "http://example.com/ids-purpose:Marketing",
+        "@type" : "anyURI"
+      },
+      "ids:leftOperand" : {
+        "@id" : "https://w3id.org/idsa/code/PURPOSE"
+      }
+    } ],
+    "ids:action" : [ {
+      "@id" : "https://w3id.org/idsa/code/USE"
+    } ]
+  } ],
+  "ids:provider" : {
+    "@id" : "http://w3id.org/engrd/connector/provider"
+  },
+  "ids:contractStart" : {
+    "@value" : "2022-01-01T14:16:32.500+02:00",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  },
+  "ids:consumer" : {
+    "@id" : "http://w3id.org/engrd/connector/consumer"
+  },
+  "ids:contractDate" : {
+    "@value" : "2022-12-31T14:16:32.500+02:00",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  }
+}

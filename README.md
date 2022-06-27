@@ -5,7 +5,7 @@ The TRUE Connector is composed of three components:
 
 * [Execution Core Container (ECC)](https://github.com/Engineering-Research-and-Development/market4.0-execution_core_container_business_logic), open-source project designed by ENG. It is in charge of the data exchange through the IDS ecosystem representing data using the IDS Information Model and interacting with an external Identity Provider. It is also able to communicate with an IDS Broker for registering and querying information.
 * [Back-End (BE) Data Application](https://github.com/Engineering-Research-and-Development/market4.0-data_app_test_BE), open-source project designed by ENG. It represents a trivial data application for generating and consuming data on top of the ECC component.
-* [Usage-Control (UC) Data Application](https://github.com/Engineering-Research-and-Development/market4.0-uc_data_app), a customized version of the Fraunhofer IESE base application for integrating the MyData Framework (a Usage Control Framework designed and implemented by Fraunhofer IESE) in a connector.
+* [Usage-Control (UC) Data Application](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon), a customized version of the Platoon base application for integrating Usage Control functionality. This version of Usage control application requires persistence layer, and it this setup, it is PostgreSQL database.
 
 ![TRUE Connector Architecture](doc/TRUE_Connector_Architecture.png?raw=true "TRUE Connector Architecture")
 
@@ -52,6 +52,9 @@ ecc_cert - directory used to store certificate files (DAPS certificate, HTTPS ce
 ecc_resources_consumer - directory containing property file for consumer ECC advanced configuration
 ecc_resources_provider - directory containing property file for provider ECC advanced configuration
 
+Platoon Usage control related (contains property file for usage control data app):
+uc-dataapp_resources_consumer
+uc-dataapp_resources_provider
 ```
 
 ### Default configuration <a name="defaultconfiguration"></a>
@@ -153,6 +156,20 @@ application.selfdescription.title=Data Connector title
 application.selfdescription.curator=http://curatorURI.com
 application.selfdescription.maintainer=http://maintainerURI.com
 ```
+
+### Connector Id
+
+In .env file, you can find 2 properties, one for Provider and one for Consumer, called
+
+```
+PROVIDER_ISSUER_CONNECTOR_URI=http://w3id.org/engrd/connector/provider
+
+CONSUMER_ISSUER_CONNECTOR_URI=http://w3id.org/engrd/connector/consumer
+
+```
+
+Those 2 properties can be modified to "label" connector with proper Id. This Id plays important role in Contract Negotiation sequence, since those 2 values will be used when creating Contract Agreement and when enforcing policy. Also, they are used in Basic Data App, in proxy functionality, to create request and response messages, to set correct value for issuerConnector. 
+
 
 ## How to Exchange Data <a name="exchangedata"></a>
 
@@ -336,11 +353,8 @@ application.isEnabledDapsInteraction=true
 
 The TRUE Connector is able to interact with the following Identity Providers:
 For each of 3 supported identity providers, you need to obtain certificate, in order to be able to get JWToken from DAPS server. Certificate needs to be copied into *ecc_cert* folder and modify *DAPS_KEYSTORE_NAME*, *DAPS_KEYSTORE_PASSWORD* and
-*DAPS_KEYSTORE_ALIAS* in *.env* file.
+*DAPS_KEYSTORE_ALIAS* in *.env* file, for both Provider and Consumer section..
 
-* **AISECv1** additional step: edit *application-docker.properties* and modify
-	*application.dapsVersion=v1* and
-	*application.dapsUrl* should point to DAPS v1 server
 * **AISECv2** (default configuration)additional step: edit *application-docker.properties* and modify
 	*application.dapsVersion=v2* and
 	*application.dapsUrl* should point to DAPS v2 server
@@ -348,12 +362,20 @@ For each of 3 supported identity providers, you need to obtain certificate, in o
 edit related settings (i.e., *application.daps.orbiter.privateKey*, *application.daps.orbiter.password*) and set the *application.dapsVersion* (in the *application-docker.properties*) to *orbiter*
 *application.dapsUrl* should point to Orbiter IDP server
 
-DAPS related configuration can be achieved by modifying following (.env file):
+DAPS related configuration can be achieved by modifying following (.env file). Following snippet is just an example:
 
 ```
-DAPS_KEYSTORE_NAME=daps-keystore.p12
-DAPS_KEYSTORE_PASSWORD=password
-DAPS_KEYSTORE_ALIAS=1
+PROVIDER_DAPS_KEYSTORE_NAME=daps-keystore-provider.p12
+PROVIDER_DAPS_KEYSTORE_PASSWORD=password
+PROVIDER_DAPS_KEYSTORE_ALIAS=1
+```
+
+and/or
+
+```
+CONSUMER_DAPS_KEYSTORE_NAME=daps-keystore-consumer.p12
+CONSUMER_DAPS_KEYSTORE_PASSWORD=password
+CONSUMER_DAPS_KEYSTORE_ALIAS=1
 ```
 
 ### Convert keystorage files <a name="convert_keystorage"></a>
@@ -403,8 +425,9 @@ TRUE Connector supports p12 format of certificate file, but if for some reason c
 
 ### Validate protocol <a name="validateprotocol"></a>
 
-Forward-To protocol validation can be changed by editing *application-docker.properties* and modify **application.validateProtocol**. Default value is *false* and Forward-To URL will not be validated.
-Forward-To URL can be set like http(https,wss)://example.com or just example.com and the protocol chosen (from application-docker.properties) will be automatically set (it will be overwritten!)</br>
+Forward-To protocol validation can be enabled by setting the property **application.enableProtocolValidation** to true. If you have this enabled please refer to the following step.
+
+Forward-To protocol validation can be changed by editing *application-docker.properties* and modify **application.validateProtocol**. Default value is *false* and Forward-To URL will not be validated. Forward-To URL can be set like http(https,wss)://example.com or just example.com and the protocol chosen (from application-docker.properties) will be automatically set (it will be overwritten!)</br>
 Example: http://example.com will be wss://example if you chose wss in the properties).
 
 If validateProtocol is true, then Forward-To header must contain full URL, including protocol.</br>
@@ -427,7 +450,7 @@ application.isEnabledClearingHouse=true
 Information on how TRUE Connector can interact with Broker, can be found on following [link](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/BROKER.md)
 
 ### Usage Control <a name="usagecontrol"></a>
-The TRUE Connector integrates the [Fraunhofer MyData Framework](https://www.mydata-control.de/) for implementing the Usage Control. Details about the PMP and PEP components can be found [here](doc/USAGE_CONTROL_RULES.md).
+The TRUE Connector integrates the [Platoon Usage Control Data App](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon) for enforcing the Usage Control. Details about the PMP and PEP components can be found [here](doc/PLATOON_USAGE_CONTROL_RULES.md).
 
 Since Usage Control is disabled by default, in order to enable it, set following property to true:
 
@@ -441,7 +464,7 @@ application.isEnabledUsageControl=true
 Usage Control is disabled by default.
 If you want to enable it (mandatory for contract negotiation), please check ["Enabling usage control"](#usagecontrol).
 
-If mandatory, for other connectors, you can perform contract negotiation with other connector (not TRUE Connector) or with TRUE Connector. There is default contract offer that will be sent if ContractRequestMessage is received. It will allow consuming of resource in year 2021.
+If mandatory, for other connectors, you can perform contract negotiation with other connector (not TRUE Connector) or with TRUE Connector. There is default contract offer that will be sent if ContractRequestMessage is received. It will allow consuming of resource in year 2022.
 
 If you do not want to do contract negotiation, and you are using TRUE Connector "on both sides", there is "workaround", to upload Usage Control policy directly to Consumer Usage Control Data App. In order to achieve this, use following link:
 

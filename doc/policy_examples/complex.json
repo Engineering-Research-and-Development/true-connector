@@ -1,0 +1,86 @@
+{
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
+  },
+  "@type" : "ids:ContractAgreement",
+  "@id" : "https://w3id.org/idsa/autogen/contractAgreement/ef246841-dee5-41bb-b8fd-8b5a92aaedec",
+  "ids:permission" : [ {
+    "@type" : "ids:Permission",
+    "@id" : "https://w3id.org/idsa/autogen/permission/a9022979-031c-480c-ac5f-2342b6dd46f3",
+    "ids:target" : {
+      "@id" : "http://w3id.org/engrd/connector/artifact/1"
+    },
+    "ids:description" : [ {
+      "@value" : "Description of contract agreement",
+      "@type" : "http://www.w3.org/2001/XMLSchema#string"
+    } ],
+    "ids:title" : [ {
+      "@value" : "Permission title for artifact 1",
+      "@type" : "http://www.w3.org/2001/XMLSchema#string"
+    } ],
+    "ids:action" : [ {
+      "@id" : "https://w3id.org/idsa/code/USE"
+    } ],
+    "ids:constraint" : [ {
+      "@type" : "ids:Constraint",
+      "@id" : "https://w3id.org/idsa/autogen/constraint/b5222d2e-98d9-4915-baac-ffbc94bcf7bf",
+      "ids:operator" : {
+        "@id" : "https://w3id.org/idsa/code/BEFORE"
+      },
+      "ids:leftOperand" : {
+        "@id" : "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
+      },
+      "ids:rightOperand" : {
+        "@value" : "2022-12-31T12:21:11Z",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      }
+    }, {
+      "@type" : "ids:Constraint",
+      "@id" : "https://w3id.org/idsa/autogen/constraint/652b98c3-23f2-431c-b99a-4d13d49893c0",
+      "ids:operator" : {
+        "@id" : "https://w3id.org/idsa/code/EQ"
+      },
+      "ids:leftOperand" : {
+        "@id" : "https://w3id.org/idsa/code/ABSOLUTE_SPATIAL_POSITION"
+      },
+      "ids:rightOperand" : {
+        "@value" : "IT",
+        "@type" : "anyURI"
+      },
+      "ids:pipEndpoint" : {
+        "@id" : "http://pip.endpoint.location"
+      }
+    }, {
+      "@type" : "ids:Constraint",
+      "@id" : "https://w3id.org/idsa/autogen/constraint/4b7eb7c6-8477-42f3-b090-2ea4cd189fc3",
+      "ids:operator" : {
+        "@id" : "https://w3id.org/idsa/code/EQ"
+      },
+      "ids:leftOperand" : {
+        "@id" : "https://w3id.org/idsa/code/PURPOSE"
+      },
+      "ids:rightOperand" : {
+        "@value" : "http://example.com/ids-purpose:Marketing",
+        "@type" : "anyURI"
+      },
+      "ids:pipEndpoint" : {
+        "@id" : "http://pip.endpoint.purpose"
+      }
+    } ]
+  } ],
+  "ids:provider" : {
+    "@id" : "http://w3id.org/engrd/connector/provider"
+  },
+  "ids:contractStart" : {
+    "@value" : "2022-06-24T14:21:12.113+02:00",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  },
+  "ids:contractDate" : {
+    "@value" : "2022-06-24T14:21:12.112+02:00",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  },
+  "ids:consumer" : {
+    "@id" : "http://w3id.org/engrd/connector/consumer"
+  }
+}

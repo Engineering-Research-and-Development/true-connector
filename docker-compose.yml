@@ -163,3 +163,16 @@ services:
       - ./be-dataapp_resources:/config
       - ./be-dataapp_data_sender:/data
       - ./ecc_cert:/cert
+
+volumes:
+  ecc_cert : {}
+  be-dataapp_resources: {}
+  ecc_resources_provider : {}
+  be-dataapp_data_receiver : {}
+  uc-dataapp_resources_provider : {}
+  app_provider : {}
+  ecc_resources_consumer : {}
+  be-dataapp_resources: {}
+  be-dataapp_data_sender : {}
+  uc-dataapp_resources_consumer : {}
+  app_consumer : {}
