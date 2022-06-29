@@ -469,9 +469,9 @@ If mandatory, for other connectors, you can perform contract negotiation with ot
 If you do not want to do contract negotiation, and you are using TRUE Connector "on both sides", there is "workaround", to upload Usage Control policy directly to Consumer Usage Control Data App. In order to achieve this, use following link:
 
 ```
-http://localhost:9553/swagger-ui.html#/odrl-policy-controller
+http://localhost:9553/platoontec/PlatoonDataUsage/1.0/swagger-ui/index.html?configUrl=/platoontec/PlatoonDataUsage/1.0/v3/api-docs/swagger-config
 ```
-In POST request, upload policy from [here](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app/blob/master/src/main/resources/policy-examples/0.0.3/1%20restrict-access-interval.json).
+In POST request, upload policy from [here](doc/policy_examples/time_constraint.json).
 
 Assuming you are running docker instance on local machine. If not, please update hostname to match your scenario.
 
@@ -559,7 +559,7 @@ However, if DAT is valid, SelfDescriptionResponse is being sent to Consumer with
 		"@id" : "https://w3id.org/idsa/autogen/descriptionRequestMessage/8405b08f-4c93-4082-b22c-a07ba4e74753"
 	  },
 	  "ids:recipientConnector" : [ {
-		"@id" : "http://w3id.org/engrd/connector"
+		"@id" : "http://w3id.org/engrd/connector/consumer"
 	  } ],
 	  "ids:recipientAgent" : [ ]
 	}
@@ -573,7 +573,7 @@ However, if DAT is valid, SelfDescriptionResponse is being sent to Consumer with
 		"idsc" : "https://w3id.org/idsa/code/"
 	  },
 	  "@type" : "ids:BaseConnector",
-	  "@id" : "https://w3id.org/engrd/connector/",
+	  "@id" : "https://w3id.org/engrd/connector/provider",
 	  "ids:resourceCatalog" : [ {
 		"@type" : "ids:ResourceCatalog",
 		"@id" : "https://w3id.org/idsa/autogen/resourceCatalog/ba0987f6-f86e-4c9b-a6b1-020b3babf285",
@@ -597,12 +597,6 @@ However, if DAT is valid, SelfDescriptionResponse is being sent to Consumer with
 			  "ids:target" : {
 				"@id" : "http://w3id.org/engrd/connector/artifact/1"
 			  },
-			  "ids:assignee" : [ {
-				"@id" : "https://assignee.com"
-			  } ],
-			  "ids:assigner" : [ {
-				"@id" : "https://assigner.com"
-			  } ],
 			  "ids:action" : [ {
 				"@id" : "https://w3id.org/idsa/code/USE"
 			  } ],
@@ -618,7 +612,7 @@ However, if DAT is valid, SelfDescriptionResponse is being sent to Consumer with
 				  "@id" : "https://w3id.org/idsa/code/BEFORE"
 				},
 				"ids:rightOperand" : {
-				  "@value" : "2022-01-09T13:48:40Z",
+				  "@value" : "2022-12-31T13:48:40Z",
 				  "@type" : "http://www.w3.org/2001/XMLSchema#datetime"
 				}
 			  }, {
@@ -631,7 +625,7 @@ However, if DAT is valid, SelfDescriptionResponse is being sent to Consumer with
 				  "@id" : "https://w3id.org/idsa/code/AFTER"
 				},
 				"ids:rightOperand" : {
-				  "@value" : "2021-12-02T13:48:40Z",
+				  "@value" : "2022-01-01T13:48:40Z",
 				  "@type" : "http://www.w3.org/2001/XMLSchema#datetime"
 				}
 			  } ],
@@ -639,15 +633,16 @@ However, if DAT is valid, SelfDescriptionResponse is being sent to Consumer with
 			  "ids:title" : [ ]
 			} ],
 			"ids:provider" : {
-			  "@id" : "https://provider.com"
+			  "@id" : "https://w3id.org/engrd/connector/provider"
 			},
 			"ids:contractDate" : {
-			  "@value" : "2021-12-09T13:48:41.493Z",
+			  "@value" : "2022-06-27T13:48:41.493Z",
 			  "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
 			},
-			"ids:consumer" : {
-			  "@id" : "https://consumer.com"
-			},
+			"ids:contractStart" : {
+           "@value" : "2022-06-27T09:42:41.996Z",
+           "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+          },
 			"ids:prohibition" : [ ],
 			"ids:obligation" : [ ]
 		  } ],
@@ -761,107 +756,223 @@ Contract Request Message is initial message sent in Contract Negotiation flow. I
 	"multipart": "form",
 	"Forward-To": "https://ecc-provider:8889/data",
 	"messageType": "ContractRequestMessage",
-	"requestedElement": "http://w3id.org/engrd/connector/artifact/1"
+	"requestedElement": "http://w3id.org/engrd/connector/artifact/1",
+	"payload" : xxxxxx
 	}'
 
 </details>
+
+For payload part you need to pass Contract Request from prevoius request or you can use following snippet, but be sure to modify following fields:
+Permission - @id and target
+
+<details>
+  <summary>Contract Request Payload part</summary>
+
+	{
+		"@context": {
+			"ids": "https://w3id.org/idsa/core/",
+			"idsc": "https://w3id.org/idsa/code/"
+		},
+		"@type": "ids:ContractRequest",
+		"@id": "https://w3id.org/idsa/autogen/contractRequest/46863e9c-e7ce-4041-959c-11b317a10c5c",
+		"ids:permission": [
+			{
+				"@type": "ids:Permission",
+				"@id": "https://w3id.org/idsa/autogen/permission/57c1728b-788d-4b80-ae1d-02a7d46eb1a0",
+				"ids:target": {
+					"@id": "http://w3id.org/engrd/connector/artifact/1"
+				},
+				"ids:assignee": [],
+				"ids:assigner": [],
+				"ids:action": [
+					{
+						"@id": "https://w3id.org/idsa/code/USE"
+					}
+				],
+				"ids:preDuty": [],
+				"ids:postDuty": [],
+				"ids:constraint": [
+					{
+						"@type": "ids:Constraint",
+						"@id": "https://w3id.org/idsa/autogen/constraint/07f7dd8b-0b47-46e9-8d25-7205ea243de9",
+						"ids:leftOperand": {
+							"@id": "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
+						},
+						"ids:operator": {
+							"@id": "https://w3id.org/idsa/code/AFTER"
+						},
+						"ids:rightOperand": {
+							"@value": "2022-06-20T09:43:49Z",
+							"@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+						},
+						"ids:pipEndpoint": {
+							"@id": "http://pip.endpoint.after"
+						}
+					},
+					{
+						"@type": "ids:Constraint",
+						"@id": "https://w3id.org/idsa/autogen/constraint/5832a389-9af1-4e2f-9ab4-038ac5db0091",
+						"ids:leftOperand": {
+							"@id": "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
+						},
+						"ids:operator": {
+							"@id": "https://w3id.org/idsa/code/BEFORE"
+						},
+						"ids:rightOperand": {
+							"@value": "2022-07-27T09:43:49Z",
+							"@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+						},
+						"ids:pipEndpoint": {
+							"@id": "http://pip.endpoint.before"
+						}
+					}
+				],
+				"ids:description": [],
+				"ids:title": []
+			}
+		],
+		"ids:provider": {
+			"@id": "http://w3id.org/engrd/connector/provider"
+		},
+		"ids:obligation": [],
+		"ids:prohibition": [],
+		"ids:consumer": {
+			"@id": "http://w3id.org/engrd/connector/consumer"
+		}
+	}
+
+</details>
+
 
 If everything goes well, you will get response with body containing "@type" : "ids:ContractAgreementMessage" and payload containing "@type": "ids:ContractAgreement", as shown in example response.
 
 <details>
   <summary>Contract Request Message - Response example</summary>
 
-	--NfiM38lAW4pGKxK4NRAqufpJFM40wz
+	--P4P0K6voLPRtGGaDtazTYLsuN7E7OXJ
 	Content-Disposition: form-data; name="header"
-	Content-Length: 1150
+	Content-Length: 2599
 	Content-Type: application/ld+json
-
+	
 	{
 	  "@context" : {
-		"ids" : "https://w3id.org/idsa/core/",
-		"idsc" : "https://w3id.org/idsa/code/"
+	    "ids" : "https://w3id.org/idsa/core/",
+	    "idsc" : "https://w3id.org/idsa/code/"
 	  },
 	  "@type" : "ids:ContractAgreementMessage",
-	  "@id" : "https://w3id.org/idsa/autogen/contractAgreementMessage/090de85d-455a-493f-b15c-1cab0d7df098",
-	  "ids:securityToken" : {
-		"@type" : "ids:DynamicAttributeToken",
-		"@id" : "https://w3id.org/idsa/autogen/dynamicAttributeToken/dbbca5d5-2d75-464f-9311-6aee63e18299",
-		"ids:tokenValue" : "DummyTokenValue",
-		"ids:tokenFormat" : {
-		  "@id" : "https://w3id.org/idsa/code/JWT"
-		}
-	  },
+	  "@id" : "https://w3id.org/idsa/autogen/contractAgreementMessage/c669ffe6-7716-4c43-8930-fa4ac5b9abde",
 	  "ids:issuerConnector" : {
-		"@id" : "https://w3id.org/engrd/connector/provider"
+	    "@id" : "http://w3id.org/engrd/connector/provider"
 	  },
 	  "ids:senderAgent" : {
-		"@id" : "https://w3id.org/engrd/connector/provider"
+	    "@id" : "http://w3id.org/engrd/connector/provider"
+	  },
+	  "ids:securityToken" : {
+	    "@type" : "ids:DynamicAttributeToken",
+	    "@id" : "https://w3id.org/idsa/autogen/dynamicAttributeToken/ee2b22ee-31c3-433b-8ed6-3c53c0d8d9db",
+	    "ids:tokenValue" : "DUMMY_TOKEN_VALUE",
+	    "ids:tokenFormat" : {
+	      "@id" : "https://w3id.org/idsa/code/JWT"
+	    }
 	  },
 	  "ids:modelVersion" : "4.1.0",
 	  "ids:issued" : {
-		"@value" : "2021-12-03T16:37:54.102Z",
-		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+	    "@value" : "2022-06-27T10:09:40.985Z",
+	    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+	  },
+	  "ids:correlationMessage" : {
+	    "@id" : "https://w3id.org/idsa/autogen/contractRequestMessage/f9bd01c6-dd10-4cd5-9c1f-7854bcb06ef5"
 	  },
 	  "ids:recipientConnector" : [ {
-		"@id" : "http://w3id.org/engrd/connector"
+	    "@id" : "http://w3id.org/engrd/connector/consumer"
 	  } ],
-	  "ids:recipientAgent" : [ ],
-	  "ids:correlationMessage" : {
-		"@id" : "https://w3id.org/idsa/autogen/contractRequestMessage/b780699f-9e79-4e31-812a-d957b0b5d645"
-	  }
+	  "ids:recipientAgent" : [ ]
 	}
-	--NfiM38lAW4pGKxK4NRAqufpJFM40wz
+	--P4P0K6voLPRtGGaDtazTYLsuN7E7OXJ
 	Content-Disposition: form-data; name="payload"
-	Content-Length: 1244
-
+	Content-Length: 2351
+	
 	{
-	   "@context": {
-		  "ids":"https://w3id.org/idsa/core/",
-		  "idsc" : "https://w3id.org/idsa/code/"
-	   },
-	  "@type": "ids:ContractAgreement",
-	  "@id": "https://w3id.org/idsa/autogen/contract/restrict-access-interval",
-	  "profile": "http://example.com/ids-profile",
-	  "ids:provider": "ecc-provider",
-	  "ids:consumer": "ecc-consumer",
-	  "ids:permission": [{
-		  "ids:target": {
-			  "@id":"http://w3id.org/engrd/connector/artifact/1"
-		   },
-		  "ids:action": [{
-			"@id":"idsc:USE"
-		  }],
-		  "ids:constraint": [{
-			"@type":"ids:Constraint",
-			"ids:leftOperand": { "@id": "idsc:POLICY_EVALUATION_TIME"},
-			"ids:operator": { "@id": "idsc:TEMPORAL_EQUALS"},
-			"ids:rightOperand": {
-			 "@type": "ids:interval",
-			 "@value": {
-				 "ids:begin": {
-				   "@value": "2021-06-15T00:00:00Z",
-				   "@type": "xsd:datetimeStamp"
-				},
-				"ids:end": {
-				   "@value": "2021-12-31T00:00:00Z",
-				   "@type": "xsd:datetimeStamp"
-				}
-			 }
-			},
-			"ids:pipEndpoint": { "@id": "https//example.com/pip/policy_evaluation_time" }
-		  }
-	]
-	  }]
+	  "@context" : {
+	    "ids" : "https://w3id.org/idsa/core/",
+	    "idsc" : "https://w3id.org/idsa/code/"
+	  },
+	  "@type" : "ids:ContractAgreement",
+	  "@id" : "https://w3id.org/idsa/autogen/contractAgreement/7dacb032-ed43-4492-b76f-ff637fb2d417",
+	  "ids:permission" : [ {
+	    "@type" : "ids:Permission",
+	    "@id" : "https://w3id.org/idsa/autogen/permission/57c1728b-788d-4b80-ae1d-02a7d46eb1a0",
+	    "ids:target" : {
+	      "@id" : "http://w3id.org/engrd/connector/artifact/1"
+	    },
+	    "ids:assignee" : [ ],
+	    "ids:assigner" : [ ],
+	    "ids:action" : [ {
+	      "@id" : "https://w3id.org/idsa/code/USE"
+	    } ],
+	    "ids:preDuty" : [ ],
+	    "ids:postDuty" : [ ],
+	    "ids:constraint" : [ {
+	      "@type" : "ids:Constraint",
+	      "@id" : "https://w3id.org/idsa/autogen/constraint/07f7dd8b-0b47-46e9-8d25-7205ea243de9",
+	      "ids:leftOperand" : {
+	        "@id" : "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
+	      },
+	      "ids:operator" : {
+	        "@id" : "https://w3id.org/idsa/code/AFTER"
+	      },
+	      "ids:rightOperand" : {
+	        "@value" : "2022-06-20T09:43:49Z",
+	        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+	      },
+	      "ids:pipEndpoint" : {
+	        "@id" : "http://pip.endpoint.after"
+	      }
+	    }, {
+	      "@type" : "ids:Constraint",
+	      "@id" : "https://w3id.org/idsa/autogen/constraint/5832a389-9af1-4e2f-9ab4-038ac5db0091",
+	      "ids:leftOperand" : {
+	        "@id" : "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
+	      },
+	      "ids:operator" : {
+	        "@id" : "https://w3id.org/idsa/code/BEFORE"
+	      },
+	      "ids:rightOperand" : {
+	        "@value" : "2022-07-27T09:43:49Z",
+	        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+	      },
+	      "ids:pipEndpoint" : {
+	        "@id" : "http://pip.endpoint.before"
+	      }
+	    } ],
+	    "ids:description" : [ ],
+	    "ids:title" : [ ]
+	  } ],
+	  "ids:provider" : {
+	    "@id" : "http://w3id.org/engrd/connector/provider"
+	  },
+	  "ids:contractStart" : {
+	    "@value" : "2022-06-27T09:42:41.996Z",
+	    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+	  },
+	  "ids:contractDate" : {
+	    "@value" : "2022-06-27T09:43:49.320Z",
+	    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+	  },
+	  "ids:consumer" : {
+	    "@id" : "http://w3id.org/engrd/connector/consumer"
+	  },
+	  "ids:prohibition" : [ ],
+	  "ids:obligation" : [ ]
 	}
-	--NfiM38lAW4pGKxK4NRAqufpJFM40wz--
+	--P4P0K6voLPRtGGaDtazTYLsuN7E7OXJ--
 
 </details>
 
 ### Contract Agreement request <a name="contract_agreement_request"></a>
 
-**NOTE**: Payload part is taken as example. Be sure to replace with value you have recieved.
-In the following step of negotiation, we create Contract Agreement Message: in Payload of new message we put (copy & paste) payload (ContractAgreement) obtained from previous response from ContractRequestMessage.\
-**NOTE**: Be sure to check the end date. In current example it is valid until 2021-12-31.
+**NOTE**: Payload part must be replaced with value you have received from previous response.
+**NOTE**: Be sure to check the end date. 
 
 <details>
   <summary>Multipart form - Contract Agreement request</summary>
@@ -873,50 +984,7 @@ In the following step of negotiation, we create Contract Agreement Message: in P
 		"Forward-To": "https://ecc-provider:8889/data",
 		"messageType": "ContractAgreementMessage",
 		"requestedArtifact": "http://w3id.org/engrd/connector/artifact/1",
-		"payload" : {
-			"@context": {
-				"ids":"https://w3id.org/idsa/core/",
-				"idsc" : "https://w3id.org/idsa/code/"
-			},
-			"@type": "ids:ContractAgreement",
-			"@id": "https://w3id.org/idsa/autogen/contract/restrict-access-interval",
-			"profile": "http://example.com/ids-profile",
-			"ids:provider": "ecc-provider",
-			"ids:consumer": "ecc-consumer",
-			"ids:permission": [{
-				"ids:target": {
-					"@id":"http://w3id.org/engrd/connector/artifact/1"
-				},
-				"ids:action": [{
-					"@id":"idsc:USE"
-				}],
-				"ids:constraint": [{
-					"@type":"ids:Constraint",
-					"ids:leftOperand": {
-						"@id": "idsc:POLICY_EVALUATION_TIME"
-					},
-					"ids:operator": {
-						"@id": "idsc:TEMPORAL_EQUALS"
-					},
-					"ids:rightOperand": {
-						"@type": "ids:interval",
-						"@value": {
-							 "ids:begin": {
-								"@value": "2021-06-15T00:00:00Z",
-								"@type": "xsd:datetimeStamp"
-							},
-							"ids:end": {
-								"@value": "2021-12-31T00:00:00Z",
-								"@type": "xsd:datetimeStamp"
-							}
-						}
-					},
-					"ids:pipEndpoint": {
-						"@id": "https//example.com/pip/policy_evaluation_time"
-					}
-				}]
-			}]
-		}
+		"payload" : xxxxxx
 	}'
 
 </details>
@@ -974,6 +1042,9 @@ You can also check the Usage Control logs that the policy has been updated.
 
 When you have finished negotiation, you can query for resource again to see if we get artifact data.
 
+**NOTE**: Be sure to replace value for transferContract with correct value - it should be contractAgreement id. You can get it from the step Contract Agreement request, the one that is set in payload. (like following: https://w3id.org/idsa/autogen/contractAgreement/7dacb032-ed43-4492-b76f-ff637fb2d417). This value is important, since it it will be used in contract negotiation, to validate against that contract agreement, if consumer can consume artifact.
+
+
 <details>
   <summary>Multipart Form - Artifact Request Message</summary>
 
@@ -983,7 +1054,8 @@ When you have finished negotiation, you can query for resource again to see if w
 	    "multipart": "form",
 	    "Forward-To": "http://ecc-provider:8889/data",
 	    "messageType":"ArtifactRequestMessage",
-	    "requestedArtifact": "http://w3id.org/engrd/connector/artifact/1"
+	    "requestedArtifact": "http://w3id.org/engrd/connector/artifact/1",
+	    "transferContract" : "xxxxxx"
 	}'
 
 </details>
@@ -994,52 +1066,54 @@ Expected response is ArtifactResponseMessage, as header, and in payload - json d
 <details>
   <summary>Artifact Request Message - Example response</summary>
 
-	--aDbue-EGZyC4BcMi99dnOgN5AEfBsGOQrcT
+	--Jg43iZd4C8H3mA96jSHQsSVP_HdzROIqTkFz
 	Content-Disposition: form-data; name="header"
-	Content-Length: 1148
+	Content-Length: 2730
 	Content-Type: application/ld+json
-
+	
 	{
 	  "@context" : {
-		"ids" : "https://w3id.org/idsa/core/",
-		"idsc" : "https://w3id.org/idsa/code/"
+	    "ids" : "https://w3id.org/idsa/core/",
+	    "idsc" : "https://w3id.org/idsa/code/"
 	  },
 	  "@type" : "ids:ArtifactResponseMessage",
-	  "@id" : "https://w3id.org/idsa/autogen/artifactResponseMessage/05f486c7-c1d3-4073-ae64-adef0de0257b",
-	  "ids:securityToken" : {
-		"@type" : "ids:DynamicAttributeToken",
-		"@id" : "https://w3id.org/idsa/autogen/dynamicAttributeToken/be20ab22-9af0-4c4b-9179-bf5e84147f86",
-		"ids:tokenValue" : "DummyTokenValue",
-		"ids:tokenFormat" : {
-		  "@id" : "https://w3id.org/idsa/code/JWT"
-		}
-	  },
+	  "@id" : "https://w3id.org/idsa/autogen/artifactResponseMessage/d3f76bea-85ea-4e44-bf71-57bdbe8f6234",
 	  "ids:issuerConnector" : {
-		"@id" : "https://w3id.org/engrd/connector/provider"
+	    "@id" : "http://w3id.org/engrd/connector/provider"
 	  },
 	  "ids:senderAgent" : {
-		"@id" : "https://w3id.org/engrd/connector/provider"
+	    "@id" : "http://w3id.org/engrd/connector/provider"
+	  },
+	  "ids:securityToken" : {
+	    "@type" : "ids:DynamicAttributeToken",
+	    "@id" : "https://w3id.org/idsa/autogen/dynamicAttributeToken/e9d90738-7ecf-46a9-83f5-ad5e3752a74b",
+	    "ids:tokenValue" : "DummyTokenValue",
+	    "ids:tokenFormat" : {
+	      "@id" : "https://w3id.org/idsa/code/JWT"
+	    }
 	  },
 	  "ids:modelVersion" : "4.1.0",
 	  "ids:issued" : {
-		"@value" : "2021-12-03T16:41:31.515Z",
-		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+	    "@value" : "2022-06-27T10:17:25.025Z",
+	    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+	  },
+	  "ids:correlationMessage" : {
+	    "@id" : "https://w3id.org/idsa/autogen/artifactRequestMessage/e62e0c02-319b-4aa8-8685-1be59276e596"
 	  },
 	  "ids:recipientConnector" : [ {
-		"@id" : "http://w3id.org/engrd/connector"
+	    "@id" : "http://w3id.org/engrd/connector/consumer"
 	  } ],
 	  "ids:recipientAgent" : [ ],
-	  "ids:correlationMessage" : {
-		"@id" : "https://w3id.org/idsa/autogen/artifactRequestMessage/dacd7695-cf7c-43af-b80c-54931b803cfc"
+	  "ids:transferContract" : {
+	    "@id" : "https://w3id.org/idsa/autogen/contractAgreement/7dacb032-ed43-4492-b76f-ff637fb2d417"
 	  }
 	}
-	--aDbue-EGZyC4BcMi99dnOgN5AEfBsGOQrcT
+	--Jg43iZd4C8H3mA96jSHQsSVP_HdzROIqTkFz
 	Content-Disposition: form-data; name="payload"
 	Content-Length: 160
-
-
-	{"firstName":"John","lastName":"Doe","address":"591  Franklin Street, Pennsylvania","checksum":"ABC123 2021/12/03 17:41:31","dateOfBirth":"2021/12/03 17:41:31"}
-	--aDbue-EGZyC4BcMi99dnOgN5AEfBsGOQrcT--
+	
+	{"firstName":"John","lastName":"Doe","address":"591  Franklin Street, Pennsylvania","checksum":"ABC123 2022/06/27 12:17:25","dateOfBirth":"2022/06/27 12:17:25"}
+	--Jg43iZd4C8H3mA96jSHQsSVP_HdzROIqTkFz--
 
 </details>
 
