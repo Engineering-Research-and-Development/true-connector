@@ -1,4 +1,4 @@
-#Testbed 
+# Testbed 
 
 For more information follow the link [Testbed](https://github.com/International-Data-Spaces-Association/IDS-testbed)
 
@@ -297,12 +297,12 @@ And modify following fields:
 
 From previous request get Contract Agreement URI:
 
-![DSC Contract Agreement URI](doc/testbed/DSC_ContractAgreement_URI.JPG "DSC Contract Agreement URI")
+![DSC Contract Agreement URI](doc/testbed/DSC_ContractAgreement_URI.jpg "DSC Contract Agreement URI")
 
 
 Upon successfully executing request, you should receive *ArtifactResponseMessage*, like in the picture:
 
-![DSC Artifact Response Message](doc/testbed/DSC_ArtifactResponseMessage.JPG "DSC Artifact Response Message")
+![DSC Artifact Response Message](doc/testbed/DSC_ArtifactResponseMessage.jpg "DSC Artifact Response Message")
 
 You can scroll down in the Postman response, and get the payload, it should be Base64 encoded string.
 
@@ -330,7 +330,7 @@ ids:Constraint - array of 2 constraints, start and end date
 
 From Testbed postman collection, this time we will use following:
 
-![TC DSC Collection](doc/testbed/TC_DSC_Collection.JPG "TC DSC Collection")
+![TC DSC Collection](doc/testbed/TC_DSC_Collection.jpg "TC DSC Collection")
 
 Open the request, and make modifications, like in the picture (modify recipient to be TrueConnector provider - *https://localhost:8889/data*)
 
