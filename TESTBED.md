@@ -389,3 +389,49 @@ If not replaced by postman, make sure that URL in the postman has correct value 
 
 ![TC Obtain Data](doc/testbed/TC_ObtainData.jpg "TC Obtain Data")
 
+## Broker interaction
+
+### Register connector to Metadata Broker
+
+You can register consumer connector by executing following request:
+
+```
+curl --location --request POST 'https://localhost:8084/proxy' \
+--header 'Content-Type: text/plain' \
+--data-raw '{
+    "multipart": "form",
+    "Forward-To": "https://broker-reverseproxy/infrastructure",
+    "messageType": "ConnectorUpdateMessage",
+}'
+```
+
+If you want to register provider connector, then simply change port from 8084 to 8083.
+
+Upon successful registration, you should receive MessageProcessedNotificationMessage.
+
+### Query broker
+
+Following request can be use to query Metadata Broker
+
+```
+curl --location --request POST 'https://localhost:8084/proxy' \
+--header 'Content-Type: text/plain' \
+--data-raw '{
+    "multipart": "form",
+    "Forward-To": "https://broker-reverseproxy/infrastructure",
+    "messageType": "QueryMessage",
+    "payload": "PREFIX ids: <https://w3id.org/idsa/core/> SELECT ?connectorUri WHERE { ?connectorUri a ids:BaseConnector . } "
+}'
+```
+
+Upon successful registration, you should receive ResultMessage and in payload something like following:
+
+```
+Content-Disposition: form-data; name="payload"
+Content-Length: 56
+
+?connectorUri
+<https://localhost/connectors/-1136570709>
+
+```
+
