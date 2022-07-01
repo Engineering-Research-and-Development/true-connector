@@ -322,9 +322,7 @@ Next to this value, we will also need following ones:
 
 ids:TextResource - https://w3id.org/idsa/autogen/textResource/58898070-162b-4b62-8e7f-524d857bc6ca
 
-ids:Permission - https://w3id.org/idsa/autogen/permission/25765368-e467-4626-b032-34deda92dbdc
-
-ids:Constraint - array of 2 constraints, start and end date
+ids:Permission - array of permissions from Self Description document
 
 ### Description Request Message - get Self Description from TrueConnctor Provider
 
@@ -344,7 +342,7 @@ To narrow search, you can enable 'elementId' and set value of the textResource
 
 ### Contract Negotiation with TrueConnector provider
 
-This step DSC performes automatically, meaning that we do not need to send several requests like we did when TrueConnector was consumer. In order to do so, we need to prepare request, and modify following:
+This step DSC performs automatically, meaning that we do not need to send several requests like we did when TrueConnector was consumer. In order to do so, we need to prepare request, and modify following:
 
 Request parameters:</br>
 Modify all three fields to match TrueConnector as provider.
@@ -352,7 +350,7 @@ Modify all three fields to match TrueConnector as provider.
 ![TC ContractNegotiation 1](doc/testbed/TC_ContractNegotiation_parameters.jpg "TC ContractNegotiation parameters")
 
 Request body:</br>
-Get whole permission from TrueConnector Self Description in body, and modify target element:
+Get whole **permission** from TrueConnector Self Description in body, replace one that is present in request and modify target element:
 
 ![TC_ContractNegotiation 1](doc/testbed/TC_ContractNegotiation_body.jpg "TC ContractNegotiation body")
 
