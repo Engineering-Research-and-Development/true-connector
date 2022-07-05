@@ -40,9 +40,23 @@ services:
       - "ecc-provider:172.17.0.1"
     networks:
       - tc-network
+
+  postgres_provider:
+    image: postgres
+    hostname: postgres_provider
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./postgres_provider.env
+    volumes:
+      - ./app_provider:/var/lib/postgresql/data
+    networks:
+      - tc-network
       
   uc-dataapp-provider:
     image: rdlabengpa/ids_uc_data_app_platoon:v1.2
+    depends_on:
+      - postgres_provider
     environment:
       - TZ=Europe/Rome 
     ports:
@@ -117,8 +131,22 @@ services:
     networks:
       - tc-network
 
+  postgres_consumer:
+    image: postgres
+    hostname: postgres_consumer
+    ports:
+      - "5444:5432"
+    env_file:
+      - ./postgres_consumer.env
+    volumes:
+      - ./app_consumer:/var/lib/postgresql/data
+    networks:
+      - tc-network
+
   uc-dataapp-consumer:
     image: rdlabengpa/ids_uc_data_app_platoon:v1.2
+    depends_on:
+      - postgres_consumer
     environment:
       - TZ=Europe/Rome 
     ports:
@@ -164,6 +192,8 @@ volumes:
   ecc_resources_provider : {}
   be-dataapp_data_receiver : {}
   uc-dataapp_resources_provider : {}
+  app_provider : {}
   ecc_resources_consumer : {}
   be-dataapp_data_sender : {}
   uc-dataapp_resources_consumer : {}
+  app_consumer : {}
