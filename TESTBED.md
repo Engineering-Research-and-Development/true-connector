@@ -102,7 +102,7 @@ and provide location where to save exported certificate. It will be needed in ne
 
 ### Updating DSC truststore
 
-Open DSC truststore file *truststore.p12* using KeyStore Explorer and import TrueConnector certificate, so that DSC can make https calls towards TrueConnector provider
+Open DSC truststore file *truststore.p12* (IDS-testbed\DataspaceConnectorA\conf\) using KeyStore Explorer and import TrueConnector certificate, so that DSC can make https calls towards TrueConnector provider
 
 ![Truststore](doc/testbed/Import_TC_Certificate.jpg "Import TrueConnector Certificate")
 
@@ -235,6 +235,8 @@ and make changes for following elements, to match values in your use case:
 *requestedElement*  - "https://localhost:8084/api/artifacts/6faa6902-3da8-4020-b274-4e81d393abe7"
 
 *ids:Permission* - "@id": "https://localhost:8084/api/rules/363271e4-bf5f-4640-a020-683e529623c3"
+
+*ids:target* - "@id": "https://localhost:8084/api/artifacts/6faa6902-3da8-4020-b274-4e81d393abe7"
                 
 *ids:contractEnd* - @value
 
@@ -399,7 +401,7 @@ curl --location --request POST 'https://localhost:8084/proxy' \
 --data-raw '{
     "multipart": "form",
     "Forward-To": "https://broker-reverseproxy/infrastructure",
-    "messageType": "ConnectorUpdateMessage",
+    "messageType": "ConnectorUpdateMessage"
 }'
 ```
 
@@ -432,4 +434,47 @@ Content-Length: 56
 <https://localhost/connectors/-1136570709>
 
 ```
+## Broker Self Description after registering connector
+
+```
+curl --location --request POST 'https://localhost:8084/proxy' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "multipart": "form",
+    "Forward-To": "https://broker-reverseproxy/infrastructure",
+    "messageType": "DescriptionRequestMessage",
+    "requestedElement":"https://localhost/connectors",
+    "payload":""
+}'
+
+```
+
+and as response, you should get something like following (payload part)
+
+```
+
+{
+  "@graph" : [ {
+    "@id" : "https://localhost/connectors/",
+    "@type" : "ids:ConnectorCatalog",
+    "listedConnector" : "https://localhost/connectors/-1136570709"
+  }, {
+    "@id" : "https://localhost/connectors/-1136570709",
+    "@type" : "ids:BaseConnector",
+    "sameAs" : "https://w3id.org/engrd/connector/consumer",
+    "curator" : "http://consumer.curatorURI.com",
+    "description" : "Data Consumer Connector description",
+    "hasDefaultEndpoint" : "https://178.254.183.40:8091/",
+    "inboundModelVersion" : "4.1.0",
+    "maintainer" : "http://consumer.maintainerURI.com",
+    "outboundModelVersion" : "4.1.0",
+    "publicKey" : "https://w3id.org/idsa/autogen/publicKey/d32d6df9-3990-4500-bbd2-6ed32505f73d",
+    "resourceCatalog" : "https://localhost/connectors/-1136570709/-661022256",
+    "securityProfile" : "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE",
+    "title" : "Data Consumer Connector title"
+  } ],
+  
+  ...
+```
+
 
