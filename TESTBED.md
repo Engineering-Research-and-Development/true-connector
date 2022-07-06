@@ -99,10 +99,11 @@ and provide location where to save exported certificate. It will be needed in ne
 
 ![Certificate_2](doc/testbed/Export_TC_Certificate_2.jpg "Export TrueConnector Certificate 2")
 
+Or you can use already extracted *execution_core_container.cer* file from **ecc_cert** folder.
 
 ### Updating DSC truststore
 
-Open DSC truststore file *truststore.p12* (IDS-testbed\DataspaceConnectorA\conf\) using KeyStore Explorer and import TrueConnector certificate, so that DSC can make https calls towards TrueConnector provider
+Open DSC truststore file *truststore.p12* (IDS-testbed\DataspaceConnectorA\conf\ and IDS-testbed\DataspaceConnectorB\conf\) using KeyStore Explorer and import TrueConnector certificate, so that DSC can make https calls towards TrueConnector provider
 
 ![Truststore](doc/testbed/Import_TC_Certificate.jpg "Import TrueConnector Certificate")
 
@@ -332,7 +333,7 @@ From Testbed postman collection, this time we will use following:
 
 ![TC DSC Collection](doc/testbed/TC_DSC_Collection.jpg "TC DSC Collection")
 
-Open the request, and make modifications, like in the picture (modify recipient to be TrueConnector provider - *https://localhost:8889/data*)
+Open the request, and make modifications, like in the picture (modify recipient to be TrueConnector provider - *https://ecc-provider:8889/data*)
 
 ![TS Description Request](doc/testbed/TS_DescriptionRequest.jpg "TS Description Request")
 
