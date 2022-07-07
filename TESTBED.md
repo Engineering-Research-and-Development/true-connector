@@ -388,6 +388,12 @@ If not replaced by postman, make sure that URL in the postman has correct value 
 
 ### Obtain data
 
+You can find required request for Dataspace Connector in following section:
+
+![TC Obtain Data Request](doc/testbed/TC_ObtainData_request.jpg "TC Obtain Data Request")
+
+After executing request, response should look like in following picture:
+
 ![TC Obtain Data](doc/testbed/TC_ObtainData.jpg "TC Obtain Data")
 
 ## Broker interaction
