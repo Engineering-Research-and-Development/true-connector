@@ -63,7 +63,7 @@ services:
        - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
        - ALIAS=${ALIAS}
        - ECC_HOSTNAME=ecc-provider
-       - ECC_PORT=8889
+       - ECC_PORT=8887
        - TZ=Europe/Rome
        - ISSUER_CONNECTOR_URI=${PROVIDER_ISSUER_CONNECTOR_URI}  
     ports:
