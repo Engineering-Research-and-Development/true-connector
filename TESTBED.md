@@ -57,6 +57,22 @@ application.usageControlVersion=platoon
 application.encodePayload=true
 ```
 
+### Enabling hostname validation
+
+In order to enable this functionality, following changes are required:
+
+**.env** file 
+
+```
+DISABLE_SSL_VALIDATION=false
+
+TRUSTORE_NAME=truststoreEcc.jks
+TRUSTORE_PASSWORD=allpassword
+
+```
+
+This will load certificates from truststore and when making https call towards target system, certificate will be validated against truststore, and if certificate is present and valid, call will be successful, otherwise you will get PKIX exception.
+
 ### Docker networking
 
 Since we are running 2 separate docker containers, one for Testbed and other for TrueConnector, we must connect those 2 environments, so that they could communicate, and "see each other". For example, DAPS is mandatory service, for both environments and it is deployed in Testbed docker container, and by default, not reachable in TrueConnector.
@@ -107,7 +123,7 @@ Open DSC truststore file *truststore.p12* (IDS-testbed\DataspaceConnectorA\conf\
 
 ![Truststore](doc/testbed/Import_TC_Certificate.jpg "Import TrueConnector Certificate")
 
-and provide alias *ecc-provider*
+and provide alias *true-connector*
 
 ![Truststore Alias](doc/testbed/Import_TC_Certificate_alias.jpg "Import TrueConnector Certificate alias")
 
