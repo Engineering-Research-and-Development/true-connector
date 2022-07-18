@@ -236,8 +236,8 @@ By changing this property to false and enabling hostname validation, you will ha
 Set truststore and its password by modifying following properties
 
 ```
-TRUSTORE_NAME=truststore.p12
-TRUSTORE_PASSWORD=password
+TRUSTORE_NAME=truststoreEcc.jks
+TRUSTORE_PASSWORD=allpassword
 ```
 
 ### SSL/HTTPS <a name="ssl"></a>
