@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   ecc-provider: 
-    image: rdlabengpa/ids_execution_core_container:v1.10.0
+    image: ecc
     ports:
       - "${PROVIDER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
       - 8889:8889  #Exposed port for receiving data from another connector (REST)
@@ -77,7 +77,7 @@ services:
       - tc-network
 
   ecc-consumer: 
-    image: rdlabengpa/ids_execution_core_container:v1.10.0
+    image: ecc
     ports:
       - "${CONSUMER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
       - 8890:8889  #Exposed port for receiving data from another connector (REST)

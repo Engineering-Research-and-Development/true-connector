@@ -1,5 +1,102 @@
 # Usage control examples
 
+## Usage Control database
+
+Usage control application uses in-memory database with persisting db on file system (in uc-dataapp_resources_consumer and dataapp_resources_provider folders). This setup can be used for some small POC projects, to verify if integration is working and similar, but for real use case scenario, some more resilient database should be used, for example PostgreSQL (provided config) or some other database.
+
+In order to switch to PostgreSQL database, following steps are needed:
+
+ - modify docker compose file, and add 2 postgres services, one for Consumer and one for Provider
+ 
+```
+  postgres_provider:
+    image: postgres
+    hostname: postgres_provider
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./postgres_provider.env
+    volumes:
+      - ./app_provider:/var/lib/postgresql/data
+
+
+  postgres_consumer:
+    image: postgres
+    hostname: postgres_consumer
+    ports:
+      - "5444:5432"
+    env_file:
+      - ./postgres_consumer.env
+    volumes:
+      - ./app_consumer:/var/lib/postgresql/data
+
+```
+
+ - add dependency for usage control applications to postgres
+ 
+```
+  uc-dataapp-provider:
+  ...
+    depends_on:
+      - postgres_provider
+      
+  uc-dataapp-consumer:
+  ...
+    depends_on:
+      - postgres_consumer
+
+```
+
+ - modify usage control property files, both for consumer and provider *uc-dataapp_resources_provider* and *uc-dataapp_resources_consumer* folders (you should enable PostgreSQL properties and disable H2)
+ 
+```
+## H2 DB with persisting on disk
+#spring.datasource.url=jdbc:h2:file:/etc/platoon_db_provider
+#spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+#spring.datasource.driver-class-name=org.h2.Driver
+
+## PostgreSQL
+spring.jpa.database=POSTGRESQL
+spring.datasource.url = jdbc:postgresql://postgres_provider:5432/usagecontrol_provider
+spring.datasource.driver-class-name = org.postgresql.Driver
+spring.jpa.database-platform = org.hibernate.dialect.PostgreSQLDialect
+
+
+## H2 DB with persisting on disk
+#spring.datasource.url=jdbc:h2:file:/etc/platoon_db_consumer
+#spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+#spring.datasource.driver-class-name=org.h2.Driver
+
+##PostgreSQL
+spring.jpa.database=POSTGRESQL
+spring.datasource.url = jdbc:postgresql://postgres_consumer:5432/usagecontrol_consumer
+spring.datasource.driver-class-name = org.postgresql.Driver
+spring.jpa.database-platform = org.hibernate.dialect.PostgreSQLDialect
+
+```
+
+ - postgres env file
+ 
+2 env files needed for postgres should be created (or use existing ones if provided). If those 2 files are not present, create them, named 
+
+*postgres_provider.env* with content
+
+```
+POSTGRES_USER=connector
+POSTGRES_PASSWORD=12345
+POSTGRES_DB=usagecontrol_provider
+
+```
+
+*postgres_consumer.env* with content
+
+```
+POSTGRES_USER=connector
+POSTGRES_PASSWORD=12345
+POSTGRES_DB=usagecontrol_consumer
+
+```
+
 ## Importing rule in UsageControl dataApp
 
 Until negotiation process is implemented, provided UsageControl dataApp exposes endpoint for importing rules. Following endpoint, for Consumer Usage Control app, can be found at:
