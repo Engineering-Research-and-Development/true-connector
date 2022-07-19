@@ -48,7 +48,7 @@ services:
       - "8043:43"
     volumes:
       - ./policies:/policies
-      - ./uc-dataapp_resources:/config
+      - ./uc-dataapp_resources_mydata:/config
 
   be-dataapp-provider:
     image: rdlabengpa/ids_be_data_app:v0.2.0
@@ -119,7 +119,7 @@ services:
       - "8044:43"
     volumes:
       - ./policies:/policies
-      - ./uc-dataapp_resources:/config
+      - ./uc-dataapp_resources_mydata:/config
 
   be-dataapp-consumer:
     image:  rdlabengpa/ids_be_data_app:v0.2.0
