@@ -109,11 +109,11 @@ Or you can use already pre-configured docker compose file named *docker-compose-
 
 Open *ssl-server.jks* file from TrueConnector/ecc_cert folder using KeyStore Explorer and export certificate (right click on entry name):
 
-![Certificate_1](doc/testbed/Export_TC_Certificate_1.jpg "Export TrueConnector Certificate")
+![Certificate_1](Export_TC_Certificate_1.jpg "Export TrueConnector Certificate")
 
 and provide location where to save exported certificate. It will be needed in next step, to update DSC truststore.
 
-![Certificate_2](doc/testbed/Export_TC_Certificate_2.jpg "Export TrueConnector Certificate 2")
+![Certificate_2](Export_TC_Certificate_2.jpg "Export TrueConnector Certificate 2")
 
 Or you can use already extracted *execution_core_container.cer* file from **ecc_cert** folder.
 
@@ -121,11 +121,11 @@ Or you can use already extracted *execution_core_container.cer* file from **ecc_
 
 Open DSC truststore file *truststore.p12* (IDS-testbed\DataspaceConnectorA\conf\ and IDS-testbed\DataspaceConnectorB\conf\) using KeyStore Explorer and import TrueConnector certificate, so that DSC can make https calls towards TrueConnector provider
 
-![Truststore](doc/testbed/Import_TC_Certificate.jpg "Import TrueConnector Certificate")
+![Truststore](Import_TC_Certificate.jpg "Import TrueConnector Certificate")
 
 and provide alias *true-connector*
 
-![Truststore Alias](doc/testbed/Import_TC_Certificate_alias.jpg "Import TrueConnector Certificate alias")
+![Truststore Alias](Import_TC_Certificate_alias.jpg "Import TrueConnector Certificate alias")
 
 This will be used when DSC makes https request towards ecc-provider, to check hostname with imported certificate.
 
@@ -136,7 +136,7 @@ This will be used when DSC makes https request towards ecc-provider, to check ho
 
 Once both docker compose files are up and running, you can start postman, import Testbed postman connection  from Testbed project(TestbedPreconfiguration.postman_collection.json) and execute several requests (until Register connector), to setup DSC connector:
 
-![DSC preconfiguration](doc/testbed/DSC_preconfiguration.jpg "DSC preconfiguration")
+![DSC preconfiguration](DSC_preconfiguration.jpg "DSC preconfiguration")
 
 This will create contract offer, resource and artifact into DSC connectora (provider)
 
@@ -154,7 +154,7 @@ curl --location --request POST 'https://localhost:8084/proxy' \
 
 This request should return following response:
 
-![DSC Self Description](doc/testbed/DSC_DescriptionRequestMessage.jpg "DSC Self Description")
+![DSC Self Description](DSC_DescriptionRequestMessage.jpg "DSC Self Description")
 
 In payload part of the response, find catalog, and get URL, and update initial request, add requestedElement, like following:
 
@@ -172,11 +172,11 @@ curl --location --request POST 'https://localhost:8084/proxy' \
 
 And sent it again, to get matadata for the catalog
 
-![DSC Catalog](doc/testbed/DSC_Catalog.jpg "DSC Catalog")
+![DSC Catalog](DSC_Catalog.jpg "DSC Catalog")
 
 Find Artifact element, since we will need its id (URL)
 
-![DSC Artifact](doc/testbed/DSC_Artifact.jpg "DSC Artifact")
+![DSC Artifact](DSC_Artifact.jpg "DSC Artifact")
 
 ### Contract Request Message
 
@@ -265,7 +265,7 @@ You need to copy those values into this request from previous response - Catalog
 
 The successful request should return ContractAgreementMessage, like in the picture:
 
-![DSC Contract Agreement](doc/testbed/DSC_ContractAgreement.jpg "DSC Contract Agreement")
+![DSC Contract Agreement](DSC_ContractAgreement.jpg "DSC Contract Agreement")
 
 ### Contract Agreement
 
@@ -285,11 +285,11 @@ curl --location --request POST 'https://localhost:8084/proxy' \
 
 Copy payload part - Contract Agreement add it in payload request, to look like following:
 
-![DSC Contract Agreement Message](doc/testbed/DSC_ContractAgreementMessage.jpg "DSC Contract Agreement Message")
+![DSC Contract Agreement Message](DSC_ContractAgreementMessage.jpg "DSC Contract Agreement Message")
 
 After successful request, you should receive MessageProcessedNotificationMessage:
 
-![DSC Message Processed Notification Message](doc/testbed/DSC_MessageProcessedNotificationMessage.jpg "DSC Message Processed Notification Message")
+![DSC Message Processed Notification Message](DSC_MessageProcessedNotificationMessage.jpg "DSC Message Processed Notification Message")
 
 ### Artifact Request Message
 
@@ -316,12 +316,12 @@ And modify following fields:
 
 From previous request get Contract Agreement URI:
 
-![DSC Contract Agreement URI](doc/testbed/DSC_ContractAgreement_URI.jpg "DSC Contract Agreement URI")
+![DSC Contract Agreement URI](DSC_ContractAgreement_URI.jpg "DSC Contract Agreement URI")
 
 
 Upon successfully executing request, you should receive *ArtifactResponseMessage*, like in the picture:
 
-![DSC Artifact Response Message](doc/testbed/DSC_ArtifactResponseMessage.jpg "DSC Artifact Response Message")
+![DSC Artifact Response Message](DSC_ArtifactResponseMessage.jpg "DSC Artifact Response Message")
 
 You can scroll down in the Postman response, and get the payload, it should be Base64 encoded string.
 
@@ -347,17 +347,17 @@ ids:Permission - array of permissions from Self Description document
 
 From Testbed postman collection, this time we will use following:
 
-![TC DSC Collection](doc/testbed/TC_DSC_Collection.jpg "TC DSC Collection")
+![TC DSC Collection](TC_DSC_Collection.jpg "TC DSC Collection")
 
 Open the request, and make modifications, like in the picture (modify recipient to be TrueConnector provider - *https://ecc-provider:8889/data*)
 
-![TS Description Request](doc/testbed/TS_DescriptionRequest.jpg "TS Description Request")
+![TS Description Request](TS_DescriptionRequest.jpg "TS Description Request")
 
 And fire the request. After successful response, you should get Description Request Message, with TrueConnector Self Description document in payload part.
 
 To narrow search, you can enable 'elementId' and set value of the textResource
 
-![TC TextResource](doc/testbed/TC_TextResource.jpg "TC TextResource")
+![TC TextResource](TC_TextResource.jpg "TC TextResource")
 
 ### Contract Negotiation with TrueConnector provider
 
@@ -366,12 +366,12 @@ This step DSC performs automatically, meaning that we do not need to send severa
 Request parameters:</br>
 Modify all three fields to match TrueConnector as provider.
 
-![TC ContractNegotiation 1](doc/testbed/TC_ContractNegotiation_parameters.jpg "TC ContractNegotiation parameters")
+![TC ContractNegotiation 1](TC_ContractNegotiation_parameters.jpg "TC ContractNegotiation parameters")
 
 Request body:</br>
 Get whole **permission** from TrueConnector Self Description in body, replace one that is present in request and modify target element:
 
-![TC_ContractNegotiation 1](doc/testbed/TC_ContractNegotiation_body.jpg "TC ContractNegotiation body")
+![TC_ContractNegotiation 1](TC_ContractNegotiation_body.jpg "TC ContractNegotiation body")
 
 
 From:
@@ -392,7 +392,7 @@ to:
 
 After successful contract negotiation, response will look like following:
 
-![TC_ContractNegotiation Response](doc/testbed/TC_ContractNegotiation_response.jpg "TC ContractNegotiation Response")
+![TC_ContractNegotiation Response](TC_ContractNegotiation_response.jpg "TC ContractNegotiation Response")
 
 Note the link marked with red, this is the agreement id that will be needed for next step.
 
@@ -400,17 +400,17 @@ Note the link marked with red, this is the agreement id that will be needed for 
 
 If not replaced by postman, make sure that URL in the postman has correct value for 'Consumer agreement ID'
 
-![TC Request Artifact](doc/testbed/TC_ObtainData_datalink.jpg "TC Request Artifact")
+![TC Request Artifact](TC_ObtainData_datalink.jpg "TC Request Artifact")
 
 ### Obtain data
 
 You can find required request for Dataspace Connector in following section:
 
-![TC Obtain Data Request](doc/testbed/TC_ObtainData_request.jpg "TC Obtain Data Request")
+![TC Obtain Data Request](TC_ObtainData_request.jpg "TC Obtain Data Request")
 
 After executing request, response should look like in following picture:
 
-![TC Obtain Data](doc/testbed/TC_ObtainData.jpg "TC Obtain Data")
+![TC Obtain Data](TC_ObtainData.jpg "TC Obtain Data")
 
 ## Broker interaction
 

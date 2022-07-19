@@ -31,6 +31,7 @@ The TRUE Connector is composed of three components:
   * [Clearing House](#clearinghouse)
   * [Broker](#broker)
   * [Usage Control](#usagecontrol)
+  * [MyData Usage Control](#mydata)
 * [Contract Negotiation](#contractnegotiation)
   * [Get offered resource](#get_offered_resource)
   * [Description Request Message](#description_request_message)
@@ -459,7 +460,7 @@ application.isEnabledUsageControl=true
 
 ```
 
-### MyData Usage Control
+### MyData Usage Control <a name="mydata"></a>
 
 The TRUE Connector integrates both the [Platoon Usage Control Data App](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon) and [MyData Usage Control Data App](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app) for enforcing the Usage Control. 
 True Connector is by default configured to use Platoon Usage Control, in order to use MyData follow the instructions in the [document](doc/MYDATA_USAGE_CONTROL.md).

@@ -8,6 +8,46 @@ application.usageControlVersion=mydata
 
 It is located in  **application-docker.properties** in folders *be-dataapp_resources*, *ecc_resources_consumer* and *ecc_resources_provider*.
 
+Edit the **docker-compose.yml** file and replace existing *uc-dataapp-provider* and *uc-dataapp-consumer* services with following:
+
+```
+uc-dataapp-provider:
+    image: rdlabengpa/ids_uc_data_app:v0.0.6
+    environment:
+      - TZ=Europe/Rome 
+    ports:
+      - "9552:9555"
+      - "8043:43"
+    volumes:
+      - ./policies:/policies
+      - ./uc-dataapp_resources_mydata:/config
+```
+
+```
+uc-dataapp-consumer:
+    image: rdlabengpa/ids_uc_data_app:v0.0.6
+    environment:
+      - TZ=Europe/Rome  
+    ports:
+      - "9553:9555"
+      - "8044:43"
+    volumes:
+      - ./policies:/policies
+      - ./uc-dataapp_resources_mydata:/config
+```
+
+Change *UC_DATAAPP_URI* to in the **docker-compose.yml** file for both *ecc-provider*:
+
+```
+- UC_DATAAPP_URI=http://uc-dataapp-provider:9555
+```
+
+and *ecc-consumer* services:
+
+```
+- UC_DATAAPP_URI=http://uc-dataapp-consumer:9555
+```
+
 # Usage control examples
 
 ## Importing rule in UsageControl dataApp
