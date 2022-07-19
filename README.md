@@ -450,7 +450,7 @@ application.isEnabledClearingHouse=true
 Information on how TRUE Connector can interact with Broker, can be found on following [link](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/BROKER.md)
 
 ### Usage Control <a name="usagecontrol"></a>
-The TRUE Connector integrates both the [Platoon Usage Control Data App](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon) and [MyData Usage Control Data App](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app) for enforcing the Usage Control. Details about the PMP and PEP components for [MyData](doc/MYDATA_USAGE_CONTROL_RULES.md) and [Platoon](doc/PLATOON_USAGE_CONTROL_RULES.md).
+The TRUE Connector integrates both the [Platoon Usage Control Data App](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon) and [MyData Usage Control Data App](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app) for enforcing the Usage Control. Details about the PMP and PEP components and how to switch to PostgeSQL from the default H2 in-memory database you can find [here](doc/PLATOON_USAGE_CONTROL.md).
 
 Since Usage Control is disabled by default, in order to enable it, set following property to true:
 
@@ -459,12 +459,9 @@ application.isEnabledUsageControl=true
 
 ```
 
-And choose the desired Usage Controll app by setting the following property to **mydata** or **platoon**
+### MyData Usage Control
 
-
-```
-application.usageControlVersion=
-```
+True Connector is by default configured to use Platoon Usage Control, in order to use MyData follow the instructions in the [document](doc/MYDATA_USAGE_CONTROL.md).
 
 ## Contract Negotiation - simple flow <a name="contractnegotiation"></a>
 

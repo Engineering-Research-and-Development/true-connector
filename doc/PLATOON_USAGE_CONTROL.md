@@ -1,6 +1,4 @@
-# Usage control examples
-
-## Usage Control database
+# Usage Control database
 
 Usage control application uses in-memory database with persisting db on file system (in uc-dataapp_resources_consumer and dataapp_resources_provider folders). This setup can be used for some small POC projects, to verify if integration is working and similar, but for real use case scenario, some more resilient database should be used, for example PostgreSQL (provided config) or some other database.
 
@@ -96,6 +94,8 @@ POSTGRES_PASSWORD=12345
 POSTGRES_DB=usagecontrol_consumer
 
 ```
+
+# Usage control examples
 
 ## Importing rule in UsageControl dataApp
 

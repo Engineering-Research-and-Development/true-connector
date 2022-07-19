@@ -1,3 +1,13 @@
+# Switch to MyData Usage Control
+
+To use MyData Usage Control set the following property to **mydata**.
+
+```
+application.usageControlVersion=mydata
+```
+
+It is located in  **application-docker.properties** in folders *be-dataapp_resources*, *ecc_resources_consumer* and *ecc_resources_provider*.
+
 # Usage control examples
 
 ## Importing rule in UsageControl dataApp
