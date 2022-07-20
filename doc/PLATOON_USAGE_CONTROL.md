@@ -4,7 +4,7 @@ Usage control application uses in-memory database with persisting db on file sys
 
 In order to switch to PostgreSQL database, following steps are needed:
 
- - modify docker compose file, and add 2 postgres services, one for Consumer and one for Provider
+ - modify docker compose file, and add 2 PostgreSQL services, one for Provider and one for Consumer:
  
 ```
   postgres_provider:
@@ -45,7 +45,7 @@ In order to switch to PostgreSQL database, following steps are needed:
 
 ```
 
- - modify usage control property files, both for consumer and provider *uc-dataapp_resources_provider* and *uc-dataapp_resources_consumer* folders (you should enable PostgreSQL properties and disable H2)
+ - modify usage control property files, both for *uc-dataapp_resources_provider* 
  
 ```
 ## H2 DB with persisting on disk
@@ -59,7 +59,11 @@ spring.datasource.url = jdbc:postgresql://postgres_provider:5432/usagecontrol_pr
 spring.datasource.driver-class-name = org.postgresql.Driver
 spring.jpa.database-platform = org.hibernate.dialect.PostgreSQLDialect
 
+```
 
+and *uc-dataapp_resources_consumer* 
+
+```
 ## H2 DB with persisting on disk
 #spring.datasource.url=jdbc:h2:file:/etc/platoon_db_consumer
 #spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
@@ -75,7 +79,7 @@ spring.jpa.database-platform = org.hibernate.dialect.PostgreSQLDialect
 
  - postgres env file
  
-2 env files needed for postgres should be created (or use existing ones if provided). If those 2 files are not present, create them, named 
+2 env files needed for PostgreSQL should be created, in root of TrueConnector directory: 
 
 *postgres_provider.env* with content
 
@@ -146,7 +150,7 @@ In the snippet below is located an example of the complex rule: spatial rule def
 [Complex Rule](policy_examples/complex.json)
 
 
-## NOT APPLICABLE AT TEH MOMENT - Modifier Rule
+## NOT APPLICABLE AT THE MOMENT - Modifier Rule
 
 ### Anonymize
 The following rule describes an example of modifier rule, anonymize, which will modify the payload response using json path. The current limitation is that the payload must be json string in order to be able to apply rules with modifiers.
