@@ -17,6 +17,7 @@ The TRUE Connector is composed of three components:
   * [Starting and stopping containers](#startstop)
 * [Endpoints](#endpoints)
 * [Connector reachability](#reachability)
+* [Connector Id](#connectorId)
 * [How to Exchange Data](#exchangedata)
 * [Modifying configuration](#modifyconfiguration)
   * [Enable hostname validation](#hosnamevalidation)
@@ -158,7 +159,7 @@ application.selfdescription.curator=http://curatorURI.com
 application.selfdescription.maintainer=http://maintainerURI.com
 ```
 
-### Connector Id
+### Connector Id <a name="connectorId"></a>
 
 In .env file, you can find 2 properties, one for Provider and one for Consumer, called
 
