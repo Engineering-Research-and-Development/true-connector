@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "a3b20a91-2d1d-44c0-875c-9be8da80d5ec",
+		"name": "TRUEConnector-Platoon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ArtifactRequestMessage",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"multipart\": \"form\",\n    \"Forward-To\": \"https://ecc-provider:8889/data\",\n    \"messageType\":\"ArtifactRequestMessage\",\n    \"requestedArtifact\": \"http://w3id.org/engrd/connector/artifact/1\",\n    \"transferContract\" : \"https://w3id.org/idsa/autogen/contractAgreement/7dacb032-ed43-4492-b76f-ff637fb2d417\"\n}"
+				},
+				"url": {
+					"raw": "https://localhost:8084/proxy",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"proxy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Description Request Message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"multipart\": \"form\",\n    \"Forward-To\": \"https://ecc-provider:8889/data\",\n    \"messageType\":\"DescriptionRequestMessage\"\n}"
+				},
+				"url": {
+					"raw": "https://localhost:8084/proxy",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"proxy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ContractRequestMessage",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"multipart\": \"form\",\n\t\"Forward-To\": \"https://ecc-provider:8889/data\",\n\t\"messageType\": \"ContractRequestMessage\",\n\t\"requestedElement\": \"http://w3id.org/engrd/connector/artifact/1\",\n    \"payload\" :\n     {\n  \"@context\" : {\n    \"ids\" : \"https://w3id.org/idsa/core/\",\n    \"idsc\" : \"https://w3id.org/idsa/code/\"\n  },\n  \"@type\" : \"ids:ContractRequest\",\n  \"@id\" : \"https://w3id.org/idsa/autogen/contractRequest/46863e9c-e7ce-4041-959c-11b317a10c5c\",\n  \"ids:permission\" : [ {\n          \"@type\" : \"ids:Permission\",\n          \"@id\" : \"https://w3id.org/idsa/autogen/permission/57c1728b-788d-4b80-ae1d-02a7d46eb1a0\",\n          \"ids:target\" : {\n            \"@id\" : \"http://w3id.org/engrd/connector/artifact/1\"\n          },\n          \"ids:assignee\" : [ ],\n          \"ids:assigner\" : [ ],\n          \"ids:action\" : [ {\n            \"@id\" : \"https://w3id.org/idsa/code/USE\"\n          } ],\n          \"ids:preDuty\" : [ ],\n          \"ids:postDuty\" : [ ],\n          \"ids:constraint\" : [ {\n            \"@type\" : \"ids:Constraint\",\n            \"@id\" : \"https://w3id.org/idsa/autogen/constraint/07f7dd8b-0b47-46e9-8d25-7205ea243de9\",\n            \"ids:leftOperand\" : {\n              \"@id\" : \"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"\n            },\n            \"ids:operator\" : {\n              \"@id\" : \"https://w3id.org/idsa/code/AFTER\"\n            },\n            \"ids:rightOperand\" : {\n              \"@value\" : \"2022-06-20T09:43:49Z\",\n              \"@type\" : \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\n            },\n            \"ids:pipEndpoint\" : {\n              \"@id\" : \"http://pip.endpoint.after\"\n            }\n          }, {\n            \"@type\" : \"ids:Constraint\",\n            \"@id\" : \"https://w3id.org/idsa/autogen/constraint/5832a389-9af1-4e2f-9ab4-038ac5db0091\",\n            \"ids:leftOperand\" : {\n              \"@id\" : \"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"\n            },\n            \"ids:operator\" : {\n              \"@id\" : \"https://w3id.org/idsa/code/BEFORE\"\n            },\n            \"ids:rightOperand\" : {\n              \"@value\" : \"2022-07-27T09:43:49Z\",\n              \"@type\" : \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\n            },\n            \"ids:pipEndpoint\" : {\n              \"@id\" : \"http://pip.endpoint.before\"\n            }\n          } ],\n          \"ids:description\" : [ ],\n          \"ids:title\" : [ ]\n        } ],\n  \"ids:provider\" : {\n    \"@id\" : \"http://w3id.org/engrd/connector/provider\"\n  },\n  \"ids:obligation\" : [ ],\n  \"ids:prohibition\" : [ ],\n  \"ids:consumer\" : {\n    \"@id\" : \"http://w3id.org/engrd/connector/consumer\"\n  }\n}\n\t}"
+				},
+				"url": {
+					"raw": "https://localhost:8084/proxy",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"proxy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ContractAgreementMessage",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\t\"multipart\": \"form\",\n\t\t\"Forward-To\": \"https://ecc-provider:8889/data\",\n\t\t\"messageType\": \"ContractAgreementMessage\",\n\t\t\"requestedArtifact\": \"http://w3id.org/engrd/connector/artifact/1\",\n\t\t\"payload\" : \n        {\n  \"@context\" : {\n    \"ids\" : \"https://w3id.org/idsa/core/\",\n    \"idsc\" : \"https://w3id.org/idsa/code/\"\n  },\n  \"@type\" : \"ids:ContractAgreement\",\n  \"@id\" : \"https://w3id.org/idsa/autogen/contractAgreement/7dacb032-ed43-4492-b76f-ff637fb2d417\",\n  \"ids:permission\" : [ {\n    \"@type\" : \"ids:Permission\",\n    \"@id\" : \"https://w3id.org/idsa/autogen/permission/57c1728b-788d-4b80-ae1d-02a7d46eb1a0\",\n    \"ids:target\" : {\n      \"@id\" : \"http://w3id.org/engrd/connector/artifact/1\"\n    },\n    \"ids:assignee\" : [ ],\n    \"ids:assigner\" : [ ],\n    \"ids:action\" : [ {\n      \"@id\" : \"https://w3id.org/idsa/code/USE\"\n    } ],\n    \"ids:preDuty\" : [ ],\n    \"ids:postDuty\" : [ ],\n    \"ids:constraint\" : [ {\n      \"@type\" : \"ids:Constraint\",\n      \"@id\" : \"https://w3id.org/idsa/autogen/constraint/07f7dd8b-0b47-46e9-8d25-7205ea243de9\",\n      \"ids:leftOperand\" : {\n        \"@id\" : \"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"\n      },\n      \"ids:operator\" : {\n        \"@id\" : \"https://w3id.org/idsa/code/AFTER\"\n      },\n      \"ids:rightOperand\" : {\n        \"@value\" : \"2022-06-20T09:43:49Z\",\n        \"@type\" : \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\n      },\n      \"ids:pipEndpoint\" : {\n        \"@id\" : \"http://pip.endpoint.after\"\n      }\n    }, {\n      \"@type\" : \"ids:Constraint\",\n      \"@id\" : \"https://w3id.org/idsa/autogen/constraint/5832a389-9af1-4e2f-9ab4-038ac5db0091\",\n      \"ids:leftOperand\" : {\n        \"@id\" : \"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"\n      },\n      \"ids:operator\" : {\n        \"@id\" : \"https://w3id.org/idsa/code/BEFORE\"\n      },\n      \"ids:rightOperand\" : {\n        \"@value\" : \"2022-07-27T09:43:49Z\",\n        \"@type\" : \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\n      },\n      \"ids:pipEndpoint\" : {\n        \"@id\" : \"http://pip.endpoint.before\"\n      }\n    } ],\n    \"ids:description\" : [ ],\n    \"ids:title\" : [ ]\n  } ],\n  \"ids:provider\" : {\n    \"@id\" : \"http://w3id.org/engrd/connector/provider\"\n  },\n  \"ids:contractStart\" : {\n    \"@value\" : \"2022-06-27T09:42:41.996Z\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\n  },\n  \"ids:contractDate\" : {\n    \"@value\" : \"2022-06-27T09:43:49.320Z\",\n    \"@type\" : \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\n  },\n  \"ids:consumer\" : {\n    \"@id\" : \"http://w3id.org/engrd/connector/consumer\"\n  },\n  \"ids:prohibition\" : [ ],\n  \"ids:obligation\" : [ ]\n}\n\t}"
+				},
+				"url": {
+					"raw": "https://localhost:8084/proxy",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"proxy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Connector to Broker",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"multipart\": \"form\",\n    \"Forward-To\": \"https://broker-reverseproxy/infrastructure\",\n    \"messageType\": \"ConnectorUpdateMessage\",\n}"
+				},
+				"url": {
+					"raw": "https://localhost:8084/proxy",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"proxy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Broker",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"multipart\": \"form\",\n    \"Forward-To\": \"https://broker-reverseproxy/infrastructure\",\n    \"messageType\": \"QueryMessage\",\n    \"payload\": \"PREFIX ids: <https://w3id.org/idsa/core/> SELECT ?connectorUri WHERE { ?connectorUri a ids:BaseConnector . } \"\n}"
+				},
+				"url": {
+					"raw": "https://localhost:8084/proxy",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"proxy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Broker Self Description - connectors",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"multipart\": \"form\",\n    \"Forward-To\": \"https://broker-reverseproxy/infrastructure\",\n    \"messageType\": \"DescriptionRequestMessage\",\n    \"requestedElement\":\"https://localhost/connectors\",\n    \"payload\":\"\"\n}"
+				},
+				"url": {
+					"raw": "https://localhost:8084/proxy",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"proxy"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

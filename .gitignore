@@ -1,1 +1,3 @@
 .project
+app_consumer/**
+app_provider/**

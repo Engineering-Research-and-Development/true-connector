@@ -1,7 +1,7 @@
-version: '2.2'
+version: '3.1'
 services:
   ecc-provider: 
-    image: rdlabengpa/ids_execution_core_container:v1.9.3
+    image: rdlabengpa/ids_execution_core_container:v1.10.0
     ports:
       - "${PROVIDER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
       - 8889:8889  #Exposed port for receiving data from another connector (REST)
@@ -15,7 +15,7 @@ services:
        - IDSCP2=${IDSCP2}
        - WS_EDGE=${PROVIDER_WS_EDGE}
        - WS_ECC=${WS_ECC}
-       - UC_DATAAPP_URI=${PROVIDER_UC_DATAAPP_URI}
+       - UC_DATAAPP_URI=http://uc-dataapp-provider:8080/platoontec/PlatoonDataUsage/1.0/
        - CLEARING_HOUSE=${CLEARING_HOUSE}
        - PUBLIC_PORT=${PROVIDER_PORT}
        - BROKER_URL=${BROKER_URL}
@@ -27,9 +27,9 @@ services:
        - KEY_PASSWORD=${KEY_PASSWORD}
        - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
        - ALIAS=${ALIAS}
-       - DAPS_KEYSTORE_NAME=${DAPS_KEYSTORE_NAME}
-       - DAPS_KEYSTORE_PASSWORD=${DAPS_KEYSTORE_PASSWORD}
-       - DAPS_KEYSTORE_ALIAS=${DAPS_KEYSTORE_ALIAS}
+       - DAPS_KEYSTORE_NAME=${PROVIDER_DAPS_KEYSTORE_NAME}
+       - DAPS_KEYSTORE_PASSWORD=${PROVIDER_DAPS_KEYSTORE_PASSWORD}
+       - DAPS_KEYSTORE_ALIAS=${PROVIDER_DAPS_KEYSTORE_ALIAS}
        - TRUSTORE_NAME=${TRUSTORE_NAME}
        - TRUSTORE_PASSWORD=${TRUSTORE_PASSWORD}
        - TZ=Europe/Rome                
@@ -40,18 +40,16 @@ services:
       - "ecc-provider:172.17.0.1"
 
   uc-dataapp-provider:
-    image: rdlabengpa/ids_uc_data_app:v0.0.6
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.2
     environment:
       - TZ=Europe/Rome 
     ports:
-      - "9552:9555"
-      - "8043:43"
+      - "9552:8080"
     volumes:
-      - ./policies:/policies
-      - ./uc-dataapp_resources:/config
+      - ./uc-dataapp_resources_provider:/etc
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.1.2
+    image: rdlabengpa/ids_be_data_app:v0.2.0
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - DATA_APP_MULTIPART=${PROVIDER_MULTIPART_EDGE}
@@ -61,8 +59,9 @@ services:
        - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
        - ALIAS=${ALIAS}
        - ECC_HOSTNAME=ecc-provider
-       - ECC_PORT=8889
-       - TZ=Europe/Rome 
+       - ECC_PORT=8887
+       - TZ=Europe/Rome
+       - ISSUER_CONNECTOR_URI=${PROVIDER_ISSUER_CONNECTOR_URI}  
     ports:
       - "8083:8083"
       - "9000:9000"
@@ -72,7 +71,7 @@ services:
       - ./ecc_cert:/cert
 
   ecc-consumer: 
-    image: rdlabengpa/ids_execution_core_container:v1.9.3
+    image: rdlabengpa/ids_execution_core_container:v1.10.0
     ports:
       - "${CONSUMER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
       - 8890:8889  #Exposed port for receiving data from another connector (REST)
@@ -87,7 +86,7 @@ services:
        - WS_EDGE=${CONSUMER_WS_EDGE}
        - WS_ECC=${WS_ECC}
        - CLEARING_HOUSE=${CLEARING_HOUSE}
-       - UC_DATAAPP_URI=${CONSUMER_UC_DATAAPP_URI}
+       - UC_DATAAPP_URI=http://uc-dataapp-consumer:8080/platoontec/PlatoonDataUsage/1.0/
        - PUBLIC_PORT=${CONSUMER_PORT}
        - BROKER_URL=${BROKER_URL}
        - DISABLE_SSL_VALIDATION=${DISABLE_SSL_VALIDATION}
@@ -98,9 +97,9 @@ services:
        - KEY_PASSWORD=${KEY_PASSWORD}
        - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
        - ALIAS=${ALIAS}
-       - DAPS_KEYSTORE_NAME=${DAPS_KEYSTORE_NAME}
-       - DAPS_KEYSTORE_PASSWORD=${DAPS_KEYSTORE_PASSWORD}
-       - DAPS_KEYSTORE_ALIAS=${DAPS_KEYSTORE_ALIAS}
+       - DAPS_KEYSTORE_NAME=${CONSUMER_DAPS_KEYSTORE_NAME}
+       - DAPS_KEYSTORE_PASSWORD=${CONSUMER_DAPS_KEYSTORE_PASSWORD}
+       - DAPS_KEYSTORE_ALIAS=${CONSUMER_DAPS_KEYSTORE_ALIAS}
        - TRUSTORE_NAME=${TRUSTORE_NAME}
        - TRUSTORE_PASSWORD=${TRUSTORE_PASSWORD}
        - TZ=Europe/Rome                
@@ -111,18 +110,16 @@ services:
       - "ecc-consumer:172.17.0.1"
 
   uc-dataapp-consumer:
-    image: rdlabengpa/ids_uc_data_app:v0.0.6
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.2
     environment:
-      - TZ=Europe/Rome  
+      - TZ=Europe/Rome 
     ports:
-      - "9553:9555"
-      - "8044:43"
+      - "9553:8080"
     volumes:
-      - ./policies:/policies
-      - ./uc-dataapp_resources:/config
-
+      - ./uc-dataapp_resources_consumer:/etc
+ 
   be-dataapp-consumer:
-    image:  rdlabengpa/ids_be_data_app:v0.1.2
+    image:  rdlabengpa/ids_be_data_app:v0.2.0
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - DATA_APP_MULTIPART=${CONSUMER_MULTIPART_EDGE}
@@ -133,7 +130,8 @@ services:
        - ALIAS=${ALIAS}
        - ECC_HOSTNAME=ecc-consumer
        - ECC_PORT=8887
-       - TZ=Europe/Rome                
+       - TZ=Europe/Rome
+       - ISSUER_CONNECTOR_URI=${CONSUMER_ISSUER_CONNECTOR_URI}            
     ports:
       - "8084:8083"
       - "9001:9000"
@@ -141,3 +139,13 @@ services:
       - ./be-dataapp_resources:/config
       - ./be-dataapp_data_sender:/data
       - ./ecc_cert:/cert
+
+volumes:
+  ecc_cert : {}
+  be-dataapp_resources: {}
+  ecc_resources_provider : {}
+  be-dataapp_data_receiver : {}
+  uc-dataapp_resources_provider : {}
+  ecc_resources_consumer : {}
+  be-dataapp_data_sender : {}
+  uc-dataapp_resources_consumer : {}

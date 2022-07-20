@@ -1,0 +1,73 @@
+{
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
+  },
+  "@type" : "ids:ContractAgreement",
+  "@id" : "https://w3id.org/idsa/autogen/contractAgreement/754cdc2a-87e7-4280-9233-a9173b42a2fa",
+  "ids:contractStart" : {
+    "@value" : "2022-06-24T14:17:38.200+02:00",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  },
+  "ids:consumer" : {
+    "@id" : "http://w3id.org/engrd/connector/consumer"
+  },
+  "ids:contractDate" : {
+    "@value" : "2022-06-24T14:17:38.199+02:00",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  },
+  "ids:permission" : [ {
+    "@type" : "ids:Permission",
+    "@id" : "https://w3id.org/idsa/autogen/permission/052bb560-3722-4f10-85bd-7f8ba249a62d",
+    "ids:constraint" : [ {
+      "@type" : "ids:Constraint",
+      "@id" : "https://w3id.org/idsa/autogen/constraint/b56a95b2-60fe-4060-95ff-49d24488235f",
+      "ids:leftOperand" : {
+        "@id" : "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
+      },
+      "ids:rightOperand" : {
+        "@value" : "2022-06-17T12:17:37Z",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      },
+      "ids:pipEndpoint" : {
+        "@id" : "http://pip.endpoint.after"
+      },
+      "ids:operator" : {
+        "@id" : "https://w3id.org/idsa/code/AFTER"
+      }
+    }, {
+      "@type" : "ids:Constraint",
+      "@id" : "https://w3id.org/idsa/autogen/constraint/daeeb579-1905-4c35-ae48-8ebd5a955493",
+      "ids:leftOperand" : {
+        "@id" : "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
+      },
+      "ids:rightOperand" : {
+        "@value" : "2022-07-24T12:17:37Z",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      },
+      "ids:pipEndpoint" : {
+        "@id" : "http://pip.endpoint.before"
+      },
+      "ids:operator" : {
+        "@id" : "https://w3id.org/idsa/code/BEFORE"
+      }
+    } ],
+    "ids:action" : [ {
+      "@id" : "https://w3id.org/idsa/code/USE"
+    } ],
+    "ids:description" : [ {
+      "@value" : "Description of contract agreement",
+      "@type" : "http://www.w3.org/2001/XMLSchema#string"
+    } ],
+    "ids:title" : [ {
+      "@value" : "Permission title for artifact 1",
+      "@type" : "http://www.w3.org/2001/XMLSchema#string"
+    } ],
+    "ids:target" : {
+      "@id" : "http://w3id.org/engrd/connector/artifact/1"
+    }
+  } ],
+  "ids:provider" : {
+    "@id" : "http://w3id.org/engrd/connector/provider"
+  }
+}
