@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   ecc-provider: 
-    image: rdlabengpa/ids_execution_core_container:v1.10.0
+    image: rdlabengpa/ids_execution_core_container:v1.10.1
     ports:
       - "${PROVIDER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
       - 8889:8889  #Exposed port for receiving data from another connector (REST)
@@ -49,7 +49,7 @@ services:
       - ./uc-dataapp_resources_provider:/etc
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.2.0
+    image: rdlabengpa/ids_be_data_app:v0.2.1
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - DATA_APP_MULTIPART=${PROVIDER_MULTIPART_EDGE}
@@ -71,7 +71,7 @@ services:
       - ./ecc_cert:/cert
 
   ecc-consumer: 
-    image: rdlabengpa/ids_execution_core_container:v1.10.0
+    image: rdlabengpa/ids_execution_core_container:v1.10.1
     ports:
       - "${CONSUMER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
       - 8890:8889  #Exposed port for receiving data from another connector (REST)
@@ -119,7 +119,7 @@ services:
       - ./uc-dataapp_resources_consumer:/etc
  
   be-dataapp-consumer:
-    image:  rdlabengpa/ids_be_data_app:v0.2.0
+    image:  rdlabengpa/ids_be_data_app:v0.2.1
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
        - DATA_APP_MULTIPART=${CONSUMER_MULTIPART_EDGE}
