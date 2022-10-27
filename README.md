@@ -34,6 +34,7 @@ The TRUE Connector is composed of three components:
   * [Broker](#broker)
   * [Usage Control](#usagecontrol)
   * [MyData Usage Control](#mydata)
+  * [Audit logs](#auditlogs)
 * [Contract Negotiation](#contractnegotiation)
   * [Get offered resource](#get_offered_resource)
   * [Description Request Message](#description_request_message)
@@ -41,6 +42,7 @@ The TRUE Connector is composed of three components:
   * [Contract Agreement request](#contract_agreement_request)
   * [Get offered resource after access is granted](#get_offered_resource_granted)
 * [Self Description API](#selfdescription)
+* [Postman collection](#postman)
 * [License](#license)
 
 ## Introduction  <a name="introduction"></a>
@@ -522,6 +524,10 @@ application.isEnabledUsageControl=true
 
 The TRUE Connector integrates both the [Platoon Usage Control Data App](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon) and [MyData Usage Control Data App](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app) for enforcing the Usage Control. 
 True Connector is by default configured to use Platoon Usage Control, in order to use MyData follow the instructions in the [document](doc/MYDATA_USAGE_CONTROL.md).
+
+### Audit logs <a name="auditlogs"></a>
+
+Audit logging is turned on by default. If you wish to configure it or even turn off please follow this [document](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/AUDIT.md) .
 
 ## Contract Negotiation - simple flow <a name="contractnegotiation"></a>
 
@@ -1208,6 +1214,18 @@ application.selfdescription.maintainer=
 ```
 
 With single offered resource, artifact and contract offer.
+
+## Postman collection <a name="postman"></a>
+
+There is a postman collection which can be used to initiate requests that are most commonly used: perform contract negotiation, get artifact, broker interaction, manipulate Self Description document via API.
+
+![Postman collection](doc/postman_collection.png?raw=true "Postman collection")
+
+[TRUEConnector.postman_collection](TRUEConnector.postman_collection.json)</br>
+[TRUEConnector enviroment.postman_environment](TRUEConnector enviroment.postman_environment.json)
+
+This collection comes with predefined environments so be sure to also import environment file.
+
 
 ## License <a name="license"></a>
 The TRUE Connector components are released following different licenses:
