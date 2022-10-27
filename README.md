@@ -1222,7 +1222,8 @@ There is a postman collection which can be used to initiate requests that are mo
 ![Postman collection](doc/postman_collection.png?raw=true "Postman collection")
 
 [TRUEConnector.postman_collection](TRUEConnector.postman_collection.json)</br>
-[TRUEConnector enviroment.postman_environment](TRUEConnector enviroment.postman_environment.json)
+
+[TRUEConnector enviroment.postman_environment](TRUEConnector_enviroment.postman_environment.json)
 
 This collection comes with predefined environments so be sure to also import environment file.
 
