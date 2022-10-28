@@ -44,8 +44,8 @@ whether it is already implemented or not.
 | - | CR 1.12     | System use notification | |
 | NA | CR 1.14     | Strength of symmetric key-based authentication| Using asymetric key pair |
 | x? | CR 2.1      | Authorization enforcement | |
-| NA | CR 2.2      | Wireless use control | |
-| NA | CR 2.5      | Session lock | |
+| NA | CR 2.2      | Wireless use control | We do not have wireless control|
+| NA | CR 2.5      | Session lock | We do not have sessions |
 | x | CR 2.8      | Auditable events | |
 | x? | CR 2.9      | Audit storage capacity | |
 | x | CR 2.10     | Response to audit processing failures | |
