@@ -1,0 +1,1155 @@
+{
+	"info": {
+		"_postman_id": "2794f76f-549b-4e0b-adf0-af3c54288ed0",
+		"name": "TRUEConnector",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21815221"
+	},
+	"item": [
+		{
+			"name": "SelfDescription API",
+			"item": [
+				{
+					"name": "ContractOffer",
+					"item": [
+						{
+							"name": "ContractOffer",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.response.to.be.ok;\r",
+											"\r",
+											"pm.test(\"Contract offer\", function () {\r",
+											"//http://w3id.org/engrd/connector/artifact/test\r",
+											"  pm.expect(pm.response.text()).to.include(\"ids:Permission\");\r",
+											"  pm.expect(pm.response.text()).to.include(\"ids:ContractOffer\");\r",
+											"  pm.expect(pm.response.text()).to.include(\"ids:Constraint\");\r",
+											"  pm.expect(pm.response.text()).to.include(\"http://w3id.org/engrd/connector/artifact\");\r",
+											"  });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "contractOffer",
+										"value": "{{contractOffer}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Self_Description_URL}}/api/contractOffer/",
+									"host": [
+										"{{Self_Description_URL}}"
+									],
+									"path": [
+										"api",
+										"contractOffer",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ContractOffer - Create",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.response.to.be.ok;\r",
+											"\r",
+											"pm.test(\"ContractOffer Created\", function () {\r",
+											"//http://w3id.org/engrd/connector/artifact/test\r",
+											"  pm.expect(pm.response.text()).to.include(\"http://w3id.org/engrd/connector/artifact/test\");\r",
+											"  });"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var dateNow = new Date();\r",
+											"pm.environment.set(\"futureDate\", new Date(dateNow.setDate(dateNow.getDate() + 60)).toISOString());"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "resource",
+										"value": "{{offeredResource}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"@context\": {\r\n        \"ids\": \"https://w3id.org/idsa/core/\",\r\n        \"idsc\": \"https://w3id.org/idsa/code/\"\r\n    },\r\n    \"@type\": \"ids:ContractOffer\",\r\n    \"@id\": \"https://w3id.org/idsa/autogen/contractOffer/{{$guid}}\",\r\n    \"ids:permission\": [\r\n        {\r\n            \"@type\": \"ids:Permission\",\r\n            \"@id\": \"https://w3id.org/idsa/autogen/permission/{{$guid}}\",\r\n            \"ids:target\": {\r\n                \"@id\": \"http://w3id.org/engrd/connector/artifact/test\"\r\n            },\r\n            \"ids:description\": [\r\n                {\r\n                    \"@value\": \"provide-access\",\r\n                    \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n                }\r\n            ],\r\n            \"ids:action\": [\r\n                {\r\n                    \"@id\": \"https://w3id.org/idsa/code/USE\"\r\n                }\r\n            ],\r\n            \"ids:title\": [\r\n                {\r\n                    \"@value\": \"Example Usage Policy\",\r\n                    \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n                }\r\n            ],\r\n            \"ids:preDuty\": [],\r\n            \"ids:constraint\": [\r\n                {\r\n                    \"@type\": \"ids:Constraint\",\r\n                    \"@id\": \"https://w3id.org/idsa/autogen/constraint/{{$guid}}\",\r\n                    \"ids:rightOperand\": {\r\n                        \"@value\": \"{{$isoTimestamp}}\",\r\n                        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n                    },\r\n                    \"ids:leftOperand\": {\r\n                        \"@id\": \"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"\r\n                    },\r\n                    \"ids:operator\": {\r\n                        \"@id\": \"https://w3id.org/idsa/code/AFTER\"\r\n                    }\r\n                },\r\n                {\r\n                    \"@type\": \"ids:Constraint\",\r\n                    \"@id\": \"https://w3id.org/idsa/autogen/constraint/{{$guid}}\",\r\n                    \"ids:rightOperand\": {\r\n                        \"@value\": \"{{futureDate}}\",\r\n                        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n                    },\r\n                    \"ids:leftOperand\": {\r\n                        \"@id\": \"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"\r\n                    },\r\n                    \"ids:operator\": {\r\n                        \"@id\": \"https://w3id.org/idsa/code/BEFORE\"\r\n                    }\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"ids:provider\": {\r\n        \"@id\": \"https://w3id.org/engrd/connector/\"\r\n    },\r\n    \"ids:contractStart\": {\r\n        \"@value\": \"{{$isoTimestamp}}\",\r\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n    },\r\n    \"ids:contractDate\": {\r\n        \"@value\": \"{{$isoTimestamp}}\",\r\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Self_Description_URL}}/api/contractOffer/",
+									"host": [
+										"{{Self_Description_URL}}"
+									],
+									"path": [
+										"api",
+										"contractOffer",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ContractOffer - Update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.response.to.be.ok;\r",
+											"\r",
+											"pm.test(\"ContractOffer Updated\", function () {\r",
+											"//http://w3id.org/engrd/connector/artifact/test\r",
+											"  pm.expect(pm.response.text()).to.include(\"http://w3id.org/engrd/connector/artifact/testUpdate\");\r",
+											"  });"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var dateNow = new Date();\r",
+											"pm.environment.set(\"futureDate\", new Date(dateNow.setDate(dateNow.getDate() + 60)).toISOString());"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "resource",
+										"value": "{{offeredResource}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"@context\": {\r\n        \"ids\": \"https://w3id.org/idsa/core/\",\r\n        \"idsc\": \"https://w3id.org/idsa/code/\"\r\n    },\r\n    \"@type\": \"ids:ContractOffer\",\r\n    \"@id\": \"{{contractOffer}}\",\r\n    \"ids:permission\": [\r\n        {\r\n            \"@type\": \"ids:Permission\",\r\n            \"@id\": \"https://w3id.org/idsa/autogen/permission/{{$guid}}\",\r\n            \"ids:target\": {\r\n                \"@id\": \"http://w3id.org/engrd/connector/artifact/3\"\r\n            },\r\n            \"ids:description\": [\r\n                {\r\n                    \"@value\": \"provide-access\",\r\n                    \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n                }\r\n            ],\r\n            \"ids:action\": [\r\n                {\r\n                    \"@id\": \"https://w3id.org/idsa/code/USE\"\r\n                }\r\n            ],\r\n            \"ids:title\": [\r\n                {\r\n                    \"@value\": \"Example Usage Policy\",\r\n                    \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n                }\r\n            ],\r\n            \"ids:preDuty\": [],\r\n            \"ids:constraint\": [\r\n                {\r\n                    \"@type\": \"ids:Constraint\",\r\n                    \"@id\": \"https://w3id.org/idsa/autogen/constraint/{{$guid}}\",\r\n                    \"ids:rightOperand\": {\r\n                        \"@value\": \"{{$isoTimestamp}}\",\r\n                        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n                    },\r\n                    \"ids:leftOperand\": {\r\n                        \"@id\": \"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"\r\n                    },\r\n                    \"ids:operator\": {\r\n                        \"@id\": \"https://w3id.org/idsa/code/AFTER\"\r\n                    }\r\n                },\r\n                {\r\n                    \"@type\": \"ids:Constraint\",\r\n                    \"@id\": \"https://w3id.org/idsa/autogen/constraint/{{$guid}}\",\r\n                    \"ids:rightOperand\": {\r\n                        \"@value\": \"{{futureDate}}\",\r\n                        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n                    },\r\n                    \"ids:leftOperand\": {\r\n                        \"@id\": \"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"\r\n                    },\r\n                    \"ids:operator\": {\r\n                        \"@id\": \"https://w3id.org/idsa/code/BEFORE\"\r\n                    }\r\n                }\r\n            ],\r\n            \"ids:postDuty\": [],\r\n            \"ids:assignee\": [],\r\n            \"ids:assigner\": []\r\n        }\r\n    ],\r\n    \"ids:provider\": {\r\n        \"@id\": \"https://w3id.org/engrd/connector/\"\r\n    },\r\n    \"ids:contractStart\": {\r\n        \"@value\": \"{{$isoTimestamp}}\",\r\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n    },\r\n    \"ids:contractDate\": {\r\n        \"@value\": \"{{$isoTimestamp}}\",\r\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n    },\r\n    \"ids:prohibition\": [],\r\n    \"ids:obligation\": []\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Self_Description_URL}}/api/contractOffer/",
+									"host": [
+										"{{Self_Description_URL}}"
+									],
+									"path": [
+										"api",
+										"contractOffer",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ContractOffer - Delete",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.response.to.be.ok;\r",
+											"\r",
+											"pm.test(\"ContractOffer Deleted\", function () {\r",
+											"//http://w3id.org/engrd/connector/artifact/test\r",
+											"    pm.expect(pm.response.text()).to.not.include(pm.collectionVariables.get(\"contractOffer\"));\r",
+											"  });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "contractOffer",
+										"value": "{{contractOffer}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Self_Description_URL}}/api/contractOffer/",
+									"host": [
+										"{{Self_Description_URL}}"
+									],
+									"path": [
+										"api",
+										"contractOffer",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "OfferedResource",
+					"item": [
+						{
+							"name": "OfferedResource",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.response.to.be.ok;\r",
+											"\r",
+											"pm.test(\"Offered resource\", function () {\r",
+											"//http://w3id.org/engrd/connector/artifact/test\r",
+											"  pm.expect(pm.response.text()).to.include(\"ids:TextResource\");\r",
+											"  pm.expect(pm.response.text()).to.include(\"ids:ContractOffer\");\r",
+											"  pm.expect(pm.response.text()).to.include(\"ids:Constraint\");\r",
+											"  pm.expect(pm.response.text()).to.include(\"ids:TextRepresentation\");\r",
+											"  pm.expect(pm.response.text()).to.include(\"ids:Artifact\");\r",
+											"  });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "resource",
+										"value": "{{offeredResource}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Self_Description_URL}}/api/offeredResource/",
+									"host": [
+										"{{Self_Description_URL}}"
+									],
+									"path": [
+										"api",
+										"offeredResource",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OfferedResource - Create",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.response.to.be.ok;\r",
+											"\r",
+											"pm.test(\"OfferedResource Created\", function () {\r",
+											"//http://w3id.org/engrd/connector/artifact/postman\r",
+											"  pm.expect(pm.response.text()).to.include(\"http://w3id.org/engrd/connector/artifact/postman\");\r",
+											"  var list = jsonData[\"ids:resourceCatalog\"][0][\"ids:offeredResource\"].length;\r",
+											"  tests[\"Validate total of 3 offered resources\"] = list === 3;\r",
+											"  });\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "catalog",
+										"value": "{{resourceCatalog}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"@context\": {\r\n        \"ids\": \"https://w3id.org/idsa/core/\",\r\n        \"idsc\": \"https://w3id.org/idsa/code/\"\r\n    },\r\n    \"@type\": \"ids:TextResource\",\r\n    \"@id\": \"https://w3id.org/idsa/autogen/textResource/{{$guid}}\",\r\n    \"ids:language\": [\r\n        {\r\n            \"@id\": \"https://w3id.org/idsa/code/EN\"\r\n        }\r\n    ],\r\n    \"ids:version\": \"1.0.0\",\r\n    \"ids:keyword\": [\r\n        {\r\n            \"@value\": \"Engineering Ingegneria Informatica SpA TEST\",\r\n            \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n        }\r\n    ],\r\n    \"ids:contentType\": {\r\n        \"@id\": \"https://w3id.org/idsa/code/SCHEMA_DEFINITION\"\r\n    },\r\n    \"ids:description\": [\r\n        {\r\n            \"@value\": \"Used to verify large data transfer\",\r\n            \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n        }\r\n    ],\r\n    \"ids:created\": {\r\n        \"@value\": \"{{$isoTimestamp}}\",\r\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n    },\r\n    \"ids:theme\": [],\r\n    \"ids:contractOffer\": [\r\n        {\r\n            \"@type\": \"ids:ContractOffer\",\r\n            \"@id\": \"https://w3id.org/idsa/autogen/contractOffer/{{$guid}}\",\r\n            \"ids:permission\": [\r\n                {\r\n                    \"@type\": \"ids:Permission\",\r\n                    \"@id\": \"https://w3id.org/idsa/autogen/permission/{{$guid}}\",\r\n                    \"ids:target\": {\r\n                        \"@id\": \"http://w3id.org/engrd/connector/artifact/postman\"\r\n                    },\r\n                    \"ids:description\": [\r\n                        {\r\n                            \"@value\": \"provide-access\",\r\n                            \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n                        }\r\n                    ],\r\n                    \"ids:constraint\": [\r\n                        {\r\n                            \"@type\": \"ids:Constraint\",\r\n                            \"@id\": \"https://w3id.org/idsa/autogen/constraint/{{$guid}}\",\r\n                            \"ids:operator\": {\r\n                                \"@id\": \"https://w3id.org/idsa/code/AFTER\"\r\n                            },\r\n                            \"ids:leftOperand\": {\r\n                                \"@id\": \"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"\r\n                            },\r\n                            \"ids:rightOperand\": {\r\n                                \"@value\": \"{{$isoTimestamp}}\",\r\n                                \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n                            }\r\n                        }\r\n                    ],\r\n                    \"ids:action\": [\r\n                        {\r\n                            \"@id\": \"https://w3id.org/idsa/code/USE\"\r\n                        }\r\n                    ],\r\n                    \"ids:title\": [\r\n                        {\r\n                            \"@value\": \"Example Usage Policy POSTMAN\",\r\n                            \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n                        }\r\n                    ]\r\n                }\r\n            ],\r\n            \"ids:provider\": {\r\n                \"@id\": \"https://w3id.org/engrd/connector/\"\r\n            },\r\n            \"ids:contractStart\": {\r\n                \"@value\": \"{{$isoTimestamp}}\",\r\n                \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n            },\r\n            \"ids:contractDate\": {\r\n                \"@value\": \"{{$isoTimestamp}}\",\r\n                \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n            }\r\n        }\r\n    ],\r\n    \"ids:representation\": [\r\n        {\r\n            \"@type\": \"ids:TextRepresentation\",\r\n            \"@id\": \"https://w3id.org/idsa/autogen/textRepresentation/{{$guid}}\",\r\n            \"ids:instance\": [\r\n                {\r\n                    \"@type\": \"ids:Artifact\",\r\n                    \"@id\": \"http://w3id.org/engrd/connector/artifact/postman\",\r\n                    \"ids:creationDate\": {\r\n                        \"@value\": \"{{$isoTimestamp}}\",\r\n                        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n                    }\r\n                }\r\n            ],\r\n            \"ids:language\": {\r\n                \"@id\": \"https://w3id.org/idsa/code/EN\"\r\n            },\r\n            \"ids:created\": {\r\n                \"@value\": \"{{$isoTimestamp}}\",\r\n                \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n            }\r\n        }\r\n    ],\r\n    \"ids:title\": [\r\n        {\r\n            \"@value\": \"World class literature\",\r\n            \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n        }\r\n    ],\r\n    \"ids:modified\": {\r\n        \"@value\": \"{{$isoTimestamp}}\",\r\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Self_Description_URL}}/api/offeredResource/",
+									"host": [
+										"{{Self_Description_URL}}"
+									],
+									"path": [
+										"api",
+										"offeredResource",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OfferedResource - Update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.response.to.be.ok;\r",
+											"\r",
+											"pm.test(\"OfferedResource Update\", function () {\r",
+											"//http://w3id.org/engrd/connector/artifact/postman/update\r",
+											"  pm.expect(pm.response.text()).to.include(\"http://w3id.org/engrd/connector/artifact/postman/update\");\r",
+											"//  var list = jsonData[\"ids:resourceCatalog\"][0][\"ids:offeredResource\"].length;\r",
+											"//  tests[\"Validate total of 3 offered resources\"] = list === 3;\r",
+											"  });\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "catalog",
+										"value": "{{resourceCatalog}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"@context\": {\r\n        \"ids\": \"https://w3id.org/idsa/core/\",\r\n        \"idsc\": \"https://w3id.org/idsa/code/\"\r\n    },\r\n    \"@type\": \"ids:TextResource\",\r\n    \"@id\": \"{{offeredResource}}\",\r\n    \"ids:language\": [\r\n        {\r\n            \"@id\": \"https://w3id.org/idsa/code/EN\"\r\n        }\r\n    ],\r\n    \"ids:version\": \"1.0.0\",\r\n    \"ids:keyword\": [\r\n        {\r\n            \"@value\": \"Engineering Ingegneria Informatica SpA TEST\",\r\n            \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n        }\r\n    ],\r\n    \"ids:contentType\": {\r\n        \"@id\": \"https://w3id.org/idsa/code/SCHEMA_DEFINITION\"\r\n    },\r\n    \"ids:description\": [\r\n        {\r\n            \"@value\": \"Used to verify large data transfer\",\r\n            \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n        }\r\n    ],\r\n    \"ids:created\": {\r\n        \"@value\": \"{{$isoTimestamp}}\",\r\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n    },\r\n    \"ids:theme\": [],\r\n    \"ids:contractOffer\": [\r\n        {\r\n            \"@type\": \"ids:ContractOffer\",\r\n            \"@id\": \"https://w3id.org/idsa/autogen/contractOffer/{{$guid}}\",\r\n            \"ids:permission\": [\r\n                {\r\n                    \"@type\": \"ids:Permission\",\r\n                    \"@id\": \"https://w3id.org/idsa/autogen/permission/{{$guid}}\",\r\n                    \"ids:target\": {\r\n                        \"@id\": \"http://w3id.org/engrd/connector/artifact/postman/update\"\r\n                    },\r\n                    \"ids:description\": [\r\n                        {\r\n                            \"@value\": \"provide-access\",\r\n                            \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n                        }\r\n                    ],\r\n                    \"ids:constraint\": [\r\n                        {\r\n                            \"@type\": \"ids:Constraint\",\r\n                            \"@id\": \"https://w3id.org/idsa/autogen/constraint/{{$guid}}\",\r\n                            \"ids:operator\": {\r\n                                \"@id\": \"https://w3id.org/idsa/code/AFTER\"\r\n                            },\r\n                            \"ids:leftOperand\": {\r\n                                \"@id\": \"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"\r\n                            },\r\n                            \"ids:rightOperand\": {\r\n                                \"@value\": \"{{$isoTimestamp}}\",\r\n                                \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n                            }\r\n                        }\r\n                    ],\r\n                    \"ids:action\": [\r\n                        {\r\n                            \"@id\": \"https://w3id.org/idsa/code/USE\"\r\n                        }\r\n                    ],\r\n                    \"ids:title\": [\r\n                        {\r\n                            \"@value\": \"Example Usage Policy POSTMAN\",\r\n                            \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n                        }\r\n                    ]\r\n                }\r\n            ],\r\n            \"ids:provider\": {\r\n                \"@id\": \"https://w3id.org/engrd/connector/\"\r\n            },\r\n            \"ids:contractStart\": {\r\n                \"@value\": \"{{$isoTimestamp}}\",\r\n                \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n            },\r\n            \"ids:contractDate\": {\r\n                \"@value\": \"{{$isoTimestamp}}\",\r\n                \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n            }\r\n        }\r\n    ],\r\n    \"ids:representation\": [\r\n        {\r\n            \"@type\": \"ids:TextRepresentation\",\r\n            \"@id\": \"https://w3id.org/idsa/autogen/textRepresentation/{{$guid}}\",\r\n            \"ids:instance\": [\r\n                {\r\n                    \"@type\": \"ids:Artifact\",\r\n                    \"@id\": \"http://w3id.org/engrd/connector/artifact/postman/update\",\r\n                    \"ids:creationDate\": {\r\n                        \"@value\": \"{{$isoTimestamp}}\",\r\n                        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n                    }\r\n                }\r\n            ],\r\n            \"ids:language\": {\r\n                \"@id\": \"https://w3id.org/idsa/code/EN\"\r\n            },\r\n            \"ids:created\": {\r\n                \"@value\": \"{{$isoTimestamp}}\",\r\n                \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n            }\r\n        }\r\n    ],\r\n    \"ids:title\": [\r\n        {\r\n            \"@value\": \"World class literature\",\r\n            \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n        }\r\n    ],\r\n    \"ids:modified\": {\r\n        \"@value\": \"{{$isoTimestamp}}\",\r\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Self_Description_URL}}/api/offeredResource/",
+									"host": [
+										"{{Self_Description_URL}}"
+									],
+									"path": [
+										"api",
+										"offeredResource",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OfferedResource - Delete",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.response.to.be.ok;\r",
+											"\r",
+											"pm.test(\"OfferedResource Deleted\", function () {\r",
+											"//http://w3id.org/engrd/connector/artifact/test\r",
+											"    pm.expect(pm.response.text()).to.not.include(pm.collectionVariables.get(\"offeredResource\"));\r",
+											"  });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "resource",
+										"value": "{{offeredResource}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Self_Description_URL}}/api/offeredResource/",
+									"host": [
+										"{{Self_Description_URL}}"
+									],
+									"path": [
+										"api",
+										"offeredResource",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Representation",
+					"item": [
+						{
+							"name": "Representation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.response.to.be.ok;\r",
+											"\r",
+											"pm.test(\"Representation\", function () {\r",
+											"//http://w3id.org/engrd/connector/artifact/test\r",
+											"  pm.expect(pm.response.text()).to.include(\"ids:TextRepresentation\");\r",
+											"  });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "representation",
+										"value": "{{representation}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Self_Description_URL}}/api/representation/",
+									"host": [
+										"{{Self_Description_URL}}"
+									],
+									"path": [
+										"api",
+										"representation",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Representation - Create",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.response.to.be.ok;\r",
+											"\r",
+											"pm.test(\"Representation Created\", function () {\r",
+											"//http://w3id.org/engrd/connector/artifact/postman\r",
+											"  pm.expect(pm.response.text()).to.include(\"http://w3id.org/engrd/connector/artifact/postman\");\r",
+											"  });"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "resource",
+										"value": "{{offeredResource}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"@context\": {\r\n        \"ids\": \"https://w3id.org/idsa/core/\",\r\n        \"idsc\": \"https://w3id.org/idsa/code/\"\r\n    },\r\n    \"@type\": \"ids:TextRepresentation\",\r\n    \"@id\": \"https://w3id.org/idsa/autogen/textRepresentation/{{$guid}}\",\r\n    \"ids:instance\": [\r\n        {\r\n            \"@type\": \"ids:Artifact\",\r\n            \"@id\": \"http://w3id.org/engrd/connector/artifact/postman\",\r\n            \"ids:creationDate\": {\r\n                \"@value\": \"{{$isoTimestamp}}\",\r\n                \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n            }\r\n        }\r\n    ],\r\n    \"ids:language\": {\r\n        \"@id\": \"https://w3id.org/idsa/code/EN\"\r\n    },\r\n    \"ids:created\": {\r\n        \"@value\": \"{{$isoTimestamp}}\",\r\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Self_Description_URL}}/api/representation/",
+									"host": [
+										"{{Self_Description_URL}}"
+									],
+									"path": [
+										"api",
+										"representation",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Representation - Update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.response.to.be.ok;\r",
+											"\r",
+											"pm.test(\"Representation Updated\", function () {\r",
+											"//http://w3id.org/engrd/connector/artifact/postman/update\r",
+											"  pm.expect(pm.response.text()).to.include(\"http://w3id.org/engrd/connector/artifact/postman/update\");\r",
+											"  });"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "resource",
+										"value": "{{offeredResource}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"@context\": {\r\n        \"ids\": \"https://w3id.org/idsa/core/\",\r\n        \"idsc\": \"https://w3id.org/idsa/code/\"\r\n    },\r\n    \"@type\": \"ids:TextRepresentation\",\r\n    \"@id\": \"{{representation}}\",\r\n    \"ids:instance\": [\r\n        {\r\n            \"@type\": \"ids:Artifact\",\r\n            \"@id\": \"http://w3id.org/engrd/connector/artifact/postman/update\",\r\n            \"ids:creationDate\": {\r\n                \"@value\": \"{{$isoTimestamp}}\",\r\n                \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n            }\r\n        }\r\n    ],\r\n    \"ids:language\": {\r\n        \"@id\": \"https://w3id.org/idsa/code/EN\"\r\n    },\r\n    \"ids:created\": {\r\n        \"@value\": \"{{$isoTimestamp}}\",\r\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Self_Description_URL}}/api/representation/",
+									"host": [
+										"{{Self_Description_URL}}"
+									],
+									"path": [
+										"api",
+										"representation",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Representation - Delete",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"pm.response.to.be.ok;\r",
+											"\r",
+											"pm.test(\"Representation Deleted\", function () {\r",
+											"//http://w3id.org/engrd/connector/artifact/test\r",
+											"    pm.expect(pm.response.text()).to.not.include(pm.collectionVariables.get(\"representation\"));\r",
+											"  });"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "representation",
+										"value": "{{representation}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{Self_Description_URL}}/api/representation/",
+									"host": [
+										"{{Self_Description_URL}}"
+									],
+									"path": [
+										"api",
+										"representation",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SelfDescription",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.response.to.be.ok;\r",
+									"//store applicants self-description for further tests\r",
+									"pm.collectionVariables.set(\"APPLICANT_SELF_DESCRIPTION\", jsonData)\r",
+									"\r",
+									"pm.test(\"ContractOffer\", function () {\r",
+									"  // catalog\r",
+									"  pm.expect(jsonData[\"ids:resourceCatalog\"][0][\"@id\"]).to.exist;\r",
+									"  pm.collectionVariables.set(\"resourceCatalog\", jsonData[\"ids:resourceCatalog\"][0][\"@id\"])  \r",
+									"  // resource\r",
+									"  pm.expect(jsonData[\"ids:resourceCatalog\"][0][\"ids:offeredResource\"][0][\"@id\"]).to.exist;\r",
+									"  pm.collectionVariables.set(\"offeredResource\", jsonData[\"ids:resourceCatalog\"][0][\"ids:offeredResource\"][0][\"@id\"])\r",
+									"  // contractOffer\r",
+									"  pm.expect(jsonData[\"ids:resourceCatalog\"][0][\"ids:offeredResource\"][0][\"ids:contractOffer\"][0][\"@id\"]).to.exist;\r",
+									"  pm.collectionVariables.set(\"contractOffer\", jsonData[\"ids:resourceCatalog\"][0][\"ids:offeredResource\"][0][\"ids:contractOffer\"][0][\"@id\"])\r",
+									"  // representation\r",
+									"  pm.expect(jsonData[\"ids:resourceCatalog\"][0][\"ids:offeredResource\"][0][\"ids:representation\"][0][\"@id\"]).to.exist;\r",
+									"  pm.collectionVariables.set(\"representation\", jsonData[\"ids:resourceCatalog\"][0][\"ids:offeredResource\"][0][\"ids:representation\"][0][\"@id\"])\r",
+									"  });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Self_Description_URL}}/",
+							"host": [
+								"{{Self_Description_URL}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contract Negotiation",
+			"item": [
+				{
+					"name": "Description Request Message",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Retrieve offered resource\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"offered_resource\", jsonData[\"ids:resourceCatalog\"][0][\"ids:offeredResource\"][0][\"@id\"])\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"multipart\": \"{{multipart_type}}\",\n    \"Forward-To\": \"{{Forward-To}}\",\n    \"messageType\": \"DescriptionRequestMessage\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:8084/proxy",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"proxy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Description Request Message with offered resource",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Retrieve contract artifact\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"contract_artifact\", jsonData[\"ids:representation\"][0][\"ids:instance\"][0][\"@id\"])\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Retrieve contract id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"contract_id\", jsonData[\"ids:contractOffer\"][0][\"@id\"])\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Retrieve contract permission\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"contract_permission\", JSON.stringify(jsonData[\"ids:contractOffer\"][0][\"ids:permission\"][0]))\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Retrieve contract provider\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"contract_provider\", jsonData[\"ids:contractOffer\"][0][\"ids:provider\"][\"@id\"])\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"multipart\": \"{{multipart_type}}\",\n    \"Forward-To\": \"{{Forward-To}}\",\n    \"messageType\": \"DescriptionRequestMessage\",\n    \"requestedElement\": \"{{offered_resource}}\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:8084/proxy",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"proxy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ContractRequestMessage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Retrieve contract contract_agreement\", function () {\r",
+									"    pm.collectionVariables.set(\"contract_agreement\", JSON.stringify(pm.response.json()))\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let responseData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"transfer_contract\", responseData[\"@id\"]);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"multipart\": \"{{multipart_type}}\",\n    \"Forward-To\": \"{{Forward-To}}\",\n    \"messageType\": \"ContractRequestMessage\",\n    \"requestedElement\": \"{{contract_artifact}}\",\n    \"payload\": {\n        \"@context\": {\n            \"ids\": \"https://w3id.org/idsa/core/\",\n            \"idsc\": \"https://w3id.org/idsa/code/\"\n        },\n        \"@type\": \"ids:ContractRequest\",\n        \"@id\": \"{{contract_id}}\",\n        \"ids:permission\": [\n            {{contract_permission}}\n        ],\n        \"ids:provider\": {\n            \"@id\": \"{{contract_provider}}\"\n        },\n        \"ids:obligation\": [],\n        \"ids:prohibition\": [],\n        \"ids:consumer\": {\n            \"@id\": \"http://w3id.org/engrd/connector/consumer\"\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "https://localhost:8084/proxy",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"proxy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ContractAgreementMessage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body is MessageProcessedNotificationMessage\", function () {\r",
+									"    pm.response.to.have.body(\"MessageProcessedNotificationMessage\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"multipart\": \"{{multipart_type}}\",\n    \"Forward-To\": \"{{Forward-To}}\",\n    \"messageType\": \"ContractAgreementMessage\",\n    \"requestedArtifact\": \"{{contract_artifact}}\",\n    \"payload\": {{contract_agreement}}\n}"
+						},
+						"url": {
+							"raw": "https://localhost:8084/proxy",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"proxy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ArtifactRequestMessage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"JSON values check\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[\"firstName\"]).to.eql(\"John\");\r",
+									"    pm.expect(jsonData[\"lastName\"]).to.eql(\"Doe\");\r",
+									"    pm.expect(jsonData[\"address\"]).to.eql(\"591  Franklin Street, Pennsylvania\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"multipart\": \"{{multipart_type}}\",\n    \"Forward-To\": \"{{Forward-To}}\",\n    \"messageType\": \"ArtifactRequestMessage\",\n    \"requestedArtifact\": \"{{contract_artifact}}\",\n    \"transferContract\": \"{{transfer_contract}}\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:8084/proxy",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"proxy"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Broker Interaction",
+			"item": [
+				{
+					"name": "Connector Update Message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"multipart\": \"{{multipart_type}}\",\r\n    \"Forward-To\": \"{{Broker_URL}}\",\r\n    \"messageType\": \"ConnectorUpdateMessage\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:8084/proxy",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"proxy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Connector Unavailable Message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"multipart\": \"{{multipart_type}}\",\r\n    \"Forward-To\": \"{{Broker_URL}}\",\r\n    \"messageType\": \"ConnectorUnavailableMessage\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:8084/proxy",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"proxy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Connector Query Message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"multipart\": \"{{multipart_type}}\",\r\n    \"Forward-To\": \"{{Broker_URL}}\",\r\n    \"messageType\": \"QueryMessage\",\r\n    \"payload\": \"PREFIX ids: <https://w3id.org/idsa/core/> SELECT ?connectorUri WHERE { ?connectorUri a ids:BaseConnector . }\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:8084/proxy",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"proxy"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "password",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "offered_resource",
+			"value": "https://w3id.org/idsa/autogen/textResource/a79141dd-1d65-4ecb-b8d9-61935a8381a3"
+		},
+		{
+			"key": "contract_artifact",
+			"value": "http://w3id.org/engrd/connector/artifact/1"
+		},
+		{
+			"key": "contract_id",
+			"value": "https://w3id.org/idsa/autogen/contractOffer/9d9dc0ba-d74e-4d10-88a5-782f45f752e4"
+		},
+		{
+			"key": "contract_permission",
+			"value": "{\"@type\":\"ids:Permission\",\"@id\":\"https://w3id.org/idsa/autogen/permission/edae8e5d-f3cb-40a0-8386-78618e9dbdf3\",\"ids:target\":{\"@id\":\"http://w3id.org/engrd/connector/artifact/1\"},\"ids:preDuty\":[],\"ids:assignee\":[],\"ids:assigner\":[],\"ids:action\":[{\"@id\":\"https://w3id.org/idsa/code/USE\"}],\"ids:postDuty\":[],\"ids:constraint\":[{\"@type\":\"ids:Constraint\",\"@id\":\"https://w3id.org/idsa/autogen/constraint/9508f927-ecb9-4360-80a5-69a933effe35\",\"ids:leftOperand\":{\"@id\":\"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"},\"ids:operator\":{\"@id\":\"https://w3id.org/idsa/code/AFTER\"},\"ids:rightOperand\":{\"@value\":\"2022-09-29T14:35:15Z\",\"@type\":\"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"}},{\"@type\":\"ids:Constraint\",\"@id\":\"https://w3id.org/idsa/autogen/constraint/cf585c0c-3666-450f-9c5d-dcedc25ba060\",\"ids:leftOperand\":{\"@id\":\"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"},\"ids:operator\":{\"@id\":\"https://w3id.org/idsa/code/BEFORE\"},\"ids:rightOperand\":{\"@value\":\"2022-11-06T14:35:15Z\",\"@type\":\"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"}}],\"ids:description\":[{\"@value\":\"provide-access\",\"@type\":\"http://www.w3.org/2001/XMLSchema#string\"}],\"ids:title\":[{\"@value\":\"Example Usage Policy\",\"@type\":\"http://www.w3.org/2001/XMLSchema#string\"}]}"
+		},
+		{
+			"key": "contract_consumer",
+			"value": ""
+		},
+		{
+			"key": "contract_obligation",
+			"value": ""
+		},
+		{
+			"key": "contract_prohibition",
+			"value": ""
+		},
+		{
+			"key": "transfer_contract",
+			"value": "https://w3id.org/idsa/autogen/contractAgreement/b653210a-cc58-41af-91d7-98bb81b0bcc2"
+		},
+		{
+			"key": "contract_provider",
+			"value": "https://w3id.org/engrd/connector/provider"
+		},
+		{
+			"key": "contract_agreement",
+			"value": "{\"@context\":{\"ids\":\"https://w3id.org/idsa/core/\",\"idsc\":\"https://w3id.org/idsa/code/\"},\"@type\":\"ids:ContractAgreement\",\"@id\":\"https://w3id.org/idsa/autogen/contractAgreement/b653210d-cc58-41af-91d7-98bb81b0bcc2\",\"ids:permission\":[{\"@type\":\"ids:Permission\",\"@id\":\"https://w3id.org/idsa/autogen/permission/edae8e5d-f3cb-40a0-8386-78618e9dbdf3\",\"ids:target\":{\"@id\":\"http://w3id.org/engrd/connector/artifact/1\"},\"ids:preDuty\":[],\"ids:assignee\":[],\"ids:assigner\":[],\"ids:action\":[{\"@id\":\"https://w3id.org/idsa/code/USE\"}],\"ids:postDuty\":[],\"ids:constraint\":[{\"@type\":\"ids:Constraint\",\"@id\":\"https://w3id.org/idsa/autogen/constraint/9508f927-ecb9-4360-80a5-69a933effe35\",\"ids:leftOperand\":{\"@id\":\"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"},\"ids:operator\":{\"@id\":\"https://w3id.org/idsa/code/AFTER\"},\"ids:rightOperand\":{\"@value\":\"2022-09-29T14:35:15Z\",\"@type\":\"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"}},{\"@type\":\"ids:Constraint\",\"@id\":\"https://w3id.org/idsa/autogen/constraint/cf585c0c-3666-450f-9c5d-dcedc25ba060\",\"ids:leftOperand\":{\"@id\":\"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"},\"ids:operator\":{\"@id\":\"https://w3id.org/idsa/code/BEFORE\"},\"ids:rightOperand\":{\"@value\":\"2022-11-06T14:35:15Z\",\"@type\":\"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"}}],\"ids:description\":[{\"@value\":\"provide-access\",\"@type\":\"http://www.w3.org/2001/XMLSchema#string\"}],\"ids:title\":[{\"@value\":\"Example Usage Policy\",\"@type\":\"http://www.w3.org/2001/XMLSchema#string\"}]}],\"ids:provider\":{\"@id\":\"http://w3id.org/engrd/connector/provider\"},\"ids:contractStart\":{\"@value\":\"2022-10-06T14:35:16.201Z\",\"@type\":\"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"},\"ids:contractDate\":{\"@value\":\"2022-10-06T14:35:16.194Z\",\"@type\":\"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"},\"ids:consumer\":{\"@id\":\"http://w3id.org/engrd/connector/consumer\"},\"ids:prohibition\":[],\"ids:obligation\":[]}"
+		},
+		{
+			"key": "APPLICANT_SELF_DESCRIPTION",
+			"value": ""
+		},
+		{
+			"key": "contractOffer",
+			"value": ""
+		},
+		{
+			"key": "resource",
+			"value": ""
+		},
+		{
+			"key": "representation",
+			"value": ""
+		},
+		{
+			"key": "resourceCatalog",
+			"value": ""
+		},
+		{
+			"key": "offeredResource",
+			"value": ""
+		},
+		{
+			"key": "futureDate",
+			"value": ""
+		}
+	]
+}
