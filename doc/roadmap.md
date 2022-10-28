@@ -1,24 +1,7 @@
----
-layout: default
-title: IDS-ready
-nav_order: 2
-description: ""
-permalink: /Roadmap/Ids-ready
-parent: Roadmap
----
-
-# IDS-ready Implementation Concept
-{: .fs-9 }
-
-Following the IDS certification criteria, an IDS Connector has to provide certain software criteria.
-{: .fs-6 .fw-300 }
-
----
-
 In the table below is an overview of all criteria for the base profile and
 whether it is already implemented or not.
 
-| TrueConnector | No.         | Title       |
+| TrueConnector | No.         | Title       | Note |
 |:---:|:------------|:------------|
 | x | COM 01      | Protected connection |
 | x | COM 02      | Mutual authentication |
@@ -59,10 +42,10 @@ whether it is already implemented or not.
 | x | CR 1.10     | Authenticator feedback |
 | x | CR 1.11     | Unsuccessful login attempts |
 | - | CR 1.12     | System use notification |
-| not applicable (using asymetric key pair) | CR 1.14     | Strength of symmetric key-based authentication |
+| NA | CR 1.14     | Strength of symmetric key-based authentication| Using asymetric key pair |
 | x? | CR 2.1      | Authorization enforcement |
-| not applicable | CR 2.2      | Wireless use control |
-| not applicable | CR 2.5      | Session lock |
+| NA | CR 2.2      | Wireless use control |
+| NA | CR 2.5      | Session lock |
 | x | CR 2.8      | Auditable events |
 | x? | CR 2.9      | Audit storage capacity |
 | x | CR 2.10     | Response to audit processing failures |
@@ -75,7 +58,7 @@ whether it is already implemented or not.
 | x? | CR 3.5      | Input validation |
 | - | CR 3.6      | Deterministic output |
 | x | CR 3.7      | Error handling |
-| not applicable (we do not have sessions) | CR 3.8      | Session integrity |
+| NA | CR 3.8      | Session integrity| We do not have sessions |
 | x? | CR 4.1      | Information confidentiality |
 | - | CR 4.2 (1)  | Erase of shared memory resources |
 | x? | CR 4.3      | Use of cryptography |
