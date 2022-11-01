@@ -3,7 +3,7 @@
 The TRUE Connector will use two protocols (http and https) as described by the Docker Compose File.
 Overview of all available endpointss:
 
-*NOTE* Endpoints /api/** are protected with credentials
+*NOTE* Endpoints /api/\*\* and /notification/\*\* are protected with credentials
 
 | **Method** |	**Endpoint** |	**Usage** |	**Returns** |
 | ---------- |	------------ |	--------- |	----------- |
@@ -11,6 +11,7 @@ Overview of all available endpointss:
 | GET | / | Get connector self description | Connector |
 | GET | /about/version | Return version of deployed ECC | - |
 | GET | /notification/content/{hash} | Hash string from path variable | String |
+| GET | /notification/password/{password} | Hash plain text password  | String |
 | GET | /api/selfDescription/ | Self description document without validation | Connector |
 | GET | /api/offeredResource/{resourceId} | Get requested resource | Resource |
 | POST | /api/offeredResource/{catalogId} | Add new or update existing resource | Connector |

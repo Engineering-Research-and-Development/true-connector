@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   ecc-provider: 
-    image: rdlabengpa/ids_execution_core_container:v1.10.2
+    image: rdlabengpa/ids_execution_core_container:v1.10.3
     container_name: ecc-provider
     ports:
       - "${PROVIDER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
@@ -43,7 +43,7 @@ services:
       - "ecc-provider:172.17.0.1"
 
   uc-dataapp-provider:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.2
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.3
     container_name: uc-dataapp-provider
     environment:
       - TZ=Europe/Rome 
@@ -51,9 +51,10 @@ services:
       - "9552:8080"
     volumes:
       - ./uc-dataapp_resources_provider:/etc
+      - ./uc_provider_data:/data
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.2.2
+    image: rdlabengpa/ids_be_data_app:v0.2.3
     container_name: be-dataapp-provider
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
@@ -77,7 +78,7 @@ services:
       - ./ecc_cert:/cert
 
   ecc-consumer: 
-    image: rdlabengpa/ids_execution_core_container:v1.10.2
+    image: rdlabengpa/ids_execution_core_container:v1.10.3
     container_name: ecc-consumer
     ports:
       - "${CONSUMER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints 
@@ -119,7 +120,7 @@ services:
       - "ecc-consumer:172.17.0.1"
 
   uc-dataapp-consumer:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.2
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.3
     container_name: uc-dataapp-consumer
     environment:
       - TZ=Europe/Rome 
@@ -127,9 +128,10 @@ services:
       - "9553:8080"
     volumes:
       - ./uc-dataapp_resources_consumer:/etc
+      - ./uc_consumer_data:/data
  
   be-dataapp-consumer:
-    image:  rdlabengpa/ids_be_data_app:v0.2.2
+    image:  rdlabengpa/ids_be_data_app:v0.2.3
     container_name: be-dataapp-consumer
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
