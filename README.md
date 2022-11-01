@@ -528,7 +528,7 @@ True Connector is by default configured to use Platoon Usage Control, in order t
 
 ### Audit logs <a name="auditlogs"></a>
 
-Audit logging is turned on by default. If you wish to configure it or even turn off please follow this [document](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/AUDIT.md) .
+Audit logging is turned **off** by default. If you wish to configure it or even turn off please follow this [document](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/AUDIT.md) .
 
 ## Contract Negotiation - simple flow <a name="contractnegotiation"></a>
 
