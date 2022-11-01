@@ -42,6 +42,7 @@ The TRUE Connector is composed of three components:
   * [Contract Agreement request](#contract_agreement_request)
   * [Get offered resource after access is granted](#get_offered_resource_granted)
 * [Self Description API](#selfdescription)
+  * [Changing API password](#changepassword)
 * [Postman collection](#postman)
 * [License](#license)
 
@@ -527,7 +528,7 @@ True Connector is by default configured to use Platoon Usage Control, in order t
 
 ### Audit logs <a name="auditlogs"></a>
 
-Audit logging is turned on by default. If you wish to configure it or even turn off please follow this [document](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/AUDIT.md) .
+Audit logging is turned **off** by default. If you wish to configure it or even turn off please follow this [document](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/AUDIT.md) .
 
 ## Contract Negotiation - simple flow <a name="contractnegotiation"></a>
 
@@ -1214,6 +1215,20 @@ application.selfdescription.maintainer=
 ```
 
 With single offered resource, artifact and contract offer.
+
+### Changing API password<a name="changepassword"></a>
+
+If you want to change password for API, this can be done via follwing endpoint
+
+```
+/notification/password/{new_password}
+```
+
+Bare in mind that this endpoint is password protected, and you will have to provide existing credentials in order for TrueConnector to generate new hash that matches with the value passed in URL. Once new hash is returned, you can modify property and set new password.
+
+```
+spring.security.user.password=
+```
 
 ## Postman collection <a name="postman"></a>
 
