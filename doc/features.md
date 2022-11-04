@@ -1,4 +1,4 @@
-#Features
+# Features
 
 Following document provide overview of the components and technologies used to build TrueConnector.
 
@@ -12,10 +12,11 @@ Software quality is ensured by adhering to and implementing code style guides an
 
 ## Core components
 
-TrueConnector is compose of 2 components: Execution Core Container (ECC) and DataApp (dataApp).
+TrueConnector is compose of 3 components: Execution Core Container (ECC), DataApp (dataApp) and Usage Control application (UC dataApp).
 
-Responsibility of ECC is to enforce IDS Ecosystem requirements, like 
-DataApp is here to make bridge between IDS domain and user specific domain. It contains logic to receive IDS request, handle some specific use cases (like contract negotiation), create simple response and prepare IDS response. If you need to do some modification, then this is the place to do it, either on consumer side, or on provider side of the dataApp. How to do that, check DataApp documentation (link provided below)
+Responsibility of ECC is to enforce IDS Ecosystem requirements, like fetch token from Identity Provider, enforce data usage.
+
+DataApp is here to make bridge between IDS domain and user specific domain. There are 2 logical parts of the dataApp: consumer and provider part. Consumer part is responsible for establishing the bridge between backend system and ECC, preparing request for provider part, while provider part is responsible for preparing response. Provider part has implemented logic for contract negotiation, which should not be changed, and creating simple JSON artifact and prepare IDS response. If you need to do some modification, then this is the place to do it, either on consumer side, or on provider side of the dataApp. How to do that, check DataApp documentation (link provided below)
 
 | Library | License | Owner | Contact |
 |:--------|:--------|:------|:--------|
@@ -27,6 +28,8 @@ DataApp is here to make bridge between IDS domain and user specific domain. It c
 
 ## Libraries
 
+Libraries used in TRUEConnector are:
+
 | Library | License | Owner | Contact |
 |:--------|:--------|:------|:--------|
 | [Multipart Message Library](https://github.com/Engineering-Research-and-Development/true-connector-multipart_message_library) | License | Engineering | contact email |
@@ -36,7 +39,12 @@ DataApp is here to make bridge between IDS domain and user specific domain. It c
 
 ## IDS Communication
 
+TRUEConnector supports communication with following IDS systems (services)
+
 | Component | License | Owner | Contact |
 |:--------|:--------|:------|:--------|
-| [IDS Broker](https://broker.ids.isst.fraunhofer.de/) | [Apache 2.0](https://github.com/International-Data-Spaces-Association/metadata-broker-open-core) | Fraunhofer IAIS | [E-Mail](mailto:contact@ids.fraunhofer.de) |
+| [Clearing House Eng](https://github.com/Engineering-Research-and-Development/market4.0-clearing_house) | License | Engineering | Contact |
 | [DAPS](https://daps.aisec.fraunhofer.de/) | [Apache 2.0](https://github.com/Fraunhofer-AISEC/omejdn-server) | Fraunhofer AISEC | [Gerd Brost](mailto:gerd.brost@aisec.fraunhofer.de) |
+| [IDS Broker](https://broker.ids.isst.fraunhofer.de/) | [Apache 2.0](https://github.com/International-Data-Spaces-Association/metadata-broker-open-core) | Fraunhofer IAIS | [E-Mail](mailto:contact@ids.fraunhofer.de) |
+
+
