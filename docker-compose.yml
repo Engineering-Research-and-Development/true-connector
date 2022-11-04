@@ -54,7 +54,7 @@ services:
       - ./uc_provider_data:/data
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.2.3
+    image: rdlabengpa/ids_be_data_app:v0.2.4
     container_name: be-dataapp-provider
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  
@@ -131,7 +131,7 @@ services:
       - ./uc_consumer_data:/data
  
   be-dataapp-consumer:
-    image:  rdlabengpa/ids_be_data_app:v0.2.3
+    image:  rdlabengpa/ids_be_data_app:v0.2.4
     container_name: be-dataapp-consumer
     environment:
        - "SPRING_PROFILES_ACTIVE=docker"  

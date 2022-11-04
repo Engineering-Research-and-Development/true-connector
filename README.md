@@ -316,8 +316,18 @@ ALIAS={your_certificate_alias}
 
 If you want to use http and not https, simply disable following property
 
+If you want to use http and not https, simply disable following properties
+
 ```
 SERVER_SSL_ENABLED=false
+REST_ENABLE_HTTPS=false
+```
+
+Keep also in mind to change the data app URLs
+
+```
+PROVIDER_DATA_APP_ENDPOINT=http://be-dataapp-provider:8083/data
+CONSUMER_DATA_APP_ENDPOINT=http://be-dataapp-consumer:8083/data
 ```
 
 ### Change message format - Multipart/Mixed, Multipart/Form, Http-headers <a name="messageformat"></a>
