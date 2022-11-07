@@ -40,3 +40,16 @@ Swagger UI for contract offer CRUD operations:
 
 On following [link](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/SELF_DESCRIPTION.md), you can find more detailed explanation of endpoints, with example requests.
 
+## Changing API password<a name="changepassword"></a>
+
+If you want to change password for API, this can be done via follwing endpoint
+
+```
+/notification/password/{new_password}
+```
+
+Bare in mind that this endpoint is password protected, and you will have to provide existing credentials in order for TrueConnector to generate new hash that matches with the value passed in URL. Once new hash is returned, you can modify property and set new password.
+
+```
+spring.security.user.password=
+```
