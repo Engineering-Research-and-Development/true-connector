@@ -2,6 +2,13 @@ version: '3.1'
 services:
   ecc-provider:
     image: rdlabengpa/ids_execution_core_container:v1.10.3
+    deploy:
+      resources:
+        limits:
+          memory: 1024M
+    logging:
+      options:
+        max-size: "200M"
     networks:
       - provider
       - consumer
@@ -47,6 +54,9 @@ services:
 
   uc-dataapp-provider:
     image: rdlabengpa/ids_uc_data_app_platoon:v1.3
+    logging:
+      options:
+        max-size: "100M"
     networks:
       - provider
     container_name: uc-dataapp-provider
@@ -60,6 +70,9 @@ services:
 
   be-dataapp-provider:
     image: rdlabengpa/ids_be_data_app:v0.2.3
+    logging:
+      options:
+        max-size: "100M"
     networks:
       - provider
     container_name: be-dataapp-provider
@@ -86,6 +99,9 @@ services:
 
   ecc-consumer:
     image: rdlabengpa/ids_execution_core_container:v1.10.3
+    logging:
+      options:
+        max-size: "200M"
     networks:
       - consumer
       - provider
@@ -131,6 +147,9 @@ services:
 
   uc-dataapp-consumer:
     image: rdlabengpa/ids_uc_data_app_platoon:v1.3
+    logging:
+      options:
+        max-size: "100M"
     networks:
       - consumer
     container_name: uc-dataapp-consumer
@@ -144,6 +163,9 @@ services:
 
   be-dataapp-consumer:
     image: rdlabengpa/ids_be_data_app:v0.2.3
+    logging:
+      options:
+        max-size: "100M"
     networks:
       - consumer
     container_name: be-dataapp-consumer
