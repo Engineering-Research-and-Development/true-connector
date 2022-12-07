@@ -5,7 +5,8 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1024M
+          #cpus: "0.2"
+          memory: 512M
     logging:
       options:
         max-size: "200M"
@@ -54,6 +55,11 @@ services:
 
   uc-dataapp-provider:
     image: rdlabengpa/ids_uc_data_app_platoon:v1.3
+    deploy:
+      resources:
+        limits:
+          #cpus: "0.2"
+          memory: 512M
     logging:
       options:
         max-size: "100M"
@@ -70,6 +76,11 @@ services:
 
   be-dataapp-provider:
     image: rdlabengpa/ids_be_data_app:v0.2.3
+    deploy:
+      resources:
+        limits:
+          #cpus: "0.2"
+          memory: 512M
     logging:
       options:
         max-size: "100M"
@@ -99,6 +110,11 @@ services:
 
   ecc-consumer:
     image: rdlabengpa/ids_execution_core_container:v1.10.3
+    deploy:
+      resources:
+        limits:
+          #cpus: "0.2"
+          memory: 512M
     logging:
       options:
         max-size: "200M"
@@ -147,6 +163,11 @@ services:
 
   uc-dataapp-consumer:
     image: rdlabengpa/ids_uc_data_app_platoon:v1.3
+    deploy:
+      resources:
+        limits:
+          #cpus: "0.2"
+          memory: 512M
     logging:
       options:
         max-size: "100M"
@@ -163,6 +184,11 @@ services:
 
   be-dataapp-consumer:
     image: rdlabengpa/ids_be_data_app:v0.2.3
+    deploy:
+      resources:
+        limits:
+          #cpus: "0.2"
+          memory: 512M
     logging:
       options:
         max-size: "100M"
