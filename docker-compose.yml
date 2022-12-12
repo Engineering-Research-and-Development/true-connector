@@ -48,8 +48,8 @@ services:
     volumes:
       - ./ecc_resources_provider:/config
       - ./ecc_cert:/cert
-      - ./log:/log
-      - ./sd_provider:/sd
+      - ecc_provider_log:/log
+      - ecc_provider_sd:/sd
     extra_hosts:
       - "ecc-provider:172.17.0.1"
 
@@ -72,7 +72,7 @@ services:
       - "8080"
     volumes:
       - ./uc-dataapp_resources_provider:/etc
-      - ./uc_provider_data:/data
+      - uc_provider_data:/data
 
   be-dataapp-provider:
     image: rdlabengpa/ids_be_data_app:v0.2.3
@@ -105,8 +105,8 @@ services:
       - EXTRACT_PAYLOAD_FROM_RESPONSE=${EXTRACT_PAYLOAD_FROM_RESPONSE}
     volumes:
       - ./be-dataapp_resources:/config
-      - ./be-dataapp_data_receiver:/data
       - ./ecc_cert:/cert
+      - be_dataapp_data_provider:/data
 
   ecc-consumer:
     image: rdlabengpa/ids_execution_core_container:v1.10.3
@@ -156,8 +156,8 @@ services:
     volumes:
       - ./ecc_resources_consumer:/config
       - ./ecc_cert:/cert
-      - ./log:/log
-      - ./sd_consumer:/sd
+      - ecc_consumer_log:/log
+      - ecc_consumer_sd:/sd
     extra_hosts:
       - "ecc-consumer:172.17.0.1"
 
@@ -180,7 +180,7 @@ services:
       - "8080"
     volumes:
       - ./uc-dataapp_resources_consumer:/etc
-      - ./uc_consumer_data:/data
+      - uc_consumer_data:/data
 
   be-dataapp-consumer:
     image: rdlabengpa/ids_be_data_app:v0.2.3
@@ -213,19 +213,19 @@ services:
       - ISSUER_CONNECTOR_URI=${CONSUMER_ISSUER_CONNECTOR_URI}
     volumes:
       - ./be-dataapp_resources:/config
-      - ./be-dataapp_data_sender:/data
       - ./ecc_cert:/cert
-
+      - be_dataapp_data_consumer:/data
+      
 networks:
   consumer: { }
   provider: { }
 
 volumes:
-  ecc_cert: { }
-  be-dataapp_resources: { }
-  ecc_resources_provider: { }
-  be-dataapp_data_receiver: { }
-  uc-dataapp_resources_provider: { }
-  ecc_resources_consumer: { }
-  be-dataapp_data_sender: { }
-  uc-dataapp_resources_consumer: { }
+  ecc_provider_log : {}
+  ecc_provider_sd : {}
+  uc_provider_data : {}
+  be_dataapp_data_provider : {}
+  ecc_consumer_log : {}
+  ecc_consumer_sd : {}
+  uc_consumer_data : {}
+  be_dataapp_data_consumer : {}

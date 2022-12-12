@@ -13,6 +13,7 @@ The TRUE Connector is composed of three components:
 ## Table of Contents
 
 * [Introduction](#introduction)
+  * [Docker volumes](#volumes)
   * [System requirements](#systemrequirements)
   * [Default configuration](#defaultconfiguration)
   * [Starting and stopping containers](#startstop)
@@ -46,7 +47,7 @@ The TRUE Connector is composed of three components:
 * [Postman collection](#postman)
 * [License](#license)
 
-## Introduction  <a name="introduction"></a>
+## Introduction <a name="introduction"></a>
 
 Once you clone or download repository, you will have following directory structure, with following directories:
 
@@ -71,6 +72,30 @@ TrueConnector comes as dockerized application, which consists of few docker cont
  - consumer execution core container
  - consumer data application (sample data application)
  - consumer usage control application
+ 
+### Volumes <a name="volumes"></a>
+
+Following docker volumes will be created
+
+```
+ecc_provider_log
+ecc_provider_sd
+uc_provider_data
+be_dataapp_data_provider
+
+ecc_consumer_log
+ecc_consumer_sd
+uc_consumer_data
+be_dataapp_data_consumer
+```
+
+Those volumes will store data needed for corresponding service, like log files, self description file, Usage Control H2 database (default configuration) and dataApp resource storage.
+
+If you need to have some files present in volume, for example provider dataApp shares some file, you can either
+
+ * create volume, mount it to some "dummy" docker container, copy file into volume, stop "dummy" container and you will have file present in volume, and when you start TRUEConnector, it will load already populated dataApp resource volume, or
+
+ * you can change using volume and mount folder instead.
  
 ### System requirements <a name="systemrequirements"></a>
 
