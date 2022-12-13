@@ -2,11 +2,12 @@ version: '3.1'
 services:
   ecc-provider:
     image: rdlabengpa/ids_execution_core_container:v1.10.3
+#    image: ecctest
     deploy:
       resources:
         limits:
-          #cpus: "0.2"
-          memory: 512M
+          cpus: "1"
+          memory: 1024M
     logging:
       options:
         max-size: "200M"
@@ -58,8 +59,8 @@ services:
     deploy:
       resources:
         limits:
-          #cpus: "0.2"
-          memory: 512M
+          cpus: "1"
+          memory: 1024M
     logging:
       options:
         max-size: "100M"
@@ -79,8 +80,8 @@ services:
     deploy:
       resources:
         limits:
-          #cpus: "0.2"
-          memory: 512M
+          cpus: "1"
+          memory: 1024M
     logging:
       options:
         max-size: "100M"
@@ -113,8 +114,8 @@ services:
     deploy:
       resources:
         limits:
-          #cpus: "0.2"
-          memory: 512M
+          cpus: "1"
+          memory: 1024M
     logging:
       options:
         max-size: "200M"
@@ -166,8 +167,8 @@ services:
     deploy:
       resources:
         limits:
-          #cpus: "0.2"
-          memory: 512M
+          cpus: "1"
+          memory: 1024M
     logging:
       options:
         max-size: "100M"
@@ -187,8 +188,8 @@ services:
     deploy:
       resources:
         limits:
-          #cpus: "0.2"
-          memory: 512M
+          cpus: "1"
+          memory: 1024M
     logging:
       options:
         max-size: "100M"

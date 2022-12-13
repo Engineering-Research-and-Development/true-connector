@@ -101,6 +101,9 @@ If you need to have some files present in volume, for example provider dataApp s
 
 In order to run TrueConnector following minimal system requirements are needed:
 
+* CPU core: 1/container
+* Memory: 1024MB
+
 
 ### Default configuration <a name="defaultconfiguration"></a>
 
