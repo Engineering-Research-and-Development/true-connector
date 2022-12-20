@@ -13,8 +13,8 @@ The TRUE Connector is composed of three components:
 ## Table of Contents
 
 * [Introduction](#introduction)
-  * [Docker volumes](#volumes)
   * [System requirements](#systemrequirements)
+  * [Docker volumes](#volumes)
   * [Default configuration](#defaultconfiguration)
   * [Starting and stopping containers](#startstop)
 * [REST API](#restapi)
@@ -73,6 +73,17 @@ TrueConnector comes as dockerized application, which consists of few docker cont
  - consumer data application (sample data application)
  - consumer usage control application
  
+ 
+### System requirements <a name="systemrequirements"></a>
+
+In order to run TrueConnector following minimal system requirements are needed:
+
+* CPU core: 1/container
+* Memory: 1024MB - for ECC services, 512M for DataApp and Usage Control services
+
+This values can be considered as initial values, and if required, they can be increased or reduces, keeping the functionality of TRUEConnector unchanged.
+
+
 ### Volumes <a name="volumes"></a>
 
 Following docker volumes will be created
@@ -96,14 +107,6 @@ If you need to have some files present in volume, for example provider dataApp s
  * create volume, mount it to some "dummy" docker container, copy file into volume, stop "dummy" container and you will have file present in volume, and when you start TRUEConnector, it will load already populated dataApp resource volume, or
 
  * you can change using volume and mount folder instead.
- 
-### System requirements <a name="systemrequirements"></a>
-
-In order to run TrueConnector following minimal system requirements are needed:
-
-* CPU core: 1/container
-* Memory: 1024MB
-
 
 ### Default configuration <a name="defaultconfiguration"></a>
 
