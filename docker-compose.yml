@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   ecc-provider:
-    image: rdlabengpa/ids_execution_core_container:v1.10.3
+    image: rdlabengpa/ids_execution_core_container:v1.11.0
     deploy:
       resources:
         limits:
@@ -48,7 +48,7 @@ services:
     volumes:
       - ./ecc_resources_provider:/config
       - ./ecc_cert:/cert
-      - ecc_provider_log:/log
+      - ecc_provider_log:/var/log/ecc
       - ecc_provider_sd:/sd
     extra_hosts:
       - "ecc-provider:172.17.0.1"
@@ -75,7 +75,7 @@ services:
       - uc_provider_data:/data
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.2.3
+    image: rdlabengpa/ids_be_data_app:v0.2.5
     deploy:
       resources:
         limits:
@@ -109,7 +109,7 @@ services:
       - be_dataapp_data_provider:/data
 
   ecc-consumer:
-    image: rdlabengpa/ids_execution_core_container:v1.10.3
+    image: rdlabengpa/ids_execution_core_container:v1.11.0
     deploy:
       resources:
         limits:
@@ -156,7 +156,7 @@ services:
     volumes:
       - ./ecc_resources_consumer:/config
       - ./ecc_cert:/cert
-      - ecc_consumer_log:/log
+      - ecc_consumer_log:/var/log/ecc
       - ecc_consumer_sd:/sd
     extra_hosts:
       - "ecc-consumer:172.17.0.1"
@@ -183,7 +183,7 @@ services:
       - uc_consumer_data:/data
 
   be-dataapp-consumer:
-    image: rdlabengpa/ids_be_data_app:v0.2.3
+    image: rdlabengpa/ids_be_data_app:v0.2.5
     deploy:
       resources:
         limits:
