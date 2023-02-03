@@ -3,7 +3,7 @@
 The TRUE Connector will use two protocols (http and https) as described by the Docker Compose File.
 Overview of all available endpointss:
 
-*NOTE* Endpoints /api/\*\* and /notification/\*\* are protected with credentials
+*NOTE* Endpoints are protected with credentials, for more details, please check [this link](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/SECURITY.md)
 
 | **Method** |	**Endpoint** |	**Usage** |	**Returns** |
 | ---------- |	------------ |	--------- |	----------- |

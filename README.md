@@ -14,6 +14,7 @@ The TRUE Connector is composed of three components:
 
 * [Introduction](#introduction)
   * [System requirements](#systemrequirements)
+  * [Docker volumes](#volumes)
   * [Default configuration](#defaultconfiguration)
   * [Starting and stopping containers](#startstop)
 * [REST API](#restapi)
@@ -29,6 +30,7 @@ The TRUE Connector is composed of three components:
 * [Advanced configuration](#advancedconfiguration)
   * [Supported Identity Providers](#identityproviders)
   * [Convert keystorage files](#convert_keystorage)
+  * [Extended jwt validation](#extendedjwt)
   * [Validate protocol](#validateprotocol)
   * [Clearing House](#clearinghouse)
   * [Broker](#broker)
@@ -46,7 +48,7 @@ The TRUE Connector is composed of three components:
 * [Postman collection](#postman)
 * [License](#license)
 
-## Introduction  <a name="introduction"></a>
+## Introduction <a name="introduction"></a>
 
 Once you clone or download repository, you will have following directory structure, with following directories:
 
@@ -72,10 +74,40 @@ TrueConnector comes as dockerized application, which consists of few docker cont
  - consumer data application (sample data application)
  - consumer usage control application
  
+ 
 ### System requirements <a name="systemrequirements"></a>
 
 In order to run TrueConnector following minimal system requirements are needed:
 
+* CPU core: 1/container
+* Memory: 1024MB - for ECC services, 512M for DataApp and Usage Control services
+
+This values can be considered as initial values, and if required, they can be increased or reduces, keeping the functionality of TRUEConnector unchanged.
+
+
+### Volumes <a name="volumes"></a>
+
+Following docker volumes will be created
+
+```
+ecc_provider_log
+ecc_provider_sd
+uc_provider_data
+be_dataapp_data_provider
+
+ecc_consumer_log
+ecc_consumer_sd
+uc_consumer_data
+be_dataapp_data_consumer
+```
+
+Those volumes will store data needed for corresponding service, like log files, self description file, Usage Control H2 database (default configuration) and dataApp resource storage.
+
+If you need to have some files present in volume, for example provider dataApp shares some file, you can either
+
+ * create volume, mount it to some "dummy" docker container, copy file into volume, stop "dummy" container and you will have file present in volume, and when you start TRUEConnector, it will load already populated dataApp resource volume, or
+
+ * you can change using volume and mount folder instead.
 
 ### Default configuration <a name="defaultconfiguration"></a>
 
@@ -183,6 +215,9 @@ At this point, you should be able to use TRUE Connector and send messages. How t
 
 Detailed description of API endpoints provided by TrueConnector can be found in [link](doc/rest_api/REST_API.md)
 
+Bare in mind that all endpoints of the TrueConnector will require authorization. Please follow [this link](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/SECURITY.md) to get more information about providing correct credentials for desired request/functionality. 
+
+
 ## Connector reachability <a name="reachability"></a>
 
 Once docker containers are up and running, you can use following links to verify connectors are up and running, except checking log output.
@@ -242,6 +277,7 @@ With default configuration, you can use following curl command, to get data from
 
 	curl --location --request POST 'https://localhost:8084/proxy' \
 	--header 'Content-Type: text/plain' \
+	--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 	--data-raw '{
 	    "multipart": "form",
 	    "Forward-To": "https://ecc-provider:8889/data",
@@ -440,6 +476,11 @@ CONSUMER_DAPS_KEYSTORE_PASSWORD=password
 CONSUMER_DAPS_KEYSTORE_ALIAS=1
 ```
 
+### Extended jwt validation <a name="extendedjwt"></a>
+
+TRUEConnector can check additional claims from jwToken. For more information. please check [following link]
+(https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/TRANSPORTCERTSSHA256.md)
+
 ### Convert keystorage files <a name="convert_keystorage"></a>
 
 Change values for keystore file name, password and alias that matches Your keystore file. Keystore can be in jks format or p12. If you have some other certificate format (like pem for example), you can convert it by executing following commands from terminal:
@@ -498,7 +539,7 @@ Forward-To=https://localhost:8890/data - this one will work, since it has protoc
 
 ### Clearing House <a name="clearinghouse"></a>
 
-The TRUE Connector supports is able to communicate with the ENG Clearing House for registering transactions.
+The TRUE Connector supports is able to communicate with the Fraunhofer Clearing House for registering transactions.
 
 Since Clearing house is disabled by default, in order to enable it, set following property to true:
 
@@ -557,6 +598,7 @@ We can query the resource with ArtifactRequestMessage:
 
 	curl --location --request POST 'https://localhost:8084/proxy' \
 	--header 'Content-Type: application/json' \
+	--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 	--data-raw '{
 		"multipart": "form",
 		"Forward-To": "https://ecc-provider:8889/data",
@@ -581,6 +623,7 @@ Initially, Description Request Message is sent by consumer without payload.
 
 	curl --location --request POST 'https://localhost:8084/proxy' \
 	--header 'Content-Type: application/json' \
+	--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 	--data-raw '{
 		"multipart": "form",
 		"Forward-To": "https://ecc-provider:8889/data",
@@ -823,6 +866,7 @@ Contract Request Message is initial message sent in Contract Negotiation flow. I
 
 	curl --location --request POST 'https://localhost:8084/proxy' \
 	--header 'Content-Type: application/json' \
+	--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 	--data-raw '{
 	"multipart": "form",
 	"Forward-To": "https://ecc-provider:8889/data",
@@ -1050,6 +1094,7 @@ If everything goes well, you will get response with body containing "@type" : "i
 
 	curl --location --request POST 'https://localhost:8084/proxy' \
 	--header 'Content-Type: application/json' \
+	--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 	--data-raw '{
 		"multipart": "form",
 		"Forward-To": "https://ecc-provider:8889/data",
@@ -1121,6 +1166,7 @@ When you have finished negotiation, you can query for resource again to see if w
 
 	curl --location --request POST 'http://localhost:8084/proxy' \
 	--header 'Content-Type: application/json' \
+	--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 	--data-raw '{
 	    "multipart": "form",
 	    "Forward-To": "http://ecc-provider:8889/data",
@@ -1218,7 +1264,7 @@ With single offered resource, artifact and contract offer.
 
 ### Changing API password<a name="changepassword"></a>
 
-If you want to change password for API, this can be done via follwing endpoint
+If you want to change password for API, this can be done via following endpoint
 
 ```
 /notification/password/{new_password}
