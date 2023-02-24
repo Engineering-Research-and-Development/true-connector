@@ -55,7 +55,11 @@ In case of not supported message - messageType parameter:
 
 ## /data endpoint
 
+Endpoint exposed by the Connector, used to receive requests from other Connectors in Dataspace.
 
+Depending of the connector configuration, data received on this endpoint will be processes accordingly (mixed/form/header) and validate IDS message. 
+
+Regarding example requests, feel free to use same requests, for configuration, like described in [internal endpoints](#internalendpoints)
 
 ## /about/version
 
@@ -833,7 +837,7 @@ $2a$10$FiI8JM4y7BF0Of7f6mjkeeoydyLYNuLtEOVWjenei4.21LU/.c1k6
 
 In case password check is not successful, response message will contain information, which user can inspect and correct new password.
 
-## Internal endpoints
+## Internal endpoints<a name="internalendpoints"></a>
 
 Endpoint used to receive proxy request from DataApp. DataApp, will after receiving proxy request, creates valid IDS message request, and send it to Execution Core Container.
 
