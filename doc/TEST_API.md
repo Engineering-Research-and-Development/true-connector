@@ -835,19 +835,194 @@ In case password check is not successful, response message will contain informat
 
 ## Internal endpoints
 
-### Broker
+Endpoint used to receive proxy request from DataApp. DataApp, will after receiving proxy request, creates valid IDS message request, and send it to Execution Core Container.
 
-#### /selfRegistration/register
-#### /selfRegistration/update
-#### /selfRegistration/delete
-#### /selfRegistration/passivate
-#### /selfRegistration/query
+### /incoming-data-app/multipartMessageBodyBinary
+
+multipart - mixed
+
+Example request:
+
+```
+curl --location --request POST 'https://localhost:8887/incoming-data-app/multipartMessageBodyBinary' \
+--header 'Forward-To: https://localhost:8889/data' \
+--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
+--header 'Content-Type: text/plain' \
+--data-raw '--9RDrAvgB92_-w2A-YY7av8i7GEQcKogs7pjm
+Content-Disposition: form-data; name="header"
+Content-Length: 1196
+Content-Type: application/ld+json
+
+{
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
+  },
+  "@type" : "ids:ArtifactRequestMessage",
+  "@id" : "https://w3id.org/idsa/autogen/artifactRequestMessage/e639dcba-d3b3-41b0-87fd-c181c2586bef",
+  "ids:transferContract" : {
+    "@id" : "https://w3id.org/idsa/autogen/contractAgreement/39f9cc50-5d9b-4d12-80dc-23e03f3cc1f8"
+  },
+  "ids:recipientConnector" : [ ],
+  "ids:issuerConnector" : {
+    "@id" : "http://w3id.org/engrd/connector/"
+  },
+  "ids:senderAgent" : {
+    "@id" : "http://sender.agent/sender"
+  },
+  "ids:securityToken" : {
+    "@type" : "ids:DynamicAttributeToken",
+    "@id" : "https://w3id.org/idsa/autogen/dynamicAttributeToken/89910184-7a73-4d2f-8559-64dbfef254f2",
+    "ids:tokenFormat" : {
+      "@id" : "https://w3id.org/idsa/code/JWT"
+    },
+    "ids:tokenValue" : "DummyTokenValue"
+  },
+  "ids:issued" : {
+    "@value" : "2023-02-24T11:58:46.963+01:00",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  },
+  "ids:recipientAgent" : [ ],
+  "ids:modelVersion" : "4.1.0",
+  "ids:requestedArtifact" : {
+    "@id" : "http://w3id.org/engrd/connector/artifact/1"
+  }
+}
+--9RDrAvgB92_-w2A-YY7av8i7GEQcKogs7pjm--'
+```
+
+### /incoming-data-app/multipartMessageBodyFormData
+
+multipart - form
+
+Example request:
+
+```
+curl --location --request POST 'https://localhost:8887/incoming-data-app/multipartMessageBodyFormData' \
+--header 'Forward-To: https://localhost:8889/data' \
+--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
+--form 'header="{
+  \"@context\" : {
+    \"ids\" : \"https://w3id.org/idsa/core/\",
+    \"idsc\" : \"https://w3id.org/idsa/code/\"
+  },
+  \"@type\" : \"ids:ArtifactRequestMessage\",
+  \"@id\" : \"https://w3id.org/idsa/autogen/artifactRequestMessage/e639dcba-d3b3-41b0-87fd-c181c2586bef\",
+  \"ids:transferContract\" : {
+    \"@id\" : \"https://w3id.org/idsa/autogen/contractAgreement/39f9cc50-5d9b-4d12-80dc-23e03f3cc1f8\"
+  },
+  \"ids:recipientConnector\" : [ ],
+  \"ids:issuerConnector\" : {
+    \"@id\" : \"http://w3id.org/engrd/connector/\"
+  },
+  \"ids:senderAgent\" : {
+    \"@id\" : \"http://sender.agent/sender\"
+  },
+  \"ids:securityToken\" : {
+    \"@type\" : \"ids:DynamicAttributeToken\",
+    \"@id\" : \"https://w3id.org/idsa/autogen/dynamicAttributeToken/89910184-7a73-4d2f-8559-64dbfef254f2\",
+    \"ids:tokenFormat\" : {
+      \"@id\" : \"https://w3id.org/idsa/code/JWT\"
+    },
+    \"ids:tokenValue\" : \"DummyTokenValue\"
+  },
+  \"ids:issued\" : {
+    \"@value\" : \"2023-02-24T11:58:46.963+01:00\",
+    \"@type\" : \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"
+  },
+  \"ids:recipientAgent\" : [ ],
+  \"ids:modelVersion\" : \"4.1.0\",
+  \"ids:requestedArtifact\" : {
+    \"@id\" : \"http://w3id.org/engrd/connector/artifact/1\"
+  }
+}"' \
+--form 'payload="PAYLOAD"'
+```
+
+###/incoming-data-app/multipartMessageHttpHeader
+
+multipart - http-header
+
+This request is a bit specific, since it is required to convert IDS message to http headers (logic that DataApp proxy request do for you) and when conversion is done correct this is how request looks like, depending of the Messagetype and its mandatory fields: 
+
+```
+curl --location 'https://localhost:8887/incoming-data-app/multipartMessageHttpHeader' \
+--header 'Forward-To: https://localhost:8889/data' \
+--header 'IDS-CorrelationMessage: http://correlationMessage' \
+--header 'IDS-Id: https://w3id.org/idsa/autogen/ArtifactRequestMessage/e5939da0-7240-499b-ac1b-2c6ac5718933' \
+--header 'IDS-Issued: 2023-02-24T12:09:07.124+01:00' \
+--header 'IDS-IssuerConnector: http://w3id.org/engrd/connector/' \
+--header 'IDS-Messagetype: ids:ArtifactRequestMessage' \
+--header 'IDS-ModelVersion: 4.1.0' \
+--header 'IDS-RequestedArtifact: http://w3id.org/engrd/connector/artifact/1' \
+--header 'IDS-SecurityToken-Id: https://w3id.org/idsa/autogen/4cc8720d-f6bf-49a2-9b4b-c953b978a128' \
+--header 'IDS-SecurityToken-TokenFormat: https://w3id.org/idsa/code/JWT' \
+--header 'IDS-SecurityToken-TokenValue: DummyTokenValue' \
+--header 'IDS-SecurityToken-Type: ids:DynamicAttributeToken' \
+--header 'IDS-SenderAgent: http://w3id.org/engrd/connector/' \
+--header 'IDS-TransferContract: https://w3id.org/idsa/autogen/contractAgreement/39f9cc50-5d9b-4d12-80dc-23e03f3cc1f8' \
+--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
+--header 'Content-Type: text/plain' \
+--data 'PAYLOAD'
+```
+
+If any of the mandatory headers is not present or that message cannot be recreated from headers, response will be returned and user should check header responses, for IDS-Messagetype = ids:RejectionMessage and IDS-RejectionReason = https://w3id.org/idsa/code/MALFORMED_MESSAGE.
+
 
 ### /internal/sd
 
+This endpoint is used internally, between DataApp and Execution Core Container, when DataApp needs to fetch Connector Self Description document (when DataApp receives DescriptionRequestMessage). Reason for existence of this API is to eliminate need for DataApp to have API credentials of public Self Description endpoint.
+
+
+### Broker
+
+There are convenient endpoints to initiate flow with Broker. They can be triggered from proxy endpoint. In order to do that, messageType in the proxy request must be correct. All of those endpoints will create valid IDS message and send message to connector, which will add IDS related elements (DAPS token and other) and forward to Broker. In order to send message to the Broker, Forward-To parameter of proxy request must have Broker URL. If Broker requires authentication, please set correct credentials in request, TRUEConnector will forward authorization header to destination, without modifying it.
+
+Example proxy request:
+
+```
+curl --location 'https://localhost:8084/proxy' \
+--header 'Authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
+--header 'Content-Type: application/json' \
+--data '{
+    "multipart": "form",
+    "Forward-To": "https://broker-reverseproxy/infrastructure",
+    "messageType": "ConnectorUpdateMessage"
+}'
+```
+Processing of the response will be done based of the Broker response.
+
+#### /selfRegistration/register
+
+Message type of the proxy request - ConnectorUpdateMessage
+
+#### /selfRegistration/update
+
+Message type of the proxy request - ConnectorUpdateMessage
+
+#### /selfRegistration/delete
+
+Message type of the proxy request - ConnectorUnavailableMessage
+
+#### /selfRegistration/passivate
+
+Message type of the proxy request - ConnectorUnavailableMessage
+
+#### /selfRegistration/query
+
+Message type of the proxy request - QueryMessage
+
 ### WSS
+
+Flow starts when API receives start frame, and ends when end frame is received. Data in between are buffered, and once whole package is received, it will try to recreate multipart/mixed request and continue with processing received request. Logic applies for both endpoints listed below.</br>
+Data received are binary packets. 
 
 #### timerEndpointA
 
+Interface between Consumer DataApp and Connector, to support receiving request data in WebSocket flow. 
+
 #### timerEndpointB
 
+Interface between 2 connectors. 
+
+Logic regarding recreating request is same like for timerEndpointA
