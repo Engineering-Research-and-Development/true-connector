@@ -17,6 +17,7 @@ The TRUE Connector is composed of three components:
   * [Docker volumes](#volumes)
   * [Default configuration](#defaultconfiguration)
   * [Starting and stopping containers](#startstop)
+  * [Component overview](#componentoverview)
 * [REST API](#restapi)
 * [Connector reachability](#reachability)
 * [Connector Id](#connectorId)
@@ -211,6 +212,24 @@ docker-compose down -v
 
 At this point, you should be able to use TRUE Connector and send messages. How to send messages, check following link [Send multipart form request](#exchangedata):
 
+### Component overview <a name="componentoverview"></a>
+
+TRUEConnector is build using Java11, and use following libraries:
+
+| Component | Version |
+| --- | --- |
+| [Multipart Message Library](https://github.com/Engineering-Research-and-Development/true-connector-multipart_message_library) | 1.0.16 |
+| [Websocket Message Streamer](https://github.com/Engineering-Research-and-Development/true-connector-websocket_message_streamer) | 1.0.16 |
+| [Information model](https://github.com/International-Data-Spaces-Association/InformationModel) | 4.1.1 | 
+| [idscp2](https://github.com/International-Data-Spaces-Association/idscp2-jvm) | 0.5.2 |
+| SpringBoot | 2.2.11.RELEASE |
+| Apache Camel | 3.19.0 |
+| com.squareup.okhttp3 | 4.10.0 |
+| fasterxml.jackson | 2.10.5 |
+| apache.commons commons-text | 1.10.0 |  
+| commons-io | 2.7 | 
+| logback | 1.2.7 |
+| org.mockito | 3.1.0 |
 
 ## REST API <a name="restapi"></a>
 
@@ -1299,10 +1318,10 @@ Signed images starts with following versions:
 **rdlabengpa/ids_be_data_app:v0.2.5**</br>
 **rdlabengpa/ids_uc_data_app_platoon:v1.5**</br>
 
-Once images are downloaded, you can verify the signature by executing following command, (cosign.pub file can be found in the root of this repo) and response should be like following
+Once images are downloaded, you can verify the signature by executing following command, (trueconn.pub file can be found in the root of this repo) and response should be like following
 
 ```
-cosign verify --key cosign.pub rdlabengpa/ids_execution_core_container:v1.11.0
+cosign verify --key trueconn.pub rdlabengpa/ids_execution_core_container:v1.11.0
 
 Verification for index.docker.io/rdlabengpa/ids_execution_core_container:v1.11.0
 The following checks were performed on each of these signatures:
@@ -1326,7 +1345,7 @@ The following checks were performed on each of these signatures:
 ```
 
 ```
-cosign verify --key cosign.pub rdlabengpa/ids_be_data_app:v0.2.5
+cosign verify --key trueconn.pub rdlabengpa/ids_be_data_app:v0.2.5
 
 Verification for index.docker.io/rdlabengpa/ids_be_data_app:v0.2.5 --
 The following checks were performed on each of these signatures:
@@ -1350,7 +1369,7 @@ The following checks were performed on each of these signatures:
 ```
 
 ```
-cosign verify --key cosign.pub rdlabengpa/ids_uc_data_app_platoon:v1.5
+cosign verify --key trueconn.pub rdlabengpa/ids_uc_data_app_platoon:v1.5
 
 Verification for index.docker.io/rdlabengpa/ids_uc_data_app_platoon:v1.5 --
 The following checks were performed on each of these signatures:
