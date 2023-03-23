@@ -210,6 +210,8 @@ To stop containers, execute following:
 docker-compose down -v
 ```
 
+There is also short video, that shows how to use TRUEConnector. Files are located in [tutorial](doc/tutorial) folder.
+
 At this point, you should be able to use TRUE Connector and send messages. How to send messages, check following link [Send multipart form request](#exchangedata):
 
 ### Component overview <a name="componentoverview"></a>
