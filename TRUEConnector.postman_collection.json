@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6c72e2e4-6f78-4443-930c-1e38e741410f",
+		"_postman_id": "37a161dd-8cb9-4e5e-9563-cdd5276a3541",
 		"name": "TRUEConnector",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "12578087"
@@ -887,9 +887,13 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Retrieve offered resource\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.collectionVariables.set(\"offered_resource\", jsonData[\"ids:resourceCatalog\"][0][\"ids:offeredResource\"][0][\"@id\"])\r",
+									"pm.test(\"Retrieve offered resource\", () => {\r",
+									"   let jsonData = pm.response.json()\r",
+									"   arrayOfObject = jsonData[\"ids:resourceCatalog\"][0][\"ids:offeredResource\"];\r",
+									"   var result = arrayOfObject.find(obj => {\r",
+									"     return obj[\"ids:contractOffer\"][0][\"ids:permission\"][0][\"ids:target\"][\"@id\"] === \"http://w3id.org/engrd/connector/artifact/1\"\r",
+									"   })\r",
+									"   pm.collectionVariables.set(\"offered_resource\", result[\"@id\"])\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",

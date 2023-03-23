@@ -16,8 +16,15 @@ If you want to create new certificate, please follow [instructions](https://gith
 ### DAPS certificate
 
 You can use certificate already provided in Testbed project, in following location - *IDS-testbed\CertificateAuthority\data\cert\*
+We need to make some small adjustments, to generate valid p12 file. For this purpose, we can need to copy *ReferenceTestbedCA.crt* file from ca folder (one level above) and execute following command:
 
-For this setup, we used testbed3.p12 file. Copy this file to trueconnector\ecc_cert folder.
+```
+openssl pkcs12 -export -out testbed3.p12 -inkey testbed3.key -in testbed3.crt -certfile ReferenceTestbedCA.crt
+```
+
+This will generate valid testbed3.p12 file. Copy this file to trueconnector\ecc_cert folder.
+
+**Remark:** in DAPS, only testbed1, testbed2 and testbed3 files are registered, so we will use same testbed3.p12 file for both consumer and provider.
 
 
 ### TrueConnector properties
@@ -33,7 +40,13 @@ PROVIDER_DAPS_KEYSTORE_PASSWORD=password
 PROVIDER_DAPS_KEYSTORE_ALIAS=1
 
 PROVIDER_MULTIPART_EDGE=form
+
+CONSUMER_DAPS_KEYSTORE_NAME=testbed3.p12
+CONSUMER_DAPS_KEYSTORE_PASSWORD=password
+CONSUMER_DAPS_KEYSTORE_ALIAS=1
 ```
+
+(for the moment, we will use same DAPS certificate for both Provider nad Consumer)
 
 **application.properties** for both consumer and provider
 
@@ -96,14 +109,12 @@ networks:
 
 ```
 
-And also for each service, add it to the network, by simply adding:
+And also for ecc-consumer and ecc-provider service, add it to the network, by simply adding:
 
 ```
     networks:
       - tc-network
 ```
-
-Or you can use already pre-configured docker compose file named *docker-compose-testbed.yml*
 
 ### Export TrueConnector certificate
 
@@ -140,190 +151,11 @@ Once both docker compose files are up and running, you can start postman, import
 
 This will create contract offer, resource and artifact into DSC connectora (provider)
 
-### Description Request Message - get Self Description from DSC connectorA
+There is Postman collection that can be used to perform contract negotiation with DataSpaceConnector and get artifact. For this purpose, you can use and import [following collection](DSC communication.postman_collection.json) into Postman. You can execute whole collection in one go, or execute each request in ordering how they are listed.
 
-```
-curl --location --request POST 'https://localhost:8084/proxy' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "multipart": "form",
-    "Forward-To": "https://connectora:8080/api/ids/data",
-    "messageType":"DescriptionRequestMessage"
-}'
-```
+Once imported, it should look like following:
 
-This request should return following response:
-
-![DSC Self Description](DSC_DescriptionRequestMessage.jpg "DSC Self Description")
-
-In payload part of the response, find catalog, and get URL, and update initial request, add requestedElement, like following:
-
-```
-curl --location --request POST 'https://localhost:8084/proxy' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "multipart": "form",
-    "Forward-To": "https://connectora:8080/api/ids/data",
-    "messageType":"DescriptionRequestMessage",
-    "requestedElement" : "https://localhost:8084/api/catalogs/c9239930-0c4f-4de0-b7e5-be2c2e228b30"
-}'
-
-```
-
-And sent it again, to get matadata for the catalog
-
-![DSC Catalog](DSC_Catalog.jpg "DSC Catalog")
-
-Find Artifact element, since we will need its id (URL)
-
-![DSC Artifact](DSC_Artifact.jpg "DSC Artifact")
-
-### Contract Request Message
-
-Import following request in Postman:
-
-```
-curl --location --request POST 'https://localhost:8084/proxy' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "multipart": "form",
-    "Forward-To": "https://connectora:8080/api/ids/data",
-    "messageType": "ContractRequestMessage",
-    "requestedElement": "https://localhost:8084/api/artifacts/6faa6902-3da8-4020-b274-4e81d393abe7",
-    "payload": {
-        "@context": {
-            "ids": "https://w3id.org/idsa/core/",
-            "idsc": "https://w3id.org/idsa/code/"
-        },
-        "@type": "ids:ContractRequest",
-        "@id": "https://w3id.org/idsa/autogen/contractRequest/46863e9c-e7ce-4041-959c-11b317a10c5c",
-        "ids:permission": [
-            {
-                "@type": "ids:Permission",
-                "@id": "https://localhost:8084/api/rules/363271e4-bf5f-4640-a020-683e529623c3",
-                "ids:target": {
-                    "@id": "https://localhost:8084/api/artifacts/6faa6902-3da8-4020-b274-4e81d393abe7"
-                },
-                "ids:description": [
-                    {
-                        "@value": "Usage policy provide access applied",
-                        "@type": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                ],
-                "ids:title": [
-                    {
-                        "@value": "Example Usage Policy",
-                        "@type": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                ],
-                "ids:action": [
-                    {
-                        "@id": "https://w3id.org/idsa/code/USE"
-                    }
-                ]
-            }
-        ],
-        "ids:provider": {
-            "@id": "https://connectora:8080/"
-        },
-        "ids:obligation": [],
-        "ids:prohibition": [],
-        "ids:consumer": {
-            "@id": "http://w3id.org/engrd/connector/consumer"
-        },
-        "ids:contractEnd": {
-            "@value": "2023-10-22T07:48:37.068Z",
-            "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-        },
-        "ids:contractStart": {
-            "@value": "2021-10-22T07:48:37.068Z",
-            "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-        },
-        "ids:contractDate": {
-            "@value": "2022-06-30T09:14:17.575Z",
-            "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-        }
-    }
-}'
-
-```
-and make changes for following elements, to match values in your use case:
-
-*requestedElement*  - "https://localhost:8084/api/artifacts/6faa6902-3da8-4020-b274-4e81d393abe7"
-
-*ids:Permission* - "@id": "https://localhost:8084/api/rules/363271e4-bf5f-4640-a020-683e529623c3"
-
-*ids:target* - "@id": "https://localhost:8084/api/artifacts/6faa6902-3da8-4020-b274-4e81d393abe7"
-                
-*ids:contractEnd* - @value
-
-*ids:contractStart* - @value
-
-*ids:contractDate* - @value
-
-You need to copy those values into this request from previous response - Catalog description.
-
-The successful request should return ContractAgreementMessage, like in the picture:
-
-![DSC Contract Agreement](DSC_ContractAgreement.jpg "DSC Contract Agreement")
-
-### Contract Agreement
-
-Import following request:
-
-```
-curl --location --request POST 'https://localhost:8084/proxy' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "multipart": "form",
-    "Forward-To": "https://connectora:8080/api/ids/data",
-    "messageType": "ContractAgreementMessage",
-    "requestedArtifact": "https://localhost:8084/api/artifacts/0859fa4a-36b7-4bfd-be1c-6122af6f542d",
-    "payload": ""
-}'
-```
-
-Copy payload part - Contract Agreement add it in payload request, to look like following:
-
-![DSC Contract Agreement Message](DSC_ContractAgreementMessage.jpg "DSC Contract Agreement Message")
-
-After successful request, you should receive MessageProcessedNotificationMessage:
-
-![DSC Message Processed Notification Message](DSC_MessageProcessedNotificationMessage.jpg "DSC Message Processed Notification Message")
-
-### Artifact Request Message
-
-Import following request:
-
-```
-curl --location --request POST 'https://localhost:8084/proxy' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "multipart": "form",
-    "Forward-To": "https://connectora:8080/api/ids/data",
-    "messageType":"ArtifactRequestMessage",
-    "requestedArtifact": "https://localhost:8084/api/artifacts/6faa6902-3da8-4020-b274-4e81d393abe7",
-    "transferContract" : "https://localhost:8084/api/agreements/e74f3684-a7d4-4eef-91e9-6cdcbc0da6a6",
-    "payload" : {}
-}'
-
-```
-
-And modify following fields:
-
-*requestedArtifact* - this one we used before, when requesting contract </br>
-*transferContract* - contract agreement URI
-
-From previous request get Contract Agreement URI:
-
-![DSC Contract Agreement URI](DSC_ContractAgreement_URI.jpg "DSC Contract Agreement URI")
-
-
-Upon successfully executing request, you should receive *ArtifactResponseMessage*, like in the picture:
-
-![DSC Artifact Response Message](DSC_ArtifactResponseMessage.jpg "DSC Artifact Response Message")
-
-You can scroll down in the Postman response, and get the payload, it should be Base64 encoded string.
+![DSC Collection](DSC_Communication.jpg "DSC Collection")
 
 
 ## TrueConnector as provider
