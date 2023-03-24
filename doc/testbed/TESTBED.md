@@ -16,7 +16,7 @@ If you want to create new certificate, please follow [instructions](https://gith
 ### DAPS certificate
 
 You can use certificate already provided in Testbed project, in following location - *IDS-testbed\CertificateAuthority\data\cert\*
-We need to make some small adjustments, to generate valid p12 file. For this purpose, we can need to copy *ReferenceTestbedCA.crt* file from ca folder (one level above) and execute following command:
+We need to make some small adjustments, to generate valid p12 file. For this purpose, we need to copy *ReferenceTestbedCA.crt* file from ca folder (one level above) and execute following command:
 
 ```
 openssl pkcs12 -export -out testbed3.p12 -inkey testbed3.key -in testbed3.crt -certfile ReferenceTestbedCA.crt
