@@ -210,6 +210,8 @@ To stop containers, execute following:
 docker-compose down -v
 ```
 
+There is also short video, that shows how to use TRUEConnector. Files are located in [tutorial](doc/tutorial) folder.
+
 At this point, you should be able to use TRUE Connector and send messages. How to send messages, check following link [Send multipart form request](#exchangedata):
 
 ### Component overview <a name="componentoverview"></a>
@@ -596,16 +598,13 @@ Audit logging is turned **off** by default. If you wish to configure it or even 
 Usage Control is disabled by default.
 If you want to enable it (mandatory for contract negotiation), please check ["Enabling usage control"](#usagecontrol).
 
-If mandatory, for other connectors, you can perform contract negotiation with other connector (not TRUE Connector) or with TRUE Connector. There is default contract offer that will be sent if ContractRequestMessage is received. It will allow consuming of resource in year 2022.
-
-If you do not want to do contract negotiation, and you are using TRUE Connector "on both sides", there is "workaround", to upload Usage Control policy directly to Consumer Usage Control Data App. In order to achieve this, use following link:
-
-```
-http://localhost:9553/platoontec/PlatoonDataUsage/1.0/swagger-ui/index.html?configUrl=/platoontec/PlatoonDataUsage/1.0/v3/api-docs/swagger-config
-```
-In POST request, upload policy from [here](doc/policy_examples/time_constraint.json).
+If mandatory, for other connectors, you can perform contract negotiation with other connector (not TRUE Connector) or with TRUE Connector. There is default contract offer that will be sent if ContractRequestMessage is received. It will allow consuming of resource.
 
 Assuming you are running docker instance on local machine. If not, please update hostname to match your scenario.
+
+You can use provided [Postman collection](TRUEConnector.postman_collection.json) and [Postman environment](TRUEConnector_enviroment.postman_environment.json); import both files into Postman and perform Contract Negotiation automatically or do this step by step, as described below.
+
+![TC Postman](doc/TRUEConnector_Postman.jpg)
 
 ### Get offered resource <a name="get_offered_resource"></a>
 
