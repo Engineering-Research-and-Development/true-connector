@@ -1,0 +1,222 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: tc-consumer
+  name: tc-consumer
+spec:
+  type: LoadBalancer
+  ports:
+  - name: "8091"
+    port: 8091
+    targetPort: 8091
+  - name: "8890"
+    port: 8890
+    targetPort: 8889
+  - name: "8087"
+    port: 8087
+    targetPort: 8086
+  - name: "8085"
+    port: 8085
+    targetPort: 8084
+  - name: "9001"
+    port: 9001
+    targetPort: 9000
+  - name: "8887"
+    port: 8887
+    targetPort: 8887
+  - name: "8888"
+    port: 8888
+    targetPort: 8888
+  selector:
+    io.kompose.service: tc-consumer
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: be-dataapp-consumer-claim0
+  name: be-dataapp-consumer-claim0
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: be-dataapp-consumer-claim1
+  name: be-dataapp-consumer-claim1
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: be-dataapp-consumer-claim2
+  name: be-dataapp-consumer-claim2
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: ecc-consumer-claim0
+  name: ecc-consumer-claim0
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: ecc-consumer-claim1
+  name: ecc-consumer-claim1
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: tc-consumer
+  name: tc-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: tc-consumer
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: tc-consumer
+    spec:
+      containers:
+      - image: rdlabengpa/ids_be_data_app:develop
+#        command: ["/bin/sh"]
+#        args: ["-c", "sleep 60m && echo Sleep expired > co/dev/termination-log"]
+        imagePullPolicy: ""
+        name: be-dataapp-consumer
+        ports:
+        - containerPort: 8083
+        - containerPort: 9000
+        resources: {}
+        volumeMounts:
+        - name: be-dataapp-consumer-claim0
+          mountPath: /config
+        - mountPath: /data
+          name: be-dataapp-consumer-claim1
+        - name: be-dataapp-consumer-claim2
+#          mountPath: /cert
+          mountPath: /cert/ssl-server.jks
+          subPath: ssl-server.jks
+          readOnly: false
+
+      - image: rdlabengpa/ids_execution_core_container:develop
+#        command: ["/bin/sh"]
+#        args: ["-c", "sleep 60m && echo Sleep expired > /dev/termination-log"]
+        imagePullPolicy: ""
+        name: ecc-consumer
+        ports:
+        - containerPort: 8091
+        - containerPort: 8889
+        - containerPort: 8086
+        - containerPort: 8887
+        - containerPort: 8888
+        resources: {}
+        volumeMounts:
+        - mountPath: /config
+          name: ecc-consumer-claim0
+        - name: ecc-consumer-claim1
+#          mountPath: /cert
+          mountPath: /cert/truststoreEcc.jks
+          subPath: truststoreEcc.jks
+          readOnly: false
+        - name: ecc-consumer-claim1
+          mountPath: /cert/ssl-server.jks
+          subPath: ssl-server.jks
+          readOnly: false  
+          
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: be-dataapp-consumer-claim0
+#        hostPath:
+#          path: /home/config_and_cerificate/be-dataapp-consumer/config     
+#          type: Directory
+        configMap:
+          name: be-dataapp-consumer-configmap
+          optional: false
+      - name: be-dataapp-consumer-claim1
+        persistentVolumeClaim:
+          claimName: be-dataapp-consumer-claim1
+      - name: be-dataapp-consumer-claim2
+        configMap:
+          name: ca-pemstore
+          optional: false
+#        hostPath:
+#          path: /home/config_and_cerificate/be-dataapp-consumer/cert     
+#          type: Directory
+      - name: ecc-consumer-claim0
+#        hostPath:
+#          path: /home/config_and_cerificate/ecc-consumer/config
+#          type: Directory
+        configMap:
+          name: ecc-consumer-configmap
+          optional: false        
+      - name: ecc-consumer-claim1
+#        hostPath:
+#          path: /home/config_and_cerificate/ecc-consumer/cert
+#          type: Directory
+        configMap:
+          name: ca-pemstore
+          optional: false
+          
+status: {}

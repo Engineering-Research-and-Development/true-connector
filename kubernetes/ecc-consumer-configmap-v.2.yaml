@@ -1,0 +1,248 @@
+apiVersion: v1
+data:
+  application.properties: |
+    spring.banner.location=classpath:true-connector-banner.txt
+    logging.config=classpath:logback-RECEIVER.xml
+    #Choose which events to log from list bellow
+    #auditableEvents=ALL,NONE,SELF_DESCRIPTION,SELF_DESCRIPTION_ALL,CONTRACT_OFFER,OFFERED_RESOURCE,REPRESENTATION,USER,EXCEPTION,CONNECTOR
+    #if left empty it will default to ALL
+    application.logging.auditableEvents=
+
+    #GLOBAL PROPERTIES
+    #define the directory where you can find certificates
+    application.targetDirectory=/cert/
+    #SSL Settings for https communication (Related to Springboot)
+    #use https instead of http, if false the ssl settings can be empty
+    #Selfdescription SSL Settings
+    server.ssl.enabled=true
+    application.ssl.key-store.name=ssl-server.jks
+    application.ssl.key-store-password=changeit
+    application.ssl.key-password=changeit
+    
+    #    Check the configurations !!!
+    ### App setup
+    server.port=8444
+    server.max-http-header-size=15360
+    server.ssl.key-alias=execution-core-container
+    server.ssl.key-password=${application.ssl.key-password}
+    server.ssl.key-store-password=${application.ssl.key-store-password}
+    server.ssl.key-store=${application.targetDirectory}${application.ssl.key-store.name}
+    server.ssl.key-store-provider=SUN
+    server.ssl.key-store-type=JKS
+    server.ssl.SHA256=AC3BCAED1F01C63E18D4E0994C48D18EB6F79D01844564A4BA8476BE2D17F5E4
+    #disable hostname validation
+    application.disableSslVerification=true
+    
+    #enable protocol validation (default=false)
+    #if false the Forward-To header is same as input
+    application.enableProtocolValidation=false
+    #true = checks if the protocol in Forward-To is correct (https/http://example.com || wss://example.com || idscp://example.com) based on selected configuration
+    #false = if the protocol in Forward-To is not correct it will overwrite it based on selected configuration
+    #application.websocket.isEnabled(wss) and camel.component.jetty.use-global-ssl-context-parameters(http/https) these properties influence the behavior
+    application.validateProtocol=true
+    
+    ### DAPS Parameters (for getting token)
+    application.isEnabledDapsInteraction=false
+    #Cache token(true) or always use new token(false)
+    application.tokenCaching=true
+    #Fetch and cache token on startup. application.tokenCaching must be true!
+    application.fetchTokenOnStartup=true
+    #v2,orbiter
+    application.dapsVersion=v2
+    #Orbiter
+    application.daps.orbiter.privateKey=
+    application.daps.orbiter.password=
+    
+    #application.dapsUrl=
+    #application.keyStoreName=
+    #application.keyStorePassword=
+    #application.keystoreAliasName=
+    #application.trustStoreName=
+    #application.trustStorePassword=
+    #application.connectorUUID=
+    #application.dapsJWKSUrl=
+    application.dapsUrl=https://daps.aisec.fraunhofer.de/v2/token
+                            
+    #DAPS URI for validating
+    application.dapsJWKSUrl=https://daps.aisec.fraunhofer.de/.well-known/jwks.json
+    application.keyStoreName=ecc-consumer.p12
+    application.keyStorePassword=password
+    application.keystoreAliasName=1
+    application.trustStoreName=truststoreEcc.jks
+    application.trustStorePassword=allpassword
+    application.connectorUUID=eff835e8-bf68-4a8e-9869-d4c7ed5af9f8
+    
+    #DAPS URI for validating
+    
+    #encode/decode payload on ECC boundaries - default value false
+    application.encodeDecodePayload=false
+    
+    ### Clearing-House
+    #application.clearinghouse.isEnabledClearingHouse=true
+    application.clearinghouse.isEnabledClearingHouse=false
+    application.clearinghouse.username=
+    application.clearinghouse.password=
+    #Clearing House endpoint and local dir for hashing
+    application.clearinghouse.baseUrl=
+    application.clearinghouse.logEndpoint=/messages/log/
+    application.clearinghouse.processEndpoint=/process/
+    
+    #D endpoint
+    
+    #Connector URIs
+    application.uriSchema=http
+    application.uriAuthority=//w3id.org/engrd
+    application.uriConnector=/connector/
+    
+    #IDSCP2
+    application.idscp2.isEnabled=false
+    #define if the connector is used as receiver
+    application.isReceiver=true
+    
+    #HTTP port
+    http.port=8082
+    
+    #WSS Port
+    application.wss.server.port=8086
+    
+    #Camel A endpoint
+    application.camelSenderPort=8888
+    
+    #Camel B endpoint
+    application.camelReceiverPort=8890
+    
+    #Open API Data APP
+    application.openDataAppReceiver=https://localhost:8083/data
+    application.openDataAppReceiverHealth=https://localhost:8083/about/version
+                         
+    # For WSS flow
+    #application.openDataAppReceiver=https://localhost:9000/incoming-data-app/routerBodyBinary
+    
+    # Body: binary
+    application.openDataAppReceiverRouter=mixed
+    # Body: form-data
+    #application.openDataAppReceiverRouter=form
+    # Body: http-header
+    #application.openDataAppReceiverRouter=http-header
+    
+    # Body:binary
+    application.eccHttpSendRouter=mixed
+    # Body: form-data
+    #application.eccHttpSendRouter=form
+    # Body: http-header
+    #application.eccHttpSendRouter=http-header
+    
+    ## Health check properties
+    application.healthcheck.enabled=false
+    application.healthcheck.cron.expression=0 */5 * ? * *
+    # fixedDelay in ms
+    application.healthcheck.resourcemanager.cron.fixedDelay=60000
+    
+    ## Threshold in percentages - from max value
+    application.healthcheck.threshold.audit=5
+    application.healthcheck.threshold.cpu=0.5
+    application.healthcheck.threshold.memory=10.5
+    
+    application.healthcheck.dataapp=https://localhost:8083/about/version
+    application.healthcheck.usagecontrol=https://localhost:8080/platoontec/PlatoonDataUsage/1.0/about/version
+    
+    application.healthcheck.daps=${application.dapsJWKSUrl}
+    application.healthcheck.clearinghouse=
+    #Camel - Spring Boot
+    camel.springboot.main-run-controller=true
+    camel.ssl.config.key-managers.key-password=${application.ssl.key-password}
+    camel.ssl.config.key-managers.key-store.resource=${application.targetDirectory}${application.ssl.key-store.name}
+    camel.ssl.config.key-managers.key-store.password=${application.ssl.key-store-password}
+    
+    #Camel - HTTP4
+    #Camel routes SSL Settings
+    camel.component.http4.use-global-ssl-context-parameters=true
+    
+    #Camel - Jetty
+    #Camel routes SSL Settings
+    camel.component.jetty.use-global-ssl-context-parameters=true
+    camel.component.jetty.keystore=${application.targetDirectory}${application.ssl.key-store.name}
+    camel.component.jetty.ssl-password=${application.ssl.key-store-password}
+    camel.component.jetty.ssl-key-password=${application.ssl.key-password}
+    
+    # Enable WebSocket over Https -> Disable Idscp to use!
+    application.websocket.isEnabled=false
+    #Enable WS communication channel from/to DataAPP
+    application.dataApp.websocket.isEnabled=false
+    
+    # scan in the com/foo/routes classpath
+    camel.xml-routes.directory=
+    
+    # Usage Control App
+    application.isEnabledUsageControl=false
+    # platoon or mydata
+    application.usageControlVersion=platoon
+    # platoon URL
+    spring.ids.ucapp.baseUrl=http://localhost:8080/platoontec/PlatoonDataUsage/1.0/
+    spring.ids.ucapp.healthUrl=http://localhost:8080/platoontec/PlatoonDataUsage/1.0/about/version
+    # mydata URL
+    #spring.ids.ucapp.baseUrl=http://localhost:9552/
+    
+    #Technical headers
+    application.technicalHeaders=header,Is-Enabled-DataApp-WebSocket,payload,Forward-To,Payload-Content-Type,Host
+    
+    #SelfDescription
+    #API management credentials
+    application.user.api.username=admin
+    # 'password' encoded
+        value
+    application.user.api.password=$2a$10$MQ5grDaIqDpBjMlG78PFduv.AMRe9cs0CNm/V4cgUubrqdGTFCH3m
+    application.user.connector.username=connector
+    application.user.connector.password=$2a$10$MQ5grDaIqDpBjMlG78PFduv.AMRe9cs0CNm/V4cgUubrqdGTFCH3m
+    #number of consecutive failed attempts
+    application.user.lock.maxattempts=5
+    # duration for how long user will be locked
+    application.user.lock.duration=30
+    # time unit used for locking user, possible values are: SECONDS,MINUTES,HOURS,DAYS
+    application.user.lock.unit=MINUTES
+    
+    ##Password Validator
+    #Password length should be in between (for example) 8 and 16 characters, 0 disable rule
+    application.password.validator.minLength=8
+    application.password.validator.maxLength=16
+    #At least one Upper-case character, 0 disable rule
+    application.password.validator.minUpperCase=1
+    #At least one Lower-case character, 0 disable rule
+    application.password.validator.minLowerCase=1
+    #At least one digit, 0 disable rule
+    application.password.validator.minDigit=1
+    #At least one special character, 0 disable rule
+    application.password.validator.minSpecial=1
+    
+    application.selfdescription.description=Receiver Connector description
+    application.selfdescription.title=Receiver Connector title
+    application.selfdescription.curator=http://receiver.curatorURI.com
+    application.selfdescription.maintainer=http://receiver.maintainerURI.com
+    application.selfdescription.registrateOnStartup=false
+    application.selfdescription.brokerURL=
+    application.selfdescription.filelocation=/home/gianluca/git/true-connector-extra/selfdescription_filelocation/
+    
+    #Springdoc
+    springdoc.packagesToScan=it.eng.idsa.businesslogic.web.rest
+    springdoc.pathsToMatch=/**
+    springdoc.writer-with-default-pretty-printer=true
+    
+    #For logging the response over WSS set to DEBUG, else leave empty
+    #logging.level.it.eng.idsa.businesslogic.processor.receiver=
+    application.extendedTokenValidation=false
+  logback-RECEIVER.xml: "<configuration>\n  <appender name=\"jsonConsoleAppender\"
+    class=\"ch.qos.logback.core.ConsoleAppender\">\n    <encoder class=\"net.logstash.logback.encoder.LogstashEncoder\"/>\n
+    \ </appender>\n  \n  <appender name=\"STDOUT\" class=\"ch.qos.logback.core.ConsoleAppender\">\n
+    \   <encoder>\n      <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{35}
+    - %msg %n</pattern>\n    </encoder>\n  </appender>\n\n\t<property name=\"LOG_DIR\"
+    value=\"/var/log/ecc\" />\n\t<appender name=\"FILE\" class=\"ch.qos.logback.core.FileAppender\">\n\t\t<file>${LOG_DIR}/true_connector_audit_RECEIVER.log</file>\n\t\t<append>true</append>\n\t\t<encoder
+    class=\"net.logstash.logback.encoder.LogstashEncoder\"/>\n\t</appender>\n  \n
+    \ <logger name=\"JSON\" level=\"INFO\">\n<!--     <appender-ref ref=\"jsonConsoleAppender\"/>
+    -->\n    <appender-ref ref=\"FILE\"/>\n  </logger>\n  \n   <logger name=\"it.eng.idsa\"
+    level=\"info\" additivity=\"false\">\n        <appender-ref ref=\"STDOUT\"/>\n
+    \   </logger>\n  \n  <root level=\"INFO\">\n  \t<appender-ref ref=\"STDOUT\"/>\n
+    \ </root>\n</configuration>\n"                                            
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: ecc-consumer-configmap
