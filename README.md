@@ -602,7 +602,7 @@ If mandatory, for other connectors, you can perform contract negotiation with ot
 
 Assuming you are running docker instance on local machine. If not, please update hostname to match your scenario.
 
-You can use provided [Postman collection](TRUEConnector_enviroment.postman_environment.json) and [Postman environment](TRUEConnector_enviroment.postman_environment.json); import both files into Postman and perform Contract Negotiation automatically or do this step by step, as described below.
+You can use provided [Postman collection](TRUEConnector.postman_collection.json) and [Postman environment](TRUEConnector_enviroment.postman_environment.json); import both files into Postman and perform Contract Negotiation automatically or do this step by step, as described below.
 
 ![TC Postman](doc/TRUEConnector_Postman.jpg)
 

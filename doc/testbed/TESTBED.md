@@ -46,7 +46,7 @@ CONSUMER_DAPS_KEYSTORE_PASSWORD=password
 CONSUMER_DAPS_KEYSTORE_ALIAS=1
 ```
 
-(for the moment, we will use same DAPS certificate for both Provider nad Consumer)
+(for the moment, we will use same DAPS certificate for both Provider and Consumer)
 
 **application.properties** for both consumer and provider
 
