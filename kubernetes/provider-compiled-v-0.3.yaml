@@ -117,7 +117,7 @@ metadata:
     io.kompose.service: tc-provider
   name: tc-provider
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       io.kompose.service: tc-provider
@@ -193,8 +193,12 @@ spec:
         configMap:
           name: ecc-provider-configmap
           optional: false
-      - hostPath:
-          path: /home/config_and_cerificate/ecc-provider/cert
-          type: Directory
-        name: ecc-provider-claim1
+      - name: ecc-provider-claim1
+#        hostPath:
+#          path: /home/config_and_cerificate/ecc-provider/cert
+#          type: Directory
+        configMap:
+          name: ca-pemstore
+          optional: false
+
 status: {}
