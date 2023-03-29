@@ -139,7 +139,7 @@ spec:
         io.kompose.service: tc-consumer
     spec:
       containers:
-      - image: rdlabengpa/ids_be_data_app:develop
+      - image: rdlabengpa/ids_be_data_app:v0.2.5
 #        command: ["/bin/sh"]
 #        args: ["-c", "sleep 60m && echo Sleep expired > co/dev/termination-log"]
         imagePullPolicy: ""
@@ -159,7 +159,7 @@ spec:
           subPath: ssl-server.jks
           readOnly: false
 
-      - image: rdlabengpa/ids_execution_core_container:develop
+      - image: rdlabengpa/ids_execution_core_container:v1.11.0
 #        command: ["/bin/sh"]
 #        args: ["-c", "sleep 60m && echo Sleep expired > /dev/termination-log"]
         imagePullPolicy: ""

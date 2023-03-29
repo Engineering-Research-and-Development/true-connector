@@ -133,7 +133,7 @@ spec:
         io.kompose.service: tc-provider
     spec:
       containers:
-      - image: rdlabengpa/ids_be_data_app:develop
+      - image: rdlabengpa/ids_be_data_app:v0.2.5
         imagePullPolicy: ""
         name: be-dataapp-provider
         ports:
@@ -152,7 +152,7 @@ spec:
           subPath: ssl-server.jks
           readOnly: false
           
-      - image: rdlabengpa/ids_execution_core_container:develop
+      - image: rdlabengpa/ids_execution_core_container:v1.11.0
         imagePullPolicy: ""
         name: ecc-provider
         ports:
