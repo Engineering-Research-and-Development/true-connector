@@ -1,0 +1,204 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: tc-provider
+  name: tc-provider
+spec:
+  type: LoadBalancer
+  ports:
+  - name: "8083"
+    port: 8083
+    targetPort: 8083
+  - name: "9000"
+    port: 9000
+    targetPort: 9000
+  - name: "8090"
+    port: 8090
+    targetPort: 8449
+  - name: "8889"
+    port: 8889
+    targetPort: 8889
+  - name: "8086"
+    port: 8086
+    targetPort: 8086
+  selector:
+    io.kompose.service: tc-provider
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: be-dataapp-provider-claim0
+  name: be-dataapp-provider-claim0
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: be-dataapp-provider-claim1
+  name: be-dataapp-provider-claim1
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: be-dataapp-provider-claim2
+  name: be-dataapp-provider-claim2
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: ecc-provider-claim0
+  name: ecc-provider-claim0
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: ecc-provider-claim1
+  name: ecc-provider-claim1
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: tc-provider
+  name: tc-provider
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: tc-provider
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: tc-provider
+    spec:
+      containers:
+      - image: rdlabengpa/ids_be_data_app:v0.2.5
+        imagePullPolicy: ""
+        name: be-dataapp-provider
+        ports:
+        - containerPort: 8083
+        - containerPort: 9000
+        resources: {}                                                          
+        volumeMounts:
+        - mountPath: /config            
+          name: be-dataapp-provider-claim0
+        - mountPath: /data
+          name: be-dataapp-provider-claim1
+        - name: be-dataapp-provider-claim2
+          mountPath: /cert                               
+#          mountPath: /cert
+          mountPath: /cert/ssl-server.jks
+          subPath: ssl-server.jks
+          readOnly: false
+          
+      - image: rdlabengpa/ids_execution_core_container:v1.11.0
+        imagePullPolicy: ""
+        name: ecc-provider
+        ports:
+        - containerPort: 8449
+        - containerPort: 8889
+        - containerPort: 8086
+        resources: {}
+        volumeMounts:
+        - mountPath: /config
+          name: ecc-provider-claim0
+        - mountPath: /cert
+          name: ecc-provider-claim1
+          
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: be-dataapp-provider-claim0
+#        hostPath:
+#          path: /home/config_and_cerificate/be-dataapp-provider/config     
+#          type: Directory
+        configMap:
+          name: be-dataapp-provider-configmap
+          optional: false
+      - name: be-dataapp-provider-claim1
+        persistentVolumeClaim:
+          claimName: be-dataapp-provider-claim1
+      - name: be-dataapp-provider-claim2
+#        hostPath:
+#          path: /home/config_and_cerificate/be-dataapp-provider/cert
+#          type: Directory
+        configMap:
+          name: ca-pemstore
+          optional: false
+      - name: ecc-provider-claim0
+#        hostPath:
+#          path: /home/config_and_cerificate/ecc-provider/config
+#          type: Directory
+        configMap:
+          name: ecc-provider-configmap
+          optional: false
+      - name: ecc-provider-claim1
+#        hostPath:
+#          path: /home/config_and_cerificate/ecc-provider/cert
+#          type: Directory
+        configMap:
+          name: ca-pemstore
+          optional: false
+
+status: {}

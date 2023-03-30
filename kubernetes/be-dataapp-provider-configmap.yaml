@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-03-10T14:30:42Z"
+  name: be-dataapp-provider-configmap
+  namespace: default
+  resourceVersion: "337263"
+  uid: 39dcb093-7fca-4404-9c5e-67cc32bd6fbf
+data:
+  application.properties: |
+    ### App setup
+    spring.banner.location=classpath:dataapp_banner.txt
+    # add following line to exclude stacktrace from response - needed if spring-dev is included
+    server.error.include-stacktrace=never
+
+    logging.level.root=ERROR
+    logging.level.it.eng.idsa.dataapp=INFO
+    logging.pattern.console=%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger.%M - %msg%n
+
+    server.port=8084
+    # set ssl to false if need to enable http communication
+    #server.ssl.enabled=false
+    server.ssl.key-store=classpath:ssl-server.jks
+    server.ssl.key-password=changeit
+    server.ssl.key-alias=execution-core-container
+    server.ssl.key-store-type=JKS
+    server.ssl.trust-store-type=JKS
+    #server.ssl.key-store-provider=SUN
+
+    #application.websocket.isEnabled=false
+    application.fileSenderPort=9001
+    application.dataLakeDirectory=.
+
+    #encode payload - default value false
+    application.encodePayload=false
+
+    #returns only payload part of Multipart Message as response
+    application.extractPayloadFromResponse=true
+
+    application.ecc.issuer.connector=http://w3id.org/engrd/connector/provider
+
+    #Use default behavior for contract agreement, should not be used in production
+    application.contract.negotiation.demo=true
+
+    #mydata or platoon
+    application.usageControlVersion=platoon
+
+    application.ecc.protocol=https
+    application.ecc.host=localhost
+    application.ecc.port=8888
+    application.ecc.mix-context=/incoming-data-app/multipartMessageBodyBinary
+    application.ecc.form-context=/incoming-data-app/multipartMessageBodyFormData
+    application.ecc.header-context=/incoming-data-app/multipartMessageHttpHeader
+
+    application.ecc.selfdescription-context=/internal/sd
+    application.ecc.broker-register-context=/selfRegistration/register
+    application.ecc.broker-update-context=/selfRegistration/update
+    application.ecc.broker-delete-context=/selfRegistration/delete
+    application.ecc.broker-passivate-context=/selfRegistration/passivate
+    application.ecc.broker-querry-context=/selfRegistration/query
+                                                                                             
+    spring.servlet.multipart.max-request-size=200MB
+    spring.servlet.multipart.max-file-size=200MB
+    # Setting max size of post requests to 6MB (default: 2MB)
+    server.tomcat.max-http-post-size=200291456
+
+    #mixed|form|http-header
+    application.dataapp.http.config=form
+  config.properties: |
+    ### App setup
+    server.ssl.key-password=changeit
+    server.ssl.key-store=ssl-server.jks
+    server.ssl.port=9000
+    server.path=/incoming-data-channel-received-message
+    # Timer in ms
+    application.recreation.frequency=1000
