@@ -13,7 +13,7 @@ foo@bar:~$ minikube start
 > Consumer Data APP configmap
 
 ```bash
-foo@bar:~$ kubectl apply -f https://raw.githubusercontent.com/Engineering-Research-and-Development/true-connector/Kubernetes/kubernetes/be-dataapp-consumer-configmap.yaml
+foo@bar:~$ kubectl apply -f https://raw.githubusercontent.com/Engineering-Research-and-Development/true-connector/main/kubernetes/be-dataapp-consumer-configmap.yaml
 ```
 
 expected result: 
@@ -25,7 +25,7 @@ expected result:
 > Provider Data APP configmap
 
 ```bash
-foo@bar:~$ kubectl apply -f https://raw.githubusercontent.com/Engineering-Research-and-Development/true-connector/Kubernetes/kubernetes/be-dataapp-provider-configmap.yaml
+foo@bar:~$ kubectl apply -f https://raw.githubusercontent.com/Engineering-Research-and-Development/true-connector/main/kubernetes/be-dataapp-provider-configmap.yaml
 ```
 
 expected result: 
@@ -37,7 +37,7 @@ expected result:
 > Consumer Execution Core Container configmap
 
 ```bash
-foo@bar:~$ kubectl apply -f https://raw.githubusercontent.com/Engineering-Research-and-Development/true-connector/Kubernetes/kubernetes/ecc-consumer-configmap-v.2.yaml
+foo@bar:~$ kubectl apply -f https://raw.githubusercontent.com/Engineering-Research-and-Development/true-connector/main/kubernetes/ecc-consumer-configmap-v.2.yaml
 ```
 
 expected result: 
@@ -49,7 +49,7 @@ expected result:
 > Provider Execution Core Container configmap
 
 ```bash
-foo@bar:~$ kubectl apply -f https://raw.githubusercontent.com/Engineering-Research-and-Development/true-connector/Kubernetes/kubernetes/ecc-provider-configmap-v.2.yaml
+foo@bar:~$ kubectl apply -f https://raw.githubusercontent.com/Engineering-Research-and-Development/true-connector/main/kubernetes/ecc-provider-configmap-v.2.yaml
 ```
 
 expected result: 
@@ -61,7 +61,7 @@ expected result:
 Inside this configmap are present **ssl-server.jks** and **truststoreEcc.jks**.
 
 ```bash
-foo@bar:~$ kubectl apply -f https://raw.githubusercontent.com/Engineering-Research-and-Development/true-connector/Kubernetes/kubernetes/ca-pemstore.yaml
+foo@bar:~$ kubectl apply -f https://raw.githubusercontent.com/Engineering-Research-and-Development/true-connector/main/kubernetes/ca-pemstore.yaml
 ```
 
 expected result: 
@@ -73,7 +73,7 @@ expected result:
 > Counsumer pod
 
 ```bash
-foo@bar:~$ kubectl apply -f https://raw.githubusercontent.com/Engineering-Research-and-Development/true-connector/Kubernetes/kubernetes/consumer-compiled-v-0.3.yaml
+foo@bar:~$ kubectl apply -f https://raw.githubusercontent.com/Engineering-Research-and-Development/true-connector/main/kubernetes/consumer-compiled-v-0.3.yaml
 ```
 
 expected result: 
@@ -93,7 +93,7 @@ deployment.apps/tc-consumer created
 > Provider pod
 
 ```bash
-foo@bar:~$ kubectl apply -f https://raw.githubusercontent.com/Engineering-Research-and-Development/true-connector/Kubernetes/kubernetes/provider-compiled-v-0.3.yaml
+foo@bar:~$ kubectl apply -f https://raw.githubusercontent.com/Engineering-Research-and-Development/true-connector/main/kubernetes/provider-compiled-v-0.3.yaml
 ```
 
 expected result: 
