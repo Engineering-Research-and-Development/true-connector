@@ -190,8 +190,8 @@ expected result:
 
 Using these two changes you can try same request present in Postman collection which can be used to initiate requests that are most commonly used.
 
-[TRUEConnector.postman_collection](TRUEConnector.postman_collection.json)</br>
+[TRUEConnector.postman_collection](../TRUEConnector.postman_collection.json)</br>
 
-[TRUEConnector enviroment.postman_environment](TRUEConnector_enviroment.postman_environment.json)
+[TRUEConnector enviroment.postman_environment](../TRUEConnector_enviroment.postman_environment.json)
 
 This collection comes with predefined environments so be sure to also import environment file.
