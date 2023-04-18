@@ -1,4 +1,7 @@
 ![TRUE Connector Logo](doc/TRUE_Connector_Logo.png?raw=true "TRUE Connector Logo")
+
+</br></br>
+
 **TRUE** (**TRU**sted **E**ngineering) **Connector** for the IDS (International Data Space) ecosystem
 
 The TRUE Connector is composed of three components:
