@@ -1,4 +1,4 @@
-# TRUE CONNECTOR
+![TRUE Connector Logo](doc/TRUE_Connector_Logo.png?raw=true "TRUE Connector Logo")
 **TRUE** (**TRU**sted **E**ngineering) **Connector** for the IDS (International Data Space) ecosystem
 
 The TRUE Connector is composed of three components:
@@ -223,9 +223,9 @@ TRUEConnector is build using Java11, and use following libraries:
 
 | Component | Version |
 | --- | --- |
-| [Multipart Message Library](https://github.com/Engineering-Research-and-Development/true-connector-multipart_message_library) | 1.0.16 |
-| [Websocket Message Streamer](https://github.com/Engineering-Research-and-Development/true-connector-websocket_message_streamer) | 1.0.16 |
-| [Information model](https://github.com/International-Data-Spaces-Association/InformationModel) | 4.1.1 | 
+| [Multipart Message Library](https://github.com/Engineering-Research-and-Development/true-connector-multipart_message_library) | 1.0.17 |
+| [Websocket Message Streamer](https://github.com/Engineering-Research-and-Development/true-connector-websocket_message_streamer) | 1.0.17 |
+| [Information model](https://github.com/International-Data-Spaces-Association/InformationModel) | 4.2.7 | 
 | [idscp2](https://github.com/International-Data-Spaces-Association/idscp2-jvm) | 0.5.2 |
 | SpringBoot | 2.2.11.RELEASE |
 | Apache Camel | 3.19.0 |
@@ -410,6 +410,8 @@ MULTIPART_ECC=mixed
 PROVIDER_MULTIPART_EDGE=mixed
 CONSUMER_MULTIPART_EDGE=mixed
 ```
+
+**NOTE**: In the case of WSS flow, additional property is used in ECC, which isn't listed in the property file, and that is wssSelfDescriptionPort which is used for fetching self-description. This value isn't essential to the end user since both in ECC and DataApp it is automatically generated based on application.wss-server-port.
 
 * between Consumer DataApp and Consumer ECC
 
@@ -686,7 +688,7 @@ However, if DAT is valid, SelfDescriptionResponse is being sent to Consumer with
 	  "ids:issuerConnector" : {
 		"@id" : "https://w3id.org/engrd/connector/provider"
 	  },
-	  "ids:modelVersion" : "4.1.0",
+	  "ids:modelVersion" : "4.2.7",
 	  "ids:issued" : {
 		"@value" : "2021-12-09T13:50:03.883Z",
 		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
@@ -851,8 +853,8 @@ However, if DAT is valid, SelfDescriptionResponse is being sent to Consumer with
 	  "ids:curator" : {
 		"@id" : "http://provider.curatorURI.com"
 	  },
-	  "ids:inboundModelVersion" : [ "4.1.0" ],
-	  "ids:outboundModelVersion" : "4.1.0",
+	  "ids:inboundModelVersion" : [ "4.2.7" ],
+	  "ids:outboundModelVersion" : "4.2.7",
 	  "ids:hasEndpoint" : [ ],
 	  "ids:hasDefaultEndpoint" : {
 		"@type" : "ids:ConnectorEndpoint",
@@ -1012,7 +1014,7 @@ If everything goes well, you will get response with body containing "@type" : "i
 	      "@id" : "https://w3id.org/idsa/code/JWT"
 	    }
 	  },
-	  "ids:modelVersion" : "4.1.0",
+	  "ids:modelVersion" : "4.2.7",
 	  "ids:issued" : {
 	    "@value" : "2022-06-27T10:09:40.985Z",
 	    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
@@ -1159,7 +1161,7 @@ You can also check the Usage Control logs that the policy has been updated.
 	  "ids:senderAgent" : {
 		"@id" : "https://w3id.org/engrd/connector/provider"
 	  },
-	  "ids:modelVersion" : "4.1.0",
+	  "ids:modelVersion" : "4.2.7",
 	  "ids:issued" : {
 		"@value" : "2021-12-03T16:40:27.269Z",
 		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
@@ -1231,7 +1233,7 @@ Expected response is ArtifactResponseMessage, as header, and in payload - json d
 	      "@id" : "https://w3id.org/idsa/code/JWT"
 	    }
 	  },
-	  "ids:modelVersion" : "4.1.0",
+	  "ids:modelVersion" : "4.2.7",
 	  "ids:issued" : {
 	    "@value" : "2022-06-27T10:17:25.025Z",
 	    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"

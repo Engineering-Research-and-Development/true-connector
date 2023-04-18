@@ -887,7 +887,7 @@ Content-Type: application/ld+json
     "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
   },
   "ids:recipientAgent" : [ ],
-  "ids:modelVersion" : "4.1.0",
+  "ids:modelVersion" : "4.2.7",
   "ids:requestedArtifact" : {
     "@id" : "http://w3id.org/engrd/connector/artifact/1"
   }
@@ -935,7 +935,7 @@ curl --location --request POST 'https://localhost:8887/incoming-data-app/multipa
     \"@type\" : \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"
   },
   \"ids:recipientAgent\" : [ ],
-  \"ids:modelVersion\" : \"4.1.0\",
+  \"ids:modelVersion\" : \"4.2.7\",
   \"ids:requestedArtifact\" : {
     \"@id\" : \"http://w3id.org/engrd/connector/artifact/1\"
   }
@@ -957,7 +957,7 @@ curl --location 'https://localhost:8887/incoming-data-app/multipartMessageHttpHe
 --header 'IDS-Issued: 2023-02-24T12:09:07.124+01:00' \
 --header 'IDS-IssuerConnector: http://w3id.org/engrd/connector/' \
 --header 'IDS-Messagetype: ids:ArtifactRequestMessage' \
---header 'IDS-ModelVersion: 4.1.0' \
+--header 'IDS-ModelVersion: 4.2.7' \
 --header 'IDS-RequestedArtifact: http://w3id.org/engrd/connector/artifact/1' \
 --header 'IDS-SecurityToken-Id: https://w3id.org/idsa/autogen/4cc8720d-f6bf-49a2-9b4b-c953b978a128' \
 --header 'IDS-SecurityToken-TokenFormat: https://w3id.org/idsa/code/JWT' \
