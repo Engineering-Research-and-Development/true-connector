@@ -1,8 +1,8 @@
 # Table of contents
 
-* [Contributing TRUE Connector](README.md)
+
 * [TRUE CONNECTOR](<README (1).md>)
-* [doc](doc/README.md)
+* [Advanced doc](doc/README.md)
   * [MYDATA\_USAGE\_CONTROL](doc/MYDATA\_USAGE\_CONTROL.md)
   * [PLATOON\_USAGE\_CONTROL](doc/PLATOON\_USAGE\_CONTROL.md)
   * [Test cases](doc/TEST\_API.md)
@@ -12,3 +12,4 @@
   * [testbed](doc/testbed/README.md)
     * [Testbed](doc/testbed/TESTBED.md)
 * [Step to replicate True Connector installation in minikube.](kubernetes/README.md)
+* [Contributing TRUE Connector](README.md)
