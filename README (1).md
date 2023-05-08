@@ -10,6 +10,8 @@ The TRUE Connector is composed of three components:
 
 ![TRUE Connector Architecture](doc/TRUE\_Connector\_Architecture.png)
 
+#TEST NEW SECTION
+
 ## Table of Contents
 
 * [TRUE CONNECTOR](<README (1).md#true-connector>)
