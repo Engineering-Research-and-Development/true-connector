@@ -8,7 +8,7 @@
     * [Component overview](doc/component-overview.md)
   * [REST API](doc/rest-api.md)
   * [Connector reachability](doc/reachability.md)
-    * [Connector Id](readme/reachability#connectorid)
+    * [Connector Id](<doc/reachability.md#connectorid->)
   * [How to Exchange Data](doc/exchange-data.md)
   * [Modifying configuration](doc/modify-configuration.md)
     * [Enable hostname validation](doc/modify-configuration.md#hostnamevalidation)
