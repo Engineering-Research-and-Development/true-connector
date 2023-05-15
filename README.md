@@ -15,7 +15,7 @@ The TRUE Connector is composed of three components:
 * [TRUE CONNECTOR](<README.md#true-connector>)
   * [Table of Contents](<README.md#table-of-contents>)
   * [Introduction](<README.md#introduction->)
-    * [System requirements](<doc/system-requirements.md->)
+    * [System requirements](https://github.com/Engineering-Research-and-Development/true-connector/blob/gitbook/doc/system-requirements.md)
     * [Volumes](<README (1).md#volumes->)
     * [Default configuration](<README (1).md#default-configuration->)
     * [Starting and stopping containers](<README (1).md#starting-and-stopping-containers->)

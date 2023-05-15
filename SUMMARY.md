@@ -1,7 +1,7 @@
 # Table of contents
 
 * [TRUE CONNECTOR](<README.md>)
-    * [System requirements](<README (1).md#system-requirements->)
+    * [System requirements](<doc/system-requirements.md->)
     * [Volumes](<README (1).md#volumes->)
     * [Default configuration](<README (1).md#default-configuration->)
     * [Starting and stopping containers](<README (1).md#starting-and-stopping-containers->)
