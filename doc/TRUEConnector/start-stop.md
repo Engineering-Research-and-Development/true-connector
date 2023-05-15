@@ -84,6 +84,6 @@ To stop containers, execute following:
 docker-compose down -v
 ```
 
-There is also short video, that shows how to use TRUE Connector. Files are located in [tutorial](doc/tutorial/) folder.
+There is also short video, that shows how to use TRUE Connector. Files are located in [tutorial](../tutorial/) folder.
 
-At this point, you should be able to use TRUE Connector and send messages. How to send messages, check following link [Send multipart form request](doc/exchange-data.md):
+At this point, you should be able to use TRUE Connector and send messages. How to send messages, check following link [Send multipart form request](../exchange-data.md):

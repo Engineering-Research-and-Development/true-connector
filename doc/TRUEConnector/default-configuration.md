@@ -10,4 +10,4 @@ TRUE Connector comes pre-configured with following:
 * Disabled validate protocol in Forward-To header
 * Disabled hostname validation
 
-If you wish to change this configuration, please check chapter [Modifying configuration](doc/modify-configuration.md)
+If you wish to change this configuration, please check chapter [Modifying configuration](../modifyingConfiguration/modify-configuration.md)
