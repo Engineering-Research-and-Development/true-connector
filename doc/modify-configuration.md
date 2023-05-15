@@ -2,7 +2,7 @@
 
 If you wish to change some configuration parameters for TRUE Connector, it can be done by editing **.env** file.
 
-### Enable hostname validation <a href="#hosnamevalidation" id="hosnamevalidation"></a>
+### Enable hostname validation <a href="#hostnamevalidation" id="hostnamevalidation"></a>
 
 To enable hostname validation, set following property to false:
 
