@@ -1,4 +1,4 @@
-## Connector reachability <a href="#reachability" id="reachability"></a>
+## Connector reachability
 
 Once docker containers are up and running, you can use following links to verify connectors are up and running, except checking log output.
 
