@@ -8,11 +8,11 @@ Assuming you are running docker instance on local machine. If not, please update
 
 You can use provided [Postman collection](TRUEConnector.postman\_collection.json) and [Postman environment](TRUEConnector\_enviroment.postman\_environment.json); import both files into Postman and perform Contract Negotiation automatically or do this step by step, as described below.
 
-![TC Postman](TRUEConnector\_Postman.jpg)
+![TRUE Connector Postman](TRUEConnector\_Postman.jpg)
 
 ### Get offered resource <a href="#get_offered_resource" id="get_offered_resource"></a>
 
-In order to get resource that TrueConnector offers, you need to send ArtifactRequestMessage to B-endpoint.
+In order to get resource that TRUE Connector offers, you need to send ArtifactRequestMessage to B-endpoint.
 
 We can query the resource with ArtifactRequestMessage:
 

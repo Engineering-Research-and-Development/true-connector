@@ -58,7 +58,7 @@ c08ebef5bcab   rdlabengpa/ids_execution_core_container:v1.10.1   "/bin/sh -c 'ja
 
 ```
 
-Once all containers are up and running, TrueConnector is ready to be used.
+Once all containers are up and running, TRUE Connector is ready to be used.
 
 This can be also verified with issuing following GET commands:
 
@@ -84,6 +84,6 @@ To stop containers, execute following:
 docker-compose down -v
 ```
 
-There is also short video, that shows how to use TRUEConnector. Files are located in [tutorial](doc/tutorial/) folder.
+There is also short video, that shows how to use TRUE Connector. Files are located in [tutorial](doc/tutorial/) folder.
 
 At this point, you should be able to use TRUE Connector and send messages. How to send messages, check following link [Send multipart form request](doc/exchange-data.md):

@@ -33,7 +33,7 @@ If you want to change password for API, this can be done via following endpoint
 /notification/password/{new_password}
 ```
 
-Bare in mind that this endpoint is password protected, and you will have to provide existing credentials in order for TrueConnector to generate new hash that matches with the value passed in URL. Once new hash is returned, you can modify property and set new password.
+Bare in mind that this endpoint is password protected, and you will have to provide existing credentials in order for TRUE Connector to generate new hash that matches with the value passed in URL. Once new hash is returned, you can modify property and set new password.
 
 ```
 spring.security.user.password=
@@ -45,16 +45,16 @@ There is a postman collection which can be used to initiate requests that are mo
 
 ![Postman collection](postman\_collection.png)
 
-[TRUEConnector.postman\_collection](TRUEConnector.postman\_collection.json)\
+[TRUE Connector.postman\_collection](TRUEConnector.postman\_collection.json)\
 
 
-[TRUEConnector enviroment.postman\_environment](TRUEConnector\_enviroment.postman\_environment.json)
+[TRUE Connector enviroment.postman\_environment](TRUEConnector\_enviroment.postman\_environment.json)
 
 This collection comes with predefined environments so be sure to also import environment file.
 
 ## Cosign <a href="#cosign" id="cosign"></a>
 
-Docker images that are part of the TRUEConnector are signed using [cosign](https://github.com/sigstore/cosign). In releases section, you can find apropriate version of cosign executable, appropriate of the target OS.
+Docker images that are part of the TRUE Connector are signed using [cosign](https://github.com/sigstore/cosign). In releases section, you can find apropriate version of cosign executable, appropriate of the target OS.
 
 Signed images starts with following versions:
 

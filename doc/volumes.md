@@ -18,5 +18,5 @@ Those volumes will store data needed for corresponding service, like log files, 
 
 If you need to have some files present in volume, for example provider dataApp shares some file, you can either
 
-* create volume, mount it to some "dummy" docker container, copy file into volume, stop "dummy" container and you will have file present in volume, and when you start TRUEConnector, it will load already populated dataApp resource volume, or
+* create volume, mount it to some "dummy" docker container, copy file into volume, stop "dummy" container and you will have file present in volume, and when you start TRUE Connector, it will load already populated dataApp resource volume, or
 * you can change using volume and mount folder instead.

@@ -1,6 +1,6 @@
 # Table of contents
 
-* [TRUE CONNECTOR](<README.md>)
+* [TRUE Connector](<README.md>)
     * [System requirements](doc/system-requirements.md)
     * [Volumes](doc/volumes.md)
     * [Default configuration](doc/default-configuration.md)

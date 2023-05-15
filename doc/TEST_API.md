@@ -63,7 +63,7 @@ Regarding example requests, feel free to use same requests, for configuration, l
 ## /about/version
 
 Main purpose for this endpoint is to provide version of the deployed Execution Core Container version. This endpoint is not password protected.\
-User can also use it to check if TRUEConnector is ready for use (if component is completed with initialization/startup).
+User can also use it to check if TRUE Connector is ready for use (if component is completed with initialization/startup).
 
 Example of the request:
 
@@ -975,7 +975,7 @@ This endpoint is used internally, between DataApp and Execution Core Container, 
 
 ### Broker
 
-There are convenient endpoints to initiate flow with Broker. They can be triggered from proxy endpoint. In order to do that, messageType in the proxy request must be correct. All of those endpoints will create valid IDS message and send message to connector, which will add IDS related elements (DAPS token and other) and forward to Broker. In order to send message to the Broker, Forward-To parameter of proxy request must have Broker URL. If Broker requires authentication, please set correct credentials in request, TRUEConnector will forward authorization header to destination, without modifying it.
+There are convenient endpoints to initiate flow with Broker. They can be triggered from proxy endpoint. In order to do that, messageType in the proxy request must be correct. All of those endpoints will create valid IDS message and send message to connector, which will add IDS related elements (DAPS token and other) and forward to Broker. In order to send message to the Broker, Forward-To parameter of proxy request must have Broker URL. If Broker requires authentication, please set correct credentials in request, TRUE Connector will forward authorization header to destination, without modifying it.
 
 Example proxy request:
 

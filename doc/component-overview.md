@@ -1,6 +1,6 @@
 ### Component overview <a href="#componentoverview" id="componentoverview"></a>
 
-TRUEConnector is build using Java11, and use following libraries:
+TRUE Connector is build using Java11, and use following libraries:
 
 | Component                                                                                                                         | Version        |
 | --------------------------------------------------------------------------------------------------------------------------------- | -------------- |

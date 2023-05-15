@@ -34,7 +34,7 @@ CONSUMER_DAPS_KEYSTORE_ALIAS=1
 
 ### Extended jwt validation <a href="#extendedjwt" id="extendedjwt"></a>
 
-TRUEConnector can check additional claims from jwToken. For more information. please check \[following link] (https://github.com/Engineering-Research-and-Development/true-connector-execution\_core\_container/blob/master/doc/TRANSPORTCERTSSHA256.md)
+TRUE Connector can check additional claims from jwToken. For more information. please check \[following link] (https://github.com/Engineering-Research-and-Development/true-connector-execution\_core\_container/blob/master/doc/TRANSPORTCERTSSHA256.md)
 
 ### Convert keystorage files <a href="#convert_keystorage" id="convert_keystorage"></a>
 
@@ -72,7 +72,7 @@ openssl pkcs12 -export -in cert.pem -inkey privkey.key -out certificate.p12 -nam
 Provide passwords when prompted.\
 Change alias to desired value.
 
-Once you have p12 file, you can use it as is in TRUEConnector, or you can convert it to jks with:
+Once you have p12 file, you can use it as is in TRUE Connector, or you can convert it to jks with:
 
 ```
 keytool -importkeystore -srckeystore certificate.p12 -srcstoretype pkcs12 -destkeystore cert.jks
