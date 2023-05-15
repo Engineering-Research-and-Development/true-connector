@@ -8,7 +8,7 @@
     * [Component overview](doc/component-overview.md)
 * [REST API](doc/rest-api.md)
 * [Connector reachability](doc/reachability.md)
-  * [Connector Id](reachability.md#connectorid)
+  * [Connector Id](doc/reachability.md#my-anchor)
 * [How to Exchange Data](doc/exchange-data.md)
 * [Modifying configuration](doc/modify-configuration.md)
   * [Enable hostname validation](https://engineering-ing-inf-rd.gitbook.io/true-connector/readme/modify-configuration#hostnamevalidation)
