@@ -46,11 +46,11 @@ The TRUE Connector is composed of three components:
     * [Contract Request Message](doc/contract-negotiation.md#contract-request-message-)
     * [Contract Agreement request](doc/contract-negotiation.md#contract-agreement-request-)
     * [Get offered resource after access is granted](doc/contract-negotiation.md#get-offered-resource-after-access-is-granted-)
-  * [Self Description API](<README (1).md#self-description-api->)
-    * [Changing API password](<README (1).md#changing-api-password>)
-  * [Postman collection](<README (1).md#postman-collection->)
-  * [Cosign](<README (1).md#cosign->)
-  * [License](<README (1).md#license->)
+  * [Self Description API](doc/self-description-API.md)
+    * [Changing API password](doc/self-description-API.md#changing-api-password)
+  * [Postman collection](doc/self-description-API.md#postman-collection-)
+  * [Cosign](doc/self-description-API.md#cosign-)
+  * [License](doc/license.md)
   
 ## Introduction <a href="#introduction" id="introduction"></a>
 
