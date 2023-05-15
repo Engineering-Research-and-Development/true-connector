@@ -33,7 +33,7 @@ application.selfdescription.curator=http://curatorURI.com
 application.selfdescription.maintainer=http://maintainerURI.com
 ```
 
-## Connector ID <a href="#connectorid" id="connectorid"></a>
+## Connector ID <a href="doc/#connectorid" id="connectorid"></a>
 
 In .env file, you can find 2 properties, one for Provider and one for Consumer, called
 
