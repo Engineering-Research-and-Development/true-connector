@@ -2,7 +2,7 @@
 
 * [TRUE CONNECTOR](<README.md>)
     * [System requirements](doc/system-requirements.md)
-    * [Volumes](<README (1).md#volumes->)
+    * [Volumes](doc/volumes.md)
     * [Default configuration](<README (1).md#default-configuration->)
     * [Starting and stopping containers](<README (1).md#starting-and-stopping-containers->)
     * [Component overview](<README (1).md#component-overview->)
@@ -10,7 +10,7 @@
   * [Connector reachability](<README (1).md#connector-reachability->)
     * [Connector Id](<README (1).md#connector-id->)
   * [How to Exchange Data](<README (1).md#how-to-exchange-data->)
-  * [Modifying configuration](<README (1).md#modifying-configuration->)
+  * [Modifying configuration](doc/modify-configuration.md)
     * [Enable hostname validation](<README (1).md#enable-hostname-validation->)
     * [SSL/HTTPS](<README (1).md#sslhttps->)
     * [Change message format - Multipart/Mixed, Multipart/Form, Http-headers](<README (1).md#change-message-format---multipartmixed-multipartform-http-headers->)
