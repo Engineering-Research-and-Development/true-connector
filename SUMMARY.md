@@ -13,8 +13,6 @@
 * [Step to replicate True Connector installation in minikube.](kubernetes/README.md)
 * [Contributing TRUE Connector](README.md)
 
-* [TRUE CONNECTOR](<README (1).md#true-connector>)
-  * [Table of Contents](<README (1).md#table-of-contents>)
   * [Introduction](<README (1).md#introduction->)
     * [System requirements](<README (1).md#system-requirements->)
     * [Volumes](<README (1).md#volumes->)
