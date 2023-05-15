@@ -42,6 +42,6 @@ server.ssl.key-password=changeit
 server.ssl.key-store=/cert/ssl-server.jks
 ```
 
-With custom certificate or leave default one. _Note:_ if using custom certificate, same certificate must be used in ECC and DataApp, in order to be able to do handshake between ECC and DataApp. Check [SSL/HTTPS](<README (1).md#ssl>)
+With custom certificate or leave default one. _Note:_ if using custom certificate, same certificate must be used in ECC and DataApp, in order to be able to do handshake between ECC and DataApp. Check [SSL/HTTPS](ssl.md)
 
-On the following link, information regarding WebSocket Message Streamer implementation can be found here [WebSocket Message Streamer library](https://github.com/Engineering-Research-and-Development/market4.0-websocket\_message\_streamer).
+On the following link, information regarding WebSocket Message Streamer implementation can be found here [WebSocket Message Streamer library](https://github.com/Engineering-Research-and-Development/true-connector-websocket_message_streamer).
