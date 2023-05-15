@@ -109,7 +109,7 @@ Information on how TRUE Connector can interact with Broker, can be found on foll
 
 ### Usage Control <a href="#usagecontrol" id="usagecontrol"></a>
 
-Details about the PMP and PEP components and how to switch to PostgeSQL from the default H2 in-memory database you can find [here](doc/PLATOON\_USAGE\_CONTROL.md).
+Details about the PMP and PEP components and how to switch to PostgeSQL from the default H2 in-memory database you can find [here](PLATOON\_USAGE\_CONTROL.md).
 
 Since Usage Control is disabled by default, in order to enable it, set following property to true:
 
@@ -120,7 +120,7 @@ application.isEnabledUsageControl=true
 
 ### MyData Usage Control <a href="#mydata" id="mydata"></a>
 
-The TRUE Connector integrates both the [Platoon Usage Control Data App](https://github.com/Engineering-Research-and-Development/true-connector-uc\_data\_app\_platoon) and [MyData Usage Control Data App](https://github.com/Engineering-Research-and-Development/true-connector-uc\_data\_app) for enforcing the Usage Control. True Connector is by default configured to use Platoon Usage Control, in order to use MyData follow the instructions in the [document](doc/MYDATA\_USAGE\_CONTROL.md).
+The TRUE Connector integrates both the [Platoon Usage Control Data App](https://github.com/Engineering-Research-and-Development/true-connector-uc\_data\_app\_platoon) and [MyData Usage Control Data App](https://github.com/Engineering-Research-and-Development/true-connector-uc\_data\_app) for enforcing the Usage Control. True Connector is by default configured to use Platoon Usage Control, in order to use MyData follow the instructions in the [document](MYDATA\_USAGE\_CONTROL.md).
 
 ### Audit logs <a href="#auditlogs" id="auditlogs"></a>
 
