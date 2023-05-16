@@ -2,17 +2,17 @@
 
 ## /proxy Endpoint
 
-Following endpoint is used as utility endpoint, logic behind it is hiding logic related with IDS message creation. This endpoint is not password protected.
-Body of the request is json, with key-pair structure. Possible keys, with some predefined values are:
+Following endpoint is used as utility endpoint, logic behind it is hiding logic related with IDS message creation. This endpoint is not password protected. Body of the request is json, with key-pair structure. Possible keys, with some predefined values are:
 
-*multipart*, of type String, with predefined values: mixed, form, http-header, wss; required</br>
-*forwardTo* of type String, should be formatted as URI; required </br>
-*messageType* - of type String, messages that are currently supported/logic implemented; required</br>
-*forwardToInternal* of type String, should be formatted as URI; used in case of wss flow </br>
-*payload* - of type String, json object; can be left out </br>
-*requestedArtifact* - of type String, should be formatted as URI </br>
-*requestedElement* - of type String, should be formatted as URI </br>
-*transferContract* - of type String, should be formatted as URI </br>
+_multipart_, of type String, with predefined values: mixed, form, http-header, wss; required\
+_forwardTo_ of type String, should be formatted as URI; required\
+_messageType_ - of type String, messages that are currently supported/logic implemented; required\
+_forwardToInternal_ of type String, should be formatted as URI; used in case of wss flow\
+_payload_ - of type String, json object; can be left out\
+_requestedArtifact_ - of type String, should be formatted as URI\
+_requestedElement_ - of type String, should be formatted as URI\
+_transferContract_ - of type String, should be formatted as URI\
+
 
 Example request:
 
@@ -52,19 +52,18 @@ In case of not supported message - messageType parameter:
 }
 ```
 
-
 ## /data endpoint
 
 Endpoint exposed by the Connector, used to receive requests from other Connectors in Dataspace.
 
-Depending of the connector configuration, data received on this endpoint will be processes accordingly (mixed/form/header) and validate IDS message. 
+Depending of the connector configuration, data received on this endpoint will be processes accordingly (mixed/form/header) and validate IDS message.
 
-Regarding example requests, feel free to use same requests, for configuration, like described in [internal endpoints](#internalendpoints)
+Regarding example requests, feel free to use same requests, for configuration, like described in [internal endpoints](TEST\_API.md#internalendpoints)
 
 ## /about/version
 
-Main purpose for this endpoint is to provide version of the deployed Execution Core Container version. This endpoint is not password protected.<br/>
-User can also use it to check if TRUEConnector is ready for use (if component is completed with initialization/startup).
+Main purpose for this endpoint is to provide version of the deployed Execution Core Container version. This endpoint is not password protected.\
+User can also use it to check if TRUE Connector is ready for use (if component is completed with initialization/startup).
 
 Example of the request:
 
@@ -80,7 +79,7 @@ and expected response:
 
 ## Self Description API
 
-Following set of endpoints are used to manipulate with Self Description document, like get, add, update or remove specific element. All of the endpoints are password protected, and require user with *ADMIN* role.
+Following set of endpoints are used to manipulate with Self Description document, like get, add, update or remove specific element. All of the endpoints are password protected, and require user with _ADMIN_ role.
 
 ### /api/contractOffer/
 
@@ -157,6 +156,7 @@ If header element is not present or if contract offer does not exist, following 
     "message": "Missing request header 'contractOffer' for method parameter of type URI"
 }
 ```
+
 or
 
 ```
@@ -171,8 +171,7 @@ Add new contract offer to offered resource.
 
 Required parameters are:
 
-resource - of type String, should be formatted as URI
-contractOffer - of type String, json representation of de.fraunhofer.iais.eis.ContractOfferImpl class
+resource - of type String, should be formatted as URI contractOffer - of type String, json representation of de.fraunhofer.iais.eis.ContractOfferImpl class
 
 NOTE: It is required to provide context in json representation, otherwise, request data will not be parsed correct and subelements will not be created properly, which might result in invalid data added to Self Description.
 
@@ -261,8 +260,7 @@ Update existing contract offer.
 
 Required parameters are:
 
-resource - of type String, should be formatted as URI
-contractOffer - of type String, json representation of de.fraunhofer.iais.eis.ContractOfferImpl class
+resource - of type String, should be formatted as URI contractOffer - of type String, json representation of de.fraunhofer.iais.eis.ContractOfferImpl class
 
 Successful scenario will return in response updated self description, with HTTP status 200, and user can verify that response contains updated contract offer.
 
@@ -442,8 +440,7 @@ Add new offered resource to catalog.
 
 Required parameters are:
 
-catalog - of type String, should be formatted as URI
-resource - of type String, json representation of de.fraunhofer.iais.eis.ResourceImpl class
+catalog - of type String, should be formatted as URI resource - of type String, json representation of de.fraunhofer.iais.eis.ResourceImpl class
 
 NOTE: It is required to provide context in json representation, otherwise, request data will not be parsed correct and subelements will not be created properly, which might result in invalid data added to Self Description.
 
@@ -571,6 +568,7 @@ curl --location --request POST 'http://localhost:8081/api/offeredResource/' \
     }
 }'
 ```
+
 If everything is correct, as response, updated self description will be returned, with HTTP status 200, and user can verify that response contains newly added offered resource.
 
 In case of invalid input data (Resource json string), HTTP status code 400, with following error will be returned:
@@ -604,6 +602,7 @@ If catalog header parameter is missing or invalid, proper error response message
     "message": "Missing request header 'catalog' for method parameter of type URI"
 }
 ```
+
 or
 
 ```
@@ -618,8 +617,7 @@ Update existing offered resource.
 
 Required parameters are:
 
-catalog - of type String, should be formatted as URI
-resource - of type String, json representation of de.fraunhofer.iais.eis.ResourceImpl class
+catalog - of type String, should be formatted as URI resource - of type String, json representation of de.fraunhofer.iais.eis.ResourceImpl class
 
 Successful scenario will return in response updated self description, with HTTP status 200, and user can verify that response contains updated resource offer.
 
@@ -700,6 +698,7 @@ If header element is not provided or invalid:
     "message": "Missing request header 'representation' for method parameter of type URI"
 }
 ```
+
 or
 
 ```
@@ -714,8 +713,7 @@ Add new representation to offered resource.
 
 Required parameters are:
 
-resource - of type String, should be formatted as URI
-representation - of type String, json representation of de.fraunhofer.iais.eis.RepresentationImpl class
+resource - of type String, should be formatted as URI representation - of type String, json representation of de.fraunhofer.iais.eis.RepresentationImpl class
 
 NOTE: It is required to provide context in json representation, otherwise, request data will not be parsed correct and sub-elements will not be created properly, which might result in invalid data added to Self Description.
 
@@ -785,8 +783,7 @@ Update existing representation.
 
 Required parameters are:
 
-resource - of type String, should be formatted as URI
-representation - of type String, json representation of de.fraunhofer.iais.eis.RepresentationImpl class
+resource - of type String, should be formatted as URI representation - of type String, json representation of de.fraunhofer.iais.eis.RepresentationImpl class
 
 Successful scenario will return in response updated self description, with HTTP status 200, and user can verify that response contains updated representation.
 
@@ -837,7 +834,7 @@ $2a$10$FiI8JM4y7BF0Of7f6mjkeeoydyLYNuLtEOVWjenei4.21LU/.c1k6
 
 In case password check is not successful, response message will contain information, which user can inspect and correct new password.
 
-## Internal endpoints<a name="internalendpoints"></a>
+## Internal endpoints <a href="#internalendpoints" id="internalendpoints"></a>
 
 Endpoint used to receive proxy request from DataApp. DataApp, will after receiving proxy request, creates valid IDS message request, and send it to Execution Core Container.
 
@@ -943,11 +940,11 @@ curl --location --request POST 'https://localhost:8887/incoming-data-app/multipa
 --form 'payload="PAYLOAD"'
 ```
 
-###/incoming-data-app/multipartMessageHttpHeader
+\###/incoming-data-app/multipartMessageHttpHeader
 
 multipart - http-header
 
-This request is a bit specific, since it is required to convert IDS message to http headers (logic that DataApp proxy request do for you) and when conversion is done correct this is how request looks like, depending of the Messagetype and its mandatory fields: 
+This request is a bit specific, since it is required to convert IDS message to http headers (logic that DataApp proxy request do for you) and when conversion is done correct this is how request looks like, depending of the Messagetype and its mandatory fields:
 
 ```
 curl --location 'https://localhost:8887/incoming-data-app/multipartMessageHttpHeader' \
@@ -970,17 +967,15 @@ curl --location 'https://localhost:8887/incoming-data-app/multipartMessageHttpHe
 --data 'PAYLOAD'
 ```
 
-If any of the mandatory headers is not present or that message cannot be recreated from headers, response will be returned and user should check header responses, for IDS-Messagetype = ids:RejectionMessage and IDS-RejectionReason = https://w3id.org/idsa/code/MALFORMED_MESSAGE.
-
+If any of the mandatory headers is not present or that message cannot be recreated from headers, response will be returned and user should check header responses, for IDS-Messagetype = ids:RejectionMessage and IDS-RejectionReason = https://w3id.org/idsa/code/MALFORMED\_MESSAGE.
 
 ### /internal/sd
 
 This endpoint is used internally, between DataApp and Execution Core Container, when DataApp needs to fetch Connector Self Description document (when DataApp receives DescriptionRequestMessage). Reason for existence of this API is to eliminate need for DataApp to have API credentials of public Self Description endpoint.
 
-
 ### Broker
 
-There are convenient endpoints to initiate flow with Broker. They can be triggered from proxy endpoint. In order to do that, messageType in the proxy request must be correct. All of those endpoints will create valid IDS message and send message to connector, which will add IDS related elements (DAPS token and other) and forward to Broker. In order to send message to the Broker, Forward-To parameter of proxy request must have Broker URL. If Broker requires authentication, please set correct credentials in request, TRUEConnector will forward authorization header to destination, without modifying it.
+There are convenient endpoints to initiate flow with Broker. They can be triggered from proxy endpoint. In order to do that, messageType in the proxy request must be correct. All of those endpoints will create valid IDS message and send message to connector, which will add IDS related elements (DAPS token and other) and forward to Broker. In order to send message to the Broker, Forward-To parameter of proxy request must have Broker URL. If Broker requires authentication, please set correct credentials in request, TRUE Connector will forward authorization header to destination, without modifying it.
 
 Example proxy request:
 
@@ -994,6 +989,7 @@ curl --location 'https://localhost:8084/proxy' \
     "messageType": "ConnectorUpdateMessage"
 }'
 ```
+
 Processing of the response will be done based of the Broker response.
 
 #### /selfRegistration/register
@@ -1018,15 +1014,15 @@ Message type of the proxy request - QueryMessage
 
 ### WSS
 
-Flow starts when API receives start frame, and ends when end frame is received. Data in between are buffered, and once whole package is received, it will try to recreate multipart/mixed request and continue with processing received request. Logic applies for both endpoints listed below.</br>
-Data received are binary packets. 
+Flow starts when API receives start frame, and ends when end frame is received. Data in between are buffered, and once whole package is received, it will try to recreate multipart/mixed request and continue with processing received request. Logic applies for both endpoints listed below.\
+Data received are binary packets.
 
 #### timerEndpointA
 
-Interface between Consumer DataApp and Connector, to support receiving request data in WebSocket flow. 
+Interface between Consumer DataApp and Connector, to support receiving request data in WebSocket flow.
 
 #### timerEndpointB
 
-Interface between 2 connectors. 
+Interface between 2 connectors.
 
 Logic regarding recreating request is same like for timerEndpointA

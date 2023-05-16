@@ -79,7 +79,7 @@ spring.jpa.database-platform = org.hibernate.dialect.PostgreSQLDialect
 
  - postgres env file
  
-2 env files needed for PostgreSQL should be created, in root of TrueConnector directory: 
+2 env files needed for PostgreSQL should be created, in root of TRUE Connector directory: 
 
 *postgres_provider.env* with content
 
