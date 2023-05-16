@@ -1,8 +1,6 @@
-![TRUE Connector Logo](doc/TRUE_Connector_Logo.png?raw=true "TRUE Connector Logo")
+![TRUE Connector Logo](doc/TRUE_Connector_Logo.png?raw=true)
 
 </br></br>
-
-# TRUE CONNECTOR
 
 **TRUE** (**TRU**sted **E**ngineering) **Connector** for the IDS (International Data Space) ecosystem
 
