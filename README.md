@@ -14,6 +14,8 @@ The TRUE Connector is composed of three components:
 
 ## Table of Contents
 
+Please [click here](https://engineering-ing-inf-rd.gitbook.io/true-connector/), referring to gitbook for a more readable documentation.
+
 * [TRUE Connector](<README.md#true-connector>)
   * [Table of Contents](<README.md#table-of-contents>)
     * [Introduction](doc/TRUEConnector/introduction.md)
