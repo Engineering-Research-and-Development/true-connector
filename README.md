@@ -1,4 +1,4 @@
-![TRUE Connector Logo](doc/TRUE_Connector_Logo.png?raw=true)
+![](doc/TRUE_Connector_Logo.png?raw=true)
 
 </br></br>
 
