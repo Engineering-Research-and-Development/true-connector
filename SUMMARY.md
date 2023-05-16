@@ -1,6 +1,7 @@
 # Table of contents
 
 * [TRUE Connector](README.md)
+  * [Introduction](doc/TRUEConnector/introduction.md)
   * [System requirements](doc/TRUEConnector/system-requirements.md)
   * [Volumes](doc/TRUEConnector/volumes.md)
   * [Default configuration](doc/TRUEConnector/default-configuration.md)
