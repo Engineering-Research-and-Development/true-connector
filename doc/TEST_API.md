@@ -17,7 +17,7 @@ Body of the request is json, with key-pair structure. Possible keys, with some p
 Example request:
 
 ```
-curl --location --request POST 'https://localhost:8084/proxy' \
+curl --location --request POST 'https://localhost:8184/proxy' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "multipart": "form",
@@ -64,7 +64,7 @@ Regarding example requests, feel free to use same requests, for configuration, l
 ## /about/version
 
 Main purpose for this endpoint is to provide version of the deployed Execution Core Container version. This endpoint is not password protected.<br/>
-User can also use it to check if TRUEConnector is ready for use (if component is completed with initialization/startup).
+User can also use it to check if TRUE Connector is ready for use (if component is completed with initialization/startup).
 
 Example of the request:
 
@@ -332,7 +332,7 @@ And successful response:
             "@type": "http://www.w3.org/2001/XMLSchema#string"
         },
         {
-            "@value": "TRUEConnector",
+            "@value": "TRUE Connector",
             "@type": "http://www.w3.org/2001/XMLSchema#string"
         }
     ],
@@ -485,7 +485,7 @@ curl --location --request POST 'http://localhost:8081/api/offeredResource/' \
             "@type": "http://www.w3.org/2001/XMLSchema#string"
         },
         {
-            "@value": "TRUEConnector",
+            "@value": "TRUE Connector",
             "@type": "http://www.w3.org/2001/XMLSchema#string"
         }
     ],
@@ -980,12 +980,12 @@ This endpoint is used internally, between DataApp and Execution Core Container, 
 
 ### Broker
 
-There are convenient endpoints to initiate flow with Broker. They can be triggered from proxy endpoint. In order to do that, messageType in the proxy request must be correct. All of those endpoints will create valid IDS message and send message to connector, which will add IDS related elements (DAPS token and other) and forward to Broker. In order to send message to the Broker, Forward-To parameter of proxy request must have Broker URL. If Broker requires authentication, please set correct credentials in request, TRUEConnector will forward authorization header to destination, without modifying it.
+There are convenient endpoints to initiate flow with Broker. They can be triggered from proxy endpoint. In order to do that, messageType in the proxy request must be correct. All of those endpoints will create valid IDS message and send message to connector, which will add IDS related elements (DAPS token and other) and forward to Broker. In order to send message to the Broker, Forward-To parameter of proxy request must have Broker URL. If Broker requires authentication, please set correct credentials in request, TRUE Connector will forward authorization header to destination, without modifying it.
 
 Example proxy request:
 
 ```
-curl --location 'https://localhost:8084/proxy' \
+curl --location 'https://localhost:8184/proxy' \
 --header 'Authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
 --header 'Content-Type: application/json' \
 --data '{

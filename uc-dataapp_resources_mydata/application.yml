@@ -14,6 +14,9 @@ spring:
       ddl-auto: update
       hbm2ddl:
         auto: update
+  devtools:
+    restart:
+      enabled: false
 
 server:
   port: 9555

@@ -60,20 +60,22 @@ The TRUE Connector is composed of three components:
 Once you clone or download repository, you will have following directory structure, with following directories:
 
 ```
-be-dataapp_data_receiver - containing data needed for receiver/provider dataApp, files to share...
+be-dataapp_data_provider - containing data needed for provider dataApp, files to share...
 be-dataapp_data_sender
 be-dataapp_resources - directory containing property file used for advanced configuration for both dataApps
 ecc_cert - directory used to store certificate files (DAPS certificate, HTTPS certificate, truststore...)
 ecc_resources_consumer - directory containing property file for consumer ECC advanced configuration
 ecc_resources_provider - directory containing property file for provider ECC advanced configuration
-kubernetes - directory containing yaml files to have True Connector in a Kubernetes enviroment
+kubernetes - directory containing yaml files to have TRUE Connector in a Kubernetes enviroment
+log - directory containing logs
 
 Platoon Usage control related (contains property file for usage control data app):
 uc-dataapp_resources_consumer
 uc-dataapp_resources_provider
+uc-dataapp_resources_mydata
 ```
 
-TrueConnector comes as dockerized application, which consists of few docker containers:
+TRUE Connector comes as dockerized application, which consists of few docker containers:
 
  - provider execution core container
  - provider data application (sample data application)
@@ -85,12 +87,12 @@ TrueConnector comes as dockerized application, which consists of few docker cont
  
 ### System requirements <a name="systemrequirements"></a>
 
-In order to run TrueConnector following minimal system requirements are needed:
+In order to run TRUE Connector following minimal system requirements are needed:
 
 * CPU core: 1/container
 * Memory: 1024MB - for ECC services, 512M for DataApp and Usage Control services
 
-This values can be considered as initial values, and if required, they can be increased or reduces, keeping the functionality of TRUEConnector unchanged.
+This values can be considered as initial values, and if required, they can be increased or reduces, keeping the functionality of TRUE Connector unchanged.
 
 
 ### Volumes <a name="volumes"></a>
@@ -113,7 +115,7 @@ Those volumes will store data needed for corresponding service, like log files, 
 
 If you need to have some files present in volume, for example provider dataApp shares some file, you can either
 
- * create volume, mount it to some "dummy" docker container, copy file into volume, stop "dummy" container and you will have file present in volume, and when you start TRUEConnector, it will load already populated dataApp resource volume, or
+ * create volume, mount it to some "dummy" docker container, copy file into volume, stop "dummy" container and you will have file present in volume, and when you start TRUE Connector, it will load already populated dataApp resource volume, or
 
  * you can change using volume and mount folder instead.
 
@@ -190,20 +192,20 @@ c08ebef5bcab   rdlabengpa/ids_execution_core_container:v1.10.1   "/bin/sh -c 'ja
 
 ```
 
-Once all containers are up and running, TrueConnector is ready to be used.
+Once all containers are up and running, TRUE Connector is ready to be used.
 
 This can be also verified with issuing following GET commands:
 
 Provider connector:
 
-*https://localhost:8090/about/version* 
+*https://localhost:8091/about/version* 
 
 or self description document:</br>
-*https://localhost:8090/* 
+*https://localhost:8091/* 
 
 Consumer connector:
 
-*https://localhost:8091/about/version*
+*https://localhost:8090/about/version*
 
 or self description document:</br>
 *https://localhost:8090/* 
@@ -216,13 +218,13 @@ To stop containers, execute following:
 docker-compose down -v
 ```
 
-There is also short video, that shows how to use TRUEConnector. Files are located in [tutorial](doc/tutorial) folder.
+There is also short video, that shows how to use TRUE Connector. Files are located in [tutorial](doc/tutorial) folder.
 
 At this point, you should be able to use TRUE Connector and send messages. How to send messages, check following link [Send multipart form request](#exchangedata):
 
 ### Component overview <a name="componentoverview"></a>
 
-TRUEConnector is build using Java11, and use following libraries:
+TRUE Connector is build using Java11, and use following libraries:
 
 | Component | Version |
 | --- | --- |
@@ -241,9 +243,9 @@ TRUEConnector is build using Java11, and use following libraries:
 
 ## REST API <a name="restapi"></a>
 
-Detailed description of API endpoints provided by TrueConnector can be found in [link](doc/rest_api/REST_API.md)
+Detailed description of API endpoints provided by TRUE Connector can be found in [link](doc/rest_api/REST_API.md)
 
-Bare in mind that all endpoints of the TrueConnector will require authorization. Please follow [this link](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/SECURITY.md) to get more information about providing correct credentials for desired request/functionality. 
+Bare in mind that all endpoints of the TRUE Connector will require authorization. Please follow [this link](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/SECURITY.md) to get more information about providing correct credentials for desired request/functionality. 
 
 
 ## Connector reachability <a name="reachability"></a>
@@ -303,7 +305,7 @@ With default configuration, you can use following curl command, to get data from
 <details>
   <summary>Multipart Form request</summary>
 
-	curl --location --request POST 'https://localhost:8084/proxy' \
+	curl --location --request POST 'https://localhost:8184/proxy' \
 	--header 'Content-Type: text/plain' \
 	--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 	--data-raw '{
@@ -329,14 +331,14 @@ Be sure to use correct configuration/ports for sender and receiver Data App and 
 Default values:
 
 ```
-DataApp URL: https://localhost:8084/proxy
+DataApp URL: https://localhost:8184/proxy
 "Forward-To": "https://ecc-provider:8889/data",
 ```
 
 For WSS flow:
 
 ```
-DataApp URL: https://localhost:8084/proxy
+DataApp URL: https://localhost:8184/proxy
 "multipart": "wss",
 "Forward-To": "wss://ecc-provider:8086/data",
 "Forward-To-Internal": "wss://ecc-consumer:8887",
@@ -508,7 +510,7 @@ CONSUMER_DAPS_KEYSTORE_ALIAS=1
 
 ### Extended jwt validation <a name="extendedjwt"></a>
 
-TRUEConnector can check additional claims from jwToken. For more information. please check [following link]
+TRUE Connector can check additional claims from jwToken. For more information. please check [following link]
 (https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/master/doc/TRANSPORTCERTSSHA256.md)
 
 ### Convert keystorage files <a name="convert_keystorage"></a>
@@ -547,7 +549,7 @@ openssl pkcs12 -export -in cert.pem -inkey privkey.key -out certificate.p12 -nam
 Provide passwords when prompted.</br>
 Change alias to desired value.
 
-Once you have p12 file, you can use it as is in TRUEConnector, or you can convert it to jks with:
+Once you have p12 file, you can use it as is in TRUE Connector, or you can convert it to jks with:
 
 ```
 keytool -importkeystore -srckeystore certificate.p12 -srcstoretype pkcs12 -destkeystore cert.jks
@@ -595,7 +597,7 @@ application.isEnabledUsageControl=true
 ### MyData Usage Control <a name="mydata"></a>
 
 The TRUE Connector integrates both the [Platoon Usage Control Data App](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon) and [MyData Usage Control Data App](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app) for enforcing the Usage Control. 
-True Connector is by default configured to use Platoon Usage Control, in order to use MyData follow the instructions in the [document](doc/MYDATA_USAGE_CONTROL.md).
+TRUE Connector is by default configured to use Platoon Usage Control, in order to use MyData follow the instructions in the [document](doc/MYDATA_USAGE_CONTROL.md).
 
 ### Audit logs <a name="auditlogs"></a>
 
@@ -610,20 +612,20 @@ If mandatory, for other connectors, you can perform contract negotiation with ot
 
 Assuming you are running docker instance on local machine. If not, please update hostname to match your scenario.
 
-You can use provided [Postman collection](TRUEConnector.postman_collection.json) and [Postman environment](TRUEConnector_enviroment.postman_environment.json); import both files into Postman and perform Contract Negotiation automatically or do this step by step, as described below.
+You can use provided [Postman collection](TRUE Connector.postman_collection.json) and [Postman environment](TRUE Connector_enviroment.postman_environment.json); import both files into Postman and perform Contract Negotiation automatically or do this step by step, as described below.
 
-![TC Postman](doc/TRUEConnector_Postman.jpg)
+![TC Postman](doc/TRUE Connector_Postman.jpg)
 
 ### Get offered resource <a name="get_offered_resource"></a>
 
-In order to get resource that TrueConnector offers, you need to send ArtifactRequestMessage to B-endpoint.
+In order to get resource that TRUE Connector offers, you need to send ArtifactRequestMessage to B-endpoint.
 
 We can query the resource with ArtifactRequestMessage:
 
 <details>
   <summary>Multipart form - Artifact Request Message</summary>
 
-	curl --location --request POST 'https://localhost:8084/proxy' \
+	curl --location --request POST 'https://localhost:8184/proxy' \
 	--header 'Content-Type: application/json' \
 	--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 	--data-raw '{
@@ -648,7 +650,7 @@ Initially, Description Request Message is sent by consumer without payload.
 <details>
   <summary>Multipart form - Description Request Message</summary>
 
-	curl --location --request POST 'https://localhost:8084/proxy' \
+	curl --location --request POST 'https://localhost:8184/proxy' \
 	--header 'Content-Type: application/json' \
 	--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 	--data-raw '{
@@ -815,7 +817,7 @@ However, if DAT is valid, SelfDescriptionResponse is being sent to Consumer with
 			"@value" : "Engineering Ingegneria Informatica SpA",
 			"@type" : "http://www.w3.org/2001/XMLSchema#string"
 		  }, {
-			"@value" : "TRUEConnector",
+			"@value" : "TRUE Connector",
 			"@type" : "http://www.w3.org/2001/XMLSchema#string"
 		  } ],
 		  "ids:temporalCoverage" : [ ],
@@ -891,7 +893,7 @@ Contract Request Message is initial message sent in Contract Negotiation flow. I
 <details>
   <summary>Multipart form - Contract Request Message</summary>
 
-	curl --location --request POST 'https://localhost:8084/proxy' \
+	curl --location --request POST 'https://localhost:8184/proxy' \
 	--header 'Content-Type: application/json' \
 	--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 	--data-raw '{
@@ -1119,7 +1121,7 @@ If everything goes well, you will get response with body containing "@type" : "i
 <details>
   <summary>Multipart form - Contract Agreement request</summary>
 
-	curl --location --request POST 'https://localhost:8084/proxy' \
+	curl --location --request POST 'https://localhost:8184/proxy' \
 	--header 'Content-Type: application/json' \
 	--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 	--data-raw '{
@@ -1191,7 +1193,7 @@ When you have finished negotiation, you can query for resource again to see if w
 <details>
   <summary>Multipart Form - Artifact Request Message</summary>
 
-	curl --location --request POST 'http://localhost:8084/proxy' \
+	curl --location --request POST 'http://localhost:8184/proxy' \
 	--header 'Content-Type: application/json' \
 	--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 	--data-raw '{
@@ -1297,7 +1299,7 @@ If you want to change password for API, this can be done via following endpoint
 /notification/password/{new_password}
 ```
 
-Bare in mind that this endpoint is password protected, and you will have to provide existing credentials in order for TrueConnector to generate new hash that matches with the value passed in URL. Once new hash is returned, you can modify property and set new password.
+Bare in mind that this endpoint is password protected, and you will have to provide existing credentials in order for TRUE Connector to generate new hash that matches with the value passed in URL. Once new hash is returned, you can modify property and set new password.
 
 ```
 spring.security.user.password=
@@ -1309,15 +1311,15 @@ There is a postman collection which can be used to initiate requests that are mo
 
 ![Postman collection](doc/postman_collection.png?raw=true "Postman collection")
 
-[TRUEConnector.postman_collection](TRUEConnector.postman_collection.json)</br>
+[TRUE Connector.postman_collection](TRUE Connector.postman_collection.json)</br>
 
-[TRUEConnector enviroment.postman_environment](TRUEConnector_enviroment.postman_environment.json)
+[TRUE Connector enviroment.postman_environment](TRUE Connector_enviroment.postman_environment.json)
 
 This collection comes with predefined environments so be sure to also import environment file.
 
 ## Cosign <a name="cosign"></a>
 
-Docker images that are part of the TRUEConnector are signed using [cosign](https://github.com/sigstore/cosign). In releases section, you can find apropriate version of cosign executable, appropriate of the target OS.
+Docker images that are part of the TRUE Connector are signed using [cosign](https://github.com/sigstore/cosign). In releases section, you can find apropriate version of cosign executable, appropriate of the target OS.
 
 Signed images starts with following versions:
 

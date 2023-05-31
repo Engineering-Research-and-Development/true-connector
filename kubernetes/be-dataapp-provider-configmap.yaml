@@ -52,7 +52,8 @@ data:
     application.ecc.form-context=/incoming-data-app/multipartMessageBodyFormData
     application.ecc.header-context=/incoming-data-app/multipartMessageHttpHeader
 
-    application.ecc.selfdescription-context=/internal/sd
+    application.ecc.selfdescription-port=8101
+
     application.ecc.broker-register-context=/selfRegistration/register
     application.ecc.broker-update-context=/selfRegistration/update
     application.ecc.broker-delete-context=/selfRegistration/delete

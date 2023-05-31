@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   ecc-provider:
-    image: rdlabengpa/ids_execution_core_container:v1.11.0
+    image: rdlabengpa/ids_execution_core_container:v1.12.0
     deploy:
       resources:
         limits:
@@ -28,8 +28,6 @@ services:
       - WS_EDGE=${PROVIDER_WS_EDGE}
       - WS_ECC=${WS_ECC}
       - UC_DATAAPP_URI=http://uc-dataapp-provider:8080/platoontec/PlatoonDataUsage/1.0/
-      - CLEARING_HOUSE=${CLEARING_HOUSE}
-      - PUBLIC_PORT=${PROVIDER_PORT}
       - BROKER_URL=${BROKER_URL}
       - DISABLE_SSL_VALIDATION=${DISABLE_SSL_VALIDATION}
       - CACHE_TOKEN=${CACHE_TOKEN}
@@ -49,12 +47,12 @@ services:
       - ./ecc_resources_provider:/config
       - ./ecc_cert:/cert
       - ecc_provider_log:/var/log/ecc
-      - ecc_provider_sd:/sd
+      - ecc_provider_sd:/home/nobody/app/sd
     extra_hosts:
       - "ecc-provider:172.17.0.1"
 
   uc-dataapp-provider:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.5
+    image: rdlabengpa/ids_uc_data_app_platoon:develop
     deploy:
       resources:
         limits:
@@ -75,7 +73,7 @@ services:
       - uc_provider_data:/data
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.2.5
+    image: rdlabengpa/ids_be_data_app:v0.2.6
     deploy:
       resources:
         limits:
@@ -88,7 +86,7 @@ services:
       - provider
     container_name: be-dataapp-provider
     ports:
-      - "8083:8083"
+      - "8183:8183"
       - "9000:9000"
     environment:
       - "SPRING_PROFILES_ACTIVE=docker"
@@ -105,11 +103,11 @@ services:
       - EXTRACT_PAYLOAD_FROM_RESPONSE=${EXTRACT_PAYLOAD_FROM_RESPONSE}
     volumes:
       - ./be-dataapp_resources:/config
+      - ./be-dataapp_data_provider:/home/nobody/data
       - ./ecc_cert:/cert
-      - be_dataapp_data_provider:/data
 
   ecc-consumer:
-    image: rdlabengpa/ids_execution_core_container:v1.11.0
+    image: rdlabengpa/ids_execution_core_container:v1.12.0
     deploy:
       resources:
         limits:
@@ -135,9 +133,7 @@ services:
       - IDSCP2=${IDSCP2}
       - WS_EDGE=${CONSUMER_WS_EDGE}
       - WS_ECC=${WS_ECC}
-      - CLEARING_HOUSE=${CLEARING_HOUSE}
       - UC_DATAAPP_URI=http://uc-dataapp-consumer:8080/platoontec/PlatoonDataUsage/1.0/
-      - PUBLIC_PORT=${CONSUMER_PORT}
       - BROKER_URL=${BROKER_URL}
       - DISABLE_SSL_VALIDATION=${DISABLE_SSL_VALIDATION}
       - CACHE_TOKEN=${CACHE_TOKEN}
@@ -162,7 +158,7 @@ services:
       - "ecc-consumer:172.17.0.1"
 
   uc-dataapp-consumer:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.5
+    image: rdlabengpa/ids_uc_data_app_platoon:develop
     deploy:
       resources:
         limits:
@@ -183,7 +179,7 @@ services:
       - uc_consumer_data:/data
 
   be-dataapp-consumer:
-    image: rdlabengpa/ids_be_data_app:v0.2.5
+    image: rdlabengpa/ids_be_data_app:v0.2.6
     deploy:
       resources:
         limits:
@@ -196,7 +192,7 @@ services:
       - consumer
     container_name: be-dataapp-consumer
     ports:
-      - "8084:8083"
+      - "8184:8183"
       - "9001:9000"
     environment:
       - "SPRING_PROFILES_ACTIVE=docker"
@@ -214,11 +210,11 @@ services:
     volumes:
       - ./be-dataapp_resources:/config
       - ./ecc_cert:/cert
-      - be_dataapp_data_consumer:/data
+      - be_dataapp_data_consumer:/home/nobody/data
       
 networks:
-  consumer: { }
-  provider: { }
+  consumer: {}
+  provider: {}
 
 volumes:
   ecc_provider_log : {}

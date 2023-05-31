@@ -27,7 +27,7 @@ This will generate valid testbed3.p12 file. Copy this file to trueconnector\ecc_
 **Remark:** in DAPS, only testbed1, testbed2 and testbed3 files are registered, so we will use same testbed3.p12 file for both consumer and provider.
 
 
-### TrueConnector properties
+### TRUE Connector properties
 
 Make sure that following properties are configured for Testbed environment:
 
@@ -88,7 +88,7 @@ This will load certificates from truststore and when making https call towards t
 
 ### Docker networking
 
-Since we are running 2 separate docker containers, one for Testbed and other for TrueConnector, we must connect those 2 environments, so that they could communicate, and "see each other". For example, DAPS is mandatory service, for both environments and it is deployed in Testbed docker container, and by default, not reachable in TrueConnector.
+Since we are running 2 separate docker containers, one for Testbed and other for TRUE Connector, we must connect those 2 environments, so that they could communicate, and "see each other". For example, DAPS is mandatory service, for both environments and it is deployed in Testbed docker container, and by default, not reachable in TRUE Connector.
 
 In Testbed docker setup, there is network created, in docker-compose.yml.
 
@@ -98,8 +98,8 @@ networks:
     driver: bridge
 ```
 
-This network needs to be added in TrueConnector docker compose, so that 2 ecosystems can communicate with each other.</b>
-Modify TrueConnector docker-compose.yml file and add following at the end of the file:
+This network needs to be added in TRUE Connector docker compose, so that 2 ecosystems can communicate with each other.</b>
+Modify TRUE Connector docker-compose.yml file and add following at the end of the file:
 
 ```
 networks:
@@ -116,34 +116,34 @@ And also for ecc-consumer and ecc-provider service, add it to the network, by si
       - tc-network
 ```
 
-### Export TrueConnector certificate
+### Export TRUE Connector certificate
 
-Open *ssl-server.jks* file from TrueConnector/ecc_cert folder using KeyStore Explorer and export certificate (right click on entry name):
+Open *ssl-server.jks* file from TRUE Connector/ecc_cert folder using KeyStore Explorer and export certificate (right click on entry name):
 
-![Certificate_1](Export_TC_Certificate_1.jpg "Export TrueConnector Certificate")
+![Certificate_1](Export_TC_Certificate_1.jpg "Export TRUE Connector Certificate")
 
 and provide location where to save exported certificate. It will be needed in next step, to update DSC truststore.
 
-![Certificate_2](Export_TC_Certificate_2.jpg "Export TrueConnector Certificate 2")
+![Certificate_2](Export_TC_Certificate_2.jpg "Export TRUE Connector Certificate 2")
 
 Or you can use already extracted *execution_core_container.cer* file from **ecc_cert** folder.
 
 ### Updating DSC truststore
 
-Open DSC truststore file *truststore.p12* (IDS-testbed\DataspaceConnectorA\conf\ and IDS-testbed\DataspaceConnectorB\conf\) using KeyStore Explorer and import TrueConnector certificate, so that DSC can make https calls towards TrueConnector provider
+Open DSC truststore file *truststore.p12* (IDS-testbed\DataspaceConnectorA\conf\ and IDS-testbed\DataspaceConnectorB\conf\) using KeyStore Explorer and import TRUE Connector certificate, so that DSC can make https calls towards TRUE Connector provider
 
-![Truststore](Import_TC_Certificate.jpg "Import TrueConnector Certificate")
+![Truststore](Import_TC_Certificate.jpg "Import TRUE Connector Certificate")
 
 and provide alias *true-connector*
 
-![Truststore Alias](Import_TC_Certificate_alias.jpg "Import TrueConnector Certificate alias")
+![Truststore Alias](Import_TC_Certificate_alias.jpg "Import TRUE Connector Certificate alias")
 
 This will be used when DSC makes https request towards ecc-provider, to check hostname with imported certificate.
 
 
 ## Configuration
 
-## TrueConnector as consumer
+## TRUE Connector as consumer
 
 Once both docker compose files are up and running, you can start postman, import Testbed postman connection  from Testbed project(TestbedPreconfiguration.postman_collection.json) and execute several requests (until Register connector), to setup DSC connector:
 
@@ -158,9 +158,9 @@ Once imported, it should look like following:
 ![DSC Collection](DSC_Communication.jpg "DSC Collection")
 
 
-## TrueConnector as provider
+## TRUE Connector as provider
 
-TrueConnector comes with predefined Self Description document, with one artifact and following contract offer. You can get more information by expecting the document itself on URL:
+TRUE Connector comes with predefined Self Description document, with one artifact and following contract offer. You can get more information by expecting the document itself on URL:
 
 ```
 https://localhost:8090/
@@ -175,33 +175,33 @@ ids:TextResource - https://w3id.org/idsa/autogen/textResource/58898070-162b-4b62
 
 ids:Permission - array of permissions from Self Description document
 
-### Description Request Message - get Self Description from TrueConnctor Provider
+### Description Request Message - get Self Description from TRUE Connctor Provider
 
 From Testbed postman collection, this time we will use following:
 
 ![TC DSC Collection](TC_DSC_Collection.jpg "TC DSC Collection")
 
-Open the request, and make modifications, like in the picture (modify recipient to be TrueConnector provider - *https://ecc-provider:8889/data*)
+Open the request, and make modifications, like in the picture (modify recipient to be TRUE Connector provider - *https://ecc-provider:8889/data*)
 
 ![TS Description Request](TS_DescriptionRequest.jpg "TS Description Request")
 
-And fire the request. After successful response, you should get Description Request Message, with TrueConnector Self Description document in payload part.
+And fire the request. After successful response, you should get Description Request Message, with TRUE Connector Self Description document in payload part.
 
 To narrow search, you can enable 'elementId' and set value of the textResource
 
 ![TC TextResource](TC_TextResource.jpg "TC TextResource")
 
-### Contract Negotiation with TrueConnector provider
+### Contract Negotiation with TRUE Connector provider
 
-This step DSC performs automatically, meaning that we do not need to send several requests like we did when TrueConnector was consumer. In order to do so, we need to prepare request, and modify following:
+This step DSC performs automatically, meaning that we do not need to send several requests like we did when TRUE Connector was consumer. In order to do so, we need to prepare request, and modify following:
 
 Request parameters:</br>
-Modify all three fields to match TrueConnector as provider.
+Modify all three fields to match TRUE Connector as provider.
 
 ![TC ContractNegotiation 1](TC_ContractNegotiation_parameters.jpg "TC ContractNegotiation parameters")
 
 Request body:</br>
-Get whole **permission** from TrueConnector Self Description in body, replace one that is present in request and modify target element:
+Get whole **permission** from TRUE Connector Self Description in body, replace one that is present in request and modify target element:
 
 ![TC_ContractNegotiation 1](TC_ContractNegotiation_body.jpg "TC ContractNegotiation body")
 
@@ -251,7 +251,7 @@ After executing request, response should look like in following picture:
 You can register consumer connector by executing following request:
 
 ```
-curl --location --request POST 'https://localhost:8084/proxy' \
+curl --location --request POST 'https://localhost:8184/proxy' \
 --header 'Content-Type: text/plain' \
 --data-raw '{
     "multipart": "form",
@@ -260,7 +260,7 @@ curl --location --request POST 'https://localhost:8084/proxy' \
 }'
 ```
 
-If you want to register provider connector, then simply change port from 8084 to 8083.
+If you want to register provider connector, then simply change port from 8184 to 8183.
 
 Upon successful registration, you should receive MessageProcessedNotificationMessage.
 
@@ -269,7 +269,7 @@ Upon successful registration, you should receive MessageProcessedNotificationMes
 Following request can be use to query Metadata Broker
 
 ```
-curl --location --request POST 'https://localhost:8084/proxy' \
+curl --location --request POST 'https://localhost:8184/proxy' \
 --header 'Content-Type: text/plain' \
 --data-raw '{
     "multipart": "form",
@@ -292,7 +292,7 @@ Content-Length: 56
 ## Broker Self Description after registering connector
 
 ```
-curl --location --request POST 'https://localhost:8084/proxy' \
+curl --location --request POST 'https://localhost:8184/proxy' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "multipart": "form",

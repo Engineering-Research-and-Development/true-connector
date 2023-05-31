@@ -1,7 +1,7 @@
 In the table below is an overview of all criteria for the base profile and
 whether it is already implemented or not.
 
-| TrueConnector | No.         | Title       | Note |
+| TRUE Connector | No.         | Title       | Note |
 |:---:|:------------|:------------|:------------|
 | x | COM 01      | Protected connection | |
 | x | COM 02      | Mutual authentication | |

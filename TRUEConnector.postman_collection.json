@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "37a161dd-8cb9-4e5e-9563-cdd5276a3541",
-		"name": "TRUEConnector",
+		"_postman_id": "2794f76f-549b-4e0b-adf0-af3c54288ed0",
+		"name": "TRUE Connector",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "12578087"
+		"_exporter_id": "21815221"
 	},
 	"item": [
 		{
@@ -34,22 +34,10 @@
 									}
 								}
 							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "password",
-											"value": "password",
-											"type": "string"
-										}
-									]
-								},
 								"method": "GET",
 								"header": [
 									{
@@ -58,6 +46,10 @@
 										"type": "text"
 									}
 								],
+								"body": {
+									"mode": "file",
+									"file": {}
+								},
 								"url": {
 									"raw": "{{Self_Description_URL}}/api/contractOffer/",
 									"host": [
@@ -95,28 +87,13 @@
 									"script": {
 										"exec": [
 											"var dateNow = new Date();\r",
-											"pm.environment.set(\"futureDate\", new Date(dateNow.setDate(dateNow.getDate() + 60)).toISOString());"
+											"pm.collectionVariables.set(\"futureDate\", new Date(dateNow.setDate(dateNow.getDate() + 60)).toISOString());"
 										],
 										"type": "text/javascript"
 									}
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "password",
-											"value": "password",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [
 									{
@@ -171,28 +148,13 @@
 									"script": {
 										"exec": [
 											"var dateNow = new Date();\r",
-											"pm.environment.set(\"futureDate\", new Date(dateNow.setDate(dateNow.getDate() + 60)).toISOString());"
+											"pm.collectionVariables.set(\"futureDate\", new Date(dateNow.setDate(dateNow.getDate() + 60)).toISOString());"
 										],
 										"type": "text/javascript"
 									}
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "password",
-											"value": "password",
-											"type": "string"
-										}
-									]
-								},
 								"method": "PUT",
 								"header": [
 									{
@@ -203,7 +165,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"@context\": {\r\n        \"ids\": \"https://w3id.org/idsa/core/\",\r\n        \"idsc\": \"https://w3id.org/idsa/code/\"\r\n    },\r\n    \"@type\": \"ids:ContractOffer\",\r\n    \"@id\": \"{{contractOffer}}\",\r\n    \"ids:permission\": [\r\n        {\r\n            \"@type\": \"ids:Permission\",\r\n            \"@id\": \"https://w3id.org/idsa/autogen/permission/{{$guid}}\",\r\n            \"ids:target\": {\r\n                \"@id\": \"http://w3id.org/engrd/connector/artifact/3\"\r\n            },\r\n            \"ids:description\": [\r\n                {\r\n                    \"@value\": \"provide-access\",\r\n                    \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n                }\r\n            ],\r\n            \"ids:action\": [\r\n                {\r\n                    \"@id\": \"https://w3id.org/idsa/code/USE\"\r\n                }\r\n            ],\r\n            \"ids:title\": [\r\n                {\r\n                    \"@value\": \"Example Usage Policy\",\r\n                    \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n                }\r\n            ],\r\n            \"ids:preDuty\": [],\r\n            \"ids:constraint\": [\r\n                {\r\n                    \"@type\": \"ids:Constraint\",\r\n                    \"@id\": \"https://w3id.org/idsa/autogen/constraint/{{$guid}}\",\r\n                    \"ids:rightOperand\": {\r\n                        \"@value\": \"{{$isoTimestamp}}\",\r\n                        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n                    },\r\n                    \"ids:leftOperand\": {\r\n                        \"@id\": \"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"\r\n                    },\r\n                    \"ids:operator\": {\r\n                        \"@id\": \"https://w3id.org/idsa/code/AFTER\"\r\n                    }\r\n                },\r\n                {\r\n                    \"@type\": \"ids:Constraint\",\r\n                    \"@id\": \"https://w3id.org/idsa/autogen/constraint/{{$guid}}\",\r\n                    \"ids:rightOperand\": {\r\n                        \"@value\": \"{{futureDate}}\",\r\n                        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n                    },\r\n                    \"ids:leftOperand\": {\r\n                        \"@id\": \"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"\r\n                    },\r\n                    \"ids:operator\": {\r\n                        \"@id\": \"https://w3id.org/idsa/code/BEFORE\"\r\n                    }\r\n                }\r\n            ],\r\n            \"ids:postDuty\": [],\r\n            \"ids:assignee\": [],\r\n            \"ids:assigner\": []\r\n        }\r\n    ],\r\n    \"ids:provider\": {\r\n        \"@id\": \"https://w3id.org/engrd/connector/\"\r\n    },\r\n    \"ids:contractStart\": {\r\n        \"@value\": \"{{$isoTimestamp}}\",\r\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n    },\r\n    \"ids:contractDate\": {\r\n        \"@value\": \"{{$isoTimestamp}}\",\r\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n    },\r\n    \"ids:prohibition\": [],\r\n    \"ids:obligation\": []\r\n}",
+									"raw": "{\r\n    \"@context\": {\r\n        \"ids\": \"https://w3id.org/idsa/core/\",\r\n        \"idsc\": \"https://w3id.org/idsa/code/\"\r\n    },\r\n    \"@type\": \"ids:ContractOffer\",\r\n    \"@id\": \"{{contractOffer}}\",\r\n    \"ids:permission\": [\r\n        {\r\n            \"@type\": \"ids:Permission\",\r\n            \"@id\": \"https://w3id.org/idsa/autogen/permission/{{$guid}}\",\r\n            \"ids:target\": {\r\n                \"@id\": \"http://w3id.org/engrd/connector/artifact/testUpdate\"\r\n            },\r\n            \"ids:description\": [\r\n                {\r\n                    \"@value\": \"provide-access\",\r\n                    \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n                }\r\n            ],\r\n            \"ids:action\": [\r\n                {\r\n                    \"@id\": \"https://w3id.org/idsa/code/USE\"\r\n                }\r\n            ],\r\n            \"ids:title\": [\r\n                {\r\n                    \"@value\": \"Example Usage Policy\",\r\n                    \"@type\": \"http://www.w3.org/2001/XMLSchema#string\"\r\n                }\r\n            ],\r\n            \"ids:preDuty\": [],\r\n            \"ids:constraint\": [\r\n                {\r\n                    \"@type\": \"ids:Constraint\",\r\n                    \"@id\": \"https://w3id.org/idsa/autogen/constraint/{{$guid}}\",\r\n                    \"ids:rightOperand\": {\r\n                        \"@value\": \"{{$isoTimestamp}}\",\r\n                        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n                    },\r\n                    \"ids:leftOperand\": {\r\n                        \"@id\": \"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"\r\n                    },\r\n                    \"ids:operator\": {\r\n                        \"@id\": \"https://w3id.org/idsa/code/AFTER\"\r\n                    }\r\n                },\r\n                {\r\n                    \"@type\": \"ids:Constraint\",\r\n                    \"@id\": \"https://w3id.org/idsa/autogen/constraint/{{$guid}}\",\r\n                    \"ids:rightOperand\": {\r\n                        \"@value\": \"{{futureDate}}\",\r\n                        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n                    },\r\n                    \"ids:leftOperand\": {\r\n                        \"@id\": \"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"\r\n                    },\r\n                    \"ids:operator\": {\r\n                        \"@id\": \"https://w3id.org/idsa/code/BEFORE\"\r\n                    }\r\n                }\r\n            ],\r\n            \"ids:postDuty\": [],\r\n            \"ids:assignee\": [],\r\n            \"ids:assigner\": []\r\n        }\r\n    ],\r\n    \"ids:provider\": {\r\n        \"@id\": \"https://w3id.org/engrd/connector/\"\r\n    },\r\n    \"ids:contractStart\": {\r\n        \"@value\": \"{{$isoTimestamp}}\",\r\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n    },\r\n    \"ids:contractDate\": {\r\n        \"@value\": \"{{$isoTimestamp}}\",\r\n        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"\r\n    },\r\n    \"ids:prohibition\": [],\r\n    \"ids:obligation\": []\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -244,21 +206,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "password",
-											"value": "password",
-											"type": "string"
-										}
-									]
-								},
 								"method": "DELETE",
 								"header": [
 									{
@@ -310,21 +257,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "password",
-											"value": "password",
-											"type": "string"
-										}
-									]
-								},
 								"method": "GET",
 								"header": [
 									{
@@ -370,21 +302,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "password",
-											"value": "password",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [
 									{
@@ -440,21 +357,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "password",
-											"value": "password",
-											"type": "string"
-										}
-									]
-								},
 								"method": "PUT",
 								"header": [
 									{
@@ -506,21 +408,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "password",
-											"value": "password",
-											"type": "string"
-										}
-									]
-								},
 								"method": "DELETE",
 								"header": [
 									{
@@ -568,21 +455,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "password",
-											"value": "password",
-											"type": "string"
-										}
-									]
-								},
 								"method": "GET",
 								"header": [
 									{
@@ -634,21 +506,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "password",
-											"value": "password",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [
 									{
@@ -709,21 +566,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "password",
-											"value": "password",
-											"type": "string"
-										}
-									]
-								},
 								"method": "PUT",
 								"header": [
 									{
@@ -775,21 +617,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "username",
-											"value": "admin",
-											"type": "string"
-										},
-										{
-											"key": "password",
-											"value": "password",
-											"type": "string"
-										}
-									]
-								},
 								"method": "DELETE",
 								"header": [
 									{
@@ -846,21 +673,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "password",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -887,13 +699,13 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Retrieve offered resource\", () => {\r",
-									"   let jsonData = pm.response.json()\r",
-									"   arrayOfObject = jsonData[\"ids:resourceCatalog\"][0][\"ids:offeredResource\"];\r",
-									"   var result = arrayOfObject.find(obj => {\r",
-									"     return obj[\"ids:contractOffer\"][0][\"ids:permission\"][0][\"ids:target\"][\"@id\"] === \"http://w3id.org/engrd/connector/artifact/1\"\r",
-									"   })\r",
-									"   pm.collectionVariables.set(\"offered_resource\", result[\"@id\"])\r",
+									"pm.test(\"Retrieve offered resource\", () => {\r",
+									"   let jsonData = pm.response.json()\r",
+									"   arrayOfObject = jsonData[\"ids:resourceCatalog\"][0][\"ids:offeredResource\"];\r",
+									"   var result = arrayOfObject.find(obj => {\r",
+									"     return obj[\"ids:contractOffer\"][0][\"ids:permission\"][0][\"ids:target\"][\"@id\"] === \"http://w3id.org/engrd/connector/artifact/1\"\r",
+									"   })\r",
+									"   pm.collectionVariables.set(\"offered_resource\", result[\"@id\"])\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
@@ -905,21 +717,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "username",
-									"value": "connector",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "password",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -932,14 +729,9 @@
 							"raw": "{\n    \"multipart\": \"{{multipart_type}}\",\n    \"Forward-To\": \"{{Forward-To}}\",\n    \"messageType\": \"DescriptionRequestMessage\"\n}"
 						},
 						"url": {
-							"raw": "https://localhost:8084/proxy",
-							"protocol": "https",
+							"raw": "{{Proxy_Endpoint}}",
 							"host": [
-								"localhost"
-							],
-							"port": "8084",
-							"path": [
-								"proxy"
+								"{{Proxy_Endpoint}}"
 							]
 						}
 					},
@@ -981,21 +773,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "username",
-									"value": "connector",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "password",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -1008,14 +785,9 @@
 							"raw": "{\n    \"multipart\": \"{{multipart_type}}\",\n    \"Forward-To\": \"{{Forward-To}}\",\n    \"messageType\": \"DescriptionRequestMessage\",\n    \"requestedElement\": \"{{offered_resource}}\"\n}"
 						},
 						"url": {
-							"raw": "https://localhost:8084/proxy",
-							"protocol": "https",
+							"raw": "{{Proxy_Endpoint}}",
 							"host": [
-								"localhost"
-							],
-							"port": "8084",
-							"path": [
-								"proxy"
+								"{{Proxy_Endpoint}}"
 							]
 						}
 					},
@@ -1044,21 +816,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "username",
-									"value": "connector",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "password",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -1071,14 +828,9 @@
 							"raw": "{\n    \"multipart\": \"{{multipart_type}}\",\n    \"Forward-To\": \"{{Forward-To}}\",\n    \"messageType\": \"ContractRequestMessage\",\n    \"requestedElement\": \"{{contract_artifact}}\",\n    \"payload\": {\n        \"@context\": {\n            \"ids\": \"https://w3id.org/idsa/core/\",\n            \"idsc\": \"https://w3id.org/idsa/code/\"\n        },\n        \"@type\": \"ids:ContractRequest\",\n        \"@id\": \"{{contract_id}}\",\n        \"ids:permission\": [\n            {{contract_permission}}\n        ],\n        \"ids:provider\": {\n            \"@id\": \"{{contract_provider}}\"\n        },\n        \"ids:obligation\": [],\n        \"ids:prohibition\": [],\n        \"ids:consumer\": {\n            \"@id\": \"http://w3id.org/engrd/connector/consumer\"\n        }\n    }\n}"
 						},
 						"url": {
-							"raw": "https://localhost:8084/proxy",
-							"protocol": "https",
+							"raw": "{{Proxy_Endpoint}}",
 							"host": [
-								"localhost"
-							],
-							"port": "8084",
-							"path": [
-								"proxy"
+								"{{Proxy_Endpoint}}"
 							]
 						}
 					},
@@ -1104,21 +856,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "username",
-									"value": "connector",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "password",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -1131,14 +868,9 @@
 							"raw": "{\n    \"multipart\": \"{{multipart_type}}\",\n    \"Forward-To\": \"{{Forward-To}}\",\n    \"messageType\": \"ContractAgreementMessage\",\n    \"requestedArtifact\": \"{{contract_artifact}}\",\n    \"payload\": {{contract_agreement}}\n}"
 						},
 						"url": {
-							"raw": "https://localhost:8084/proxy",
-							"protocol": "https",
+							"raw": "{{Proxy_Endpoint}}",
 							"host": [
-								"localhost"
-							],
-							"port": "8084",
-							"path": [
-								"proxy"
+								"{{Proxy_Endpoint}}"
 							]
 						}
 					},
@@ -1166,21 +898,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "username",
-									"value": "connector",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "password",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -1190,17 +907,12 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"multipart\": \"{{multipart_type}}\",\n    \"Forward-To\": \"{{Forward-To}}\",\n    \"messageType\": \"ArtifactRequestMessage\",\n    \"requestedArtifact\": \"{{contract_artifact}}\",\n    \"transferContract\": \"{{transfer_contract}}\"\n}"
+							"raw": "{\n    \"multipart\": \"{{multipart_type}}\",\n    \"Forward-To\": \"{{Forward-To}}\",\n    \"messageType\": \"ArtifactRequestMessage\",\n    \"requestedArtifact\": \"{{contract_artifact}}\",\n    \"transferContract\": \"{{transfer_contract}}\",\n    \"payload\" : \"\"\n}"
 						},
 						"url": {
-							"raw": "https://localhost:8084/proxy",
-							"protocol": "https",
+							"raw": "{{Proxy_Endpoint}}",
 							"host": [
-								"localhost"
-							],
-							"port": "8084",
-							"path": [
-								"proxy"
+								"{{Proxy_Endpoint}}"
 							]
 						}
 					},
@@ -1208,7 +920,282 @@
 				}
 			],
 			"auth": {
-				"type": "noauth"
+				"type": "basic",
+				"basic": [
+					{
+						"key": "username",
+						"value": "connector",
+						"type": "string"
+					},
+					{
+						"key": "password",
+						"value": "password",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Contract Negotiation WS",
+			"item": [
+				{
+					"name": "Description Request Message",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Retrieve offered resource\", () => {\r",
+									"   let jsonData = pm.response.json()\r",
+									"   arrayOfObject = jsonData[\"ids:resourceCatalog\"][0][\"ids:offeredResource\"];\r",
+									"   var result = arrayOfObject.find(obj => {\r",
+									"     return obj[\"ids:contractOffer\"][0][\"ids:permission\"][0][\"ids:target\"][\"@id\"] === \"http://w3id.org/engrd/connector/artifact/test1.csv\"\r",
+									"   })\r",
+									"   pm.collectionVariables.set(\"offered_resource\", result[\"@id\"])\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"multipart\": \"wss\",\n    \"Forward-To\": \"{{Forward-To-WS}}\",\n    \"Forward-To-Internal\": \"{{Forward-To-Internal}}\",\n    \"messageType\": \"DescriptionRequestMessage\"\n}"
+						},
+						"url": {
+							"raw": "{{Proxy_Endpoint}}",
+							"host": [
+								"{{Proxy_Endpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Description Request Message with offered resource",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Retrieve contract artifact\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"contract_artifact\", jsonData[\"ids:representation\"][0][\"ids:instance\"][0][\"@id\"])\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Retrieve contract id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"contract_id\", jsonData[\"ids:contractOffer\"][0][\"@id\"])\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Retrieve contract permission\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"contract_permission\", JSON.stringify(jsonData[\"ids:contractOffer\"][0][\"ids:permission\"][0]))\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Retrieve contract provider\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"contract_provider\", jsonData[\"ids:contractOffer\"][0][\"ids:provider\"][\"@id\"])\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"multipart\": \"wss\",\n    \"Forward-To\": \"{{Forward-To-WS}}\",\n    \"Forward-To-Internal\": \"{{Forward-To-Internal}}\",\n    \"messageType\": \"DescriptionRequestMessage\",\n    \"requestedElement\": \"{{offered_resource}}\"\n}"
+						},
+						"url": {
+							"raw": "{{Proxy_Endpoint}}",
+							"host": [
+								"{{Proxy_Endpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ContractRequestMessage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Retrieve contract contract_agreement\", function () {\r",
+									"    pm.collectionVariables.set(\"contract_agreement\", JSON.stringify(pm.response.json()))\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"let responseData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"transfer_contract\", responseData[\"@id\"]);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"multipart\": \"wss\",\n    \"Forward-To\": \"{{Forward-To-WS}}\",\n    \"Forward-To-Internal\": \"{{Forward-To-Internal}}\",\n    \"messageType\": \"ContractRequestMessage\",\n    \"requestedElement\": \"{{contract_artifact}}\",\n    \"payload\": {\n        \"@context\": {\n            \"ids\": \"https://w3id.org/idsa/core/\",\n            \"idsc\": \"https://w3id.org/idsa/code/\"\n        },\n        \"@type\": \"ids:ContractRequest\",\n        \"@id\": \"{{contract_id}}\",\n        \"ids:permission\": [\n            {{contract_permission}}\n        ],\n        \"ids:provider\": {\n            \"@id\": \"{{contract_provider}}\"\n        },\n        \"ids:obligation\": [],\n        \"ids:prohibition\": [],\n        \"ids:consumer\": {\n            \"@id\": \"http://w3id.org/engrd/connector/consumer\"\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "{{Proxy_Endpoint}}",
+							"host": [
+								"{{Proxy_Endpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ContractAgreementMessage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body is MessageProcessedNotificationMessage\", function () {\r",
+									"    pm.response.to.have.body(\"MessageProcessedNotificationMessage\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"multipart\": \"wss\",\n    \"Forward-To\": \"{{Forward-To-WS}}\",\n    \"Forward-To-Internal\": \"{{Forward-To-Internal}}\",\n    \"messageType\": \"ContractAgreementMessage\",\n    \"requestedArtifact\": \"{{contract_artifact}}\",\n    \"payload\": {{contract_agreement}}\n}"
+						},
+						"url": {
+							"raw": "{{Proxy_Endpoint}}",
+							"host": [
+								"{{Proxy_Endpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ArtifactRequestMessage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"JSON values check\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"File 'test1.csv' created successfully\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"multipart\": \"wss\",\n    \"Forward-To\": \"{{Forward-To-WS}}\",\n    \"Forward-To-Internal\": \"{{Forward-To-Internal}}\",\n    \"messageType\": \"ArtifactRequestMessage\",\n    \"requestedArtifact\": \"{{contract_artifact}}\",\n    \"transferContract\": \"{{transfer_contract}}\",\n    \"payload\" : \"\"\n}"
+						},
+						"url": {
+							"raw": "{{Proxy_Endpoint}}",
+							"host": [
+								"{{Proxy_Endpoint}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "password",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "connector",
+						"type": "string"
+					}
+				]
 			},
 			"event": [
 				{
@@ -1237,21 +1224,6 @@
 				{
 					"name": "Connector Update Message",
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "username",
-									"value": "broker",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "password",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -1280,21 +1252,6 @@
 				{
 					"name": "Connector Unavailable Message",
 					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "username",
-									"value": "broker",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "password",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -1324,19 +1281,7 @@
 					"name": "Connector Query Message",
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "username",
-									"value": "broker",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "password",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -1370,13 +1315,13 @@
 		"type": "basic",
 		"basic": [
 			{
-				"key": "password",
-				"value": "password",
+				"key": "username",
+				"value": "admin",
 				"type": "string"
 			},
 			{
-				"key": "username",
-				"value": "admin",
+				"key": "password",
+				"value": "password",
 				"type": "string"
 			}
 		]
@@ -1403,59 +1348,7 @@
 	],
 	"variable": [
 		{
-			"key": "offered_resource",
-			"value": "https://w3id.org/idsa/autogen/textResource/a79141dd-1d65-4ecb-b8d9-61935a8381a3"
-		},
-		{
-			"key": "contract_artifact",
-			"value": "http://w3id.org/engrd/connector/artifact/1"
-		},
-		{
-			"key": "contract_id",
-			"value": "https://w3id.org/idsa/autogen/contractOffer/9d9dc0ba-d74e-4d10-88a5-782f45f752e4"
-		},
-		{
-			"key": "contract_permission",
-			"value": "{\"@type\":\"ids:Permission\",\"@id\":\"https://w3id.org/idsa/autogen/permission/edae8e5d-f3cb-40a0-8386-78618e9dbdf3\",\"ids:target\":{\"@id\":\"http://w3id.org/engrd/connector/artifact/1\"},\"ids:preDuty\":[],\"ids:assignee\":[],\"ids:assigner\":[],\"ids:action\":[{\"@id\":\"https://w3id.org/idsa/code/USE\"}],\"ids:postDuty\":[],\"ids:constraint\":[{\"@type\":\"ids:Constraint\",\"@id\":\"https://w3id.org/idsa/autogen/constraint/9508f927-ecb9-4360-80a5-69a933effe35\",\"ids:leftOperand\":{\"@id\":\"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"},\"ids:operator\":{\"@id\":\"https://w3id.org/idsa/code/AFTER\"},\"ids:rightOperand\":{\"@value\":\"2022-09-29T14:35:15Z\",\"@type\":\"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"}},{\"@type\":\"ids:Constraint\",\"@id\":\"https://w3id.org/idsa/autogen/constraint/cf585c0c-3666-450f-9c5d-dcedc25ba060\",\"ids:leftOperand\":{\"@id\":\"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"},\"ids:operator\":{\"@id\":\"https://w3id.org/idsa/code/BEFORE\"},\"ids:rightOperand\":{\"@value\":\"2022-11-06T14:35:15Z\",\"@type\":\"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"}}],\"ids:description\":[{\"@value\":\"provide-access\",\"@type\":\"http://www.w3.org/2001/XMLSchema#string\"}],\"ids:title\":[{\"@value\":\"Example Usage Policy\",\"@type\":\"http://www.w3.org/2001/XMLSchema#string\"}]}"
-		},
-		{
-			"key": "contract_consumer",
-			"value": ""
-		},
-		{
-			"key": "contract_obligation",
-			"value": ""
-		},
-		{
-			"key": "contract_prohibition",
-			"value": ""
-		},
-		{
-			"key": "transfer_contract",
-			"value": "https://w3id.org/idsa/autogen/contractAgreement/b653210a-cc58-41af-91d7-98bb81b0bcc2"
-		},
-		{
-			"key": "contract_provider",
-			"value": "https://w3id.org/engrd/connector/provider"
-		},
-		{
-			"key": "contract_agreement",
-			"value": "{\"@context\":{\"ids\":\"https://w3id.org/idsa/core/\",\"idsc\":\"https://w3id.org/idsa/code/\"},\"@type\":\"ids:ContractAgreement\",\"@id\":\"https://w3id.org/idsa/autogen/contractAgreement/b653210d-cc58-41af-91d7-98bb81b0bcc2\",\"ids:permission\":[{\"@type\":\"ids:Permission\",\"@id\":\"https://w3id.org/idsa/autogen/permission/edae8e5d-f3cb-40a0-8386-78618e9dbdf3\",\"ids:target\":{\"@id\":\"http://w3id.org/engrd/connector/artifact/1\"},\"ids:preDuty\":[],\"ids:assignee\":[],\"ids:assigner\":[],\"ids:action\":[{\"@id\":\"https://w3id.org/idsa/code/USE\"}],\"ids:postDuty\":[],\"ids:constraint\":[{\"@type\":\"ids:Constraint\",\"@id\":\"https://w3id.org/idsa/autogen/constraint/9508f927-ecb9-4360-80a5-69a933effe35\",\"ids:leftOperand\":{\"@id\":\"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"},\"ids:operator\":{\"@id\":\"https://w3id.org/idsa/code/AFTER\"},\"ids:rightOperand\":{\"@value\":\"2022-09-29T14:35:15Z\",\"@type\":\"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"}},{\"@type\":\"ids:Constraint\",\"@id\":\"https://w3id.org/idsa/autogen/constraint/cf585c0c-3666-450f-9c5d-dcedc25ba060\",\"ids:leftOperand\":{\"@id\":\"https://w3id.org/idsa/code/POLICY_EVALUATION_TIME\"},\"ids:operator\":{\"@id\":\"https://w3id.org/idsa/code/BEFORE\"},\"ids:rightOperand\":{\"@value\":\"2022-11-06T14:35:15Z\",\"@type\":\"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"}}],\"ids:description\":[{\"@value\":\"provide-access\",\"@type\":\"http://www.w3.org/2001/XMLSchema#string\"}],\"ids:title\":[{\"@value\":\"Example Usage Policy\",\"@type\":\"http://www.w3.org/2001/XMLSchema#string\"}]}],\"ids:provider\":{\"@id\":\"http://w3id.org/engrd/connector/provider\"},\"ids:contractStart\":{\"@value\":\"2022-10-06T14:35:16.201Z\",\"@type\":\"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"},\"ids:contractDate\":{\"@value\":\"2022-10-06T14:35:16.194Z\",\"@type\":\"http://www.w3.org/2001/XMLSchema#dateTimeStamp\"},\"ids:consumer\":{\"@id\":\"http://w3id.org/engrd/connector/consumer\"},\"ids:prohibition\":[],\"ids:obligation\":[]}"
-		},
-		{
 			"key": "APPLICANT_SELF_DESCRIPTION",
-			"value": ""
-		},
-		{
-			"key": "contractOffer",
-			"value": ""
-		},
-		{
-			"key": "resource",
-			"value": ""
-		},
-		{
-			"key": "representation",
 			"value": ""
 		},
 		{
@@ -1467,7 +1360,43 @@
 			"value": ""
 		},
 		{
+			"key": "contractOffer",
+			"value": ""
+		},
+		{
+			"key": "representation",
+			"value": ""
+		},
+		{
 			"key": "futureDate",
+			"value": ""
+		},
+		{
+			"key": "offered_resource",
+			"value": ""
+		},
+		{
+			"key": "contract_artifact",
+			"value": ""
+		},
+		{
+			"key": "contract_id",
+			"value": ""
+		},
+		{
+			"key": "contract_permission",
+			"value": ""
+		},
+		{
+			"key": "contract_provider",
+			"value": ""
+		},
+		{
+			"key": "contract_agreement",
+			"value": ""
+		},
+		{
+			"key": "transfer_contract",
 			"value": ""
 		}
 	]
