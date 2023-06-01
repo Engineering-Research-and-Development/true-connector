@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "2794f76f-549b-4e0b-adf0-af3c54288ed0",
-		"name": "TRUE Connector",
+		"_postman_id": "71ccfe9b-0010-4901-b025-323186ce2991",
+		"name": "TRUE Connector v1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "21815221"
+		"_exporter_id": "12578087"
 	},
 	"item": [
 		{
@@ -924,7 +924,7 @@
 				"basic": [
 					{
 						"key": "username",
-						"value": "connector",
+						"value": "proxy",
 						"type": "string"
 					},
 					{
@@ -1186,13 +1186,13 @@
 				"type": "basic",
 				"basic": [
 					{
-						"key": "password",
-						"value": "password",
+						"key": "username",
+						"value": "proxy",
 						"type": "string"
 					},
 					{
-						"key": "username",
-						"value": "connector",
+						"key": "password",
+						"value": "password",
 						"type": "string"
 					}
 				]
@@ -1307,6 +1307,41 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "password",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "proxy",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}
