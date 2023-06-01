@@ -17,8 +17,9 @@ _transferContract_ - of type String, should be formatted as URI\
 Example request:
 
 ```
-curl --location --request POST 'https://localhost:8084/proxy' \
+curl --location --request POST 'https://localhost:8184/proxy' \
 --header 'Content-Type: application/json' \
+--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 --data-raw '{
     "multipart": "form",
     "Forward-To": "https://connectora:8080/api/ids/data",
@@ -980,7 +981,7 @@ There are convenient endpoints to initiate flow with Broker. They can be trigger
 Example proxy request:
 
 ```
-curl --location 'https://localhost:8084/proxy' \
+curl --location 'https://localhost:8184/proxy' \
 --header 'Authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
 --header 'Content-Type: application/json' \
 --data '{

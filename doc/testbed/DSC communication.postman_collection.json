@@ -339,7 +339,7 @@
 	"variable": [
 		{
 			"key": "TC-Proxy-Endpoint",
-			"value": "https://localhost:8084/proxy",
+			"value": "https://localhost:8184/proxy",
 			"type": "string"
 		},
 		{

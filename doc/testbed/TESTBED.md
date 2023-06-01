@@ -251,7 +251,8 @@ After executing request, response should look like in following picture:
 You can register consumer connector by executing following request:
 
 ```
-curl --location --request POST 'https://localhost:8084/proxy' \
+curl --location --request POST 'https://localhost:8184/proxy' \
+--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 --header 'Content-Type: text/plain' \
 --data-raw '{
     "multipart": "form",
@@ -260,7 +261,7 @@ curl --location --request POST 'https://localhost:8084/proxy' \
 }'
 ```
 
-If you want to register provider connector, then simply change port from 8084 to 8083.
+If you want to register provider connector, then simply change port from 8184 to 8183.
 
 Upon successful registration, you should receive MessageProcessedNotificationMessage.
 
@@ -269,8 +270,9 @@ Upon successful registration, you should receive MessageProcessedNotificationMes
 Following request can be use to query Metadata Broker
 
 ```
-curl --location --request POST 'https://localhost:8084/proxy' \
+curl --location --request POST 'https://localhost:8184/proxy' \
 --header 'Content-Type: text/plain' \
+--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 --data-raw '{
     "multipart": "form",
     "Forward-To": "https://broker-reverseproxy/infrastructure",
@@ -292,8 +294,9 @@ Content-Length: 56
 ## Broker Self Description after registering connector
 
 ```
-curl --location --request POST 'https://localhost:8084/proxy' \
+curl --location --request POST 'https://localhost:8184/proxy' \
 --header 'Content-Type: application/json' \
+--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 --data-raw '{
     "multipart": "form",
     "Forward-To": "https://broker-reverseproxy/infrastructure",

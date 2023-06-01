@@ -7,7 +7,7 @@ With default configuration, you can use following curl command, to get data from
 <summary>Multipart Form request</summary>
 
 ```
-curl --location --request POST 'https://localhost:8084/proxy' \
+curl --location --request POST 'https://localhost:8184/proxy' \
 --header 'Content-Type: text/plain' \
 --header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 --data-raw '{
@@ -34,14 +34,14 @@ Be sure to use correct configuration/ports for sender and receiver Data App and 
 Default values:
 
 ```
-DataApp URL: https://localhost:8084/proxy
+DataApp URL: https://localhost:8184/proxy
 "Forward-To": "https://ecc-provider:8889/data",
 ```
 
 For WSS flow:
 
 ```
-DataApp URL: https://localhost:8084/proxy
+DataApp URL: https://localhost:8184/proxy
 "multipart": "wss",
 "Forward-To": "wss://ecc-provider:8086/data",
 "Forward-To-Internal": "wss://ecc-consumer:8887",

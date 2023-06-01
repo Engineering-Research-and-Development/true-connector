@@ -35,6 +35,7 @@ Please [click here](https://engineering-ing-inf-rd.gitbook.io/true-connector/), 
     * [WebSocket configuration (WSS)](doc/modifyingConfiguration/wss.md)
     * [IDSCPv2 configuration](doc/modifyingConfiguration/idscp2.md)
   * [Advanced configuration](doc/advancedConfiguration/advanced-configuration.md)
+    * [OCSP](doc/advancedConfiguration/ocsp.md) 
     * [Supported Identity Providers](doc/advancedConfiguration/identityproviders.md)
     * [Extended jwt validation](doc/advancedConfiguration/extendedjwt.md)
     * [Convert keystorage files](doc/advancedConfiguration/convert_keystorage.md)

@@ -7,7 +7,7 @@ Before start of negotiation process, Description Request Message is sent to iden
 <summary>Multipart form - Description Request Message</summary>
 
 ```
-curl --location --request POST 'https://localhost:8084/proxy' \
+curl --location --request POST 'https://localhost:8184/proxy' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 --data-raw '{

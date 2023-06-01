@@ -9,7 +9,7 @@ When you have finished negotiation, you can query for resource again to see if w
 <summary>Multipart Form - Artifact Request Message</summary>
 
 ```
-curl --location --request POST 'http://localhost:8084/proxy' \
+curl --location --request POST 'http://localhost:8184/proxy' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 --data-raw '{
