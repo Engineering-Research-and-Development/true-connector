@@ -59,7 +59,7 @@ Endpoint exposed by the Connector, used to receive requests from other Connector
 
 Depending of the connector configuration, data received on this endpoint will be processes accordingly (mixed/form/header) and validate IDS message.
 
-Regarding example requests, feel free to use same requests, for configuration, like described in [internal endpoints](TEST\_API.md#internalendpoints)
+Regarding example requests, feel free to use same requests, for configuration, like described in [internal endpoints](TEST_API.md#internalendpoints)
 
 ## /about/version
 
@@ -941,7 +941,7 @@ curl --location --request POST 'https://localhost:8887/incoming-data-app/multipa
 --form 'payload="PAYLOAD"'
 ```
 
-\###/incoming-data-app/multipartMessageHttpHeader
+### /incoming-data-app/multipartMessageHttpHeader
 
 multipart - http-header
 
@@ -969,10 +969,6 @@ curl --location 'https://localhost:8887/incoming-data-app/multipartMessageHttpHe
 ```
 
 If any of the mandatory headers is not present or that message cannot be recreated from headers, response will be returned and user should check header responses, for IDS-Messagetype = ids:RejectionMessage and IDS-RejectionReason = https://w3id.org/idsa/code/MALFORMED\_MESSAGE.
-
-### /internal/sd
-
-This endpoint is used internally, between DataApp and Execution Core Container, when DataApp needs to fetch Connector Self Description document (when DataApp receives DescriptionRequestMessage). Reason for existence of this API is to eliminate need for DataApp to have API credentials of public Self Description endpoint.
 
 ### Broker
 
