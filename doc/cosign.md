@@ -1,6 +1,6 @@
-## Cosign <a href="#cosign" id="cosign"></a>
+## Docker image signing and verification <a href="#cosign" id="cosign"></a>
 
-Docker images that are part of the TRUE Connector are signed using [cosign](https://github.com/sigstore/cosign). In releases section, you can find apropriate version of cosign executable, appropriate of the target OS.
+Docker images that are part of the TRUE Connector are signed using [cosign](https://github.com/sigstore/cosign). In releases section, you can find appropriate version of cosign executable, appropriate of the target OS.
 
 Signed images starts with following versions:
 
