@@ -4,9 +4,9 @@ There is a postman collection which can be used to initiate requests that are mo
 
 ![Postman collection](../postman\_collection.png)
 
-[TRUE Connector.postman\_collection](../../TRUEConnector.postman\_collection.json)\
+[TRUE Connector.postman\_collection](../../TRUE%20Connector%20v1.postman_collection.json)
 
 
-[TRUE Connector enviroment.postman\_environment](../../TRUEConnector\_enviroment.postman\_environment.json)
+[TRUE Connector enviroment.postman\_environment](../../TRUE%20Connector%20v1%20enviroment.postman_environment.json)
 
 This collection comes with predefined environments so be sure to also import environment file.
