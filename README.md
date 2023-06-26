@@ -56,5 +56,8 @@ Please [click here](https://engineering-ing-inf-rd.gitbook.io/true-connector/), 
   * [Postman collection](doc/selfDescriptionAPI/postman.md)
   * [Docker image signing and verification](doc/cosign.md)
   * [Life cycle](doc/life_cycle.md)
+  * [Security](doc/security.md)
+  * [IDS-criteria](doc/IDS-criteria.md)
+  * [Roadmap](doc/roadmap.md)
   * [License](doc/license.md)
   * [Contributing TRUE Connector](doc/contributingTC.md)
