@@ -8,3 +8,13 @@ Since Clearing house is disabled by default, in order to enable it, set followin
 application.isEnabledClearingHouse=true
 
 ```
+
+Once Clearing House interaction is enabled, also configure location and credentials (if required) for the Clearing House by setting following properties: 
+
+```
+application.clearinghouse.username=
+application.clearinghouse.password=
+application.clearinghouse.baseUrl=
+```
+
+NOTE: Fraunhofer Clearing House implementation requires credentials for accessing.

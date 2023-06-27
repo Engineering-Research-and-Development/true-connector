@@ -8,3 +8,15 @@ Since Usage Control is disabled by default, in order to enable it, set following
 application.isEnabledUsageControl=true
 
 ```
+
+Default Usage Control app is configured by passing env variable through docker-compose.yml file:
+
+```
+UC_DATAAPP_URI=http://uc-dataapp-provider:8080/platoontec/PlatoonDataUsage/1.0/
+```
+
+or
+
+```
+UC_DATAAPP_URI=http://uc-dataapp-consumer:8080/platoontec/PlatoonDataUsage/1.0/
+```
