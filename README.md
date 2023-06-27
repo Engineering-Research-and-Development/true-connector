@@ -59,5 +59,6 @@ Please [click here](https://engineering-ing-inf-rd.gitbook.io/true-connector/), 
   * [Security](doc/security.md)
   * [IDS-criteria](doc/IDS-criteria.md)
   * [Roadmap](doc/roadmap.md)
+  * [Traceability matrix](doc/traceability_matrix.md)
   * [License](doc/license.md)
   * [Contributing TRUE Connector](doc/contributingTC.md)
