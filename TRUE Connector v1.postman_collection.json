@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "c943c0e0-5a03-41a4-a9b5-18175dbeeb74",
+		"_postman_id": "d69b4d98-a2fb-44a4-826d-99da07c6cb54",
 		"name": "TRUE Connector v1",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2326106"
 	},
 	"item": [
 		{
@@ -1603,14 +1604,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:8084/proxy",
-							"protocol": "https",
+							"raw": "{{Proxy_Endpoint}}",
 							"host": [
-								"localhost"
-							],
-							"port": "8084",
-							"path": [
-								"proxy"
+								"{{Proxy_Endpoint}}"
 							]
 						}
 					},
@@ -1631,14 +1627,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:8084/proxy",
-							"protocol": "https",
+							"raw": "{{Proxy_Endpoint}}",
 							"host": [
-								"localhost"
-							],
-							"port": "8084",
-							"path": [
-								"proxy"
+								"{{Proxy_Endpoint}}"
 							]
 						}
 					},
@@ -1647,9 +1638,6 @@
 				{
 					"name": "Connector Query Message",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -1662,14 +1650,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:8084/proxy",
-							"protocol": "https",
+							"raw": "{{Proxy_Endpoint}}",
 							"host": [
-								"localhost"
-							],
-							"port": "8084",
-							"path": [
-								"proxy"
+								"{{Proxy_Endpoint}}"
 							]
 						}
 					},
