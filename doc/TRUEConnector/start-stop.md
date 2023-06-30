@@ -48,15 +48,19 @@ ecc-consumer         | INFO: Initializing Spring DispatcherServlet 'dispatcherSe
 You can also check using _docker ps_ command to verify that containers are up and running:
 
 ```
-CONTAINER ID   IMAGE                                             COMMAND                  CREATED         STATUS                   PORTS                                                                    NAMES
-bea5310f232a   rdlabengpa/ids_be_data_app:v0.2.6                 "/bin/sh -c 'java -j…"   4 minutes ago   Up 4 minutes (healthy)   0.0.0.0:8184->8083/tcp, 0.0.0.0:9001->9000/tcp                           be-dataapp-consumer
-7fd1986331af   rdlabengpa/ids_execution_core_container:v1.12.0   "/bin/sh -c 'java -j…"   4 minutes ago   Up 4 minutes (healthy)   0.0.0.0:8086->8086/tcp, 0.0.0.0:8889->8889/tcp, 0.0.0.0:8090->8449/tcp   ecc-provider
-c08ebef5bcab   rdlabengpa/ids_execution_core_container:v1.12.0   "/bin/sh -c 'java -j…"   4 minutes ago   Up 4 minutes (healthy)   0.0.0.0:8087->8086/tcp, 0.0.0.0:8091->8449/tcp, 0.0.0.0:8890->8889/tcp   ecc-consumer
-89acdc2ed631   rdlabengpa/ids_uc_data_app_platoon:v1.6.0         "java -jar datausage…"   4 minutes ago   Up 4 minutes             0.0.0.0:9552->8080/tcp                                                   uc-dataapp-provider
-6f6a83e671c3   rdlabengpa/ids_be_data_app:v0.2.6                 "/bin/sh -c 'java -j…"   4 minutes ago   Up 4 minutes (healthy)   0.0.0.0:8183->8083/tcp, 0.0.0.0:9000->9000/tcp                           be-dataapp-provider
-2af9279ea145   rdlabengpa/ids_uc_data_app_platoon:v1.6.0         "java -jar datausage…"   4 minutes ago   Up 4 minutes             0.0.0.0:9553->8080/tcp                                                   uc-dataapp-consumer
+CONTAINER ID   IMAGE                                             COMMAND                  CREATED              STATUS                          PORTS                                                                    NAMES
+5c7bd4b70295   rdlabengpa/ids_execution_core_container:v1.13.0   "/bin/sh -c 'java -j…"   About a minute ago   Up About a minute (healthy)     0.0.0.0:8087->8086/tcp, 0.0.0.0:8091->8449/tcp, 0.0.0.0:8890->8889/tcp   ecc-consumer
+8883c669e3ed   rdlabengpa/ids_execution_core_container:v1.13.0   "/bin/sh -c 'java -j…"   About a minute ago   Up About a minute (healthy)     0.0.0.0:8086->8086/tcp, 0.0.0.0:8889->8889/tcp, 0.0.0.0:8090->8449/tcp   ecc-provider
+752af4b94096   rdlabengpa/ids_uc_data_app_platoon_pip:v1.0.0     "java -jar pip.jar"      About a minute ago   Up About a minute               0/tcp                                                                    uc-dataapp-pip-provider
+095bf6919593   rdlabengpa/ids_uc_data_app_platoon:v1.7.0         "/bin/sh -c 'java -j…"   About a minute ago   Up About a minute               8080/tcp                                                                 uc-dataapp-provider
+59c3b560d8b6   rdlabengpa/ids_be_data_app:v0.2.7                 "/bin/sh -c 'java -j…"   About a minute ago   Up About a minute (unhealthy)   0.0.0.0:8184->8183/tcp, 0.0.0.0:9001->9000/tcp                           be-dataapp-consumer
+3f8979a433cf   rdlabengpa/ids_uc_data_app_platoon:v1.7.0         "/bin/sh -c 'java -j…"   About a minute ago   Up About a minute               8080/tcp                                                                 uc-dataapp-consumer
+49d5c7e81cff   rdlabengpa/ids_uc_data_app_platoon_pip:v1.0.0     "java -jar pip.jar"      About a minute ago   Up About a minute               0/tcp                                                                    uc-dataapp-pip-consumer
+f8de175d72f0   rdlabengpa/ids_be_data_app:v0.2.7                 "/bin/sh -c 'java -j…"   About a minute ago   Up About a minute (unhealthy)   0.0.0.0:8183->8183/tcp, 0.0.0.0:9000->9000/tcp                           be-dataapp-provider
 
 ```
+
+NOTE: version of docker images might differ.
 
 Once all containers are up and running, TRUE Connector is ready to be used.
 

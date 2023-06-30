@@ -260,7 +260,6 @@ volumes:
   ecc_provider_log : {}
   ecc_provider_sd : {}
   uc_provider_data : {}
-  uc_provider_data : {}
   be_dataapp_data_provider : {}
   ecc_consumer_log : {}
   ecc_consumer_sd : {}

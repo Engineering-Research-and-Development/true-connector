@@ -7,14 +7,15 @@ With default configuration, you can use following curl command, to get data from
 <summary>Multipart Form request</summary>
 
 ```
-curl --location --request POST 'https://localhost:8184/proxy' \
---header 'Content-Type: text/plain' \
---header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
---data-raw '{
+curl --location 'https://localhost:8184/proxy' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Basic cHJveHk6cGFzc3dvcmQ=' \
+--data '{
     "multipart": "form",
     "Forward-To": "https://ecc-provider:8889/data",
-    "messageType": "ArtifactRequestMessage" ,
-    "requestedArtifact": "http://w3id.org/engrd/connector/artifact/1" ,
+    "messageType": "ArtifactRequestMessage",
+    "requestedArtifact": "http://w3id.org/engrd/connector/artifact/1",
+    "transferContract": "https://w3id.org/idsa/autogen/contractAgreement/d0459442-4eb3-4372-8640-0ca49abf8f1d",
     "payload" : {
 		"catalog.offers.0.resourceEndpoints.path":"/pet2"
 		}
