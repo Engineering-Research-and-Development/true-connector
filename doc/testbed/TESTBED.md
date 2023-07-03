@@ -21,8 +21,13 @@ We need to make some small adjustments, to generate valid p12 file. For this pur
 ```
 openssl pkcs12 -export -out testbed3.p12 -inkey testbed3.key -in testbed3.crt -certfile ReferenceTestbedCA.crt
 ```
+As Export password insert ***password***, and confirm it.
+
 
 This will generate valid testbed3.p12 file. Copy this file to trueconnector\ecc_cert folder.
+
+**Note:** If you using Linux OS, after coping file, inside trueconnector\ecc_cert folder execute next command:
+``chmod 666 testbed3.p12``
 
 **Remark:** in DAPS, only testbed1, testbed2 and testbed3 files are registered, so we will use same testbed3.p12 file for both consumer and provider.
 
@@ -151,7 +156,7 @@ Once both docker compose files are up and running, you can start postman, import
 
 This will create contract offer, resource and artifact into DSC connectora (provider)
 
-There is Postman collection that can be used to perform contract negotiation with DataSpaceConnector and get artifact. For this purpose, you can use and import [following collection](DSC communication.postman_collection.json) into Postman. You can execute whole collection in one go, or execute each request in ordering how they are listed.
+There is Postman collection that can be used to perform contract negotiation with DataSpaceConnector and get artifact. For this purpose, you can use and import [following collection](./DSC%20communication.postman_collection.json) into Postman. You can execute whole collection in one go, or execute each request in ordering how they are listed.
 
 Once imported, it should look like following:
 
@@ -251,7 +256,8 @@ After executing request, response should look like in following picture:
 You can register consumer connector by executing following request:
 
 ```
-curl --location --request POST 'https://localhost:8084/proxy' \
+curl --location --request POST 'https://localhost:8184/proxy' \
+--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 --header 'Content-Type: text/plain' \
 --data-raw '{
     "multipart": "form",
@@ -260,7 +266,7 @@ curl --location --request POST 'https://localhost:8084/proxy' \
 }'
 ```
 
-If you want to register provider connector, then simply change port from 8084 to 8083.
+If you want to register provider connector, then simply change port from 8184 to 8183.
 
 Upon successful registration, you should receive MessageProcessedNotificationMessage.
 
@@ -269,8 +275,9 @@ Upon successful registration, you should receive MessageProcessedNotificationMes
 Following request can be use to query Metadata Broker
 
 ```
-curl --location --request POST 'https://localhost:8084/proxy' \
+curl --location --request POST 'https://localhost:8184/proxy' \
 --header 'Content-Type: text/plain' \
+--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 --data-raw '{
     "multipart": "form",
     "Forward-To": "https://broker-reverseproxy/infrastructure",
@@ -292,8 +299,9 @@ Content-Length: 56
 ## Broker Self Description after registering connector
 
 ```
-curl --location --request POST 'https://localhost:8084/proxy' \
+curl --location --request POST 'https://localhost:8184/proxy' \
 --header 'Content-Type: application/json' \
+--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 --data-raw '{
     "multipart": "form",
     "Forward-To": "https://broker-reverseproxy/infrastructure",

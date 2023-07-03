@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "71bcc1fb-59c6-41f0-a92e-09b43691533a",
+		"_postman_id": "4c4626d4-cc89-4af1-94ca-42a23ddbde29",
 		"name": "DSC communication",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "12578087"
+		"_exporter_id": "2326106"
 	},
 	"item": [
 		{
@@ -203,8 +203,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Body is MessageProcessedNotificationMessage\", function () {\r",
-									"    pm.response.to.have.body(\"MessageProcessedNotificationMessage\");\r",
+									"pm.test(\"Body is Received contract agreement message\", function () {\r",
+									"    pm.response.to.have.body(\"Received contract agreement message.\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
@@ -246,11 +246,21 @@
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
+									"\r",
 									"pm.test(\"JSON values check\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData[\"firstName\"]).to.eql(\"John\");\r",
-									"    pm.expect(jsonData[\"lastName\"]).to.eql(\"Doe\");\r",
-									"    pm.expect(jsonData[\"address\"]).to.eql(\"591  Franklin Street, Pennsylvania\");\r",
+									"    pm.expect(jsonData).to.have.property('coord');\r",
+									"    pm.expect(jsonData).to.have.property('weather');\r",
+									"    pm.expect(jsonData).to.have.property('base');\r",
+									"    pm.expect(jsonData).to.have.property('main');\r",
+									"    pm.expect(jsonData).to.have.property('wind');\r",
+									"    pm.expect(jsonData).to.have.property('clouds');\r",
+									"    pm.expect(jsonData).to.have.property('dt');\r",
+									"    pm.expect(jsonData).to.have.property('sys');\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.expect(jsonData).to.have.property('name');\r",
+									"    pm.expect(jsonData).to.have.property('cod');\r",
+									"\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -284,7 +294,7 @@
 				"basic": [
 					{
 						"key": "username",
-						"value": "admin",
+						"value": "proxy",
 						"type": "string"
 					},
 					{
@@ -339,7 +349,7 @@
 	"variable": [
 		{
 			"key": "TC-Proxy-Endpoint",
-			"value": "https://localhost:8084/proxy",
+			"value": "https://localhost:8184/proxy",
 			"type": "string"
 		},
 		{

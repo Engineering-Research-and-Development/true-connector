@@ -2,7 +2,7 @@
 
 To manage your Self Description Document please check following [link](https://github.com/Engineering-Research-and-Development/true-connector-execution\_core\_container/blob/master/doc/SELF\_DESCRIPTION.md)
 
-You can copy existing valid self-description.json document to following location **/ecc\_resources\_consumer** or **/ecc\_resources\_provider** folders, for consumer or provider\
+You can copy existing valid self-description.json document to following location **/ecc\_resources\_consumer** or **/ecc\_resources\_provider** folders, for consumer or provider.
 
 
 There is also possibility to change location of self\_description.json document, which can be done by changing following property:

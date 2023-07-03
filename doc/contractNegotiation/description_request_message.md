@@ -7,235 +7,409 @@ Before start of negotiation process, Description Request Message is sent to iden
 <summary>Multipart form - Description Request Message</summary>
 
 ```
-curl --location --request POST 'https://localhost:8084/proxy' \
+curl --location 'https://localhost:8184/proxy' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
---data-raw '{
-	"multipart": "form",
-	"Forward-To": "https://ecc-provider:8889/data",
-	"messageType":"DescriptionRequestMessage"
+--header 'Authorization: Basic cHJveHk6cGFzc3dvcmQ=' \
+--data '{
+    "multipart": "form",
+    "Forward-To": "https://ecc-provider:8889/data",
+    "messageType": "DescriptionRequestMessage"
 }'
 ```
 
 </details>
 
-If DAT is invalid, Provider sents RejectionMessage with optional reason. However, if DAT is valid, SelfDescriptionResponse is being sent to Consumer with similar content:
+If DAT is invalid, Provider sends RejectionMessage with optional reason. However, if DAT is valid, SelfDescriptionResponse is being sent to Consumer with similar content:
 
 <details>
 
 <summary>Description Request Message - Response example</summary>
 
 ```
---dd8poS2Z0x4yMG0zN4LBBbNn6lKINE192Dpsz
-Content-Disposition: form-data; name="header"
-Content-Length: 1157
-Content-Type: application/ld+json
-
 {
-  "@context" : {
-	"ids" : "https://w3id.org/idsa/core/",
-	"idsc" : "https://w3id.org/idsa/code/"
-  },
-  "@type" : "ids:DescriptionResponseMessage",
-  "@id" : "https://w3id.org/idsa/autogen/descriptionResponseMessage/0d6796c9-b4ca-4314-9641-96731d29471d",
-  "ids:securityToken" : {
-	"@type" : "ids:DynamicAttributeToken",
-	"@id" : "https://w3id.org/idsa/autogen/dynamicAttributeToken/43f60b53-cba1-4aeb-b308-8979950d256f",
-	"ids:tokenValue" : "DummyTokenValue",
-	"ids:tokenFormat" : {
-	  "@id" : "https://w3id.org/idsa/code/JWT"
-	}
-  },
-  "ids:senderAgent" : {
-	"@id" : "https://w3id.org/engrd/connector/provider"
-  },
-  "ids:issuerConnector" : {
-	"@id" : "https://w3id.org/engrd/connector/provider"
-  },
-  "ids:modelVersion" : "4.1.0",
-  "ids:issued" : {
-	"@value" : "2021-12-09T13:50:03.883Z",
-	"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-  },
-  "ids:correlationMessage" : {
-	"@id" : "https://w3id.org/idsa/autogen/descriptionRequestMessage/8405b08f-4c93-4082-b22c-a07ba4e74753"
-  },
-  "ids:recipientConnector" : [ {
-	"@id" : "http://w3id.org/engrd/connector/consumer"
-  } ],
-  "ids:recipientAgent" : [ ]
+    "@context": {
+        "ids": "https://w3id.org/idsa/core/",
+        "idsc": "https://w3id.org/idsa/code/"
+    },
+    "@type": "ids:BaseConnector",
+    "@id": "https://w3id.org/engrd/connector/provider",
+    "ids:hasDefaultEndpoint": {
+        "@type": "ids:ConnectorEndpoint",
+        "@id": "https://188.2.57.38:8449/",
+        "ids:accessURL": {
+            "@id": "https://188.2.57.38:8449/"
+        }
+    },
+    "ids:resourceCatalog": [
+        {
+            "@type": "ids:ResourceCatalog",
+            "@id": "https://w3id.org/idsa/autogen/resourceCatalog/6b2a6a4d-82d9-45a3-9893-a8b4f3591fc8",
+            "ids:offeredResource": [
+                {
+                    "@type": "ids:TextResource",
+                    "@id": "https://w3id.org/idsa/autogen/textResource/f3ec0292-02fe-41d3-bc1f-bb19c383e994",
+                    "ids:contractOffer": [
+                        {
+                            "@type": "ids:ContractOffer",
+                            "@id": "https://w3id.org/idsa/autogen/contractOffer/a050f828-2246-490f-b2ec-e303f2fc6139",
+                            "ids:contractStart": {
+                                "@value": "2023-06-27T09:51:29.638Z",
+                                "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                            },
+                            "ids:contractDate": {
+                                "@value": "2023-06-27T09:51:30.670Z",
+                                "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                            },
+                            "ids:provider": {
+                                "@id": "https://w3id.org/engrd/connector/provider"
+                            },
+                            "ids:permission": [
+                                {
+                                    "@type": "ids:Permission",
+                                    "@id": "https://w3id.org/idsa/autogen/permission/bf06df92-f5bd-4420-925f-89087776dc1e",
+                                    "ids:action": [
+                                        {
+                                            "@id": "https://w3id.org/idsa/code/USE"
+                                        }
+                                    ],
+                                    "ids:title": [
+                                        {
+                                            "@value": "Example Usage Policy",
+                                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                                        }
+                                    ],
+                                    "ids:description": [
+                                        {
+                                            "@value": "provide-access",
+                                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                                        }
+                                    ],
+                                    "ids:target": {
+                                        "@id": "http://w3id.org/engrd/connector/artifact/big"
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "ids:representation": [
+                        {
+                            "@type": "ids:TextRepresentation",
+                            "@id": "https://w3id.org/idsa/autogen/textRepresentation/94e3a195-a10f-4b1d-97ef-3de3046df796",
+                            "ids:created": {
+                                "@value": "2023-06-27T09:51:30.740Z",
+                                "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                            },
+                            "ids:instance": [
+                                {
+                                    "@type": "ids:Artifact",
+                                    "@id": "http://w3id.org/engrd/connector/artifact/big",
+                                    "ids:creationDate": {
+                                        "@value": "2023-06-27T09:51:28.865Z",
+                                        "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                                    }
+                                }
+                            ],
+                            "ids:language": {
+                                "@id": "https://w3id.org/idsa/code/EN"
+                            }
+                        }
+                    ],
+                    "ids:keyword": [
+                        {
+                            "@value": "Engineering Ingegneria Informatica SpA",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                        },
+                        {
+                            "@value": "TRUEConnector",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                    ],
+                    "ids:modified": {
+                        "@value": "2023-06-27T09:51:30.502Z",
+                        "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                    },
+                    "ids:created": {
+                        "@value": "2023-06-27T09:51:30.502Z",
+                        "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                    },
+                    "ids:version": "1.0.0",
+                    "ids:title": [
+                        {
+                            "@value": "World class literature",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                    ],
+                    "ids:description": [
+                        {
+                            "@value": "Used to verify large data transfer",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                    ],
+                    "ids:contentType": {
+                        "@id": "https://w3id.org/idsa/code/SCHEMA_DEFINITION"
+                    },
+                    "ids:language": [
+                        {
+                            "@id": "https://w3id.org/idsa/code/EN"
+                        },
+                        {
+                            "@id": "https://w3id.org/idsa/code/IT"
+                        }
+                    ]
+                },
+                {
+                    "@type": "ids:DataResource",
+                    "@id": "https://w3id.org/idsa/autogen/dataResource/f8163cc7-53f4-451a-9cc4-0e7f7861ac86",
+                    "ids:contractOffer": [
+                        {
+                            "@type": "ids:ContractOffer",
+                            "@id": "https://w3id.org/idsa/autogen/contractOffer/0e482510-3225-468f-9c8e-9bf4fb2105e3",
+                            "ids:contractStart": {
+                                "@value": "2023-06-27T09:51:29.638Z",
+                                "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                            },
+                            "ids:contractDate": {
+                                "@value": "2023-06-27T09:51:31.235Z",
+                                "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                            },
+                            "ids:provider": {
+                                "@id": "https://w3id.org/engrd/connector/provider"
+                            },
+                            "ids:permission": [
+                                {
+                                    "@type": "ids:Permission",
+                                    "@id": "https://w3id.org/idsa/autogen/permission/5e51c719-d4cd-4024-a7a0-26c274ab400d",
+                                    "ids:action": [
+                                        {
+                                            "@id": "https://w3id.org/idsa/code/USE"
+                                        }
+                                    ],
+                                    "ids:title": [
+                                        {
+                                            "@value": "Example Usage Policy",
+                                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                                        }
+                                    ],
+                                    "ids:description": [
+                                        {
+                                            "@value": "provide-access",
+                                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                                        }
+                                    ],
+                                    "ids:target": {
+                                        "@id": "http://w3id.org/engrd/connector/artifact/test1.csv"
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "ids:representation": [
+                        {
+                            "@type": "ids:TextRepresentation",
+                            "@id": "https://w3id.org/idsa/autogen/textRepresentation/c376d9fd-7f26-40af-a044-9fbd2f363a92",
+                            "ids:created": {
+                                "@value": "2023-06-27T09:51:31.321Z",
+                                "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                            },
+                            "ids:instance": [
+                                {
+                                    "@type": "ids:Artifact",
+                                    "@id": "http://w3id.org/engrd/connector/artifact/test1.csv",
+                                    "ids:creationDate": {
+                                        "@value": "2023-06-27T09:51:29.089Z",
+                                        "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                                    }
+                                }
+                            ],
+                            "ids:language": {
+                                "@id": "https://w3id.org/idsa/code/EN"
+                            }
+                        }
+                    ],
+                    "ids:keyword": [
+                        {
+                            "@value": "Engineering Ingegneria Informatica SpA",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                        },
+                        {
+                            "@value": "TRUEConnector",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                    ],
+                    "ids:modified": {
+                        "@value": "2023-06-27T09:51:31.070Z",
+                        "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                    },
+                    "ids:created": {
+                        "@value": "2023-06-27T09:51:31.070Z",
+                        "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                    },
+                    "ids:version": "1.0.0",
+                    "ids:title": [
+                        {
+                            "@value": "CSV resource",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                    ],
+                    "ids:description": [
+                        {
+                            "@value": "Used to verify wss flow",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                    ],
+                    "ids:contentType": {
+                        "@id": "https://w3id.org/idsa/code/SCHEMA_DEFINITION"
+                    },
+                    "ids:language": [
+                        {
+                            "@id": "https://w3id.org/idsa/code/EN"
+                        },
+                        {
+                            "@id": "https://w3id.org/idsa/code/IT"
+                        }
+                    ]
+                },
+                {
+                    "@type": "ids:TextResource",
+                    "@id": "https://w3id.org/idsa/autogen/textResource/2751fec2-5ab8-4795-9e45-cb292b8d54ea",
+                    "ids:contractOffer": [
+                        {
+                            "@type": "ids:ContractOffer",
+                            "@id": "https://w3id.org/idsa/autogen/contractOffer/bf482e9d-a370-4489-b4ce-bd09ec6d1e1f",
+                            "ids:contractStart": {
+                                "@value": "2023-06-27T09:51:29.638Z",
+                                "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                            },
+                            "ids:contractDate": {
+                                "@value": "2023-06-27T09:51:29.620Z",
+                                "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                            },
+                            "ids:provider": {
+                                "@id": "https://w3id.org/engrd/connector/provider"
+                            },
+                            "ids:permission": [
+                                {
+                                    "@type": "ids:Permission",
+                                    "@id": "https://w3id.org/idsa/autogen/permission/f04e78e7-3808-404d-8436-d7f7c264f307",
+                                    "ids:action": [
+                                        {
+                                            "@id": "https://w3id.org/idsa/code/USE"
+                                        }
+                                    ],
+                                    "ids:title": [
+                                        {
+                                            "@value": "Example Usage Policy",
+                                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                                        }
+                                    ],
+                                    "ids:description": [
+                                        {
+                                            "@value": "provide-access",
+                                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                                        }
+                                    ],
+                                    "ids:target": {
+                                        "@id": "http://w3id.org/engrd/connector/artifact/1"
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                    "ids:representation": [
+                        {
+                            "@type": "ids:TextRepresentation",
+                            "@id": "https://w3id.org/idsa/autogen/textRepresentation/9b91a10d-2cb9-4afc-a148-7bfa054b5e9a",
+                            "ids:created": {
+                                "@value": "2023-06-27T09:51:29.926Z",
+                                "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                            },
+                            "ids:instance": [
+                                {
+                                    "@type": "ids:Artifact",
+                                    "@id": "http://w3id.org/engrd/connector/artifact/1",
+                                    "ids:creationDate": {
+                                        "@value": "2023-06-27T09:51:25.473Z",
+                                        "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                                    }
+                                }
+                            ],
+                            "ids:language": {
+                                "@id": "https://w3id.org/idsa/code/EN"
+                            }
+                        }
+                    ],
+                    "ids:keyword": [
+                        {
+                            "@value": "Engineering Ingegneria Informatica SpA",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                        },
+                        {
+                            "@value": "TRUEConnector",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                    ],
+                    "ids:modified": {
+                        "@value": "2023-06-27T09:51:29.348Z",
+                        "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                    },
+                    "ids:created": {
+                        "@value": "2023-06-27T09:51:29.349Z",
+                        "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+                    },
+                    "ids:version": "1.0.0",
+                    "ids:title": [
+                        {
+                            "@value": "Default resource",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                    ],
+                    "ids:description": [
+                        {
+                            "@value": "Default resource description",
+                            "@type": "http://www.w3.org/2001/XMLSchema#string"
+                        }
+                    ],
+                    "ids:contentType": {
+                        "@id": "https://w3id.org/idsa/code/SCHEMA_DEFINITION"
+                    },
+                    "ids:language": [
+                        {
+                            "@id": "https://w3id.org/idsa/code/EN"
+                        },
+                        {
+                            "@id": "https://w3id.org/idsa/code/IT"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "ids:securityProfile": {
+        "@id": "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE"
+    },
+    "ids:curator": {
+        "@id": "http://provider.curatorURI.com"
+    },
+    "ids:maintainer": {
+        "@id": "http://provider.maintainerURI.com"
+    },
+    "ids:inboundModelVersion": [
+        "4.2.7"
+    ],
+    "ids:outboundModelVersion": "4.2.7",
+    "ids:title": [
+        {
+            "@value": "Data Provider Connector title",
+            "@type": "http://www.w3.org/2001/XMLSchema#string"
+        }
+    ],
+    "ids:description": [
+        {
+            "@value": "Data Provider Connector description",
+            "@type": "http://www.w3.org/2001/XMLSchema#string"
+        }
+    ]
 }
---dd8poS2Z0x4yMG0zN4LBBbNn6lKINE192Dpsz
-Content-Disposition: form-data; name="payload"
-Content-Length: 6068
-
-{
-  "@context" : {
-	"ids" : "https://w3id.org/idsa/core/",
-	"idsc" : "https://w3id.org/idsa/code/"
-  },
-  "@type" : "ids:BaseConnector",
-  "@id" : "https://w3id.org/engrd/connector/provider",
-  "ids:resourceCatalog" : [ {
-	"@type" : "ids:ResourceCatalog",
-	"@id" : "https://w3id.org/idsa/autogen/resourceCatalog/ba0987f6-f86e-4c9b-a6b1-020b3babf285",
-	"ids:offeredResource" : [ {
-	  "@type" : "ids:TextResource",
-	  "@id" : "https://w3id.org/idsa/autogen/textResource/b8a9b5ae-2348-4b5d-b089-2dbeed833d52",
-	  "ids:language" : [ {
-		"@id" : "https://w3id.org/idsa/code/EN"
-	  }, {
-		"@id" : "https://w3id.org/idsa/code/IT"
-	  } ],
-	  "ids:version" : "1.0.0",
-	  "ids:resourcePart" : [ ],
-	  "ids:resourceEndpoint" : [ ],
-	  "ids:contractOffer" : [ {
-		"@type" : "ids:ContractOffer",
-		"@id" : "https://w3id.org/idsa/autogen/contractOffer/0ae8d88e-0fc2-4065-b2f7-f53e3691114a",
-		"ids:permission" : [ {
-		  "@type" : "ids:Permission",
-		  "@id" : "https://w3id.org/idsa/autogen/permission/d1fc81b0-6a4c-463f-a6f0-3d585b0cc2e2",
-		  "ids:target" : {
-			"@id" : "http://w3id.org/engrd/connector/artifact/1"
-		  },
-		  "ids:action" : [ {
-			"@id" : "https://w3id.org/idsa/code/USE"
-		  } ],
-		  "ids:preDuty" : [ ],
-		  "ids:postDuty" : [ ],
-		  "ids:constraint" : [ {
-			"@type" : "ids:Constraint",
-			"@id" : "https://w3id.org/idsa/autogen/constraint/396733e0-7977-411a-8599-e96baecc5943",
-			"ids:leftOperand" : {
-			  "@id" : "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
-			},
-			"ids:operator" : {
-			  "@id" : "https://w3id.org/idsa/code/BEFORE"
-			},
-			"ids:rightOperand" : {
-			  "@value" : "2022-12-31T13:48:40Z",
-			  "@type" : "http://www.w3.org/2001/XMLSchema#datetime"
-			}
-		  }, {
-			"@type" : "ids:Constraint",
-			"@id" : "https://w3id.org/idsa/autogen/constraint/7d544cd2-27b2-4119-b12a-19fc0ec924ce",
-			"ids:leftOperand" : {
-			  "@id" : "https://w3id.org/idsa/code/POLICY_EVALUATION_TIME"
-			},
-			"ids:operator" : {
-			  "@id" : "https://w3id.org/idsa/code/AFTER"
-			},
-			"ids:rightOperand" : {
-			  "@value" : "2022-01-01T13:48:40Z",
-			  "@type" : "http://www.w3.org/2001/XMLSchema#datetime"
-			}
-		  } ],
-		  "ids:description" : [ ],
-		  "ids:title" : [ ]
-		} ],
-		"ids:provider" : {
-		  "@id" : "https://w3id.org/engrd/connector/provider"
-		},
-		"ids:contractDate" : {
-		  "@value" : "2022-06-27T13:48:41.493Z",
-		  "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-		},
-		"ids:contractStart" : {
-       "@value" : "2022-06-27T09:42:41.996Z",
-       "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-      },
-		"ids:prohibition" : [ ],
-		"ids:obligation" : [ ]
-	  } ],
-	  "ids:paymentModality" : [ ],
-	  "ids:sample" : [ ],
-	  "ids:contentPart" : [ ],
-	  "ids:representation" : [ {
-		"@type" : "ids:TextRepresentation",
-		"@id" : "https://w3id.org/idsa/autogen/textRepresentation/2d00b3ae-c276-4ba5-932f-35aabcdf3dd8",
-		"ids:instance" : [ {
-		  "@type" : "ids:Artifact",
-		  "@id" : "http://w3id.org/engrd/connector/artifact/1",
-		  "ids:creationDate" : {
-			"@value" : "2021-12-09T13:48:39.458Z",
-			"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-		  }
-		} ],
-		"ids:language" : {
-		  "@id" : "https://w3id.org/idsa/code/EN"
-		},
-		"ids:created" : {
-		  "@value" : "2021-12-09T13:48:41.871Z",
-		  "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-		}
-	  } ],
-	  "ids:defaultRepresentation" : [ ],
-	  "ids:theme" : [ ],
-	  "ids:keyword" : [ {
-		"@value" : "Engineering Ingegneria Informatica SpA",
-		"@type" : "http://www.w3.org/2001/XMLSchema#string"
-	  }, {
-		"@value" : "TRUEConnector",
-		"@type" : "http://www.w3.org/2001/XMLSchema#string"
-	  } ],
-	  "ids:temporalCoverage" : [ ],
-	  "ids:spatialCoverage" : [ ],
-	  "ids:modified" : {
-		"@value" : "2021-12-09T13:48:40.964Z",
-		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-	  },
-	  "ids:description" : [ {
-		"@value" : "Default resource description",
-		"@type" : "http://www.w3.org/2001/XMLSchema#string"
-	  } ],
-	  "ids:title" : [ {
-		"@value" : "Default resource",
-		"@type" : "http://www.w3.org/2001/XMLSchema#string"
-	  } ],
-	  "ids:created" : {
-		"@value" : "2021-12-09T13:48:40.964Z",
-		"@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
-	  },
-	  "ids:contentType" : {
-		"@id" : "https://w3id.org/idsa/code/SCHEMA_DEFINITION"
-	  }
-	} ],
-	"ids:requestedResource" : [ ]
-  } ],
-  "ids:description" : [ {
-	"@value" : "Data Provider Connector description",
-	"@type" : "http://www.w3.org/2001/XMLSchema#string"
-  } ],
-  "ids:title" : [ {
-	"@value" : "Data Provider Connector title",
-	"@type" : "http://www.w3.org/2001/XMLSchema#string"
-  } ],
-  "ids:maintainer" : {
-	"@id" : "http://provider.maintainerURI.com"
-  },
-  "ids:curator" : {
-	"@id" : "http://provider.curatorURI.com"
-  },
-  "ids:inboundModelVersion" : [ "4.1.0" ],
-  "ids:outboundModelVersion" : "4.1.0",
-  "ids:hasEndpoint" : [ ],
-  "ids:hasDefaultEndpoint" : {
-	"@type" : "ids:ConnectorEndpoint",
-	"@id" : "https://178.148.148.139:8090/",
-	"ids:accessURL" : {
-	  "@id" : "https://178.148.148.139:8090/"
-	},
-	"ids:endpointInformation" : [ ],
-	"ids:endpointDocumentation" : [ ]
-  },
-  "ids:extendedGuarantee" : [ ],
-  "ids:hasAgent" : [ ],
-  "ids:securityProfile" : {
-	"@id" : "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE"
-  }
-}
---dd8poS2Z0x4yMG0zN4LBBbNn6lKINE192Dpsz--
 ```
 
 </details>

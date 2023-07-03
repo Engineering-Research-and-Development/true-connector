@@ -17,8 +17,9 @@ _transferContract_ - of type String, should be formatted as URI\
 Example request:
 
 ```
-curl --location --request POST 'https://localhost:8084/proxy' \
+curl --location --request POST 'https://localhost:8184/proxy' \
 --header 'Content-Type: application/json' \
+--header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
 --data-raw '{
     "multipart": "form",
     "Forward-To": "https://connectora:8080/api/ids/data",
@@ -58,7 +59,7 @@ Endpoint exposed by the Connector, used to receive requests from other Connector
 
 Depending of the connector configuration, data received on this endpoint will be processes accordingly (mixed/form/header) and validate IDS message.
 
-Regarding example requests, feel free to use same requests, for configuration, like described in [internal endpoints](TEST\_API.md#internalendpoints)
+Regarding example requests, feel free to use same requests, for configuration, like described in [internal endpoints](TEST_API.md#internalendpoints)
 
 ## /about/version
 
@@ -940,7 +941,7 @@ curl --location --request POST 'https://localhost:8887/incoming-data-app/multipa
 --form 'payload="PAYLOAD"'
 ```
 
-\###/incoming-data-app/multipartMessageHttpHeader
+### /incoming-data-app/multipartMessageHttpHeader
 
 multipart - http-header
 
@@ -969,10 +970,6 @@ curl --location 'https://localhost:8887/incoming-data-app/multipartMessageHttpHe
 
 If any of the mandatory headers is not present or that message cannot be recreated from headers, response will be returned and user should check header responses, for IDS-Messagetype = ids:RejectionMessage and IDS-RejectionReason = https://w3id.org/idsa/code/MALFORMED\_MESSAGE.
 
-### /internal/sd
-
-This endpoint is used internally, between DataApp and Execution Core Container, when DataApp needs to fetch Connector Self Description document (when DataApp receives DescriptionRequestMessage). Reason for existence of this API is to eliminate need for DataApp to have API credentials of public Self Description endpoint.
-
 ### Broker
 
 There are convenient endpoints to initiate flow with Broker. They can be triggered from proxy endpoint. In order to do that, messageType in the proxy request must be correct. All of those endpoints will create valid IDS message and send message to connector, which will add IDS related elements (DAPS token and other) and forward to Broker. In order to send message to the Broker, Forward-To parameter of proxy request must have Broker URL. If Broker requires authentication, please set correct credentials in request, TRUE Connector will forward authorization header to destination, without modifying it.
@@ -980,7 +977,7 @@ There are convenient endpoints to initiate flow with Broker. They can be trigger
 Example proxy request:
 
 ```
-curl --location 'https://localhost:8084/proxy' \
+curl --location 'https://localhost:8184/proxy' \
 --header 'Authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
 --header 'Content-Type: application/json' \
 --data '{

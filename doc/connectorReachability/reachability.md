@@ -12,9 +12,9 @@ For Data Consumer, with provided docker-compose file:
 
 * **https://localhost:8091/about/version**
 
-Self Description document, in json format, for connector, can be found at following URL - GET request
+Self Description document, in json format, for provider connector, can be found at following URL - GET request
 
-https://localhost:8091/
+https://localhost:8090/
 
 In order to set different values for connector, based on connector role (Data Consumer/Data Provider), following file and properties needs to be modified:
 
