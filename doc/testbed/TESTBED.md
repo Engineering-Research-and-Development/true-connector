@@ -1,8 +1,8 @@
 # Testbed 
 
-For more information follow the link [Testbed](https://github.com/International-Data-Spaces-Association/IDS-testbed)
+For more information follow the link [Testbed](https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/v1.1.0)
 
-Clone or download this repo. Currently verified version of the Testbed is 1.0.
+Clone or download this repo. Currently verified (supported) version of the Testbed is 1.1.0.
 
 ## Preconfigure
 
@@ -10,7 +10,7 @@ Clone or download this repo. Currently verified version of the Testbed is 1.0.
 
 This step is not mandatory, since Testbed comes with some generated certificates which can be used.
 
-If you want to create new certificate, please follow [instructions](https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CertificateAuthority) provided by Testbed, on how to achieve this.
+If you want to create new certificate, please follow [instructions](https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/v1.1.0/CertificateAuthority) provided by Testbed, on how to achieve this.
 
 
 ### DAPS certificate
