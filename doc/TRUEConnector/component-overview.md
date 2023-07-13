@@ -4,8 +4,8 @@ TRUE Connector is build using Java11, and use following libraries:
 
 | Component                                                                                                                         | Version        |
 | --------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| [Multipart Message Library](https://github.com/Engineering-Research-and-Development/true-connector-multipart\_message\_library)   | 1.0.17         |
-| [Websocket Message Streamer](https://github.com/Engineering-Research-and-Development/true-connector-websocket\_message\_streamer) | 1.0.17         |
+| [Multipart Message Library](https://github.com/Engineering-Research-and-Development/true-connector-multipart_message_library/releases/tag/1.0.17)   | 1.0.17         |
+| [Websocket Message Streamer](https://github.com/Engineering-Research-and-Development/true-connector-websocket_message_streamer/releases/tag/1.0.17) | 1.0.17         |
 | [Information model](https://github.com/International-Data-Spaces-Association/InformationModel)                                    | 4.2.7          |
 | [idscp2](https://github.com/International-Data-Spaces-Association/idscp2-jvm)                                                     | 0.5.2          |
 | SpringBoot                                                                                                                        | 2.2.11.RELEASE |
