@@ -41,3 +41,18 @@ To support hostname validation, truststore will have to be contain valid certifi
 
 Another certificate is required to be used in TRUE Connector - identity certificate, used to identify connector and to fetch jwToken from Identity Provider - DAPS. Following certificate can be generated using Testbed instructions described [here](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/v1.1.0/CertificateAuthority/README.md). Be aware that following certificates will work only with provided Dynamic Attribute Provisioning Service (DAPS) - Omejdn. For other DAPS implementations, this will require additional validation.
 Once certificate is generated, following instruction from previous link, you can configure TRUE Connector to use DAPS, by following instructions from [here](https://github.com/Engineering-Research-and-Development/true-connector/blob/main/doc/advancedConfiguration/identityproviders.md).
+
+# Integrity check
+
+TRUE Connector has several ways to check the integrity:
+
+ * [Docker cosing check](cosign.md)
+ * [Healthcheck](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.0/doc/HEALTHCHECK.md)
+ * Verification of the components itself, that will check if current version of subcomponent is verified or not;
+ 
+ Each component (Execution Core Container, Basic DataApp and Platoon Usage Control) should on startup log somethign like following:
+ 
+ ```
+Certified version: true
+ ```
+ in case if TRUE Connector is using certified subcomponent or not.
