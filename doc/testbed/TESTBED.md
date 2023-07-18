@@ -104,21 +104,17 @@ networks:
 ```
 
 This network needs to be added in TrueConnector docker compose, so that 2 ecosystems can communicate with each other.</b>
-Modify TrueConnector docker-compose.yml file and add following at the end of the file:
+Modify TrueConnector docker-compose.yml file by replacing the end of the file with the following:
 
 ```
 networks:
-  tc-network:
-    external: true
-    name: testbed_local
+  consumer:
+   external: true
+   name: testbed_local
+  provider:
+   external: true
+   name: testbed_local
 
-```
-
-And also for ecc-consumer and ecc-provider service, add it to the network, by simply adding:
-
-```
-    networks:
-      - tc-network
 ```
 
 ### Export TrueConnector certificate
@@ -146,198 +142,50 @@ and provide alias *true-connector*
 This will be used when DSC makes https request towards ecc-provider, to check hostname with imported certificate.
 
 
-## Configuration
+## Testbed interaction
 
-## TrueConnector as consumer
+### DataspaceConnector preconfiguration
 
-Once both docker compose files are up and running, you can start postman, import Testbed postman connection  from Testbed project(TestbedPreconfiguration.postman_collection.json) and execute several requests (until Register connector), to setup DSC connector:
+Once both docker compose files are up and running, you can start postman, import [Testbed postman connection](doc/testbed/Testbed_interaction.postman_collection) and execute several requests to setup DSC connector, easily done by clicking the three dots and "Run Folder":
 
-![DSC preconfiguration](DSC_preconfiguration.jpg "DSC preconfiguration")
+![DSC preconfiguration](DSC_preconfiguration.png "DSC preconfiguration")
 
-This will create contract offer, resource and artifact into DSC connectora (provider)
+This will create contract offer, resource and artifact into DSC ConnectorA (provider).
 
-There is Postman collection that can be used to perform contract negotiation with DataSpaceConnector and get artifact. For this purpose, you can use and import [following collection](./DSC%20communication.postman_collection.json) into Postman. You can execute whole collection in one go, or execute each request in ordering how they are listed.
+### TrueConnector as consumer
 
-Once imported, it should look like following:
+To perform contract negotiation with DataSpaceConnector and get an artifact. For this purpose, you can use ![TC as consumer](TC_Consumer.png "TC as consumer")
 
-![DSC Collection](DSC_Communication.jpg "DSC Collection")
+You can execute the whole folder, same as before, or execute each request in that order.
+
+If everything was successful, it should look like the following:
+
+![TC as consumer result](TC_Consumer_result.png "TC as consumer result")
 
 
-## TrueConnector as provider
+### TrueConnector as provider
 
-TrueConnector comes with predefined Self Description document, with one artifact and following contract offer. You can get more information by expecting the document itself on URL:
+TrueConnector comes with predefined Self Description document. You can get more information about it by expecting the document itself on URL:
 
 ```
 https://localhost:8090/
 
 ```
 
-Artifact id is *http://w3id.org/engrd/connector/artifact/1*
+Same goes as before, execute each request or the whole TC as provider folder:
 
-Next to this value, we will also need following ones:
+![TC as provider](TC_Provider.png "TC as provider")
 
-ids:TextResource - https://w3id.org/idsa/autogen/textResource/58898070-162b-4b62-8e7f-524d857bc6ca
+### Broker interaction
 
-ids:Permission - array of permissions from Self Description document
+The interaction with MetadataBroker can be checked with the requests from the Broker interaction folder in the same way as the steps from above.
 
-### Description Request Message - get Self Description from TrueConnctor Provider
+![Broker interaction](Broker_interaction.png "Broker interaction")
 
-From Testbed postman collection, this time we will use following:
+### Self Description API
 
-![TC DSC Collection](TC_DSC_Collection.jpg "TC DSC Collection")
+And finally, the Self Description API, for modifying the Self Description document can be accessed via the 
 
-Open the request, and make modifications, like in the picture (modify recipient to be TrueConnector provider - *https://ecc-provider:8889/data*)
-
-![TS Description Request](TS_DescriptionRequest.jpg "TS Description Request")
-
-And fire the request. After successful response, you should get Description Request Message, with TrueConnector Self Description document in payload part.
-
-To narrow search, you can enable 'elementId' and set value of the textResource
-
-![TC TextResource](TC_TextResource.jpg "TC TextResource")
-
-### Contract Negotiation with TrueConnector provider
-
-This step DSC performs automatically, meaning that we do not need to send several requests like we did when TrueConnector was consumer. In order to do so, we need to prepare request, and modify following:
-
-Request parameters:</br>
-Modify all three fields to match TrueConnector as provider.
-
-![TC ContractNegotiation 1](TC_ContractNegotiation_parameters.jpg "TC ContractNegotiation parameters")
-
-Request body:</br>
-Get whole **permission** from TrueConnector Self Description in body, replace one that is present in request and modify target element:
-
-![TC_ContractNegotiation 1](TC_ContractNegotiation_body.jpg "TC ContractNegotiation body")
-
-
-From:
-
-```
-"ids:target" : {
-    "@id" : "http://w3id.org/engrd/connector/artifact/1"
-  }
-      
-```
-
-to:
-
-```
-"ids:target" : "http://w3id.org/engrd/connector/artifact/1"
-          
-```
-
-After successful contract negotiation, response will look like following:
-
-![TC_ContractNegotiation Response](TC_ContractNegotiation_response.jpg "TC ContractNegotiation Response")
-
-Note the link marked with red, this is the agreement id that will be needed for next step.
-
-### Request Artifact
-
-If not replaced by postman, make sure that URL in the postman has correct value for 'Consumer agreement ID'
-
-![TC Request Artifact](TC_ObtainData_datalink.jpg "TC Request Artifact")
-
-### Obtain data
-
-You can find required request for Dataspace Connector in following section:
-
-![TC Obtain Data Request](TC_ObtainData_request.jpg "TC Obtain Data Request")
-
-After executing request, response should look like in following picture:
-
-![TC Obtain Data](TC_ObtainData.jpg "TC Obtain Data")
-
-## Broker interaction
-
-### Register connector to Metadata Broker
-
-You can register consumer connector by executing following request:
-
-```
-curl --location --request POST 'https://localhost:8184/proxy' \
---header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
---header 'Content-Type: text/plain' \
---data-raw '{
-    "multipart": "form",
-    "Forward-To": "https://broker-reverseproxy/infrastructure",
-    "messageType": "ConnectorUpdateMessage"
-}'
-```
-
-If you want to register provider connector, then simply change port from 8184 to 8183.
-
-Upon successful registration, you should receive MessageProcessedNotificationMessage.
-
-### Query broker
-
-Following request can be use to query Metadata Broker
-
-```
-curl --location --request POST 'https://localhost:8184/proxy' \
---header 'Content-Type: text/plain' \
---header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
---data-raw '{
-    "multipart": "form",
-    "Forward-To": "https://broker-reverseproxy/infrastructure",
-    "messageType": "QueryMessage",
-    "payload": "PREFIX ids: <https://w3id.org/idsa/core/> SELECT ?connectorUri WHERE { ?connectorUri a ids:BaseConnector . } "
-}'
-```
-
-Upon successful registration, you should receive ResultMessage and in payload something like following:
-
-```
-Content-Disposition: form-data; name="payload"
-Content-Length: 56
-
-?connectorUri
-<https://localhost/connectors/-1136570709>
-
-```
-## Broker Self Description after registering connector
-
-```
-curl --location --request POST 'https://localhost:8184/proxy' \
---header 'Content-Type: application/json' \
---header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
---data-raw '{
-    "multipart": "form",
-    "Forward-To": "https://broker-reverseproxy/infrastructure",
-    "messageType": "DescriptionRequestMessage",
-    "requestedElement":"https://localhost/connectors",
-    "payload":""
-}'
-
-```
-
-and as response, you should get something like following (payload part)
-
-```
-
-{
-  "@graph" : [ {
-    "@id" : "https://localhost/connectors/",
-    "@type" : "ids:ConnectorCatalog",
-    "listedConnector" : "https://localhost/connectors/-1136570709"
-  }, {
-    "@id" : "https://localhost/connectors/-1136570709",
-    "@type" : "ids:BaseConnector",
-    "sameAs" : "https://w3id.org/engrd/connector/consumer",
-    "curator" : "http://consumer.curatorURI.com",
-    "description" : "Data Consumer Connector description",
-    "hasDefaultEndpoint" : "https://178.254.183.40:8091/",
-    "inboundModelVersion" : "4.1.0",
-    "maintainer" : "http://consumer.maintainerURI.com",
-    "outboundModelVersion" : "4.1.0",
-    "publicKey" : "https://w3id.org/idsa/autogen/publicKey/d32d6df9-3990-4500-bbd2-6ed32505f73d",
-    "resourceCatalog" : "https://localhost/connectors/-1136570709/-661022256",
-    "securityProfile" : "https://w3id.org/idsa/code/BASE_SECURITY_PROFILE",
-    "title" : "Data Consumer Connector title"
-  } ],
-  
-  ...
-```
+![Self Description API](Self_Description_API.png "Self Description API")
 
 
