@@ -1,8 +1,7 @@
 # Contributing TRUE Connector
 
-The following is a set of guidelines for contributing to the TRUE Connector. You are very
-welcome to contribute to this project, and it's components [Execution Core Container (ECC)](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container), [Back-End (BE) Data Application](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app), [Usage-Control (UC) Data Application](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon), [Websocket Message Streamer](https://github.com/Engineering-Research-and-Development/true-connector-websocket_message_streamer) and [Multipart Message Library](https://github.com/Engineering-Research-and-Development/true-connector-multipart_message_library) when you find a bug, want to suggest an improvement, or have
-an idea for a useful feature. For this, always create an issue and a corresponding project and branch, and follow our style guides as described below.
+The following is a set of guidelines for contributing to the TRUE Connector. Contributing is based on [GitHub guidelines](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) for contributing to a project. You are very
+welcome to contribute to this project.
 
 ## Changelog
 

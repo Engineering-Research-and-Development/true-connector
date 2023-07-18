@@ -1,7 +1,7 @@
 # REST API
 
 The TRUE Connector will use two protocols (http and https) as described by the Docker Compose File.
-Overview of all available endpointss:
+Overview of all available endpoints:
 
 *NOTE* Endpoints are protected with credentials, for more details, please check [this link](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.0/doc/SECURITY.md)
 
@@ -34,7 +34,7 @@ Swagger UI for contract offer CRUD operations:
 
 ![Contract offer](Contract_Offer_Swagger.jpg "Contract Offer swagger API")
 
-Swagger UI for contract offer CRUD operations:
+Swagger UI for representation CRUD operations:
 
 ![Resource representation](Resource_Representation_Swagger.jpg "Resource representation swagger API")
 
