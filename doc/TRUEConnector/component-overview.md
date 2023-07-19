@@ -4,7 +4,7 @@ TRUE Connector is build using Java11, and use following libraries:
 
 | Component                                                                                                                         						| Version       |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| [Execution core container](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/releases/tag/1.14.0)   		| 1.14.0 		|
+| [Execution core container](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/releases/tag/1.14.1)   		| 1.14.1 		|
 | [Basic data app](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/releases/tag/0.3.0) 								| 0.3.0 		|
 | [Usage control app](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/releases/tag/1.7.2)   						| 1.7.2 		|
 | [Pip](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/tree/1.7.2/Docker_Tecnalia_DataUsage/pip) 				| 1.0.0 		|

@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   ecc-provider:
-    image: rdlabengpa/ids_execution_core_container:v1.14.0
+    image: rdlabengpa/ids_execution_core_container:v1.14.1
     deploy:
       resources:
         limits:
@@ -127,7 +127,7 @@ services:
       - ./ecc_cert:/cert
 
   ecc-consumer:
-    image: rdlabengpa/ids_execution_core_container:v1.14.0
+    image: rdlabengpa/ids_execution_core_container:v1.14.1
     deploy:
       resources:
         limits:

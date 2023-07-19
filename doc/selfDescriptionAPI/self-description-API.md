@@ -1,6 +1,6 @@
 ## Self Description API <a href="#selfdescription" id="selfdescription"></a>
 
-To manage your Self Description Document please check following [link](https://github.com/Engineering-Research-and-Development/true-connector-execution\_core\_container/blob/1.14.0/doc/SELF\_DESCRIPTION.md)
+To manage your Self Description Document please check following [link](https://github.com/Engineering-Research-and-Development/true-connector-execution\_core\_container/blob/1.14.1/doc/SELF\_DESCRIPTION.md)
 
 You can copy existing valid self-description.json document to following location **/ecc\_resources\_consumer** or **/ecc\_resources\_provider** folders, for consumer or provider.
 

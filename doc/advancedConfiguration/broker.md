@@ -13,4 +13,4 @@ TRUE Connector can register itself on startup, and also unregister when shutting
 application.selfdescription.registrateOnStartup=true
 ```
 
-Information on how TRUE Connector can interact with Broker, can be found on following [link](https://github.com/Engineering-Research-and-Development/true-connector-execution\_core\_container/blob/1.14.0/doc/BROKER.md)
+Information on how TRUE Connector can interact with Broker, can be found on following [link](https://github.com/Engineering-Research-and-Development/true-connector-execution\_core\_container/blob/1.14.1/doc/BROKER.md)
