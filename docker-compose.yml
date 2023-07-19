@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   ecc-provider:
-    image: rdlabengpa/ids_execution_core_container:v1.13.1
+    image: rdlabengpa/ids_execution_core_container:v1.14.1
     deploy:
       resources:
         limits:
@@ -15,7 +15,7 @@ services:
       - consumer
     container_name: ecc-provider
     ports:
-      - "${PROVIDER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints
+      - "${PROVIDER_PORT}:8449"  #Port for exposing HTTP endpoints
       - "8889:8889"                               #Exposed port for receiving data from another connector (REST)
       - "8086:8086"                               #Exposed port for receiving data from another connector (WS)
     environment:
@@ -52,7 +52,7 @@ services:
       - "ecc-provider:172.17.0.1"
 
   uc-dataapp-provider:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.1
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.2
     deploy:
       resources:
         limits:
@@ -93,7 +93,7 @@ services:
       - ./uc-dataapp-pip_resources_provider:/etc
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.2.7
+    image: rdlabengpa/ids_be_data_app:v0.3.0
     deploy:
       resources:
         limits:
@@ -127,7 +127,7 @@ services:
       - ./ecc_cert:/cert
 
   ecc-consumer:
-    image: rdlabengpa/ids_execution_core_container:v1.13.1
+    image: rdlabengpa/ids_execution_core_container:v1.14.1
     deploy:
       resources:
         limits:
@@ -141,7 +141,7 @@ services:
       - provider
     container_name: ecc-consumer
     ports:
-      - "${CONSUMER_PORT}:${INTERNAL_REST_PORT}"  #Port for exposing HTTP endpoints
+      - "${CONSUMER_PORT}:8449"  #Port for exposing HTTP endpoints
       - "8890:8889"                               #Exposed port for receiving data from another connector (REST)
       - "8087:8086"                               #Exposed port for receiving data from another connector (WS)
     environment:
@@ -178,7 +178,7 @@ services:
       - "ecc-consumer:172.17.0.1"
 
   uc-dataapp-consumer:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.1
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.2
     deploy:
       resources:
         limits:
@@ -219,7 +219,7 @@ services:
       - ./uc-dataapp-pip_resources_consumer:/etc
 
   be-dataapp-consumer:
-    image: rdlabengpa/ids_be_data_app:v0.2.7
+    image: rdlabengpa/ids_be_data_app:v0.3.0
     deploy:
       resources:
         limits:
