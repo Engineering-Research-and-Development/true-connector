@@ -54,6 +54,8 @@ Please [click here](https://engineering-ing-inf-rd.gitbook.io/true-connector/), 
   * [Self Description API](doc/selfDescriptionAPI/self-description-API.md)
     * [Changing API password](doc/selfDescriptionAPI/changepassword.md)
   * [Postman collection](doc/selfDescriptionAPI/postman.md)
+  * [Backup & restore](doc/backupAndUpdate/backup.md)
+  * [Updating](doc/backupAndUpdate/update.md)
   * [Docker image signing and verification](doc/cosign.md)
   * [Life cycle](doc/life_cycle.md)
   * [Security](doc/security.md)
