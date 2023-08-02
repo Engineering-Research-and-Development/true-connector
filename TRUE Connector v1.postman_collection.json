@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "d69b4d98-a2fb-44a4-826d-99da07c6cb54",
+		"_postman_id": "77fdf588-02b3-4d62-b604-bbfd055e03e6",
 		"name": "TRUE Connector v1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "2326106"
+		"_exporter_id": "2326106",
 	},
 	"item": [
 		{
@@ -924,7 +924,7 @@
 				"basic": [
 					{
 						"key": "username",
-						"value": "proxy",
+						"value": "idsUser",
 						"type": "string"
 					},
 					{
@@ -1120,7 +1120,7 @@
 							"basic": [
 								{
 									"key": "username",
-									"value": "admin",
+									"value": "apiUser",
 									"type": "string"
 								},
 								{
@@ -1291,13 +1291,13 @@
 				"type": "basic",
 				"basic": [
 					{
-						"key": "password",
-						"value": "password",
+						"key": "username",
+						"value": "idsUser",
 						"type": "string"
 					},
 					{
-						"key": "username",
-						"value": "proxy",
+						"key": "password",
+						"value": "password",
 						"type": "string"
 					}
 				]
@@ -1555,7 +1555,7 @@
 				"basic": [
 					{
 						"key": "username",
-						"value": "proxy",
+						"value": "idsUser",
 						"type": "string"
 					},
 					{
@@ -1663,13 +1663,13 @@
 				"type": "basic",
 				"basic": [
 					{
-						"key": "password",
-						"value": "password",
+						"key": "username",
+						"value": "idsUser",
 						"type": "string"
 					},
 					{
-						"key": "username",
-						"value": "proxy",
+						"key": "password",
+						"value": "password",
 						"type": "string"
 					}
 				]
@@ -1701,7 +1701,7 @@
 		"basic": [
 			{
 				"key": "username",
-				"value": "admin",
+				"value": "apiUser",
 				"type": "string"
 			},
 			{
