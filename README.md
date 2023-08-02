@@ -18,6 +18,7 @@ Please [click here](https://engineering-ing-inf-rd.gitbook.io/true-connector/), 
 
 * [TRUE Connector](<README.md#true-connector>)
   * [Table of Contents](<README.md#table-of-contents>)
+    * [Prerequisite](doc/TRUEConnector/prerequisite.md)
     * [Introduction](doc/TRUEConnector/introduction.md)
     * [System requirements](doc/TRUEConnector/system-requirements.md)
     * [Volumes](doc/TRUEConnector/volumes.md)
