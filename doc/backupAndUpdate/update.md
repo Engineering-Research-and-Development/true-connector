@@ -22,7 +22,7 @@ docker-compose down -v
 ```
 
 **CAUTION!**
-This will delete all your data! Consider doing a [backup](backup.md) beforehand.
+This will delete all your data except be_dataapp_data_provider volume, since that one is made outside of the docker compose! Consider doing a [backup](backup.md) beforehand.
 
 ### Download new version
 
