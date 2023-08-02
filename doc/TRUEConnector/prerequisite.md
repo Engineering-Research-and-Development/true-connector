@@ -13,22 +13,17 @@ To have secure and certification compliant environment, following prerequisites 
 * make sure to create rules to monitor folders and property files of the TRUE Connector (for example auditctl -w /xxxx/TRUEConnector/* -k trueconnector, depending on the location where TRUE Connector is deployed)
 * make sure to create rules for monitoring docker service (dockerd, /run/containerc, /var/lib/docker, /etc/docker, docker.service...) This might differ based on OS distribution
 * rules for auditing should be persisted (/etc/audit/audit.d/rules/audit.rules file, depending on the OS distribution, location might differ)
+* make sure to create rules for mounted docker volumes (to be able to keep track of changes made over files present in those volumes)
+
 
 * User responsible for setting up environment where connector will run should isolate or disable other services. 
-* OS user for running docker should not be root user; be sure to create new user, assign new user to docker group, that user can run docker compose; add it to sudoers, if required by the OS distribution
-* disable password login to the server for newly created user and allow only key-based authentication to the server
-* disable access for the root user by using a password when connecting to the server via ssh
-
-## Securing docker deamon
-
-User namespace configuration????
+* OS user for running docker should not be root user; be sure to create new user, assign new user to docker group, that user can run docker compose
+* disable password login to the server for newly created user and allow only key-based authentication for accessing the server where connector will run
+* disable access for the root user by using a password when connecting to the server via ssh (key-based auth only)
 
 
 * 2 types of certificate are required: DAPS and TLS. 
 DAPS certificate should be obtained from Certified Authority responsible for the Dataspace, while TLS certificate can be self signed or signed by some CA. More information about TLS certificate can be found [here](../security.md).
-
-
-* make sure to create rules for mounted docker volumes
 
 
 # Post configuration steps
