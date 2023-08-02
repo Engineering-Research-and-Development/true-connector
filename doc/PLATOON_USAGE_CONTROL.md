@@ -10,8 +10,10 @@ In order to switch to PostgreSQL database, following steps are needed:
   postgres_provider:
     image: postgres
     hostname: postgres_provider
-    ports:
-      - "5432:5432"
+    expose:
+      - "5432"
+    networks:
+      - provider
     env_file:
       - ./postgres_provider.env
     volumes:
@@ -21,8 +23,10 @@ In order to switch to PostgreSQL database, following steps are needed:
   postgres_consumer:
     image: postgres
     hostname: postgres_consumer
-    ports:
-      - "5444:5432"
+    expose:
+      - "5432"
+    networks:
+      - consumer
     env_file:
       - ./postgres_consumer.env
     volumes:

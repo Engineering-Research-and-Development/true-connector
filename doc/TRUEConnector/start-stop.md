@@ -1,5 +1,20 @@
 ### Starting and stopping containers <a href="#startstop" id="startstop"></a>
 
+To setup the TRUE connector for starting container, execute the following command:
+
+```
+sudo ./prepopulate_be_dataapp_data_provider.sh 
+
+```
+With this command, you will create external `be_dataapp_data_provider` volume.
+
+***NOTE:*** If you're using Linux, check if script is executable, if not, run the next command:
+
+```
+chmod +x prepopulate_be_dataapp_data_provider.sh 
+
+```
+
 To start docker container, open terminal and execute following command:
 
 ```

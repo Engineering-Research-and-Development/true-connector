@@ -16,7 +16,18 @@ be_dataapp_data_consumer
 
 Those volumes will store data needed for corresponding service, like log files, self description file, Usage Control H2 database (default configuration) and dataApp resource storage.
 
-If you need to have some files present in volume, for example provider dataApp shares some file, you can either
+Volume `be_dataapp_data_provider` is external volume. In order to create it, please execute the script `prepopulate_be_dataapp_data_provider.sh` running next command:
 
-* create volume, mount it to some "dummy" docker container, copy file into volume, stop "dummy" container and you will have file present in volume, and when you start TRUE Connector, it will load already populated dataApp resource volume, or
-* you can change using volume and mount folder instead.
+```
+sudo ./prepopulate_be_dataapp_data_provider.sh 
+
+```
+
+***NOTE:*** If you're using Linux, check if script is executable, if not, run the next command:
+
+```
+chmod +x prepopulate_be_dataapp_data_provider.sh 
+
+```
+
+Running this script, all files present on the host in folder `be-dataapp_data_provder` will be present in volume, so if you need to have some files present in volume, please put them in this folder before running script, and all of them will be present in `DataApp Provider` application.
