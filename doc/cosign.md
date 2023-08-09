@@ -4,11 +4,11 @@ Docker images that are part of the TRUE Connector are signed using [cosign](http
 
 Signed images starts with following versions:
 
-**rdlabengpa/ids\_execution\_core\_container:v1.14.1**\
+**rdlabengpa/ids\_execution\_core\_container:v1.14.2**\
 
-**rdlabengpa/ids\_be\_data\_app:v0.3.0**\
+**rdlabengpa/ids\_be\_data\_app:v0.3.1**\
 
-**rdlabengpa/ids\_uc\_data\_app\_platoon:v1.7.2**\
+**rdlabengpa/ids\_uc\_data\_app\_platoon:v1.7.3**\
 
 **rdlabengpa/ids\_uc\_data\_app\_platoon\_pip:v1.0.0**\
 
@@ -16,9 +16,9 @@ Signed images starts with following versions:
 Once images are downloaded, you can verify the signature by executing following command, (trueconn.pub file can be found in the root of this repo) and response should be like following
 
 ```
-cosign verify --key trueconn.pub rdlabengpa/ids_execution_core_container:v1.14.1
+cosign verify --key trueconn.pub rdlabengpa/ids_execution_core_container:v1.14.2
 
-Verification for index.docker.io/rdlabengpa/ids_execution_core_container:v1.14.1 --
+Verification for index.docker.io/rdlabengpa/ids_execution_core_container:v1.14.2 --
 The following checks were performed on each of these signatures:
   - The cosign claims were validated
   - The signatures were verified against the specified public key
@@ -40,9 +40,9 @@ The following checks were performed on each of these signatures:
 ```
 
 ```
-cosign verify --key trueconn.pub rdlabengpa/ids_be_data_app:v0.3.0
+cosign verify --key trueconn.pub rdlabengpa/ids_be_data_app:v0.3.1
 
-Verification for index.docker.io/rdlabengpa/ids_be_data_app:v0.3.0 --
+Verification for index.docker.io/rdlabengpa/ids_be_data_app:v0.3.1 --
 The following checks were performed on each of these signatures:
   - The cosign claims were validated
   - The signatures were verified against the specified public key
@@ -64,9 +64,9 @@ The following checks were performed on each of these signatures:
 ```
 
 ```
-cosign verify --key trueconn.pub rdlabengpa/ids_uc_data_app_platoon:v1.7.2
+cosign verify --key trueconn.pub rdlabengpa/ids_uc_data_app_platoon:v1.7.3
 
-Verification for index.docker.io/rdlabengpa/ids_uc_data_app_platoon:v1.7.2 --
+Verification for index.docker.io/rdlabengpa/ids_uc_data_app_platoon:v1.7.3 --
 The following checks were performed on each of these signatures:
   - The cosign claims were validated
   - The signatures were verified against the specified public key

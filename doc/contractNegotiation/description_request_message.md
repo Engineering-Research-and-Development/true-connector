@@ -7,9 +7,9 @@ Before start of negotiation process, Description Request Message is sent to iden
 <summary>Multipart form - Description Request Message</summary>
 
 ```
-curl --location 'https://localhost:8184/proxy' \
+curl --location -k 'https://localhost:8184/proxy' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Basic cHJveHk6cGFzc3dvcmQ=' \
+--header 'Authorization: Basic aWRzVXNlcjpwYXNzd29yZA==' \
 --data '{
     "multipart": "form",
     "Forward-To": "https://ecc-provider:8889/data",

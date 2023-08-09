@@ -69,13 +69,13 @@ User can also use it to check if TRUE Connector is ready for use (if component i
 Example of the request:
 
 ```
-curl --location 'http://localhost:8081/about/version'
+curl --location -k 'https://localhost:8090/about/version'
 ```
 
 and expected response:
 
 ```
-0.3.0-SNAPSHOT
+1.14.2-SNAPSHOT
 ```
 
 ## Self Description API
@@ -93,9 +93,9 @@ Required header element - contractOffer of type URI
 Request example:
 
 ```
-curl --location 'http://localhost:8081/api/contractOffer/' \
+curl --location -k 'https://localhost:8090/api/contractOffer/' \
 --header 'contractOffer: https://w3id.org/idsa/autogen/contractOffer/1e902a98-7858-4336-9607-64b9e243a76c' \
---header 'Authorization: Basic YWRtaW46cGFzc3dvcmQ='
+--header 'Authorization: Basic YXBpVXNlcjpwYXNzd29yZA=='
 ```
 
 If requested contract offer is present in self description, following response is returned:
@@ -179,9 +179,9 @@ NOTE: It is required to provide context in json representation, otherwise, reque
 Example request for adding contact offer:
 
 ```
-curl --location 'http://localhost:8081/api/contractOffer/' \
+curl --location -k 'https://localhost:8090/api/contractOffer/' \
 --header 'resource: https://w3id.org/idsa/autogen/textResource/a329a2fd-1002-4753-822e-89561f148839' \
---header 'Authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
+--header 'Authorization: Basic YXBpVXNlcjpwYXNzd29yZA==' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "@context" : {
@@ -276,9 +276,9 @@ Required header element - contractOffer of type URI
 Request example:
 
 ```
-curl --location --request DELETE 'http://localhost:8081/api/contractOffer/' \
+curl --location -k --request DELETE 'https://localhost:8090/api/contractOffer/' \
 --header 'contractOffer: https://w3id.org/idsa/autogen/contractOffer/1e902a98-7858-4336-9607-64b9e243a76c' \
---header 'Authorization: Basic YWRtaW46cGFzc3dvcmQ='
+--header 'Authorization: Basic YXBpVXNlcjpwYXNzd29yZA=='
 ```
 
 Expected response - self description document, without contract offer, if such existed.
@@ -292,9 +292,9 @@ Required header element - resource of type URI
 Request example:
 
 ```
-curl --location 'http://localhost:8081/api/offeredResource/' \
+curl --location -k 'https://localhost:8090/api/offeredResource/' \
 --header 'resource: https://w3id.org/idsa/autogen/textResource/a329a2fd-1002-4753-822e-89561f148839' \
---header 'Authorization: Basic YWRtaW46cGFzc3dvcmQ='
+--header 'Authorization: Basic YXBpVXNlcjpwYXNzd29yZA=='
 ```
 
 And successful response:
@@ -448,9 +448,9 @@ NOTE: It is required to provide context in json representation, otherwise, reque
 Example request for adding offered resource:
 
 ```
-curl --location --request POST 'http://localhost:8081/api/offeredResource/' \
+curl --location -k --request POST 'https://localhost:8090/api/offeredResource/' \
 --header 'resource: https://w3id.org/idsa/autogen/textResource/6e7c04f2-a09d-41b2-8334-013877bbda12' \
---header 'Authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
+--header 'Authorization: Basic YXBpVXNlcjpwYXNzd29yZA==' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "@context": {
@@ -633,9 +633,9 @@ Required header element - resource of type URI
 Example request:
 
 ```
-curl --location --request DELETE 'http://localhost:8081/api/offeredResource/' \
+curl --location -k --request DELETE 'https://localhost:8090/api/offeredResource/' \
 --header 'resource: https://w3id.org/idsa/autogen/textResource/6e7c04f2-a09d-41b2-8334-013877bbda12' \
---header 'Authorization: Basic YWRtaW46cGFzc3dvcmQ='
+--header 'Authorization: Basic YXBpVXNlcjpwYXNzd29yZA=='
 ```
 
 Expected successful response - self description document, without offered resource, if such existed.
@@ -657,9 +657,9 @@ Required header element - representation of type URI
 Request example:
 
 ```
-curl --location 'http://localhost:8081/api/representation/' \
+curl --location -k 'https://localhost:8090/api/representation/' \
 --header 'representation: https://w3id.org/idsa/autogen/textRepresentation/09b9b628-77ee-40a2-98c4-79b559370cda' \
---header 'Authorization: Basic YWRtaW46cGFzc3dvcmQ='
+--header 'Authorization: Basic YXBpVXNlcjpwYXNzd29yZA=='
 ```
 
 Successful response:
@@ -721,9 +721,9 @@ NOTE: It is required to provide context in json representation, otherwise, reque
 Example request for adding contact offer:
 
 ```
-curl --location 'http://localhost:8081/api/representation/' \
+curl --location -k 'https://localhost:800-/api/representation/' \
 --header 'resource: https://w3id.org/idsa/autogen/textResource/424e2559-50ad-411e-bea0-93ff6550aa80' \
---header 'Authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
+--header 'Authorization: Basic YXBpVXNlcjpwYXNzd29yZA==' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "@context": {
@@ -799,9 +799,9 @@ Required header element - representation of type URI
 Request example:
 
 ```
-curl --location --request DELETE 'http://localhost:8081/api/representation/' \
+curl --location -k --request DELETE 'https://localhost:8090/api/representation/' \
 --header 'representation: https://w3id.org/idsa/autogen/textRepresentation/09b9b628-77ee-40a2-98c4-79b559370cda' \
---header 'Authorization: Basic YWRtaW46cGFzc3dvcmQ='
+--header 'Authorization: Basic YXBpVXNlcjpwYXNzd29yZA=='
 ```
 
 Expected response - self description document, without contract offer, if such existed.
@@ -811,8 +811,8 @@ Expected response - self description document, without contract offer, if such e
 Example request:
 
 ```
-curl --location 'http://localhost:8081/api/selfDescription/' \
---header 'Authorization: Basic YWRtaW46cGFzc3dvcmQ='
+curl --location -k 'https://localhost:8090/api/selfDescription/' \
+--header 'Authorization: Basic YXBpVXNlcjpwYXNzd29yZA=='
 ```
 
 Expected response is connector Self Description document, with all elements.
@@ -846,9 +846,9 @@ multipart - mixed
 Example request:
 
 ```
-curl --location --request POST 'https://localhost:8887/incoming-data-app/multipartMessageBodyBinary' \
+curl --location -k --request POST 'https://localhost:8887/incoming-data-app/multipartMessageBodyBinary' \
 --header 'Forward-To: https://localhost:8889/data' \
---header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
+--header 'Authorization: Basic aWRzVXNlcjpwYXNzd29yZA==' \
 --header 'Content-Type: text/plain' \
 --data-raw '--9RDrAvgB92_-w2A-YY7av8i7GEQcKogs7pjm
 Content-Disposition: form-data; name="header"
@@ -900,9 +900,9 @@ multipart - form
 Example request:
 
 ```
-curl --location --request POST 'https://localhost:8887/incoming-data-app/multipartMessageBodyFormData' \
+curl --location -k --request POST 'https://localhost:8887/incoming-data-app/multipartMessageBodyFormData' \
 --header 'Forward-To: https://localhost:8889/data' \
---header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
+--header 'Authorization: Basic aWRzVXNlcjpwYXNzd29yZA==' \
 --form 'header="{
   \"@context\" : {
     \"ids\" : \"https://w3id.org/idsa/core/\",
@@ -948,7 +948,7 @@ multipart - http-header
 This request is a bit specific, since it is required to convert IDS message to http headers (logic that DataApp proxy request do for you) and when conversion is done correct this is how request looks like, depending of the Messagetype and its mandatory fields:
 
 ```
-curl --location 'https://localhost:8887/incoming-data-app/multipartMessageHttpHeader' \
+curl --location -k 'https://localhost:8887/incoming-data-app/multipartMessageHttpHeader' \
 --header 'Forward-To: https://localhost:8889/data' \
 --header 'IDS-CorrelationMessage: http://correlationMessage' \
 --header 'IDS-Id: https://w3id.org/idsa/autogen/ArtifactRequestMessage/e5939da0-7240-499b-ac1b-2c6ac5718933' \
@@ -963,7 +963,7 @@ curl --location 'https://localhost:8887/incoming-data-app/multipartMessageHttpHe
 --header 'IDS-SecurityToken-Type: ids:DynamicAttributeToken' \
 --header 'IDS-SenderAgent: http://w3id.org/engrd/connector/' \
 --header 'IDS-TransferContract: https://w3id.org/idsa/autogen/contractAgreement/39f9cc50-5d9b-4d12-80dc-23e03f3cc1f8' \
---header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
+--header 'Authorization: Basic aWRzVXNlcjpwYXNzd29yZA==' \
 --header 'Content-Type: text/plain' \
 --data 'PAYLOAD'
 ```
@@ -977,8 +977,8 @@ There are convenient endpoints to initiate flow with Broker. They can be trigger
 Example proxy request:
 
 ```
-curl --location 'https://localhost:8184/proxy' \
---header 'Authorization: Basic YWRtaW46cGFzc3dvcmQ=' \
+curl --location -k 'https://localhost:8184/proxy' \
+--header 'Authorization: Basic aWRzVXNlcjpwYXNzd29yZA==' \
 --header 'Content-Type: application/json' \
 --data '{
     "multipart": "form",

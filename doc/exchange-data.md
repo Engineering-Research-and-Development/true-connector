@@ -7,9 +7,9 @@ With default configuration, you can use following curl command, to get data from
 <summary>Multipart Form request</summary>
 
 ```
-curl --location 'https://localhost:8184/proxy' \
+curl --location -k 'https://localhost:8184/proxy' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Basic cHJveHk6cGFzc3dvcmQ=' \
+--header 'Authorization: Basic aWRzVXNlcjpwYXNzd29yZA==' \
 --data '{
     "multipart": "form",
     "Forward-To": "https://ecc-provider:8889/data",

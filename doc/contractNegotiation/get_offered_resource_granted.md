@@ -9,9 +9,9 @@ Postman collection will preset required fields from previous request.
 <summary>Multipart Form - Artifact Request Message</summary>
 
 ```
-curl --location --request POST 'http://localhost:8184/proxy' \
+curl --location -k --request POST 'http://localhost:8184/proxy' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Basic cHJveHk6cGFzc3dvcmQ=' \
+--header 'Authorization: Basic aWRzVXNlcjpwYXNzd29yZA==' \
 --data-raw '{
     "multipart": "form",
     "Forward-To": "http://ecc-provider:8889/data",
