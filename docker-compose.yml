@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   ecc-provider:
-    image: rdlabengpa/ids_execution_core_container:v1.14.1
+    image: rdlabengpa/ids_execution_core_container:v1.14.2
     deploy:
       resources:
         limits:
@@ -43,13 +43,12 @@ services:
     volumes:
       - ./ecc_resources_provider:/config
       - ./ecc_cert:/cert
-      - ecc_provider_log:/var/log/ecc
-      - ecc_provider_sd:/home/nobody/app/sd
+      - ecc_provider_data:/home/nobody/data/
     extra_hosts:
       - "ecc-provider:172.17.0.1"
 
   uc-dataapp-provider:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.2
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.3
     deploy:
       resources:
         limits:
@@ -90,7 +89,7 @@ services:
       - ./uc-dataapp-pip_resources_provider:/etc
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.3.0
+    image: rdlabengpa/ids_be_data_app:v0.3.1
     deploy:
       resources:
         limits:
@@ -119,11 +118,11 @@ services:
       - ISSUER_CONNECTOR_URI=${PROVIDER_ISSUER_CONNECTOR_URI}
     volumes:
       - ./be-dataapp_resources:/config
-      - be_dataapp_data_provider:/home/nobody/data/
+      - be_dataapp_provider_data:/home/nobody/data/
       - ./ecc_cert:/cert
       
   ecc-consumer:
-    image: rdlabengpa/ids_execution_core_container:v1.14.1
+    image: rdlabengpa/ids_execution_core_container:v1.14.2
     deploy:
       resources:
         limits:
@@ -165,13 +164,12 @@ services:
     volumes:
       - ./ecc_resources_consumer:/config
       - ./ecc_cert:/cert
-      - ecc_consumer_log:/var/log/ecc
-      - ecc_consumer_sd:/sd
+      - ecc_consumer_data:/home/nobody/data/
     extra_hosts:
       - "ecc-consumer:172.17.0.1"
 
   uc-dataapp-consumer:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.2
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.3
     deploy:
       resources:
         limits:
@@ -212,7 +210,7 @@ services:
       - ./uc-dataapp-pip_resources_consumer:/etc
 
   be-dataapp-consumer:
-    image: rdlabengpa/ids_be_data_app:v0.3.0
+    image: rdlabengpa/ids_be_data_app:v0.3.1
     deploy:
       resources:
         limits:
@@ -242,19 +240,17 @@ services:
     volumes:
       - ./be-dataapp_resources:/config
       - ./ecc_cert:/cert
-      - be_dataapp_data_consumer:/home/nobody/data
+      - be_dataapp_consumer_data:/home/nobody/data
 
 networks:
   consumer: {}
   provider: {}
 
 volumes:
-  ecc_provider_log: {}
-  ecc_provider_sd: {}
+  ecc_provider_data: {}
   uc_provider_data: {}
-  ecc_consumer_log: {}
-  ecc_consumer_sd: {}
+  ecc_consumer_data: {}
   uc_consumer_data: {}
-  be_dataapp_data_consumer: {}
-  be_dataapp_data_provider:
+  be_dataapp_consumer_data: {}
+  be_dataapp_provider_data:
     external: true
