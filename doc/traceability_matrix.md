@@ -30,3 +30,17 @@ Based on the severity (Common Vulnerability Scoring System is used) of the issue
 | Low | < 2 months |
 
 For issues that are currently reported, you can always check Security tab for specific subcomponent and in Dependabot section  find all opened issues.
+
+
+## Security issues implemented
+
+Fixes for security issues should be covered with tests. Once issue is fixed, new GitHub Action should be created and added to the existing set of tests (when applicable). 
+
+| Description | Fixed version TC | Component |
+|:------------|:---------:|:---------:|
+| com.auth0:jwks-rsa from 0.21.1 to 0.22.1 | 1.0.1 | ECC |
+| net.logstash.logback:logstash-logback-encoder from 7.0.1 to 7.3 | 1.0.1 | ECC |
+| com.auth0:java-jwt from 3.19.1 to 3.19.3 | 1.0.1 | ECC |
+| org.bitbucket.b_c:jose4j:0.7.8 to 0.9.3 | 1.0.1 | ECC |
+| TLS 1.3 as mandatory way for communication | 1.0.1 | ECC, DA, UC |
+
