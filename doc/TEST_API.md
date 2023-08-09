@@ -17,9 +17,9 @@ _transferContract_ - of type String, should be formatted as URI\
 Example request:
 
 ```
-curl --location --request POST 'https://localhost:8184/proxy' \
+curl --location -k --request POST 'https://localhost:8184/proxy' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Basic Y29ubmVjdG9yOnBhc3N3b3Jk' \
+--header 'Authorization: Basic aWRzVXNlcjpwYXNzd29yZA==' \
 --data-raw '{
     "multipart": "form",
     "Forward-To": "https://connectora:8080/api/ids/data",
