@@ -8,7 +8,7 @@ Signed images starts with following versions:
 
 **rdlabengpa/ids\_be\_data\_app:v0.3.1**\
 
-**rdlabengpa/ids\_uc\_data\_app\_platoon:v1.7.3**\
+**rdlabengpa/ids\_uc\_data\_app\_platoon:v1.7.4**\
 
 **rdlabengpa/ids\_uc\_data\_app\_platoon\_pip:v1.0.0**\
 
@@ -64,9 +64,9 @@ The following checks were performed on each of these signatures:
 ```
 
 ```
-cosign verify --key trueconn.pub rdlabengpa/ids_uc_data_app_platoon:v1.7.3
+cosign verify --key trueconn.pub rdlabengpa/ids_uc_data_app_platoon:v1.7.4
 
-Verification for index.docker.io/rdlabengpa/ids_uc_data_app_platoon:v1.7.3 --
+Verification for index.docker.io/rdlabengpa/ids_uc_data_app_platoon:v1.7.4 --
 The following checks were performed on each of these signatures:
   - The cosign claims were validated
   - The signatures were verified against the specified public key
