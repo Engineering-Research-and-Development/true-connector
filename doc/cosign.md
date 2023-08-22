@@ -30,7 +30,7 @@ The following checks were performed on each of these signatures:
                 "docker-reference": "index.docker.io/rdlabengpa/ids_execution_core_container"
             },
             "image": {
-                "docker-manifest-digest": "sha256:40416b055eb7f8841f58be6501a55364583cec25cf87768747cb117ba5f872d0"
+                "docker-manifest-digest": "sha256:d28ec86e5ee3c9c5b992dd3445fa3301d77a83b6c244b7a8577f2b4e7b8f5d52"
             },
             "type": "cosign container image signature"
         },
