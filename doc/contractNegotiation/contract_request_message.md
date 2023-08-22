@@ -7,9 +7,9 @@ Contract Request Message is initial message sent in Contract Negotiation flow. I
 <summary>Multipart form - Contract Request Message</summary>
 
 ```
-curl --location --request POST 'https://localhost:8184/proxy' \
+curl --location -k --request POST 'https://localhost:8184/proxy' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Basic cHJveHk6cGFzc3dvcmQ=' \
+--header 'Authorization: Basic aWRzVXNlcjpwYXNzd29yZA==' \
 --data-raw '{
 	"multipart": "form",
 	"Forward-To": "https://ecc-provider:8889/data",

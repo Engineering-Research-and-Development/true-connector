@@ -18,6 +18,7 @@ Please [click here](https://engineering-ing-inf-rd.gitbook.io/true-connector/), 
 
 * [TRUE Connector](<README.md#true-connector>)
   * [Table of Contents](<README.md#table-of-contents>)
+    * [Prerequisite](doc/TRUEConnector/prerequisite.md)
     * [Introduction](doc/TRUEConnector/introduction.md)
     * [System requirements](doc/TRUEConnector/system-requirements.md)
     * [Volumes](doc/TRUEConnector/volumes.md)
@@ -54,6 +55,9 @@ Please [click here](https://engineering-ing-inf-rd.gitbook.io/true-connector/), 
   * [Self Description API](doc/selfDescriptionAPI/self-description-API.md)
     * [Changing API password](doc/selfDescriptionAPI/changepassword.md)
   * [Postman collection](doc/selfDescriptionAPI/postman.md)
+  * [User management](doc/user_management.md)
+  * [Backup & restore](doc/backupAndUpdate/backup.md)
+  * [Updating](doc/backupAndUpdate/update.md)
   * [Docker image signing and verification](doc/cosign.md)
   * [Life cycle](doc/life_cycle.md)
   * [Security](doc/security.md)

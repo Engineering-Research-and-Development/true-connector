@@ -9,5 +9,10 @@ OCSP functionality is disabled by default, in order to enable it, set following 
 application.OCSP_RevocationCheckValue=none
 
 ```
+| **Property value** |	**Description** |	
+|:---:|:------------|
+| *good* | means that OCSP must be supported and certificate is not revoked |
+| *unknown* | OCSP check enabled and enforced, but certificate itself does not have OCSP check supported (no URL for checking revoke status). Check will pass in case of certificate not revoker or if cannot be determined. |
+| *none* | OCSP check disabled |
 
-When enabled, it will perform remote environemnt certificate check prior to sending request to provider connector.
+When enabled, it will perform remote environment certificate check prior to sending request to provider connector.

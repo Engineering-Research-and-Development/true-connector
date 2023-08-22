@@ -1,5 +1,45 @@
 ### Starting and stopping containers <a href="#startstop" id="startstop"></a>
 
+To setup the TRUE connector for starting container, execute the following command:
+
+# For Linux
+
+```
+sudo ./prepopulate_be_dataapp_data_provider.sh 
+
+```
+With this command, you will create external `be_dataapp_data_provider` volume.
+
+***NOTE:*** Check if script is executable, if not, run the next command:
+
+```
+chmod +x prepopulate_be_dataapp_data_provider.sh 
+
+```
+
+# For Windows
+
+In the *prepopulate_be_dataapp_data_provider_win.sh* change the *FULL_PATH* with the full path where the TRUE Connector is located:
+
+```
+docker run --rm -v "FULL_PATH/be-dataapp_data_provider:/source_data" -v "be_dataapp_provider_data:/target_data" alpine sh -c "cp -r /source_data/* /target_data/datalake/"
+```
+
+For example:
+
+```
+docker run --rm -v "C:/true-connector/be-dataapp_data_provider:/source_data" -v "be_dataapp_provider_data:/target_data" alpine sh -c "cp -r /source_data/* /target_data/datalake/"
+```
+
+And run the next command:
+
+```
+sh prepopulate_be_dataapp_data_provider_win.sh
+```
+
+
+# For both systems
+
 To start docker container, open terminal and execute following command:
 
 ```
@@ -48,15 +88,15 @@ ecc-consumer         | INFO: Initializing Spring DispatcherServlet 'dispatcherSe
 You can also check using _docker ps_ command to verify that containers are up and running:
 
 ```
-CONTAINER ID   IMAGE                                             COMMAND                  CREATED              STATUS                          PORTS                                                                    NAMES
-5c7bd4b70295   rdlabengpa/ids_execution_core_container:v1.13.1   "/bin/sh -c 'java -j…"   About a minute ago   Up About a minute (healthy)     0.0.0.0:8087->8086/tcp, 0.0.0.0:8091->8449/tcp, 0.0.0.0:8890->8889/tcp   ecc-consumer
-8883c669e3ed   rdlabengpa/ids_execution_core_container:v1.13.1   "/bin/sh -c 'java -j…"   About a minute ago   Up About a minute (healthy)     0.0.0.0:8086->8086/tcp, 0.0.0.0:8889->8889/tcp, 0.0.0.0:8090->8449/tcp   ecc-provider
-752af4b94096   rdlabengpa/ids_uc_data_app_platoon_pip:v1.0.0     "java -jar pip.jar"      About a minute ago   Up About a minute               0/tcp                                                                    uc-dataapp-pip-provider
-095bf6919593   rdlabengpa/ids_uc_data_app_platoon:v1.7.1         "/bin/sh -c 'java -j…"   About a minute ago   Up About a minute               8080/tcp                                                                 uc-dataapp-provider
-59c3b560d8b6   rdlabengpa/ids_be_data_app:v0.2.7                 "/bin/sh -c 'java -j…"   About a minute ago   Up About a minute (unhealthy)   0.0.0.0:8184->8183/tcp, 0.0.0.0:9001->9000/tcp                           be-dataapp-consumer
-3f8979a433cf   rdlabengpa/ids_uc_data_app_platoon:v1.7.1         "/bin/sh -c 'java -j…"   About a minute ago   Up About a minute               8080/tcp                                                                 uc-dataapp-consumer
-49d5c7e81cff   rdlabengpa/ids_uc_data_app_platoon_pip:v1.0.0     "java -jar pip.jar"      About a minute ago   Up About a minute               0/tcp                                                                    uc-dataapp-pip-consumer
-f8de175d72f0   rdlabengpa/ids_be_data_app:v0.2.7                 "/bin/sh -c 'java -j…"   About a minute ago   Up About a minute (unhealthy)   0.0.0.0:8183->8183/tcp, 0.0.0.0:9000->9000/tcp                           be-dataapp-provider
+CONTAINER ID   IMAGE                                             COMMAND                  CREATED       STATUS                 PORTS                                                                                                                             NAMES
+bc693e1fdb90   rdlabengpa/ids_execution_core_container:1.14.2   "/bin/sh -c 'java -j…"   3 hours ago   Up 3 hours (healthy)   0.0.0.0:8087->8086/tcp, :::8087->8086/tcp, 0.0.0.0:8091->8449/tcp, :::8091->8449/tcp, 0.0.0.0:8890->8889/tcp, :::8890->8889/tcp   ecc-consumer
+28dc87213f68   rdlabengpa/ids_be_data_app:0.3.1                "/bin/sh -c 'java -j…"   3 hours ago   Up 3 hours (healthy)   0.0.0.0:8184->8183/tcp, :::8184->8183/tcp, 0.0.0.0:9001->9000/tcp, :::9001->9000/tcp                                              be-dataapp-consumer
+9eb157ceb37b   rdlabengpa/ids_be_data_app:0.3.1                "/bin/sh -c 'java -j…"   3 hours ago   Up 3 hours (healthy)   0.0.0.0:8183->8183/tcp, :::8183->8183/tcp, 0.0.0.0:9000->9000/tcp, :::9000->9000/tcp                                              be-dataapp-provider
+44bc21187460   rdlabengpa/ids_execution_core_container:1.14.2   "/bin/sh -c 'java -j…"   3 hours ago   Up 3 hours (healthy)   0.0.0.0:8086->8086/tcp, :::8086->8086/tcp, 0.0.0.0:8889->8889/tcp, :::8889->8889/tcp, 0.0.0.0:8090->8449/tcp, :::8090->8449/tcp   ecc-provider
+b3f4cdb77ed6   rdlabengpa/ids_uc_data_app_platoon:1.7.4       "/bin/sh -c 'java -j…"   3 hours ago   Up 3 hours (healthy)   8080/tcp                                                                                                                          uc-dataapp-consumer
+a36748901ce1   rdlabengpa/ids_uc_data_app_platoon_pip:v1.0.0     "java -jar pip.jar"      3 hours ago   Up 3 hours             0/tcp                                                                                                                             uc-dataapp-pip-provider
+d6f77ad9762d   rdlabengpa/ids_uc_data_app_platoon:1.7.4        "/bin/sh -c 'java -j…"   3 hours ago   Up 3 hours (healthy)   8080/tcp                                                                                                                          uc-dataapp-provider
+bb0bb9668931   rdlabengpa/ids_uc_data_app_platoon_pip:v1.0.0     "java -jar pip.jar"      3 hours ago   Up 3 hours             0/tcp                                                                                                                             uc-dataapp-pip-consumer
 
 ```
 
@@ -76,9 +116,6 @@ _https://localhost:8090/_
 Consumer connector:
 
 _https://localhost:8091/about/version_
-
-or self description document:\
-_https://localhost:8090/_
 
 Ctrl+C is used to exit from log inspection (you will be returned to the terminal).
 

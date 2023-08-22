@@ -10,8 +10,10 @@ In order to switch to PostgreSQL database, following steps are needed:
   postgres_provider:
     image: postgres
     hostname: postgres_provider
-    ports:
-      - "5432:5432"
+    expose:
+      - "5432"
+    networks:
+      - provider
     env_file:
       - ./postgres_provider.env
     volumes:
@@ -21,8 +23,10 @@ In order to switch to PostgreSQL database, following steps are needed:
   postgres_consumer:
     image: postgres
     hostname: postgres_consumer
-    ports:
-      - "5444:5432"
+    expose:
+      - "5432"
+    networks:
+      - consumer
     env_file:
       - ./postgres_consumer.env
     volumes:
@@ -101,5 +105,5 @@ POSTGRES_DB=usagecontrol_consumer
 
 # Usage control examples
 
-For more information and examples of policies compatible with Platoon UC app, please check [README](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/blob/1.7.2/README.md)
+For more information and examples of policies compatible with Platoon UC app, please check [README](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/blob/1.7.4/README.md)
 

@@ -9,9 +9,3 @@ KEY_PASSWORD={your_certificate_key}
 KEYSTORE_PASSWORD={your_certificate_password}
 ALIAS={your_certificate_alias}
 ```
-
-If you want to use http and not https, simply disable following property
-
-```
-SERVER_SSL_ENABLED=false
-```

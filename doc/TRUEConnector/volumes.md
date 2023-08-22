@@ -3,20 +3,17 @@
 Following docker volumes will be created
 
 ```
-ecc_provider_log
-ecc_provider_sd
+ecc_provider_data
 uc_provider_data
-be_dataapp_data_provider
+be_dataapp_provider_data
 
-ecc_consumer_log
-ecc_consumer_sd
+ecc_consumer_data
 uc_consumer_data
-be_dataapp_data_consumer
+be_dataapp_consumer_data
 ```
 
 Those volumes will store data needed for corresponding service, like log files, self description file, Usage Control H2 database (default configuration) and dataApp resource storage.
 
-If you need to have some files present in volume, for example provider dataApp shares some file, you can either
+Volume `be_dataapp_provider_data` is an external volume which was created following the [start-stop.md](start-stop.md) .
 
-* create volume, mount it to some "dummy" docker container, copy file into volume, stop "dummy" container and you will have file present in volume, and when you start TRUE Connector, it will load already populated dataApp resource volume, or
-* you can change using volume and mount folder instead.
+Following the instructions, all files present on the host in the folder `be-dataapp_data_provder` will be present in the volume, so if you need to have some files present in volume, please put them in this folder before running the script and all of them will be present in `DataApp Provider` application.
