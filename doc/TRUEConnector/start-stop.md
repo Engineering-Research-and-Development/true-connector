@@ -2,18 +2,43 @@
 
 To setup the TRUE connector for starting container, execute the following command:
 
+# For Linux
+
 ```
 sudo ./prepopulate_be_dataapp_data_provider.sh 
 
 ```
 With this command, you will create external `be_dataapp_data_provider` volume.
 
-***NOTE:*** If you're using Linux, check if script is executable, if not, run the next command:
+***NOTE:*** Check if script is executable, if not, run the next command:
 
 ```
 chmod +x prepopulate_be_dataapp_data_provider.sh 
 
 ```
+
+# For Windows
+
+In the *prepopulate_be_dataapp_data_provider_win.sh* change the *FULL_PATH* with the full path where the TRUE Connector is located:
+
+```
+docker run --rm -v "FULL_PATH/be-dataapp_data_provider:/source_data" -v "be_dataapp_provider_data:/target_data" alpine sh -c "cp -r /source_data/* /target_data/datalake/"
+```
+
+For example:
+
+```
+docker run --rm -v "C:/true-connector/be-dataapp_data_provider:/source_data" -v "be_dataapp_provider_data:/target_data" alpine sh -c "cp -r /source_data/* /target_data/datalake/"
+```
+
+And run the next command:
+
+```
+sh prepopulate_be_dataapp_data_provider_win.sh
+```
+
+
+# For both systems
 
 To start docker container, open terminal and execute following command:
 
@@ -91,9 +116,6 @@ _https://localhost:8090/_
 Consumer connector:
 
 _https://localhost:8091/about/version_
-
-or self description document:\
-_https://localhost:8090/_
 
 Ctrl+C is used to exit from log inspection (you will be returned to the terminal).
 
