@@ -1,6 +1,6 @@
 ## Contract Negotiation - simple flow <a href="#contractnegotiation" id="contractnegotiation"></a>
 
-Usage Control is disabled by default. If you want to enable it (mandatory for contract negotiation), please check ["Enabling usage control"](usagecontrol.md).
+Usage Control is disabled by default. If you want to enable it (mandatory for contract negotiation), please check ["Enabling usage control"](../advancedConfiguration/usagecontrol.md).
 
 If mandatory, for other connectors, you can perform contract negotiation with other connector (not TRUE Connector) or with TRUE Connector. There is default contract offer that will be sent if ContractRequestMessage is received. It will allow consuming of resource.
 
