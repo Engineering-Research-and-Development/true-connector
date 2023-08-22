@@ -19,4 +19,4 @@ docker run --rm -v "$(pwd)/be-dataapp_data_provider:/source_data" -v "be_dataapp
 docker run --rm -v "be_dataapp_provider_data:/target_data" alpine sh -c "mkdir -p /target_data/log/dataapp && chown -R nobody:nogroup /target_data/log/dataapp"
 
 # Change the ownership of the Docker volume contents to 'nobody:nogroup'
-docker run --rm -v be_dataapp_provider_data:/target_data alpine chown -R nobody:nogroup /target_data
+docker run --rm -v "be_dataapp_provider_data:/target_data" alpine sh -c "chown -R nobody:nogroup /target_data"
