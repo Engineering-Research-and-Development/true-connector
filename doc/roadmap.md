@@ -4,8 +4,8 @@ This list follows no timeline, instead, individual tasks can be priority-assigne
 
 | Priority | Task         | Status       | Note |
 |:---:|:------------|:------------|:------------|
-| 1 | Dataspace Protocol investigation     | Ongoing | |
-| 1 | Dataspace Protocol (compliance with EDC)| Ongoing | |
+| 1 | Dataspace Protocol investigation     |  | |
+| 1 | Dataspace Protocol (compliance with EDC)|  | |
 | 2 | User Interface      | Ongoing | |
 | 1 | Audit logging      | Done | |
 | 3 | Kubernetes deployment     | Done | |
