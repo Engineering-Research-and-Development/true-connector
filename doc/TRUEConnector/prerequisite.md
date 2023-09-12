@@ -1,4 +1,4 @@
-# Prerequisite
+## Prerequisite <a href="doc/#prerequisite" id="prerequisite"></a>
 
 To have secure and certification compliant environment, following prerequisites are mandatory to be performed before setting up TRUE Connector:
 
@@ -6,7 +6,7 @@ To have secure and certification compliant environment, following prerequisites 
 * Docker is mandatory "OS service" for running connector
 * verify [System requirements](system-requirements.md) before starting the connector.
 
-## Securing docker host
+### Securing docker host
 
 * The host OS should be audited and secure; OS should be as minimal as possible and it should be preferably used to host our Docker exclusively. There should not coexist other services like web servers or web applications so that attacker could not exploit it or lead to potential exploit (minimal threat attack surface).
 * Monitoring mechanism (Linux auditd service for example) should be installed and configured as prerequisite before deploying connector. This will capture if someone tries to make changes on property files used by the connector.
@@ -26,9 +26,9 @@ To have secure and certification compliant environment, following prerequisites 
 DAPS certificate should be obtained from Certified Authority responsible for the Dataspace, while TLS certificate can be self signed or signed by some CA. More information about TLS certificate can be found [here](../security.md).
 
 
-# Post configuration steps
+## Post configuration steps
 
-Once TRUE Connector is successfully configured and is up and running, responsible user for setting up environment and configuring connector should generate new passwords for 2 type of users required for operating with connector. More information how to do this can be found [here](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.2/doc/SECURITY.md#change-default-password). 
+Once TRUE Connector is successfully configured and is up and running, responsible user for setting up environment and configuring connector should generate new passwords for 2 type of users required for operating with connector. More information how to do this can be found [here](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.3/doc/SECURITY.md#change-default-password). 
 
 Make sure to update following properties to address your usecase:
 

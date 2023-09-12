@@ -47,7 +47,7 @@ Once certificate is generated, following instruction from previous link, you can
 TRUE Connector has several ways to check the integrity:
 
  * [Docker cosing check](cosign.md)
- * [Healthcheck](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.2/doc/HEALTHCHECK.md)
+ * [Healthcheck](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.3/doc/HEALTHCHECK.md)
  * Verification of the components itself, that will check if current version of subcomponent is verified or not;
  
  Each component (Execution Core Container, Basic DataApp and Platoon Usage Control) should on startup log somethign like following:
