@@ -39,6 +39,7 @@ services:
       - DAPS_KEYSTORE_ALIAS=${PROVIDER_DAPS_KEYSTORE_ALIAS}
       - TRUSTORE_NAME=${TRUSTORE_NAME}
       - TRUSTORE_PASSWORD=${TRUSTORE_PASSWORD}
+      - FIREWALL=${PROVIDER_ECC_FIREWALL}
       - TZ=Europe/Rome
     volumes:
       - ./ecc_resources_provider:/config
@@ -116,6 +117,7 @@ services:
       - ECC_PORT=8887
       - TZ=Europe/Rome
       - ISSUER_CONNECTOR_URI=${PROVIDER_ISSUER_CONNECTOR_URI}
+      - FIREWALL=${PROVIDER_DATA_APP_FIREWALL}
     volumes:
       - ./be-dataapp_resources:/config
       - be_dataapp_provider_data:/home/nobody/data/
@@ -160,6 +162,7 @@ services:
       - DAPS_KEYSTORE_ALIAS=${CONSUMER_DAPS_KEYSTORE_ALIAS}
       - TRUSTORE_NAME=${TRUSTORE_NAME}
       - TRUSTORE_PASSWORD=${TRUSTORE_PASSWORD}
+      - FIREWALL=${CONSUMER_ECC_FIREWALL}
       - TZ=Europe/Rome
     volumes:
       - ./ecc_resources_consumer:/config
@@ -237,6 +240,7 @@ services:
       - ECC_PORT=8887
       - TZ=Europe/Rome
       - ISSUER_CONNECTOR_URI=${CONSUMER_ISSUER_CONNECTOR_URI}
+      - FIREWALL=${CONSUMER_DATA_APP_FIREWALL}
     volumes:
       - ./be-dataapp_resources:/config
       - ./ecc_cert:/cert
