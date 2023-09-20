@@ -23,6 +23,7 @@ services:
       - DATA_APP_ENDPOINT=${PROVIDER_DATA_APP_ENDPOINT} #Data APP enpoint for consuming received data
       - MULTIPART_EDGE=${PROVIDER_MULTIPART_EDGE} #Data APP endpoint multipart/mixed content type
       - MULTIPART_ECC=${MULTIPART_ECC}
+      - CONNECTOR_ID=${PROVIDER_ISSUER_CONNECTOR_URI}
       - IDSCP2=${IDSCP2}
       - WS_EDGE=${PROVIDER_WS_EDGE}
       - WS_ECC=${WS_ECC}
@@ -85,7 +86,7 @@ services:
     environment:
       - TZ=Europe/Rome
     expose:
-      - "8085:8085"
+      - "8085"
     volumes:
       - ./uc-dataapp-pip_resources_provider:/etc
 
@@ -146,6 +147,7 @@ services:
       - DATA_APP_ENDPOINT=${CONSUMER_DATA_APP_ENDPOINT} #Data APP enpoint for consuming received data
       - MULTIPART_EDGE=${CONSUMER_MULTIPART_EDGE} #Data APP endpoint multipart/mixed content type
       - MULTIPART_ECC=${MULTIPART_ECC}
+      - CONNECTOR_ID=${CONSUMER_ISSUER_CONNECTOR_URI}
       - IDSCP2=${IDSCP2}
       - WS_EDGE=${CONSUMER_WS_EDGE}
       - WS_ECC=${WS_ECC}
@@ -208,7 +210,7 @@ services:
     environment:
       - TZ=Europe/Rome
     expose:
-      - "8185:8085"
+      - "8085"
     volumes:
       - ./uc-dataapp-pip_resources_consumer:/etc
 
