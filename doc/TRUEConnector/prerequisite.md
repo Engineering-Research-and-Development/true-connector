@@ -20,6 +20,7 @@ To have secure and certification compliant environment, following prerequisites 
 * OS user for running docker should not be root user; be sure to create new user, assign new user to docker group, that user can run docker compose
 * disable password login to the server for newly created user and allow only key-based authentication for accessing the server where connector will run
 * disable access for the root user by using a password when connecting to the server via ssh (key-based auth only)
+* in case of adding some additional, more configurable and robust firewall, be sure to restrict access to the /api/* endpoints to only internal network, since those endpoints should not be exposed to the outside world, but intended to be used by "internal" user, to make modifications to the self description document.
 
 
 * 2 types of certificate are required: DAPS and TLS. 
