@@ -19,6 +19,7 @@ services:
       - "8889:8889" #Exposed port for receiving data from another connector (REST)
       - "8086:8086" #Exposed port for receiving data from another connector (WS)
     environment:
+      - "JDK_JAVA_OPTIONS=-Xmx1024m"
       - "SPRING_PROFILES_ACTIVE=docker"
       - DATA_APP_ENDPOINT=${PROVIDER_DATA_APP_ENDPOINT} #Data APP enpoint for consuming received data
       - MULTIPART_EDGE=${PROVIDER_MULTIPART_EDGE} #Data APP endpoint multipart/mixed content type
@@ -27,7 +28,7 @@ services:
       - IDSCP2=${IDSCP2}
       - WS_EDGE=${PROVIDER_WS_EDGE}
       - WS_ECC=${WS_ECC}
-      - UC_DATAAPP_URI=http://uc-dataapp-provider:8080/platoontec/PlatoonDataUsage/1.0/
+      - UC_DATAAPP_URI=https://uc-dataapp-provider:8080/platoontec/PlatoonDataUsage/1.0/
       - BROKER_URL=${BROKER_URL}
       - CACHE_TOKEN=${CACHE_TOKEN}
       - FETCH_TOKEN_ON_STARTUP=${FETCH_TOKEN_ON_STARTUP}
@@ -63,12 +64,19 @@ services:
       - provider
     container_name: uc-dataapp-provider
     environment:
+      - ECC_PORT=8449
+      - ECC_SELF_DESCRIPTION_URL=${PROVIDER_ECC_SELF_DESCRIPTION_URL}
+      - KEYSTORE_NAME=${KEYSTORE_NAME}
+      - KEY_PASSWORD=${KEY_PASSWORD}
+      - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
+      - ALIAS=${ALIAS}
       - TZ=Europe/Rome
     expose:
       - "8080"
     volumes:
       - ./uc-dataapp_resources_provider:/etc
       - uc_provider_data:/data
+      - ./ecc_cert:/cert
 
   uc-dataapp-pip-provider:
     image: rdlabengpa/ids_uc_data_app_platoon_pip:v1.0.0
@@ -105,7 +113,8 @@ services:
     container_name: be-dataapp-provider
     ports:
       - "8183:8183"
-      - "9000:9000"
+    expose:
+      - "9000"
     environment:
       - "SPRING_PROFILES_ACTIVE=docker"
       - DATA_APP_MULTIPART=${PROVIDER_MULTIPART_EDGE}
@@ -151,7 +160,7 @@ services:
       - IDSCP2=${IDSCP2}
       - WS_EDGE=${CONSUMER_WS_EDGE}
       - WS_ECC=${WS_ECC}
-      - UC_DATAAPP_URI=http://uc-dataapp-consumer:8080/platoontec/PlatoonDataUsage/1.0/
+      - UC_DATAAPP_URI=https://uc-dataapp-consumer:8080/platoontec/PlatoonDataUsage/1.0/
       - BROKER_URL=${BROKER_URL}
       - CACHE_TOKEN=${CACHE_TOKEN}
       - FETCH_TOKEN_ON_STARTUP=${FETCH_TOKEN_ON_STARTUP}
@@ -187,12 +196,19 @@ services:
       - consumer
     container_name: uc-dataapp-consumer
     environment:
+      - ECC_PORT=8449
+      - ECC_SELF_DESCRIPTION_URL=${CONSUMER_ECC_SELF_DESCRIPTION_URL}
+      - KEYSTORE_NAME=${KEYSTORE_NAME}
+      - KEY_PASSWORD=${KEY_PASSWORD}
+      - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
+      - ALIAS=${ALIAS}
       - TZ=Europe/Rome
     expose:
       - "8080"
     volumes:
       - ./uc-dataapp_resources_consumer:/etc
       - uc_consumer_data:/data
+      - ./ecc_cert:/cert
 
   uc-dataapp-pip-consumer:
     image: rdlabengpa/ids_uc_data_app_platoon_pip:v1.0.0
@@ -229,7 +245,8 @@ services:
     container_name: be-dataapp-consumer
     ports:
       - "8184:8183"
-      - "9001:9000"
+    expose:
+      - "9000"
     environment:
       - "SPRING_PROFILES_ACTIVE=docker"
       - DATA_APP_MULTIPART=${CONSUMER_MULTIPART_EDGE}

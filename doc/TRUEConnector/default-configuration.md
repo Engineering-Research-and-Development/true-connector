@@ -8,7 +8,6 @@ TRUE Connector comes pre-configured with following:
 * Disabled Usage control
 * Disabled Clearing House
 * Disabled validate protocol in Forward-To header
-* Disabled hostname validation
 * Disabled CheckSum validation
 * Disabled Firewall
 
