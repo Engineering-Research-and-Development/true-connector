@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   ecc-provider:
-    image: rdlabengpa/ids_execution_core_container:v1.14.2
+    image: rdlabengpa/ids_execution_core_container:v1.14.3
     deploy:
       resources:
         limits:
@@ -51,12 +51,12 @@ services:
       - "ecc-provider:172.17.0.1"
 
   uc-dataapp-provider:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.4
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.5
     deploy:
       resources:
         limits:
           cpus: "1"
-          memory: 512M
+          memory: 256M
     logging:
       options:
         max-size: "100M"
@@ -64,6 +64,7 @@ services:
       - provider
     container_name: uc-dataapp-provider
     environment:
+      - "JDK_JAVA_OPTIONS=-Xmx256m"
       - ECC_PORT=8449
       - ECC_SELF_DESCRIPTION_URL=${PROVIDER_ECC_SELF_DESCRIPTION_URL}
       - KEYSTORE_NAME=${KEYSTORE_NAME}
@@ -84,7 +85,7 @@ services:
       resources:
         limits:
           cpus: "1"
-          memory: 512M
+          memory: 256M
     logging:
       options:
         max-size: "100M"
@@ -92,6 +93,7 @@ services:
       - provider
     container_name: uc-dataapp-pip-provider
     environment:
+      - "JDK_JAVA_OPTIONS=-Xmx256m"
       - TZ=Europe/Rome
     expose:
       - "8085"
@@ -99,7 +101,7 @@ services:
       - ./uc-dataapp-pip_resources_provider:/etc
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.3.1
+    image: rdlabengpa/ids_be_data_app:v0.3.2
     deploy:
       resources:
         limits:
@@ -116,6 +118,7 @@ services:
     expose:
       - "9000"
     environment:
+      - "JDK_JAVA_OPTIONS=-Xmx512m"
       - "SPRING_PROFILES_ACTIVE=docker"
       - DATA_APP_MULTIPART=${PROVIDER_MULTIPART_EDGE}
       - KEYSTORE_NAME=${KEYSTORE_NAME}
@@ -134,7 +137,7 @@ services:
       - ./ecc_cert:/cert
       
   ecc-consumer:
-    image: rdlabengpa/ids_execution_core_container:v1.14.2
+    image: rdlabengpa/ids_execution_core_container:v1.14.3
     deploy:
       resources:
         limits:
@@ -152,6 +155,7 @@ services:
       - "8890:8889" #Exposed port for receiving data from another connector (REST)
       - "8087:8086" #Exposed port for receiving data from another connector (WS)
     environment:
+      - "JDK_JAVA_OPTIONS=-Xmx1024m"
       - "SPRING_PROFILES_ACTIVE=docker"
       - DATA_APP_ENDPOINT=${CONSUMER_DATA_APP_ENDPOINT} #Data APP enpoint for consuming received data
       - MULTIPART_EDGE=${CONSUMER_MULTIPART_EDGE} #Data APP endpoint multipart/mixed content type
@@ -183,12 +187,12 @@ services:
       - "ecc-consumer:172.17.0.1"
 
   uc-dataapp-consumer:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.4
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.5
     deploy:
       resources:
         limits:
           cpus: "1"
-          memory: 512M
+          memory: 256M
     logging:
       options:
         max-size: "100M"
@@ -196,6 +200,7 @@ services:
       - consumer
     container_name: uc-dataapp-consumer
     environment:
+      - "JDK_JAVA_OPTIONS=-Xmx256m"
       - ECC_PORT=8449
       - ECC_SELF_DESCRIPTION_URL=${CONSUMER_ECC_SELF_DESCRIPTION_URL}
       - KEYSTORE_NAME=${KEYSTORE_NAME}
@@ -216,7 +221,7 @@ services:
       resources:
         limits:
           cpus: "1"
-          memory: 512M
+          memory: 256M
     logging:
       options:
         max-size: "100M"
@@ -224,6 +229,7 @@ services:
       - consumer
     container_name: uc-dataapp-pip-consumer
     environment:
+      - "JDK_JAVA_OPTIONS=-Xmx256m"
       - TZ=Europe/Rome
     expose:
       - "8085"
@@ -231,7 +237,7 @@ services:
       - ./uc-dataapp-pip_resources_consumer:/etc
 
   be-dataapp-consumer:
-    image: rdlabengpa/ids_be_data_app:v0.3.1
+    image: rdlabengpa/ids_be_data_app:v0.3.2
     deploy:
       resources:
         limits:
@@ -248,6 +254,7 @@ services:
     expose:
       - "9000"
     environment:
+      - "JDK_JAVA_OPTIONS=-Xmx512m"
       - "SPRING_PROFILES_ACTIVE=docker"
       - DATA_APP_MULTIPART=${CONSUMER_MULTIPART_EDGE}
       - KEYSTORE_NAME=${KEYSTORE_NAME}
