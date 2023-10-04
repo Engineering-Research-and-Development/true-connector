@@ -1,6 +1,7 @@
 # Table of contents
 
 * [TRUE Connector](README.md)
+  * [Prerequisite](doc/TRUEConnector/prerequisite.md)
   * [Introduction](doc/TRUEConnector/introduction.md)
   * [System requirements](doc/TRUEConnector/system-requirements.md)
   * [Volumes](doc/TRUEConnector/volumes.md)
@@ -27,6 +28,7 @@
   * [Usage Control](doc/advancedConfiguration/usagecontrol.md)
   * [MyData Usage Control](doc/advancedConfiguration/mydata.md)
   * [Audit logs](doc/advancedConfiguration/auditlogs.md)
+  * [Firewall](doc/advancedConfiguration/firewall.md)
 * [Contract Negotiation - simple flow](doc/contractNegotiation/contract-negotiation.md)
   * [Get offered resource](doc/contractNegotiation/get_offered_resource.md)
   * [Description Request Message](doc/contractNegotiation/description_request_message.md)
@@ -41,10 +43,8 @@
   * [MYDATA\_USAGE\_CONTROL](doc/MYDATA\_USAGE\_CONTROL.md)
   * [PLATOON\_USAGE\_CONTROL](doc/PLATOON\_USAGE\_CONTROL.md)
   * [Test cases](doc/TEST\_API.md)
-  * [rest\_api](doc/rest\_api/README.md)
-    * [REST API](doc/rest\_api/REST\_API.md)
-  * [testbed](doc/testbed/README.md)
-    * [Testbed](doc/testbed/TESTBED.md)
+  * [REST API](doc/rest\_api/REST\_API.md)
+  * [Testbed](doc/testbed/TESTBED.md)
   * [Step to replicate True Connector installation in minikube.](kubernetes/README.md)
   * [Docker image signing and verification](doc/cosign.md)
 * [Life cycle](doc/life_cycle.md)

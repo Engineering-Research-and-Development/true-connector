@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   ecc-provider:
-    image: rdlabengpa/ids_execution_core_container:v1.14.2
+    image: rdlabengpa/ids_execution_core_container:v1.14.3
     deploy:
       resources:
         limits:
@@ -19,14 +19,16 @@ services:
       - "8889:8889" #Exposed port for receiving data from another connector (REST)
       - "8086:8086" #Exposed port for receiving data from another connector (WS)
     environment:
+      - "JDK_JAVA_OPTIONS=-Xmx1024m"
       - "SPRING_PROFILES_ACTIVE=docker"
       - DATA_APP_ENDPOINT=${PROVIDER_DATA_APP_ENDPOINT} #Data APP enpoint for consuming received data
       - MULTIPART_EDGE=${PROVIDER_MULTIPART_EDGE} #Data APP endpoint multipart/mixed content type
       - MULTIPART_ECC=${MULTIPART_ECC}
+      - CONNECTOR_ID=${PROVIDER_ISSUER_CONNECTOR_URI}
       - IDSCP2=${IDSCP2}
       - WS_EDGE=${PROVIDER_WS_EDGE}
       - WS_ECC=${WS_ECC}
-      - UC_DATAAPP_URI=http://uc-dataapp-provider:8080/platoontec/PlatoonDataUsage/1.0/
+      - UC_DATAAPP_URI=https://uc-dataapp-provider:8080/platoontec/PlatoonDataUsage/1.0/
       - BROKER_URL=${BROKER_URL}
       - CACHE_TOKEN=${CACHE_TOKEN}
       - FETCH_TOKEN_ON_STARTUP=${FETCH_TOKEN_ON_STARTUP}
@@ -39,6 +41,7 @@ services:
       - DAPS_KEYSTORE_ALIAS=${PROVIDER_DAPS_KEYSTORE_ALIAS}
       - TRUSTORE_NAME=${TRUSTORE_NAME}
       - TRUSTORE_PASSWORD=${TRUSTORE_PASSWORD}
+      - FIREWALL=${PROVIDER_ECC_FIREWALL}
       - TZ=Europe/Rome
     volumes:
       - ./ecc_resources_provider:/config
@@ -48,12 +51,12 @@ services:
       - "ecc-provider:172.17.0.1"
 
   uc-dataapp-provider:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.4
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.5
     deploy:
       resources:
         limits:
           cpus: "1"
-          memory: 512M
+          memory: 256M
     logging:
       options:
         max-size: "100M"
@@ -61,12 +64,20 @@ services:
       - provider
     container_name: uc-dataapp-provider
     environment:
+      - "JDK_JAVA_OPTIONS=-Xmx256m"
+      - ECC_PORT=8449
+      - ECC_SELF_DESCRIPTION_URL=${PROVIDER_ECC_SELF_DESCRIPTION_URL}
+      - KEYSTORE_NAME=${KEYSTORE_NAME}
+      - KEY_PASSWORD=${KEY_PASSWORD}
+      - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
+      - ALIAS=${ALIAS}
       - TZ=Europe/Rome
     expose:
       - "8080"
     volumes:
       - ./uc-dataapp_resources_provider:/etc
       - uc_provider_data:/data
+      - ./ecc_cert:/cert
 
   uc-dataapp-pip-provider:
     image: rdlabengpa/ids_uc_data_app_platoon_pip:v1.0.0
@@ -74,7 +85,7 @@ services:
       resources:
         limits:
           cpus: "1"
-          memory: 512M
+          memory: 256M
     logging:
       options:
         max-size: "100M"
@@ -82,14 +93,15 @@ services:
       - provider
     container_name: uc-dataapp-pip-provider
     environment:
+      - "JDK_JAVA_OPTIONS=-Xmx256m"
       - TZ=Europe/Rome
     expose:
-      - "8085:8085"
+      - "8085"
     volumes:
       - ./uc-dataapp-pip_resources_provider:/etc
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.3.1
+    image: rdlabengpa/ids_be_data_app:v0.3.2
     deploy:
       resources:
         limits:
@@ -103,8 +115,10 @@ services:
     container_name: be-dataapp-provider
     ports:
       - "8183:8183"
-      - "9000:9000"
+    expose:
+      - "9000"
     environment:
+      - "JDK_JAVA_OPTIONS=-Xmx512m"
       - "SPRING_PROFILES_ACTIVE=docker"
       - DATA_APP_MULTIPART=${PROVIDER_MULTIPART_EDGE}
       - KEYSTORE_NAME=${KEYSTORE_NAME}
@@ -116,13 +130,14 @@ services:
       - ECC_PORT=8887
       - TZ=Europe/Rome
       - ISSUER_CONNECTOR_URI=${PROVIDER_ISSUER_CONNECTOR_URI}
+      - FIREWALL=${PROVIDER_DATA_APP_FIREWALL}
     volumes:
       - ./be-dataapp_resources:/config
       - be_dataapp_provider_data:/home/nobody/data/
       - ./ecc_cert:/cert
       
   ecc-consumer:
-    image: rdlabengpa/ids_execution_core_container:v1.14.2
+    image: rdlabengpa/ids_execution_core_container:v1.14.3
     deploy:
       resources:
         limits:
@@ -140,14 +155,16 @@ services:
       - "8890:8889" #Exposed port for receiving data from another connector (REST)
       - "8087:8086" #Exposed port for receiving data from another connector (WS)
     environment:
+      - "JDK_JAVA_OPTIONS=-Xmx1024m"
       - "SPRING_PROFILES_ACTIVE=docker"
       - DATA_APP_ENDPOINT=${CONSUMER_DATA_APP_ENDPOINT} #Data APP enpoint for consuming received data
       - MULTIPART_EDGE=${CONSUMER_MULTIPART_EDGE} #Data APP endpoint multipart/mixed content type
       - MULTIPART_ECC=${MULTIPART_ECC}
+      - CONNECTOR_ID=${CONSUMER_ISSUER_CONNECTOR_URI}
       - IDSCP2=${IDSCP2}
       - WS_EDGE=${CONSUMER_WS_EDGE}
       - WS_ECC=${WS_ECC}
-      - UC_DATAAPP_URI=http://uc-dataapp-consumer:8080/platoontec/PlatoonDataUsage/1.0/
+      - UC_DATAAPP_URI=https://uc-dataapp-consumer:8080/platoontec/PlatoonDataUsage/1.0/
       - BROKER_URL=${BROKER_URL}
       - CACHE_TOKEN=${CACHE_TOKEN}
       - FETCH_TOKEN_ON_STARTUP=${FETCH_TOKEN_ON_STARTUP}
@@ -160,6 +177,7 @@ services:
       - DAPS_KEYSTORE_ALIAS=${CONSUMER_DAPS_KEYSTORE_ALIAS}
       - TRUSTORE_NAME=${TRUSTORE_NAME}
       - TRUSTORE_PASSWORD=${TRUSTORE_PASSWORD}
+      - FIREWALL=${CONSUMER_ECC_FIREWALL}
       - TZ=Europe/Rome
     volumes:
       - ./ecc_resources_consumer:/config
@@ -169,12 +187,12 @@ services:
       - "ecc-consumer:172.17.0.1"
 
   uc-dataapp-consumer:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.4
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.5
     deploy:
       resources:
         limits:
           cpus: "1"
-          memory: 512M
+          memory: 256M
     logging:
       options:
         max-size: "100M"
@@ -182,12 +200,20 @@ services:
       - consumer
     container_name: uc-dataapp-consumer
     environment:
+      - "JDK_JAVA_OPTIONS=-Xmx256m"
+      - ECC_PORT=8449
+      - ECC_SELF_DESCRIPTION_URL=${CONSUMER_ECC_SELF_DESCRIPTION_URL}
+      - KEYSTORE_NAME=${KEYSTORE_NAME}
+      - KEY_PASSWORD=${KEY_PASSWORD}
+      - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
+      - ALIAS=${ALIAS}
       - TZ=Europe/Rome
     expose:
       - "8080"
     volumes:
       - ./uc-dataapp_resources_consumer:/etc
       - uc_consumer_data:/data
+      - ./ecc_cert:/cert
 
   uc-dataapp-pip-consumer:
     image: rdlabengpa/ids_uc_data_app_platoon_pip:v1.0.0
@@ -195,7 +221,7 @@ services:
       resources:
         limits:
           cpus: "1"
-          memory: 512M
+          memory: 256M
     logging:
       options:
         max-size: "100M"
@@ -203,14 +229,15 @@ services:
       - consumer
     container_name: uc-dataapp-pip-consumer
     environment:
+      - "JDK_JAVA_OPTIONS=-Xmx256m"
       - TZ=Europe/Rome
     expose:
-      - "8185:8085"
+      - "8085"
     volumes:
       - ./uc-dataapp-pip_resources_consumer:/etc
 
   be-dataapp-consumer:
-    image: rdlabengpa/ids_be_data_app:v0.3.1
+    image: rdlabengpa/ids_be_data_app:v0.3.2
     deploy:
       resources:
         limits:
@@ -224,8 +251,10 @@ services:
     container_name: be-dataapp-consumer
     ports:
       - "8184:8183"
-      - "9001:9000"
+    expose:
+      - "9000"
     environment:
+      - "JDK_JAVA_OPTIONS=-Xmx512m"
       - "SPRING_PROFILES_ACTIVE=docker"
       - DATA_APP_MULTIPART=${CONSUMER_MULTIPART_EDGE}
       - KEYSTORE_NAME=${KEYSTORE_NAME}
@@ -237,6 +266,7 @@ services:
       - ECC_PORT=8887
       - TZ=Europe/Rome
       - ISSUER_CONNECTOR_URI=${CONSUMER_ISSUER_CONNECTOR_URI}
+      - FIREWALL=${CONSUMER_DATA_APP_FIREWALL}
     volumes:
       - ./be-dataapp_resources:/config
       - ./ecc_cert:/cert

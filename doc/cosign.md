@@ -4,11 +4,11 @@ Docker images that are part of the TRUE Connector are signed using [cosign](http
 
 Signed images starts with following versions:
 
-**rdlabengpa/ids\_execution\_core\_container:v1.14.2**\
+**rdlabengpa/ids\_execution\_core\_container:v1.14.3**\
 
-**rdlabengpa/ids\_be\_data\_app:v0.3.1**\
+**rdlabengpa/ids\_be\_data\_app:v0.3.2**\
 
-**rdlabengpa/ids\_uc\_data\_app\_platoon:v1.7.4**\
+**rdlabengpa/ids\_uc\_data\_app\_platoon:v1.7.5**\
 
 **rdlabengpa/ids\_uc\_data\_app\_platoon\_pip:v1.0.0**\
 
@@ -16,74 +16,74 @@ Signed images starts with following versions:
 Once images are downloaded, you can verify the signature by executing following command, (trueconn.pub file can be found in the root of this repo) and response should be like following
 
 ```
-cosign verify --key trueconn.pub rdlabengpa/ids_execution_core_container:v1.14.2
+cosign verify --key trueconn.pub rdlabengpa/ids_execution_core_container:v1.14.3
 
-Verification for index.docker.io/rdlabengpa/ids_execution_core_container:v1.14.2 --
-The following checks were performed on each of these signatures:
-  - The cosign claims were validated
-  - The signatures were verified against the specified public key
-
-[
-    {
-        "critical": {
-            "identity": {
-                "docker-reference": "index.docker.io/rdlabengpa/ids_execution_core_container"
-            },
-            "image": {
-                "docker-manifest-digest": "sha256:d28ec86e5ee3c9c5b992dd3445fa3301d77a83b6c244b7a8577f2b4e7b8f5d52"
-            },
-            "type": "cosign container image signature"
-        },
-        "optional": null
-    }
-]
-```
-
-```
-cosign verify --key trueconn.pub rdlabengpa/ids_be_data_app:v0.3.1
-
-Verification for index.docker.io/rdlabengpa/ids_be_data_app:v0.3.1 --
+Verification for index.docker.io/rdlabengpa/ids_execution_core_container:v1.14.3 --
 The following checks were performed on each of these signatures:
   - The cosign claims were validated
   - The signatures were verified against the specified public key
 
 [
 	{
-        "critical": {
-            "identity": {
-                "docker-reference": "index.docker.io/rdlabengpa/ids_be_data_app"
-            },
-            "image": {
-                "docker-manifest-digest": "sha256:905071836b33b7af28727f53574257a218a9b7c93c476f7c1bcaa07b0c7ac24a"
-            },
-            "type": "cosign container image signature"
-        },
-        "optional": null
-    }
+		"critical": {
+			"identity": {
+				"docker-reference": "index.docker.io/rdlabengpa/ids_execution_core_container"
+			},
+			"image": {
+				"docker-manifest-digest": "sha256:ef7f614c15b31cd3965224ba734bca27d3f2ee0907af05859172821907d9dd3e"
+			},
+			"type": "cosign container image signature"
+		},
+		"optional": null
+	}
 ]
 ```
 
 ```
-cosign verify --key trueconn.pub rdlabengpa/ids_uc_data_app_platoon:v1.7.4
+cosign verify --key trueconn.pub rdlabengpa/ids_be_data_app:v0.3.2
 
-Verification for index.docker.io/rdlabengpa/ids_uc_data_app_platoon:v1.7.4 --
+Verification for index.docker.io/rdlabengpa/ids_be_data_app:v0.3.2 --
 The following checks were performed on each of these signatures:
   - The cosign claims were validated
   - The signatures were verified against the specified public key
 
 [
 	{
-        "critical": {
-            "identity": {
-                "docker-reference": "index.docker.io/rdlabengpa/ids_uc_data_app_platoon"
-            },
-            "image": {
-                "docker-manifest-digest": "sha256:00b61c089c106750ed8e3f5d6761f9188c5c44276b47d85cef63d8c1df3e37f0"
-            },
-            "type": "cosign container image signature"
-        },
-        "optional": null
-    }
+		"critical": {
+			"identity": {
+				"docker-reference": "index.docker.io/rdlabengpa/ids_be_data_app"
+			},
+			"image": {
+				"docker-manifest-digest": "sha256:49248ba8c0dc65a97c22ed8261100eec317b7428ae90d0f323bb94354d53f200"
+			},
+			"type": "cosign container image signature"
+		},
+		"optional": null
+	}
+]
+```
+
+```
+cosign verify --key trueconn.pub rdlabengpa/ids_uc_data_app_platoon:v1.7.5
+
+Verification for index.docker.io/rdlabengpa/ids_uc_data_app_platoon:v1.7.5 --
+The following checks were performed on each of these signatures:
+  - The cosign claims were validated
+  - The signatures were verified against the specified public key
+
+[
+	{
+		"critical": {
+			"identity": {
+				"docker-reference": "index.docker.io/rdlabengpa/ids_uc_data_app_platoon"
+			},
+			"image": {
+				"docker-manifest-digest": "sha256:5b082889b0c9afbce7fd1f02ef58269c5bb1df7fdc1652800a66f8e6d2b0659a"
+			},
+			"type": "cosign container image signature"
+		},
+		"optional": null
+	}
 ]
 ```
 
