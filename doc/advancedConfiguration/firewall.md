@@ -4,7 +4,7 @@ TRUE Connector allows setting up HttpFirewall through Spring Security. Firewall 
 
 
 ```
-### PROVIDER Configurationapplication.firewall.isEnabled=true
+### PROVIDER Configuration
 PROVIDER_DATA_APP_FIREWALL=false
 PROVIDER_ECC_FIREWALL=false
 
@@ -16,6 +16,10 @@ CONSUMER_ECC_FIREWALL=false
 If Firewall is enabled, it will read properties defined in `firewall.properties` file located in Execution Core Container (ECC) and DataApp resources folder, which easily can be modified by needs of setup.
 
 ```
+#Set which HTTP header names should be allowed (if want to allow all header names, keep it empty)
+allowedHeaderNames=
+#Set which values in header names should have the exact value and allowed (if want to allow any values keep it empty)
+allowedHeaderValues=
 #Set which HTTP methods should be allowed
 allowedMethods=GET,POST
 #Set if a backslash "\" or a URL encoded backslash "%5C" should be allowed in the path or not
