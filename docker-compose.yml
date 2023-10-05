@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   ecc-provider:
-    image: rdlabengpa/ids_execution_core_container:v1.14.3
+    image: rdlabengpa/ids_execution_core_container:v1.14.4
     deploy:
       resources:
         limits:
@@ -101,7 +101,7 @@ services:
       - ./uc-dataapp-pip_resources_provider:/etc
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.3.2
+    image: rdlabengpa/ids_be_data_app:v0.3.3
     deploy:
       resources:
         limits:
@@ -137,7 +137,7 @@ services:
       - ./ecc_cert:/cert
       
   ecc-consumer:
-    image: rdlabengpa/ids_execution_core_container:v1.14.3
+    image: rdlabengpa/ids_execution_core_container:v1.14.4
     deploy:
       resources:
         limits:
@@ -237,7 +237,7 @@ services:
       - ./uc-dataapp-pip_resources_consumer:/etc
 
   be-dataapp-consumer:
-    image: rdlabengpa/ids_be_data_app:v0.3.2
+    image: rdlabengpa/ids_be_data_app:v0.3.3
     deploy:
       resources:
         limits:
