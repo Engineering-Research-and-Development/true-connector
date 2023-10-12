@@ -28,7 +28,7 @@ _NOTE_: even that this curl command is exported from Postman, it is noticed seve
 If this happens, please check body of the request in Postman, and if body is empty, simply copy everything enclosed between\
 _--data-raw '_ and _'_
 
-For more details on request samples, please check following link [Backend DataApp Usage](https://github.com/Engineering-Research-and-Development/market4.0-data\_app\_test\_BE/blob/0.3.3/README.md)
+For more details on request samples, please check following link [Backend DataApp Usage](https://github.com/Engineering-Research-and-Development/market4.0-data\_app\_test\_BE/blob/0.3.4/README.md)
 
 Be sure to use correct configuration/ports for sender and receiver Data App and Execution Core Container (check .env file).
 

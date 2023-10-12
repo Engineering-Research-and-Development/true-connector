@@ -10,6 +10,7 @@ TRUE Connector comes pre-configured with following:
 * Disabled validate protocol in Forward-To header
 * Disabled CheckSum validation
 * Disabled Firewall
+* Disabled Self Description validation
 
 
 If you wish to change this configuration, please check chapter [Modifying configuration](../modifyingConfiguration/modify-configuration.md)
