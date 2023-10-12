@@ -101,7 +101,7 @@ services:
       - ./uc-dataapp-pip_resources_provider:/etc
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.3.3
+    image: rdlabengpa/ids_be_data_app:v0.3.4
     deploy:
       resources:
         limits:
@@ -237,7 +237,7 @@ services:
       - ./uc-dataapp-pip_resources_consumer:/etc
 
   be-dataapp-consumer:
-    image: rdlabengpa/ids_be_data_app:v0.3.3
+    image: rdlabengpa/ids_be_data_app:v0.3.4
     deploy:
       resources:
         limits:
