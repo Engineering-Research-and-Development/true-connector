@@ -26,15 +26,15 @@ Overview of all available endpoints:
 | PUT | /api/contractOffer/{resourceId} | Update existing contract offer | Connector |
 | DELETE | /api/contractOffer/{representationId} | Delete existing contract offer | Connector |
 
-Swagger UI for offered resources CRUD operations:
+Offered resources CRUD operations:
 
 ![Offered resource](Offered_Resource_Swagger.jpg "Offered resource swagger API")
 
-Swagger UI for contract offer CRUD operations:
+Contract offer CRUD operations:
 
 ![Contract offer](Contract_Offer_Swagger.jpg "Contract Offer swagger API")
 
-Swagger UI for representation CRUD operations:
+Representation CRUD operations:
 
 ![Resource representation](Resource_Representation_Swagger.jpg "Resource representation swagger API")
 
