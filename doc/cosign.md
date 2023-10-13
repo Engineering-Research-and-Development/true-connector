@@ -6,7 +6,7 @@ Signed images starts with following versions:
 
 **rdlabengpa/ids\_execution\_core\_container:v1.14.4**\
 
-**rdlabengpa/ids\_be\_data\_app:v0.3.3**\
+**rdlabengpa/ids\_be\_data\_app:v0.3.4**\
 
 **rdlabengpa/ids\_uc\_data\_app\_platoon:v1.7.5**\
 
@@ -40,9 +40,9 @@ The following checks were performed on each of these signatures:
 ```
 
 ```
-cosign verify --key trueconn.pub rdlabengpa/ids_be_data_app:v0.3.3
+cosign verify --key trueconn.pub rdlabengpa/ids_be_data_app:v0.3.4
 
-Verification for index.docker.io/rdlabengpa/ids_be_data_app:v0.3.3 --
+Verification for index.docker.io/rdlabengpa/ids_be_data_app:v0.3.4 --
 The following checks were performed on each of these signatures:
   - The cosign claims were validated
   - The signatures were verified against the specified public key
@@ -54,7 +54,7 @@ The following checks were performed on each of these signatures:
 				"docker-reference": "index.docker.io/rdlabengpa/ids_be_data_app"
 			},
 			"image": {
-				"docker-manifest-digest": "sha256:6dae75837854133f6e895e9bf811a25d963b4dfcfb583bbf975c2b550bfe8d86"
+				"docker-manifest-digest": "sha256:a8329b41ed3c0f2219b056ca9a9cb4c85a5be0b36c3b6d7185e4a017888e3ee1"
 			},
 			"type": "cosign container image signature"
 		},
