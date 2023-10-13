@@ -131,6 +131,7 @@ services:
       - TZ=Europe/Rome
       - ISSUER_CONNECTOR_URI=${PROVIDER_ISSUER_CONNECTOR_URI}
       - FIREWALL=${PROVIDER_DATA_APP_FIREWALL}
+      - VALIDATE_SELF_DESCRIPTION=${VALIDATE_SELF_DESCRIPTION}
     volumes:
       - ./be-dataapp_resources:/config
       - be_dataapp_provider_data:/home/nobody/data/
@@ -267,6 +268,7 @@ services:
       - TZ=Europe/Rome
       - ISSUER_CONNECTOR_URI=${CONSUMER_ISSUER_CONNECTOR_URI}
       - FIREWALL=${CONSUMER_DATA_APP_FIREWALL}
+      - VALIDATE_SELF_DESCRIPTION=${VALIDATE_SELF_DESCRIPTION}
     volumes:
       - ./be-dataapp_resources:/config
       - ./ecc_cert:/cert
