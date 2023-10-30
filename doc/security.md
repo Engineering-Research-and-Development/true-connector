@@ -37,6 +37,20 @@ When creating self signed certificate, be sure to set values provided in table a
 
 To support hostname validation, truststore will have to be contain valid certificate, with information related with SAN. How to configure truststore correctly, you can get information from [link](https://github.com/Engineering-Research-and-Development/true-connector/blob/main/doc/testbed/TESTBED.md#export-trueconnector-certificate). This step is mandatory, and if not set correctly, you will get 'PKIX' exception when making https call.
 
+In the truststore, next certificates are mandatory:
+
+* DAPS TLS certificate
+
+* DAPS key provider certificate (OCSP)
+
+* Broker certificate
+
+* Consumer Connector certificate
+
+* Provider Connector
+
+* Clearing house certificate (if CH is used)
+
 ## Identity certificate - DAPS certificate
 
 Another certificate is required to be used in TRUE Connector - identity certificate, used to identify connector and to fetch jwToken from Identity Provider - DAPS. Following certificate can be generated using Testbed instructions described [here](https://github.com/International-Data-Spaces-Association/IDS-testbed/blob/v1.1.0/CertificateAuthority/README.md). Be aware that following certificates will work only with provided Dynamic Attribute Provisioning Service (DAPS) - Omejdn. For other DAPS implementations, this will require additional validation.

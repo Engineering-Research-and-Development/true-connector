@@ -13,7 +13,7 @@ Signed images starts with following versions:
 **rdlabengpa/ids\_uc\_data\_app\_platoon\_pip:v1.0.0**\
 
 
-Once images are downloaded, you can verify the signature by executing following command, (trueconn.pub file can be found in the root of this repo) and response should be like following
+Once images are downloaded, you can verify the signature by executing following command, (trueconn.pub file can be found in the ecc_cert folder) and response should be like following
 
 ```
 cosign verify --key trueconn.pub rdlabengpa/ids_execution_core_container:v1.14.4
