@@ -37,6 +37,15 @@ When creating self signed certificate, be sure to set values provided in table a
 
 To support hostname validation, truststore will have to be contain valid certificate, with information related with SAN. This step is mandatory, and if not set correctly, you will get 'PKIX' exception when making https call.
 
+In the truststore, next certificates are mandatory:
+
+* DAPS TLS certificate
+* DAPS key provider certificate (OCSP)
+* Broker certificate
+* Consumer Connector certificate
+* Provider Connector certificate
+* Clearing house certificate (if CH is used)
+
 ## Adding trusted CA certificates to Truststore
 
 Before attempting to communicate with another connector or service (e.g. DASP, Broker...) in a dataspace the TRUEConnector has to know whom to trust. This is done through adding of the other entities certificates,provided to them by trusted CAs, to the TRUEConnectors Truststore. We will be using keytool and the following command to add for example the DAPS certificate:
