@@ -29,7 +29,7 @@ DAPS certificate should be obtained from Certified Authority responsible for the
 
 ## Post configuration steps
 
-Once TRUE Connector is successfully configured and is up and running, responsible user for setting up environment and configuring connector should generate new passwords for 2 type of users required for operating with connector. More information how to do this can be found [here](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.4/doc/SECURITY.md#change-default-password). 
+Once TRUE Connector is successfully configured and is up and running, responsible user for setting up environment and configuring connector should generate new passwords for 2 type of users required for operating with connector. More information how to do this can be found [here](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.5/doc/SECURITY.md#change-default-password). 
 
 Make sure to update following properties to address your usecase:
 
