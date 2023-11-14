@@ -51,7 +51,7 @@ services:
       - "ecc-provider:172.17.0.1"
 
   uc-dataapp-provider:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.6
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.7
     deploy:
       resources:
         limits:
@@ -101,7 +101,7 @@ services:
       - ./uc-dataapp-pip_resources_provider:/etc
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.3.5
+    image: rdlabengpa/ids_be_data_app:v0.3.6
     deploy:
       resources:
         limits:
@@ -188,7 +188,7 @@ services:
       - "ecc-consumer:172.17.0.1"
 
   uc-dataapp-consumer:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.6
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.7
     deploy:
       resources:
         limits:
@@ -238,7 +238,7 @@ services:
       - ./uc-dataapp-pip_resources_consumer:/etc
 
   be-dataapp-consumer:
-    image: rdlabengpa/ids_be_data_app:v0.3.5
+    image: rdlabengpa/ids_be_data_app:v0.3.6
     deploy:
       resources:
         limits:
