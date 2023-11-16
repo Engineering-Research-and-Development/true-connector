@@ -23,5 +23,5 @@ Both user credentials are not persisted anywhere beside properties files, and th
 
 ## Modifying password for a user
 
-Once new password is generated, (described [here](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.5/doc/SECURITY.md#change-default-password)) user should send encoded password to the operations user, which should be the only one who can modify connector property file. That user will update property file and restart TRUE Connector, so that new password will be loaded by the connector.
+Once new password is generated, (described [here](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.6/doc/SECURITY.md#change-default-password)) user should send encoded password to the operations user, which should be the only one who can modify connector property file. That user will update property file and restart TRUE Connector, so that new password will be loaded by the connector.
 
