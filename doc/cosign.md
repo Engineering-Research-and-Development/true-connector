@@ -6,9 +6,9 @@ Signed images starts with following versions:
 
 **rdlabengpa/ids\_execution\_core\_container:v1.14.6**\
 
-**rdlabengpa/ids\_be\_data\_app:v0.3.6**\
+**rdlabengpa/ids\_be\_data\_app:v0.3.7**\
 
-**rdlabengpa/ids\_uc\_data\_app\_platoon:v1.7.7**\
+**rdlabengpa/ids\_uc\_data\_app\_platoon:v1.7.8**\
 
 **rdlabengpa/ids\_uc\_data\_app\_platoon\_pip:v1.0.0**\
 
@@ -27,6 +27,7 @@ signature not found in transparency log
 ```
 cosign verify --insecure-ignore-tlog --key trueconn.pub rdlabengpa/ids_execution_core_container:v1.14.6
 
+WARNING: Skipping tlog verification is an insecure practice that lacks of transparency and auditability verification for the signature.
 Verification for index.docker.io/rdlabengpa/ids_execution_core_container:v1.14.6 --
 The following checks were performed on each of these signatures:
   - The cosign claims were validated
@@ -39,7 +40,7 @@ The following checks were performed on each of these signatures:
 				"docker-reference": "index.docker.io/rdlabengpa/ids_execution_core_container"
 			},
 			"image": {
-				"docker-manifest-digest": "sha256:9ac8249ee1bfc99aa49db33c68338fe13fe175493ad15acb8225c4168400c927"
+				"docker-manifest-digest": "sha256:cb7f37253a0e9ef89726b5b7f220f05d5069b5007809d40fc477e1ac21e936e5"
 			},
 			"type": "cosign container image signature"
 		},
@@ -49,9 +50,10 @@ The following checks were performed on each of these signatures:
 ```
 
 ```
-cosign verify --insecure-ignore-tlog --key trueconn.pub rdlabengpa/ids_be_data_app:v0.3.6
+cosign verify --insecure-ignore-tlog --key trueconn.pub rdlabengpa/ids_be_data_app:v0.3.7
 
-Verification for index.docker.io/rdlabengpa/ids_be_data_app:v0.3.6 --
+WARNING: Skipping tlog verification is an insecure practice that lacks of transparency and auditability verification for the signature.
+Verification for index.docker.io/rdlabengpa/ids_be_data_app:v0.3.7 --
 The following checks were performed on each of these signatures:
   - The cosign claims were validated
   - The signatures were verified against the specified public key
@@ -63,7 +65,7 @@ The following checks were performed on each of these signatures:
 				"docker-reference": "index.docker.io/rdlabengpa/ids_be_data_app"
 			},
 			"image": {
-				"docker-manifest-digest": "sha256:444a8a5134ebd2b73afb6ea88d9426d48faa20946677abddc4672d5ebfd902f4"
+				"docker-manifest-digest": "sha256:04523e3a91568526c4a9db08fc643aa6d15e26c3c2ce5894836a44fb0f163886"
 			},
 			"type": "cosign container image signature"
 		},
@@ -73,9 +75,10 @@ The following checks were performed on each of these signatures:
 ```
 
 ```
-cosign verify --insecure-ignore-tlog --key trueconn.pub rdlabengpa/ids_uc_data_app_platoon:v1.7.7
+cosign verify --insecure-ignore-tlog --key trueconn.pub rdlabengpa/ids_uc_data_app_platoon:v1.7.8
 
-Verification for index.docker.io/rdlabengpa/ids_uc_data_app_platoon:v1.7.7 --
+WARNING: Skipping tlog verification is an insecure practice that lacks of transparency and auditability verification for the signature.
+Verification for index.docker.io/rdlabengpa/ids_uc_data_app_platoon:v1.7.8 --
 The following checks were performed on each of these signatures:
   - The cosign claims were validated
   - The signatures were verified against the specified public key
@@ -87,7 +90,7 @@ The following checks were performed on each of these signatures:
 				"docker-reference": "index.docker.io/rdlabengpa/ids_uc_data_app_platoon"
 			},
 			"image": {
-				"docker-manifest-digest": "sha256:142a5971ee47f7119e2d0715f2af9bd68f8260f9148bd8ac4c8039816c14f3d9"
+				"docker-manifest-digest": "sha256:5303a5216dcf1d658f04bc5e5cf934bf2c8faaf2f0c402b392df167d37330162"
 			},
 			"type": "cosign container image signature"
 		},
@@ -120,5 +123,3 @@ The following checks were performed on each of these signatures:
 ]
 
 ```
-**NOTE:** If you using cosign version above v1.17, please add the following flags at the end of command: ` --insecure-ignore-tlog`
-
