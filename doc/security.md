@@ -17,11 +17,11 @@ Recommended values for certificate are following:
 | Public key | RSA 4096 bits |
 | Signature Algorithm | SHA-256 with RSA |
 | Validity | 6 months |
-| Key usage | Key Agreement, Digital Signature, Key Encipherment |
-| Extended key usage | TLS Web Server Authentication (1.3.6.1.5.5.7.3.1) TLS Web Client Authentication (1.3.6.1.5.5.7.3.2) |
+| Key usage | Key Agreement, Digital Signature, Key Encipherment |
+| Extended key usage | TLS Web Server Authentication (1.3.6.1.5.5.7.3.1) TLS Web Client Authentication (1.3.6.1.5.5.7.3.2) |
 | Authority Key Identifier | 160-bit hash |
 | Subject Key Identifier | 160-bit hash |
-| Subject Alternative Name | DNS Name: be-dataapp-consumer; DNS Name: be-dataapp-provider; DNS Name: ecc-consumer; DNS Name: ecc-provider; DNS Name: localhost; DNS Name: uc-dataapp-consumer; DNS Name: uc-dataapp-provider |
+| Subject Alternative Name | DNS Name: be-dataapp-consumer; DNS Name: be-dataapp-provider; DNS Name: ecc-consumer; DNS Name: ecc-provider; DNS Name: localhost; DNS Name: uc-dataapp-consumer; DNS Name: uc-dataapp-provider |
 | Common Name (CN) | execution-core-container | 
 | Organization Unit (OU) | R&D |
 | Organization Name (O) | Engineering Ingegneria Informatica SpA |
@@ -35,7 +35,28 @@ When creating self signed certificate, be sure to set values provided in table a
 
 ## Truststore
 
-To support hostname validation, truststore will have to be contain valid certificate, with information related with SAN. How to configure truststore correctly, you can get information from [link](https://github.com/Engineering-Research-and-Development/true-connector/blob/main/doc/testbed/TESTBED.md#export-trueconnector-certificate). This step is mandatory, and if not set correctly, you will get 'PKIX' exception when making https call.
+To support hostname validation, truststore will have to be contain valid certificate, with information related with SAN. This step is mandatory, and if not set correctly, you will get 'PKIX' exception when making https call.
+
+In the truststore, next certificates are mandatory:
+
+* DAPS TLS certificate
+* DAPS key provider certificate (OCSP)
+* Broker certificate
+* Consumer Connector certificate
+* Provider Connector certificate
+* Clearing house certificate (if CH is used)
+
+## Adding trusted CA certificates to Truststore
+
+Before attempting to communicate with another connector or service (e.g. DASP, Broker...) in a dataspace the TRUEConnector has to know whom to trust. This is done through adding of the other entities certificates,provided to them by trusted CAs, to the TRUEConnectors Truststore. We will be using keytool and the following command to add for example the DAPS certificate:
+
+```
+keytool -import -keystore truststoreEcc.jks -file daps_certificate.pem -alias daps
+```
+
+- keystore - TRUEConnector Truststore
+- file - trusted CAs certificate you want to add
+- alias - unique name of the certificate in the Truststore
 
 ## Identity certificate - DAPS certificate
 
@@ -47,7 +68,7 @@ Once certificate is generated, following instruction from previous link, you can
 TRUE Connector has several ways to check the integrity:
 
  * [Docker cosing check](cosign.md)
- * [Healthcheck](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.4/doc/HEALTHCHECK.md)
+ * [Healthcheck](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.6/doc/HEALTHCHECK.md)
  * Verification of the components itself, that will check if current version of subcomponent is verified or not;
  
  Each component (Execution Core Container, Basic DataApp and Platoon Usage Control) should on startup log somethign like following:

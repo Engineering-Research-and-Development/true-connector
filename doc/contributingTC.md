@@ -18,4 +18,4 @@ should at least include the following information:
 * Steps to reproduce (system specs included)
 * Relevant logs and/or media (optional): e.g. an image
 
-For more details about branches, naming conventions and some suggestions, take a look at following [Developer instructions](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/tree/1.14.4#developer-guide-section)
+For more details about branches, naming conventions and some suggestions, take a look at following [Developer instructions](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/tree/1.14.6#developer-guide-section)
