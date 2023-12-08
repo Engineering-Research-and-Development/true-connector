@@ -2,7 +2,7 @@
 
 To have secure and certification compliant environment, following prerequisites are mandatory to be performed before setting up TRUE Connector:
 
-* NTP time server of the machine, where TRUE Connector will be deployed, has to be enabled and configured correctly. This will allow that once certificates are checked, correct time will be used to verify certificate, expired or not. This applies for both DAPS and TLS1.3 certificates. Connector will rely on OS time when checking certificates
+* NTP time server of the machine, where TRUE Connector will be deployed, has to be enabled and configured correctly. This will allow that once certificates are checked, correct time will be used to verify certificate, expired or not. This applies for both DAPS and TLS1.3 certificates. Connector will rely on OS time when checking certificates. How to setup NTP time server you can find [here.](../advancedConfiguration/ntp-server-configuration.md)
 * Docker is mandatory "OS service" for running connector
 * verify [System requirements](system-requirements.md) before starting the connector.
 
@@ -17,7 +17,7 @@ To have secure and certification compliant environment, following prerequisites 
 
 
 * User responsible for setting up environment where connector will run should isolate or disable other services. 
-* OS user for running docker should not be root user; be sure to create new user, assign new user to docker group, that user can run docker compose
+* OS user for running docker should not be root user; be sure to create new user, assign new user to docker group, that user can run docker compose. How to manage OS users you can find [here.](../advancedConfiguration/manage-os-users.md)
 * disable password login to the server for newly created user and allow only key-based authentication for accessing the server where connector will run
 * disable access for the root user by using a password when connecting to the server via ssh (key-based auth only)
 * in case of adding some additional, more configurable and robust firewall, be sure to restrict access to the /api/* endpoints to only internal network, since those endpoints should not be exposed to the outside world, but intended to be used by "internal" user, to make modifications to the self description document.

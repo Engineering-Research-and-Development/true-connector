@@ -31,6 +31,31 @@ Based on the severity (Common Vulnerability Scoring System is used) of the issue
 
 For issues that are currently reported, you can always check Security tab for specific subcomponent and in Dependabot section  find all opened issues.
 
+## GitHub issues made by end users
+
+As TrueConnector is an open-source project, we highly encourage end users to report any bugs they encounter. Our goal is to address and resolve these issues promptly.
+
+### 1. Initial Review
+- **Acknowledge the Issue**: Quickly acknowledge the new issue, ideally within 24-48 hours.
+  - Label the issue appropriately (e.g., bug, feature request, enhancement).
+  - Ask for more information if the issue is unclear or incomplete.
+
+### 2. Prioritization
+- **Assess Urgency and Impact**: Determine the issue's priority based on its urgency, impact on the project, and user needs.
+- **Set Milestones**: Assign the issue to a specific milestone if it aligns with project's roadmap and priorities.
+
+### 3. Planning
+- **Assign Responsibility**: Assign the issue to a team member who has the expertise and capacity to handle it.
+- **Estimate Timeline**: Provide an estimated timeline for when the issue might be addressed, if possible.
+
+### 4. Communication
+- **Keep Open Communication**: Update the issue thread with progress reports, questions, or requests for feedback.
+
+### 5. Fixing issue
+- **Implement Solution**: Resolve the issue through code changes, documentation updates, or other necessary actions.
+- **Code Review and Testing**: Ensure that any code changes are reviewed and tested thoroughly.
+- **Close with Explanation**: Once resolved, close the issue with a comment explaining the resolution or linking to the relevant pull request.
+
 
 ## Security issues implemented
 
