@@ -2,15 +2,14 @@
 
 This is the TRUE Connector traceability matrix for known major issues. The rating ranges from 1 (high priority) to 3 (low priority). For further details on issues please check the Github issues section of the [Data App](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/issues) and [Execution core container](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/issues).
 
-| Priority | Issue         | Status       | Note |
-|:---:|:------------|:------------|:------------|
-| 1 | Base64 encoded payload support | Done | |
-| 1 | Docker image GHA fails | Done | |
-| 1 | add Clearing house authentication header | Done | |
-| 2 | Error is printed in log when requesting self description | | |
-| 3 | Stack trace is returned when configuration and request are not matched | | |
-| 3 | Change payload from String to byte array | | |
 
+| Classification | Severity | Report Date | Issue | Description | Detailing Location | Affected Component | Impact | Status |
+|:--------------:|:--------:|:-----------:|:-----:|:-----------:|:------------------:|:------------------:|:------:|:------:|
+| Functional     | High     | 2023-01-10  | Base64 encoded payload support | Support for Base64 encoded payloads | Internal ticket| Data App | Data handling efficiency | DONE |
+| Functional     | High     | 2023-02-15  | Docker image GHA fails | Failure in Docker image generation via GitHub Actions | Internal ticket | Execution Core | Deployment issues | DONE | 
+| Security       | High     | 2023-03-05  | Clearing house authentication | Adding authentication header for clearing house | Internal ticket | Data App | Security enhancement | DONE |
+| Functional     | Medium   | 2023-06-01  | Error in log for self description | Erroneous log entries when requesting self description | https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/issues/192| Execution Core | Log clarity | DONE
+| Documentation | High | 2023-09-18 | Error in the curl comman in the "Testing DataApp Provider endoint" section of the readme | The curl call mentioned in the documentation, triggers a parsing error | https://github.com/Engineering-Research-and-Development/true-connector-basic_data_basapp/issues/107 | Data App | Users not able to explore TC | DONE |
 
 ## Vulnerability Remediation Process
 
@@ -57,15 +56,16 @@ As TrueConnector is an open-source project, we highly encourage end users to rep
 - **Close with Explanation**: Once resolved, close the issue with a comment explaining the resolution or linking to the relevant pull request.
 
 
-## Security issues implemented
+## Management of Security Issue Implementation
 
-Fixes for security issues should be covered with tests. Once issue is fixed, new GitHub Action should be created and added to the existing set of tests (when applicable). 
+For managing security issues, a comprehensive approach is adopted:
 
-| Description | Fixed version TC | Component |
-|:------------|:---------:|:---------:|
-| com.auth0:jwks-rsa from 0.21.1 to 0.22.1 | 1.0.1 | ECC |
-| net.logstash.logback:logstash-logback-encoder from 7.0.1 to 7.3 | 1.0.1 | ECC |
-| com.auth0:java-jwt from 3.19.1 to 3.19.3 | 1.0.1 | ECC |
-| org.bitbucket.b_c:jose4j:0.7.8 to 0.9.3 | 1.0.1 | ECC |
-| TLS 1.3 as mandatory way for communication | 1.0.1 | ECC, DA, UC |
+1. **Automated Security Scanning**: Continuous monitoring for vulnerabilities in dependencies using tools like GitHub Dependabot, which automatically updates vulnerable dependencies.
 
+2. **GitHub Actions for CI**: Leveraging GitHub Actions for continuous integration to build and test every commit, ensuring detection of any new vulnerabilities introduced.
+
+3. **Code Review and Quality Assurance**: Rigorous peer review process for all code changes, especially those addressing security issues, to prevent the introduction of new vulnerabilities.
+
+4. **Test Coverage**: Emphasizing comprehensive test coverage, including unit, integration, and end-to-end tests, to detect vulnerabilities early in the development cycle.
+
+5. **Documentation and Tracking**: Thorough documentation of all security fixes, detailing the vulnerability, the fix, and the impact on the system.

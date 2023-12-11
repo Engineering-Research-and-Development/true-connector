@@ -65,6 +65,6 @@
 - **Principle of Least Privilege**: Always assign the minimum necessary permissions.
 - **Regular Audits**: Periodically review user roles and permissions.
 - **Backup**: Always have a backup before making significant changes, especially in Linux `/etc` directory or Windows registry.
-
+- **Mandatory Access Control**: As an OS administrator, it is essential to implement strict access control measures. Ensure that each user is assigned to the correct group with appropriate file permissions. Regularly verify that a user (User X) cannot access files belonging to another user (User Y), especially in shared or networked environments. This can be achieved through careful configuration of user accounts, groups, and permissions, along with the use of tools like Access Control Lists (ACLs) in Linux or Group Policies in Windows.
 ---
 
