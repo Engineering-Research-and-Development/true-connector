@@ -1,7 +1,5 @@
 # Managing OS Roles and Permissions
 
-## Linux
-
 ### Requirements
 - A Linux system (e.g., Debian, Ubuntu, CentOS)
 - Sudo or root access
@@ -30,41 +28,12 @@
 - **Start/Stop Service**: `sudo systemctl start [service]`
 - **Enable/Disable Service on Boot**: `sudo systemctl enable [service]`
 
-
-## Windows
-
-### Requirements
-- A Windows machine (Windows Server recommended)
-- Administrator access
-
-### Steps
-
-#### Managing Users and Groups
-- **Add User**: Control Panel → Administrative Tools → Computer Management → Local Users and Groups → Users → New User
-- **Add Group**: Similar path as adding a user, but under Groups
-- **Add User to Group**: Right-click on the group → Add to group
-
-#### Managing File Permissions
-- **Change File Ownership**: Right-click on file → Properties → Security → Advanced → Owner → Edit
-- **Change Permissions**: Right-click on file → Properties → Security → Edit
-  - Permissions can be set for different users and groups.
-
-#### Group Policy for Role Assignment
-- **Open Group Policy Editor**: `gpedit.msc`
-- **Configure Policies**: Navigate through the policy tree and edit as needed.
-  - Policies can control user rights, security options, etc.
-
-#### Managing Services
-- **Open Services**: `services.msc`
-- **Start/Stop Service**: Right-click on service → Start/Stop
-- **Change Service Startup Type**: Right-click on service → Properties → Startup type
-
 ---
 
 ### Best Practices
 - **Principle of Least Privilege**: Always assign the minimum necessary permissions.
 - **Regular Audits**: Periodically review user roles and permissions.
-- **Backup**: Always have a backup before making significant changes, especially in Linux `/etc` directory or Windows registry.
-- **Mandatory Access Control**: As an OS administrator, it is essential to implement strict access control measures. Ensure that each user is assigned to the correct group with appropriate file permissions. Regularly verify that a user (User X) cannot access files belonging to another user (User Y), especially in shared or networked environments. This can be achieved through careful configuration of user accounts, groups, and permissions, along with the use of tools like Access Control Lists (ACLs) in Linux or Group Policies in Windows.
+- **Backup**: Always have a backup before making significant changes, especially in Linux `/etc` directory 
+- **Mandatory Access Control**: As an OS administrator, it is essential to implement strict access control measures. Ensure that each user is assigned to the correct group with appropriate file permissions. Regularly verify that a user (User X) cannot access files belonging to another user (User Y), especially in shared or networked environments. This can be achieved through careful configuration of user accounts, groups, and permissions, along with the use of tools like Access Control Lists (ACLs) in Linux.
 ---
 

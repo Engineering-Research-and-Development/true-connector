@@ -1,7 +1,6 @@
 
 # OS Log Access Configuration Guide
 
-## For Linux OS
 
 ### Prerequisites
 - Root or sudo privileges on the Linux system.
@@ -33,33 +32,3 @@
 
 5. **Review and Confirm**
    - Ensure the user can read the necessary logs without issues.
-
-
-## For Windows OS
-
-### Prerequisites
-- Administrative access to the Windows system.
-- Basic knowledge of Windows security settings and User Account Control (UAC).
-
-### Steps
-
-1. **Open Local Security Policy**
-   - Press `Win + R`, type `secpol.msc`, and press Enter.
-
-2. **Navigate to User Rights Assignment**
-   - In the Local Security Policy window, navigate to: `Security Settings` -> `Local Policies` -> `User Rights Assignment`.
-
-3. **Edit Audit Policy**
-   - Find and double-click on `Audit logon events`.
-   - Add the user or group that needs log access.
-   - Apply the changes.
-
-4. **Grant Access to Event Viewer**
-   - Right-click on `Start`, and select `Computer Management`.
-   - Go to `System Tools` -> `Event Viewer`.
-   - Right-click on `Event Viewer (Local)` and select `Properties`.
-   - Under the `Security` tab, add the user or group and assign the appropriate permissions.
-
-5. **Review and Apply Settings**
-   - Confirm all settings are correctly applied.
-   - Inform the user about the access granted.
