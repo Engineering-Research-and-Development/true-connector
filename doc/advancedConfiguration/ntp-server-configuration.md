@@ -1,7 +1,5 @@
 # NTP Server Setup Guide
 
-## Setting Up an NTP Server on Linux
-
 ### Requirements
 - A Linux system (e.g., Debian, Ubuntu, CentOS)
 - Sudo or root access
@@ -30,37 +28,3 @@
 ### Additional Notes
 - Ensure firewall settings allow UDP traffic on port 123.
 - Regularly monitor service status and synchronization.
-
----
-
-## Setting Up an NTP Server on Windows
-
-### Requirements
-- A Windows machine (Windows Server recommended)
-- Administrator access
-
-### Steps
-1. **Enable Windows NTP Server**
-   - Open Registry Editor: `regedit`.
-   - Navigate to `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W32Time\TimeProviders\NtpServer`.
-   - Set `Enabled` to `1`.
-
-2. **Configure Windows Time Service**
-   - Open Services: `services.msc`.
-   - Locate `Windows Time`, set to `Automatic`, and start the service.
-
-3. **Set NTP Settings**
-   - Open Command Prompt as Admin.
-   - Configure NTP source: `w32tm /config /manualpeerlist:"time.windows.com" /syncfromflags:manual /reliable:YES /update`.
-
-4. **Restart Windows Time Service**
-   - Restart service: `net stop w32time && net start w32time`.
-
-5. **Manual Sync and Status Check**
-   - Force sync: `w32tm /resync`.
-   - Check status: `w32tm /query /status`.
-
-### Additional Notes
-- Adjust firewall to allow NTP traffic (UDP port 123).
-- Regular checks of the service are recommended.
-
