@@ -30,6 +30,8 @@
   * [MyData Usage Control](doc/advancedConfiguration/mydata.md)
   * [Audit logs](doc/advancedConfiguration/auditlogs.md)
   * [Firewall](doc/advancedConfiguration/firewall.md)
+  * [NTP Server setup](doc/advancedConfiguration/ntp-server-configuration.md)
+  * [Manage OS users](doc/advancedConfiguration/manage-os-users.md)
 * [Contract Negotiation - simple flow](doc/contractNegotiation/contract-negotiation.md)
   * [Get offered resource](doc/contractNegotiation/get_offered_resource.md)
   * [Description Request Message](doc/contractNegotiation/description_request_message.md)

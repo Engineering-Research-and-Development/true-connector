@@ -16,3 +16,5 @@ application.OCSP_RevocationCheckValue=none
 | *none* | OCSP check disabled |
 
 When enabled, it will perform remote environment certificate check prior to sending request to provider connector.
+
+For all additional information such are responses from OCSP server, please take a look at the logs.

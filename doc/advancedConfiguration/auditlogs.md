@@ -35,3 +35,5 @@ Content of the file is consisted of json entries.
 Trace log file contains logs that can be useful when debugging or investigating what was incorrect and why connector is responding as expected. In cases when connector does not start, or if response is not expected, some rejection message is returned instead any other response, good starting point is to check content of this log file and get information why connector is not responding as expected. 
 
 User might try to solve the problem, in most cases problem will be configuration related or that invalid values are passed.
+
+More information about OS logs on Host machine and how to configure it can be found [here](os-logs-configuration.md)
