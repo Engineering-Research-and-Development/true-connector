@@ -48,6 +48,7 @@ Open the config file /etc/ssh/sshd_config with your favorite editor and add thes
 ```
 PermitRootLogin no
 AllowGroups ssh_login_group
+
 ```
 
 ### Disable password login
@@ -58,6 +59,7 @@ You probably want to disable password login to avoid someone logging in from som
 ChallengeResponseAuthentication no
 PasswordAuthentication no
 UsePAM no
+AllowUsers bob alice...
 ```
 
 ### Create SSH public and private keys for user accessing host machine
@@ -69,8 +71,8 @@ With the following command a new key-pair is created.
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/desktop_key-rsa
 ```
 
-In order to create the key, you will be asked for a password. This is the password for your key. If you don't want to have a password for your key, just press Enter at the password prompt. The result of this command should be two files. The file "\~/.ssh/desktop_key-rsa" which is the private-key file, and the file "~/.ssh/desktop_key-rsa.pub" which contains your public-key file. 
-This public-key and private-key will be transferred to the client.
+In order to create the key, you will be asked for a password. This is the password for your key. If you don't want to have a password for your key, just press Enter at the password prompt. It is recommended and considered as best practice (and also security related) to enter passphrase. It will be used as security step, avoiding the usage of a stolen or lost private key. The result of this command should be two files. The file "\~/.ssh/desktop_key-rsa" which is the private-key file, and the file "~/.ssh/desktop_key-rsa.pub" which contains your public-key file. 
+This public-key and private-key will be securely transferred to the client. This means that keys are transferred to the client machine without exposing the content of the file, following best practices for delivering files containing sensitive data.
 
 public-key needs to be added to the authorized keys. To make sure we do not override any already configured authorized key, 
 we add the public-key to the authorized_keys file. If the file does not yet exist, it will create it automatically:
@@ -93,13 +95,19 @@ from="192.168.1.12" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABA...etc...mnMo7n1DD user
 
 This will enforce that user can log in into server using key authentication only from IP address 192.168.1.12
 
-Make sure to change IP address to fit real use case.
+Make sure to change IP address to fit real use case. This additional layer of security, with IP address restriction , should be taken with caution. Client IP address should be fixed and must not change in time. Also, if client is behind some router or firewall then client machine IP address will not be the one reaching server.
 
 Once public-key is uploaded to authorized_keys, user requesting access to the server should securely receive public and private key.
 User can verify that connection with following:
 
 ```
 ssh username@server.example.com -v -i .ssh/desktop_key-rsa
+```
+
+Note: username used in command to connect to the server needs to be added in sshd deamon configuration file
+
+```
+AllowUsers bob alice...
 ```
 
 ## Post configuration steps
