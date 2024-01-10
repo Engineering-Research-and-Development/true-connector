@@ -69,3 +69,12 @@ For managing security issues, a comprehensive approach is adopted:
 4. **Test Coverage**: Emphasizing comprehensive test coverage, including unit, integration, and end-to-end tests, to detect vulnerabilities early in the development cycle.
 
 5. **Documentation and Tracking**: Thorough documentation of all security fixes, detailing the vulnerability, the fix, and the impact on the system.
+
+## Status of the issues
+
+As mentioned earlier, GitHub, used alongside Dependabot, serves as a system for monitoring reported issues, tracking the progress of ongoing issues, and recording closed issues. The most recent status updates for each component are available:
+
+1. Automated security issues - [ECC](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/security/dependabot), [DataApp](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/security/dependabot)
+2. Open issues - [ECC](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/issues), [DataApp](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/issues)
+3. Changelogs (Closed implemented issues) - [ECC](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.6/CHANGELOG.md),[DataApp](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/blob/0.3.7/CHANGELOG.md), [UCDataApp](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/blob/1.7.8/CHANGELOG.md)
+

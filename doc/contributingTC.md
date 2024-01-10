@@ -7,6 +7,10 @@ welcome to contribute to this project.
 
 We document changes in the CHANGELOG.md on root level in each project.
 
+* ECC - [CHANGELOG.md](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.6/CHANGELOG.md)
+* DataApp - [CHANGELOG.md](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/blob/0.3.7/CHANGELOG.md)
+* UCDataApp - [CHANGELOG.md](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/blob/1.7.8/CHANGELOG.md)
+
 ## Issues
 
 You always have to create an issue if you want to integrate a bugfix, improvement, or feature. Briefly and clearly describe the purpose of your contribution in the corresponding issue. You can send email to the [TRUE Connector team](mailto:trueconnector-team@eng.it) before creating an issue, if unclear in which project to create an issue.
