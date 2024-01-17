@@ -75,8 +75,10 @@ For managing security issues, a comprehensive approach is adopted:
 As mentioned earlier, GitHub, used alongside Dependabot, serves as a system for monitoring reported issues, tracking the progress of ongoing issues, and recording closed issues. The most recent status updates for each component are available:
 
 1. Automated security issues reported by Dependabot
+
 | Severity  | Report Date | Issue                                              | Affected Component | Solution        | Status |
 |:---------:|:-----------:|:--------------------------------------------------:|:------------------:|:---------------:|:------:|
+
 | High      | 2022-04     | json stack overflow vulnerability                  | ECC                | Bump to v20230227 | DONE |
 | Critical  | 2022-02     | Arbitrary code execution in Apache Commons Text	   | DataApp            | Bump to v1.10.0 | DONE   |
 | Critical  | 2022-02     | Arbitrary code execution in Apache Commons Text    | ECC                | Bump to v1.10.0 | DONE   |
