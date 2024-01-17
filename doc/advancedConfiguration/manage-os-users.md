@@ -1,5 +1,7 @@
 # Managing OS Roles and Permissions
 
+***NOTE:*** General advice is to have only one admin (root) user per OS, in case you have specific need for additional user, proceed with the next steps.
+
 ### Requirements
 - A Linux system (e.g., Debian, Ubuntu, CentOS)
 - Sudo or root access

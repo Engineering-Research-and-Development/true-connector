@@ -11,17 +11,16 @@ To have secure and certification compliant environment, following prerequisites 
 * The host OS should be audited and secure; OS should be as minimal as possible and it should be preferably used to host our Docker exclusively. There should not coexist other services like web servers or web applications so that attacker could not exploit it or lead to potential exploit (minimal threat attack surface).
 * Monitoring mechanism (Linux auditd service for example) should be installed and configured as prerequisite before deploying connector. This will capture if someone tries to make changes on property files used by the connector.
 * make sure to create rules to monitor folders and property files of the TRUE Connector (for example auditctl -w /xxxx/TRUEConnector/* -k trueconnector, depending on the location where TRUE Connector is deployed)
-* make sure to create rules for monitoring docker service (dockerd, /run/containerc, /var/lib/docker, /etc/docker, docker.service...) This might differ based on OS distribution
-* rules for auditing should be persisted (/etc/audit/audit.d/rules/audit.rules file, depending on the OS distribution, location might differ)
-* make sure to create rules for mounted docker volumes (to be able to keep track of changes made over files present in those volumes)
-* make sure to create scripts to monitor storage capacity in order to notify when the OS system is reaching storage assigned capacity. Also use crone jobs to repeat those scripts at desired time interval.
-
-
+* Make sure to create rules for monitoring docker service (dockerd, /run/containerc, /var/lib/docker, /etc/docker, docker.service...) This might differ based on OS distribution
+* Rules for auditing should be persisted (/etc/audit/audit.d/rules/audit.rules file, depending on the OS distribution, location might differ)
+* Make sure to create rules for mounted docker volumes (to be able to keep track of changes made over files present in those volumes)
+* Make sure to create scripts to monitor storage capacity in order to notify when the OS system is reaching storage assigned capacity. Also use CroneTab to repeat those scripts at desired time interval. One example of how to write script and set CronTab to automate it can be found [here](https://tecadmin.net/shell-script-to-check-disk-space-and-send-alert/)
 * User responsible for setting up environment where connector will run should isolate or disable other services. 
-* OS user for running docker should not be root user; be sure to create new user, assign new user to docker group, that user can run docker compose. How to manage OS users you can find [here.](../advancedConfiguration/manage-os-users.md)
-* disable password login to the server for newly created user and allow only key-based authentication for accessing the server where connector will run
-* disable access for the root user by using a password when connecting to the server via ssh (key-based auth only)
-* in case of adding some additional, more configurable and robust firewall, be sure to restrict access to the /api/* endpoints to only internal network, since those endpoints should not be exposed to the outside world, but intended to be used by "internal" user, to make modifications to the self description document.
+* If there is a need to create a new user which isn't admin (root) which is not recommendation, who would run the docker, be sure that new OS user is not the root one, so create a new user, assign new user to docker group, that user can run docker compose. How to manage OS users you can find [here.](../advancedConfiguration/manage-os-users.md)
+* If there is a need to create a new user who would just inspect the TC logs via SSH access, follow the rest of the advices in this document, and then setup a crone job for copying logs from docker volumes to read-only folder on OS filesystem, which can be found [here](../advancedConfiguration/tc-logs-copying.md
+* Disable password login to the server for newly created user and allow only key-based authentication for accessing the server where connector will run
+* Disable access for the root user by using a password when connecting to the server via ssh (key-based auth only)
+* In case of adding some additional, more configurable and robust firewall, be sure to restrict access to the /api/* endpoints to only internal network, since those endpoints should not be exposed to the outside world, but intended to be used by "internal" user, to make modifications to the self description document.
 
 
 * 2 types of certificate are required: DAPS and TLS. 
@@ -137,7 +136,7 @@ By regularly updating SSH keys every three months, administrators will enhance t
 
 ## Post configuration steps
 
-Once TRUE Connector is successfully configured and is up and running, responsible user for setting up environment and configuring connector should generate new passwords for 2 type of users required for operating with connector. More information how to do this can be found [here](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.6/doc/SECURITY.md#change-default-password). 
+Once TRUE Connector is successfully configured and is up and running, responsible user for setting up environment and configuring connector should generate new passwords for 2 type of users required for operating with connector. More information how to do this can be found [here](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.7/doc/SECURITY.md#change-default-password). 
 
 Make sure to update following properties to address your usecase:
 
