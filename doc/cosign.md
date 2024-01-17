@@ -4,9 +4,9 @@ Docker images that are part of the TRUE Connector are signed using [cosign](http
 
 Signed images starts with following versions:
 
-**rdlabengpa/ids\_execution\_core\_container:v1.14.6**\
+**rdlabengpa/ids\_execution\_core\_container:v1.14.7**\
 
-**rdlabengpa/ids\_be\_data\_app:v0.3.7**\
+**rdlabengpa/ids\_be\_data\_app:v0.3.8**\
 
 **rdlabengpa/ids\_uc\_data\_app\_platoon:v1.7.8**\
 
@@ -25,10 +25,10 @@ signature not found in transparency log
 ```
 
 ```
-cosign verify --insecure-ignore-tlog --key trueconn.pub rdlabengpa/ids_execution_core_container:v1.14.6
+cosign verify --insecure-ignore-tlog --key trueconn.pub rdlabengpa/ids_execution_core_container:v1.14.7
 
 WARNING: Skipping tlog verification is an insecure practice that lacks of transparency and auditability verification for the signature.
-Verification for index.docker.io/rdlabengpa/ids_execution_core_container:v1.14.6 --
+Verification for index.docker.io/rdlabengpa/ids_execution_core_container:v1.14.7 --
 The following checks were performed on each of these signatures:
   - The cosign claims were validated
   - The signatures were verified against the specified public key
@@ -50,10 +50,10 @@ The following checks were performed on each of these signatures:
 ```
 
 ```
-cosign verify --insecure-ignore-tlog --key trueconn.pub rdlabengpa/ids_be_data_app:v0.3.7
+cosign verify --insecure-ignore-tlog --key trueconn.pub rdlabengpa/ids_be_data_app:v0.3.8
 
 WARNING: Skipping tlog verification is an insecure practice that lacks of transparency and auditability verification for the signature.
-Verification for index.docker.io/rdlabengpa/ids_be_data_app:v0.3.7 --
+Verification for index.docker.io/rdlabengpa/ids_be_data_app:v0.3.8 --
 The following checks were performed on each of these signatures:
   - The cosign claims were validated
   - The signatures were verified against the specified public key
