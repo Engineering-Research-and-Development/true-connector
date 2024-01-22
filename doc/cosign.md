@@ -35,17 +35,17 @@ The following checks were performed on each of these signatures:
 
 [
 	{
-		"critical": {
-			"identity": {
-				"docker-reference": "index.docker.io/rdlabengpa/ids_execution_core_container"
-			},
-			"image": {
-				"docker-manifest-digest": "sha256:cb7f37253a0e9ef89726b5b7f220f05d5069b5007809d40fc477e1ac21e936e5"
-			},
-			"type": "cosign container image signature"
-		},
-		"optional": null
-	}
+        "critical": {
+            "identity": {
+                "docker-reference": "index.docker.io/rdlabengpa/ids_execution_core_container"
+            },
+            "image": {
+                "docker-manifest-digest": "sha256:17cb1512a22448326e74df3ab4df3e82cdddcd7cbbb8a8e81cb177455586df7c"
+            },
+            "type": "cosign container image signature"
+        },
+        "optional": null
+    }
 ]
 ```
 
@@ -60,17 +60,17 @@ The following checks were performed on each of these signatures:
 
 [
 	{
-		"critical": {
-			"identity": {
-				"docker-reference": "index.docker.io/rdlabengpa/ids_be_data_app"
-			},
-			"image": {
-				"docker-manifest-digest": "sha256:04523e3a91568526c4a9db08fc643aa6d15e26c3c2ce5894836a44fb0f163886"
-			},
-			"type": "cosign container image signature"
-		},
-		"optional": null
-	}
+        "critical": {
+            "identity": {
+                "docker-reference": "index.docker.io/rdlabengpa/ids_be_data_app"
+            },
+            "image": {
+                "docker-manifest-digest": "sha256:7eee63e0e63013b3dcb0080c7468a618fb9f0f09a337647b74d326de550dceb3"
+            },
+            "type": "cosign container image signature"
+        },
+        "optional": null
+    }
 ]
 ```
 
