@@ -1,5 +1,6 @@
 ## TC logs copying from docker volumes to read-only folder <a href="#tc-logs-copy" id="tcLogsCopy"></a>
 
+***IMPORTANT:*** Operation described in this document can be only be done by **administrator (root)** user.
 
 If there is a need to create an additional user with SSH access to view TC logs, this can be achieved using the [tc-logs-copying.sh](./tc-logs-copying.sh) script provided. Once script is downloaded, before running, be sure to check if script is executable.
 
