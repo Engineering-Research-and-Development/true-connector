@@ -1,6 +1,6 @@
 ### Changing API password <a href="#changepassword" id="changepassword"></a>
 
-If you want to change password for some of the users, this can be done via following endpoint
+If you want to change password for connector users, this can be done via following endpoint
 
 ```
 /notification/password/{new_password}

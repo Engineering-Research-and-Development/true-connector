@@ -16,7 +16,7 @@ To have secure and certification compliant environment, following prerequisites 
 * Make sure to create rules for mounted docker volumes (to be able to keep track of changes made over files present in those volumes)
 * Make sure to create scripts to monitor storage capacity in order to notify when the OS system is reaching storage assigned capacity. Also use CroneTab to repeat those scripts at desired time interval. One example of how to write script and set CronTab to automate it can be found [here](https://tecadmin.net/shell-script-to-check-disk-space-and-send-alert/)
 * User responsible for setting up environment where connector will run should isolate or disable other services. 
-* If there is a need to create a new user which isn't admin (root) which is not recommendation, who would run the docker, be sure that new OS user is not the root one, so create a new user, assign new user to docker group, that user can run docker compose. How to manage OS users you can find [here.](../advancedConfiguration/manage-os-users.md)
+* If there is a need to create a new (SSH/OS) user which isn't admin (root) which is not recommendation, who would run the docker, be sure that new SSH/OS user is not the root one, so create a new user, assign new user to docker group, that user can run docker compose. How to manage OS users you can find [here.](../advancedConfiguration/manage-os-users.md)
 * If there is a need to create a new user who would just inspect the TC logs via SSH access, follow the rest of the advices in this document, and then setup a crone job for copying logs from docker volumes to read-only folder on OS filesystem, which can be found [here](../advancedConfiguration/tc-logs-copying.md
 * Disable password login to the server for newly created user and allow only key-based authentication for accessing the server where connector will run
 * Disable access for the root user by using a password when connecting to the server via ssh (key-based auth only)
@@ -59,7 +59,7 @@ You probably want to disable password login to avoid someone logging in from som
 ChallengeResponseAuthentication no
 PasswordAuthentication no
 UsePAM no
-AllowUsers bob alice...
+AllowUsers sshUser1 sshUser2...
 ```
 
 ### Create SSH public and private keys for user accessing host machine
@@ -105,7 +105,7 @@ ssh username@server.example.com -v -i .ssh/desktop_key-rsa
 Note: username used in command to connect to the server needs to be added in sshd deamon configuration file and passphrase for that key needs to be entered when prompted.
 
 ```
-AllowUsers bob alice...
+AllowUsers sshUser1 sshUser2...
 ```
 
 

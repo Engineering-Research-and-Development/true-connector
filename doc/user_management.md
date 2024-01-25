@@ -82,9 +82,11 @@ Example:
 
 ```
 # List of users
-users.list=newUser
+users.list=exisitingUser,newUser
 
 # Credentials for each user
+# encoded - passwordExistingUser123
+exisitingUser.password=$2a$12$pnOQFwnr4abSkXs3DaKt8O0MRE2r234WHFLPKUmUgwXZkA245BDa.
 # encoded - passwordNewUser123
 newUser.password=$2a$12$v7/AKsx5KTNJpwOg9yRRe.h6jP80gc03umqqN6aMAQtvVEWmpIqna
 ```
@@ -94,18 +96,21 @@ After the files are modified, it is necessary to restart container in order to a
 
 ### Modify existing user
 
-Same rules applies to user credentials modification, what it needs to be updated is username in the `user-list`, and if password need to be updated, the same endpoint  should be used. 
+Same rules applies to user credentials modification, what it needs to be updated is username in the `user-list`, and if password need to be updated, the same endpoint mentioned above should be used. 
 
 
-Example:
+Example for changing username and password:
 
 ```
 # List of users
-users.list=newUserModify
+users.list=exisitingUser,newUserModify
 
 # Credentials for each user
-# encoded - passwordNewUser123
-newUserModify.password=$2a$12$v7/AKsx5KTNJpwOg9yRRe.h6jP80gc03umqqN6aMAQtvVEWmpIqna
+# encoded - passwordExistingUser123
+exisitingUser.password=$2a$12$pnOQFwnr4abSkXs3DaKt8O0MRE2r234WHFLPKUmUgwXZkA245BDa.
+# encoded - passwordNewUser123Modify
+newUserModify.password=$2a$12$O8BZtPck4AtFpMl.WvflFOy4MniRcc0S94X43I32Eym1ZuOr5M1/.
+
 ```
 
 Also here, after the files are modified, it is necessary to restart container in order to apply changes.
