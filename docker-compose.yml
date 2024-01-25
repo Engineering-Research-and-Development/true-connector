@@ -134,7 +134,7 @@ services:
       - VALIDATE_SELF_DESCRIPTION=${VALIDATE_SELF_DESCRIPTION}
     volumes:
       - ./be-dataapp_resources:/config
-      - be_dataapp_provider_data:/home/nobody/data/
+      - trueconnector_be_dataapp_provider_data:/home/nobody/data/
       - ./ecc_cert:/cert
       
   ecc-consumer:
@@ -284,5 +284,5 @@ volumes:
   ecc_consumer_data: {}
   uc_consumer_data: {}
   be_dataapp_consumer_data: {}
-  be_dataapp_provider_data:
+  trueconnector_be_dataapp_provider_data:
     external: true
