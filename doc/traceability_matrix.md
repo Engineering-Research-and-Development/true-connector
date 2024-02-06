@@ -72,9 +72,19 @@ For managing security issues, a comprehensive approach is adopted:
 
 ## Status of the issues
 
-As mentioned earlier, GitHub, used alongside Dependabot, serves as a system for monitoring reported issues, tracking the progress of ongoing issues, and recording closed issues. The most recent status updates for each component are available:
+As mentioned earlier, GitHub, used alongside Dependabot, serves as a system for monitoring reported issues, tracking the progress of ongoing issues, and recording closed issues.
+
+The most recent status updates for each component are available:
+
+
 
 1. Automated security issues reported by Dependabot
+
+Status of issues can be:
+
+* Open - security issue detected by Dependabot 
+* Done - security issue patched 
+
 
 | Severity  | Report Date | Issue                                              | Affected Component | Solution        | Status |
 |:---------:|:-----------:|:--------------------------------------------------:|:------------------:|:---------------:|:------:|
@@ -86,6 +96,13 @@ As mentioned earlier, GitHub, used alongside Dependabot, serves as a system for 
 | Moderate  | 2021-01     | Timing based private key exposure in Bouncy Castle | ECC                | Bump to v1.66   | DONE   |
 
 
-2. Open issues - [ECC](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/issues), [DataApp](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/issues)
-3. Changelogs (Closed implemented issues) - [ECC](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.7/CHANGELOG.md),[DataApp](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/blob/0.3.8/CHANGELOG.md), [UCDataApp](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/blob/1.7.8/CHANGELOG.md)
+2. Open issues 
+ 
+Status of issues can be:
 
+* Open - issues is reported by end user or team member
+* Under investigation - checking reported issue, labeling, categorizing and assigning it
+* Closed - issue is patched 
+
+[ECC](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/issues), [DataApp](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/issues)
+3. Changelogs (Closed implemented issues) - [ECC](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.7/CHANGELOG.md),[DataApp](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/blob/0.3.8/CHANGELOG.md), [UCDataApp](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/blob/1.7.8/CHANGELOG.md)
