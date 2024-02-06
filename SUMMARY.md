@@ -52,7 +52,6 @@
   * [Docker image signing and verification](doc/cosign.md)
 * [Life cycle](doc/life_cycle.md)
 * [Security](doc/security.md)
-* [IDS-criteria](doc/IDS-criteria.md)
 * [Roadmap](doc/roadmap.md)
 * [Traceability matrix](doc/traceability_matrix.md)
 * [License](doc/license.md)
