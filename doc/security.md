@@ -4,7 +4,7 @@ The TRUE Connector uses state-of-the-art TLS 1.3 encryption for https/wss commun
 
 ## Public Key Infrastructure - PKI
 
-TRUE Connector supports both self signed (to be used for non production environment) and certificates provided by trusted Certificate Authority, like Let'sEncrypt, which are recommended for production environment. This certificate will be used to enable TLS channel between components.
+For a proper set-up of the TRUE Connector, it is required to provide a certificate from a trusted Certificate Authority, such as Let's Encrypt, which is recommended for production environments. This certificate will be used to enable a TLS channel between components.
 
 If requested, you can create one for consumer side and one for provider side of the TRUE Connector. In that case, SAN should be split to match (consumer and provider ones should be separated)
 
