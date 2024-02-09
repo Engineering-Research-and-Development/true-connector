@@ -78,20 +78,22 @@ Status of issues can be:
 
 * Open - issues is reported by end user, team member or Dependabot
 * Under investigation - checking reported issue, labeling, categorizing and assigning it
-* Closed - issue is patched 
+* Under development - working actively on bug/issue
+* Ready for merge - development is done, automated test passed, PR is opened for a review
+* Closed - issue is patched and merged
 
 The most recent status updates for each component are available:
 
 1. Automated security issues reported by Dependabot
 
-| Severity  | Report Date | Issue                                              | Affected Component | Solution        | Status |
-|:---------:|:-----------:|:--------------------------------------------------:|:------------------:|:---------------:|:------:|
-| High      | 2022-04     | json stack overflow vulnerability                  | ECC                | Bump to v20230227 | DONE |
-| Critical  | 2022-02     | Arbitrary code execution in Apache Commons Text	   | DataApp            | Bump to v1.10.0 | DONE   |
-| Critical  | 2022-02     | Arbitrary code execution in Apache Commons Text    | ECC                | Bump to v1.10.0 | DONE   |
-| Moderate  | 2022-04     | Chosen Ciphertext Attack in Jose4j                 | ECC                | Bump to v0.9.3  | DONE   |
-| Moderate  | 2022-01     | Improper Locking in JetBrains Kotlin               | ECC                | Bump to v1.6.0  | DONE   |
-| Moderate  | 2021-01     | Timing based private key exposure in Bouncy Castle | ECC                | Bump to v1.66   | DONE   |
+| Severity  | Report Date | Issue                                              | Affected Component | Solution          | Status |
+|:---------:|:-----------:|:--------------------------------------------------:|:------------------:|:-----------------:|:------:|
+| High      | 2022-04     | JSON stack overflow vulnerability                  | ECC                | Bump to v20230227 | CLOSED |
+| Critical  | 2022-02     | Arbitrary code execution in Apache Commons Text	   | DataApp            | Bump to v1.10.0   | CLOSED |
+| Critical  | 2022-02     | Arbitrary code execution in Apache Commons Text    | ECC                | Bump to v1.10.0   | CLOSED |
+| Moderate  | 2022-04     | Chosen Ciphertext Attack in Jose4j                 | ECC                | Bump to v0.9.3    | CLOSED |
+| Moderate  | 2022-01     | Improper Locking in JetBrains Kotlin               | ECC                | Bump to v1.6.0    | CLOSED |
+| Moderate  | 2021-01     | Timing based private key exposure in Bouncy Castle | ECC                | Bump to v1.66     | CLOSED |
 
 
 2. Open issues - [ECC](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/issues), [DataApp](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/issues)

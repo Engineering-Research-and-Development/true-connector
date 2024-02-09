@@ -1,4 +1,4 @@
-## Configuaration list with evaluation evidence
+## Configuration list with evaluation evidence
 
 This document contains an iterative table providing details on the certification process of TRUE Connector since its initial release. The table includes information on each version's release date, submodule version, and corresponding details about evaluation evidence that influenced changes in that particular version.
 

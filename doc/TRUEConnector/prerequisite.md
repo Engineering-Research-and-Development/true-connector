@@ -71,6 +71,11 @@ With the following command a new key-pair is created.
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/desktop_key-rsa
 ```
 
+* `ssh-keygen` - command used to create the public and private key pairs that SSH uses for secure communication between client and server.
+* `-t rsa` - command used to create RSA (Rivest-Shamir-Adleman) key-pair widely used for secure data transmission, known for their security and efficiency
+* `-b 4096` - specifies the key length, 4096 offers a good balance between security and performance, providing strong protection against brute-force attacks without being overly taxing on system resources.
+* `-f ~/.ssh/desktop_key-rsa` -  specifies the filename for the key file
+
 In order to create the key, you will be asked for a password. This is the password for your key. It is recommended and considered as best practice (and also security related) to enter passphrase. It will be used as security step, avoiding the usage of a stolen or lost private key. The result of this command should be two files. The file "\~/.ssh/desktop_key-rsa" which is the private-key file, and the file "~/.ssh/desktop_key-rsa.pub" which contains your public-key file. 
 This public-key and private-key will be securely transferred to the client. This means that keys are transferred to the client machine without exposing the content of the file, following best practices for delivering files containing sensitive data, such are password protected zip archive, uploading to some storage, and providing link to the responsible user, admin approaching to the client and copying key file from USB stick, or whatever is applicable and most suitable for the company.
 
