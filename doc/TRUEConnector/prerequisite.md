@@ -137,9 +137,13 @@ To facilitate this process, the following steps should be diligently followed:
 
 By regularly updating SSH keys every three months, administrators will enhance the security of server access, making sure these keys effectively protect against unauthorized entry.
 
+## Secure DB
+
+It's mandatory to set **AES256-SECRET-KEY** which is valid password for column encryption with AES256 algorithm.
+
 ## Post configuration steps
 
-Once TRUE Connector is successfully configured and is up and running, responsible user for setting up environment and configuring connector should generate new passwords for 2 type of users required for operating with connector. More information how to do this can be found [here](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.7/doc/SECURITY.md#change-default-password). 
+Once TRUE Connector is successfully configured and is up and running, responsible user for setting up environment and configuring connector should generate new passwords for 2 type of users required for operating with connector. More information how to do this can be found [here](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.8/doc/SECURITY.md#change-default-password). 
 
 Make sure to update following properties to address your usecase:
 

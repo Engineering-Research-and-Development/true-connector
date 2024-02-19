@@ -105,5 +105,5 @@ POSTGRES_DB=usagecontrol_consumer
 
 # Usage control examples
 
-For more information and examples of policies compatible with Platoon UC app, please check [README](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/blob/1.7.8/README.md)
+For more information and examples of policies compatible with Platoon UC app, please check [README](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/blob/1.7.9/README.md)
 

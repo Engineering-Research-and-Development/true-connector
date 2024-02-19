@@ -7,9 +7,9 @@ welcome to contribute to this project.
 
 We document changes in the CHANGELOG.md on root level in each project.
 
-* ECC - [CHANGELOG.md](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.7/CHANGELOG.md)
+* ECC - [CHANGELOG.md](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.8/CHANGELOG.md)
 * DataApp - [CHANGELOG.md](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/blob/0.3.8/CHANGELOG.md)
-* UCDataApp - [CHANGELOG.md](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/blob/1.7.8/CHANGELOG.md)
+* UCDataApp - [CHANGELOG.md](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/blob/1.7.9/CHANGELOG.md)
 
 ## Issues
 
@@ -22,4 +22,4 @@ should at least include the following information:
 * Steps to reproduce (system specs included)
 * Relevant logs and/or media (optional): e.g. an image
 
-For more details about branches, naming conventions and some suggestions, take a look at following [Developer instructions](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/tree/1.14.7#developer-guide-section)
+For more details about branches, naming conventions and some suggestions, take a look at following [Developer instructions](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/tree/1.14.8#developer-guide-section)

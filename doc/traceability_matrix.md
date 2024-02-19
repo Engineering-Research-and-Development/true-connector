@@ -97,5 +97,5 @@ The most recent status updates for each component are available:
 
 
 2. Open issues - [ECC](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/issues), [DataApp](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/issues)
-3. Changelogs (Closed implemented issues) - [ECC](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.7/CHANGELOG.md),[DataApp](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/blob/0.3.8/CHANGELOG.md), [UCDataApp](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/blob/1.7.8/CHANGELOG.md)
+3. Changelogs (Closed implemented issues) - [ECC](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.8/CHANGELOG.md),[DataApp](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/blob/0.3.8/CHANGELOG.md), [UCDataApp](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/blob/1.7.9/CHANGELOG.md)
 
