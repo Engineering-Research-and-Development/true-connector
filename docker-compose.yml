@@ -43,7 +43,7 @@ services:
       - TRUSTORE_PASSWORD=${TRUSTORE_PASSWORD}
       - FIREWALL=${PROVIDER_ECC_FIREWALL}
       - TZ=Europe/Rome
-      - AES256-SECRET-KEY=somesecretkey
+      - AES256-SECRET-KEY=${AES_SECRET_KEY}
     volumes:
       - ./ecc_resources_provider:/config
       - ./ecc_cert:/cert
@@ -73,7 +73,7 @@ services:
       - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
       - ALIAS=${ALIAS}
       - TZ=Europe/Rome
-      - AES256-SECRET-KEY=somesecretkey
+      - AES256-SECRET-KEY=${AES_SECRET_KEY}
     expose:
       - "8080"
     volumes:
@@ -182,7 +182,7 @@ services:
       - TRUSTORE_PASSWORD=${TRUSTORE_PASSWORD}
       - FIREWALL=${CONSUMER_ECC_FIREWALL}
       - TZ=Europe/Rome
-      - AES256-SECRET-KEY=somesecretkey
+      - AES256-SECRET-KEY=${AES_SECRET_KEY}
     volumes:
       - ./ecc_resources_consumer:/config
       - ./ecc_cert:/cert
@@ -212,7 +212,7 @@ services:
       - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
       - ALIAS=${ALIAS}
       - TZ=Europe/Rome
-      - AES256-SECRET-KEY=somesecretkey
+      - AES256-SECRET-KEY=${AES_SECRET_KEY}
     expose:
       - "8080"
     volumes:

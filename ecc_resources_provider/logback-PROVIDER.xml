@@ -14,23 +14,10 @@
 		<append>true</append>
 		<encoder class="net.logstash.logback.encoder.LogstashEncoder" />
 	</appender>
-	<appender name="FILE_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_DIR}/true_connector_provider.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_DIR}/true_connector_provider-%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
-			<maxFileSize>10MB</maxFileSize>
-			<maxHistory>30</maxHistory>
-			<totalSizeCap>1GB</totalSizeCap>
-		</rollingPolicy>
-		<encoder>
-			<pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</pattern>
-		</encoder>
-	</appender>
 	<logger name="JSON" level="INFO">
 		<appender-ref ref="FILE" />
 	</logger>
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />
-		<appender-ref ref="FILE_LOG" />
 	</root>
 </configuration>
