@@ -3,7 +3,7 @@
 If you want to change password for connector users, this can be done via following endpoint
 
 ```
-/notification/password/{new_password}
+/api/password/{new_password}
 ```
 Using this endpoint, it is guaranteed that the password strength rules configured in the `application.properties` file will be enforced.
 
