@@ -139,7 +139,7 @@ By regularly updating SSH keys every three months, administrators will enhance t
 
 ## Secure DB
 
-It's mandatory to set **AES256-SECRET-KEY** as OS variable which is valid password for column encryption with AES256 algorithm.
+It's mandatory to set **AES-SECRET-KEY** as OS variable which is valid password for column encryption with AES/GCM/NoPadding algorithm.
 
 ## Post configuration steps
 
