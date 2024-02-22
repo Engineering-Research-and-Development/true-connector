@@ -44,7 +44,7 @@
 * [License](doc/license.md)
 * [Advanced doc](doc/README.md)
   * [MYDATA\_USAGE\_CONTROL](doc/MYDATA\_USAGE\_CONTROL.md)
-  * [Postgre Configuration](doc/postgreConfiguration.md)
+  * [PostgreSQL Configuration](doc/postgreConfiguration.md)
   * [Test cases](doc/TEST\_API.md)
   * [REST API](doc/rest\_api/REST\_API.md)
   * [Testbed](doc/testbed/TESTBED.md)

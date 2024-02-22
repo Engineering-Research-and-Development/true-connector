@@ -1,6 +1,6 @@
-# Postgre configuration
+# PostgreSQL configuration
 
-Both ECC and UCApp uses in-memory database (H2) with persisting db on file system. This setup can be used for some small POC projects, to verify if integration is working and similar, but for real use case scenario, some more resilient database should be used, for example PostgreSQL (provided config) or some other database.
+Both ECC and UCApp uses in-memory database (H2) with persisting db on file system. This setup can be used for some small POC projects, to verify if integration is working and similar, but for real use case scenario, some more resilient database should be used. Below you can find configuration for setting PostgreSQL.
 
 In order to switch to PostgreSQL database, following steps are needed:
 
@@ -10,8 +10,8 @@ In order to switch to PostgreSQL database, following steps are needed:
   postgres_provider:
     image: postgres:16.2-alpine3.19
     hostname: postgres_provider
-    ports:
-      - "5432:5432"
+    expose:
+      - "5432"
     networks:
       - provider
     env_file:
@@ -23,8 +23,8 @@ In order to switch to PostgreSQL database, following steps are needed:
   postgres_consumer:
     image: postgres:16.2-alpine3.19
     hostname: postgres_consumer
-    ports:
-      - "5433:5432"
+    expose:
+      - "5432"
     networks:
       - consumer
     env_file:
