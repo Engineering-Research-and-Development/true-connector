@@ -1,7 +1,7 @@
 ### Audit logs <a href="#auditlogs" id="auditlogs"></a>
 
 Audit logs must be turned on for a proper and secure deployment of the connector.
-All audit events are stored in database (H2 with default configuration, possible to replace with PostgreSQL, more information can be found [here](../postgreConfiguration.md)), this way tampering of the logs is prohibited. Entries in database are done only by the Execution Core Container. Column for storing auditLog entry is encrypted using *AES/GCM/NoPadding* algorithm which requires user to set valid password. It must be done using environment variable with following name: *AES256-SECRET-KEY*. </br>
+All audit events are stored in database (H2 with default configuration, possible to replace with PostgreSQL, more information can be found [here](../postgreConfiguration.md)), this way tampering of the logs is prohibited. Entries in database are done only by the Execution Core Container. Column for storing auditLog entry is encrypted using *AES/GCM/NoPadding* algorithm which requires user to set valid password. It must be done setting OS environment variable with following name: *AES-SECRET-KEY*. </br>
 When ECC inserts audit entry into Database, AuditLog value will be encrypted using provided algorithm, and when data is requested, it will be decrypted.</br>
 
 If you wish to configure it or even turn off please follow this [document](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.8/doc/AUDIT.md) .
