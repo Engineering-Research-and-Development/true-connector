@@ -10,9 +10,9 @@ To have secure and certification compliant environment, following prerequisites 
 
 * The host OS should be audited and secure; OS should be as minimal as possible and it should be preferably used to host our Docker exclusively. There should not coexist other services like web servers or web applications so that attacker could not exploit it or lead to potential exploit (minimal threat attack surface).
 * Monitoring mechanism (Linux auditd service for example) should be installed and configured as prerequisite before deploying connector. This will capture if someone tries to make changes on property files used by the connector.
-* make sure to create rules to monitor folders and property files of the TRUE Connector (for example auditctl -w /xxxx/TRUEConnector/* -k trueconnector, depending on the location where TRUE Connector is deployed)
+* make sure to create rules to monitor folders and property files of the TRUE Connector, more information available [here](../advancedConfiguration/os-logs-configuration.md#additional-monitoring-configuration)
 * Make sure to create rules for monitoring docker service (dockerd, /run/containerc, /var/lib/docker, /etc/docker, docker.service...) This might differ based on OS distribution
-* Rules for auditing should be persisted (/etc/audit/audit.d/rules/audit.rules file, depending on the OS distribution, location might differ)
+* Rules for auditing should be persisted, more information available [here](../advancedConfiguration/os-logs-configuration.md#additional-monitoring-configuration)
 * Make sure to create rules for mounted docker volumes (to be able to keep track of changes made over files present in those volumes)
 * Make sure to create scripts to monitor storage capacity in order to notify when the OS system is reaching storage assigned capacity. Also use CroneTab to repeat those scripts at desired time interval. One example of how to write script and set CronTab to automate it can be found [here](https://tecadmin.net/shell-script-to-check-disk-space-and-send-alert/)
 * User responsible for setting up environment where connector will run should isolate or disable other services. 
