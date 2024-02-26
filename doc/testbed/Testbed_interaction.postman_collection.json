@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "46c5c26b-4ed9-4ac6-82ad-ac0b87e39dc5",
+		"_postman_id": "390352b2-e27c-4aa1-9420-9bfde3c8064c",
 		"name": "Testbed_interaction",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "21815221"
+		"_exporter_id": "2326106",
+		"_collection_link": "https://martian-water-684810.postman.co/workspace/SQS_TESTING~6bc5bbbb-54a5-4f33-8bc4-883aaa596b4a/collection/2326106-390352b2-e27c-4aa1-9420-9bfde3c8064c?action=share&creator=2326106&source=collection_link"
 	},
 	"item": [
 		{
@@ -755,6 +756,26 @@
 								"exec": [
 									"pm.test(\"Retrieve contract artifact\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"contract_artifact\", jsonData[\"ids:offeredResource\"][0][\"ids:representation\"][0][\"ids:instance\"][0][\"@id\"])\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Retrieve contract id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"contract_id\", jsonData[\"ids:offeredResource\"][0][\"ids:contractOffer\"][0][\"@id\"])\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Retrieve contract permission\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"contract_permission\", JSON.stringify(jsonData[\"ids:offeredResource\"][0][\"ids:contractOffer\"][0][\"ids:permission\"][0]))\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Retrieve contract provider\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.collectionVariables.set(\"contract_provider\", jsonData[\"ids:offeredResource\"][0][\"ids:contractOffer\"][0][\"ids:provider\"][\"@id\"])\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Retrieve offered resource\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
 									"    pm.collectionVariables.set(\"offered_resource\", jsonData[\"ids:offeredResource\"][0][\"@id\"])\r",
 									"});\r",
 									"\r",
@@ -974,12 +995,12 @@
 				"basic": [
 					{
 						"key": "password",
-						"value": "password",
+						"value": "passwordIdsUser",
 						"type": "string"
 					},
 					{
 						"key": "username",
-						"value": "proxy",
+						"value": "idsUser",
 						"type": "string"
 					}
 				]
