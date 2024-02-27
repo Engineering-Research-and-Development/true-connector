@@ -10,9 +10,9 @@ To have secure and certification compliant environment, following prerequisites 
 
 * The host OS should be audited and secure; OS should be as minimal as possible and it should be preferably used to host our Docker exclusively. There should not coexist other services like web servers or web applications so that attacker could not exploit it or lead to potential exploit (minimal threat attack surface).
 * Monitoring mechanism (Linux auditd service for example) should be installed and configured as prerequisite before deploying connector. This will capture if someone tries to make changes on property files used by the connector.
-* make sure to create rules to monitor folders and property files of the TRUE Connector (for example auditctl -w /xxxx/TRUEConnector/* -k trueconnector, depending on the location where TRUE Connector is deployed)
+* Make sure to create OS rules to monitor folders and property files of the TRUE Connector, more information available [here](../advancedConfiguration/os-logs-configuration.md#additional-monitoring-configuration)
 * Make sure to create rules for monitoring docker service (dockerd, /run/containerc, /var/lib/docker, /etc/docker, docker.service...) This might differ based on OS distribution
-* Rules for auditing should be persisted (/etc/audit/audit.d/rules/audit.rules file, depending on the OS distribution, location might differ)
+* Rules for OS auditing should be persisted, more information available [here](../advancedConfiguration/os-logs-configuration.md#additional-monitoring-configuration)
 * Make sure to create rules for mounted docker volumes (to be able to keep track of changes made over files present in those volumes)
 * Make sure to create scripts to monitor storage capacity in order to notify when the OS system is reaching storage assigned capacity. Also use CroneTab to repeat those scripts at desired time interval. One example of how to write script and set CronTab to automate it can be found [here](https://tecadmin.net/shell-script-to-check-disk-space-and-send-alert/)
 * User responsible for setting up environment where connector will run should isolate or disable other services. 
@@ -70,6 +70,11 @@ With the following command a new key-pair is created.
 ```
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/desktop_key-rsa
 ```
+
+* `ssh-keygen` - command used to create the public and private key pairs that SSH uses for secure communication between client and server.
+* `-t rsa` - command used to create RSA (Rivest-Shamir-Adleman) key-pair widely used for secure data transmission, known for their security and efficiency
+* `-b 4096` - specifies the key length, 4096 offers a good balance between security and performance, providing strong protection against brute-force attacks without being overly taxing on system resources.
+* `-f ~/.ssh/desktop_key-rsa` -  specifies the filename for the key file
 
 In order to create the key, you will be asked for a password. This is the password for your key. It is recommended and considered as best practice (and also security related) to enter passphrase. It will be used as security step, avoiding the usage of a stolen or lost private key. The result of this command should be two files. The file "\~/.ssh/desktop_key-rsa" which is the private-key file, and the file "~/.ssh/desktop_key-rsa.pub" which contains your public-key file. 
 This public-key and private-key will be securely transferred to the client. This means that keys are transferred to the client machine without exposing the content of the file, following best practices for delivering files containing sensitive data, such are password protected zip archive, uploading to some storage, and providing link to the responsible user, admin approaching to the client and copying key file from USB stick, or whatever is applicable and most suitable for the company.
@@ -132,9 +137,13 @@ To facilitate this process, the following steps should be diligently followed:
 
 By regularly updating SSH keys every three months, administrators will enhance the security of server access, making sure these keys effectively protect against unauthorized entry.
 
+## Secure DB
+
+It's mandatory to set **AES-SECRET-KEY** as OS variable which is valid password for column encryption with AES/GCM/NoPadding algorithm.
+
 ## Post configuration steps
 
-Once TRUE Connector is successfully configured and is up and running, responsible user for setting up environment and configuring connector should generate new passwords for 2 type of users required for operating with connector. More information how to do this can be found [here](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.7/doc/SECURITY.md#change-default-password). 
+Once TRUE Connector is successfully configured and is up and running, responsible user for setting up environment and configuring connector should change existing TRUE Connector users, more information about user management can be found here [here](../user_management.md). 
 
 Make sure to update following properties to address your usecase:
 

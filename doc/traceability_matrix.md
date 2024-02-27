@@ -72,20 +72,30 @@ For managing security issues, a comprehensive approach is adopted:
 
 ## Status of the issues
 
-As mentioned earlier, GitHub, used alongside Dependabot, serves as a system for monitoring reported issues, tracking the progress of ongoing issues, and recording closed issues. The most recent status updates for each component are available:
+As mentioned earlier, GitHub, used alongside Dependabot, serves as a system for monitoring reported issues, tracking the progress of ongoing issues, and recording closed issues. 
+
+Status of issues can be:
+
+* Open - issues is reported by end user, team member or Dependabot
+* Under investigation - checking reported issue, labeling, categorizing and assigning it
+* Under development - working actively on bug/issue
+* Ready for merge - development is done, automated test passed, PR is opened for a review
+* Closed - issue is patched and merged
+
+The most recent status updates for each component are available:
 
 1. Automated security issues reported by Dependabot
 
-| Severity  | Report Date | Issue                                              | Affected Component | Solution        | Status |
-|:---------:|:-----------:|:--------------------------------------------------:|:------------------:|:---------------:|:------:|
-| High      | 2022-04     | json stack overflow vulnerability                  | ECC                | Bump to v20230227 | DONE |
-| Critical  | 2022-02     | Arbitrary code execution in Apache Commons Text	   | DataApp            | Bump to v1.10.0 | DONE   |
-| Critical  | 2022-02     | Arbitrary code execution in Apache Commons Text    | ECC                | Bump to v1.10.0 | DONE   |
-| Moderate  | 2022-04     | Chosen Ciphertext Attack in Jose4j                 | ECC                | Bump to v0.9.3  | DONE   |
-| Moderate  | 2022-01     | Improper Locking in JetBrains Kotlin               | ECC                | Bump to v1.6.0  | DONE   |
-| Moderate  | 2021-01     | Timing based private key exposure in Bouncy Castle | ECC                | Bump to v1.66   | DONE   |
+| Severity  | Report Date | Issue                                              | Affected Component | Solution          | Status |
+|:---------:|:-----------:|:--------------------------------------------------:|:------------------:|:-----------------:|:------:|
+| High      | 2022-04     | JSON stack overflow vulnerability                  | ECC                | Bump to v20230227 | CLOSED |
+| Critical  | 2022-02     | Arbitrary code execution in Apache Commons Text	   | DataApp            | Bump to v1.10.0   | CLOSED |
+| Critical  | 2022-02     | Arbitrary code execution in Apache Commons Text    | ECC                | Bump to v1.10.0   | CLOSED |
+| Moderate  | 2022-04     | Chosen Ciphertext Attack in Jose4j                 | ECC                | Bump to v0.9.3    | CLOSED |
+| Moderate  | 2022-01     | Improper Locking in JetBrains Kotlin               | ECC                | Bump to v1.6.0    | CLOSED |
+| Moderate  | 2021-01     | Timing based private key exposure in Bouncy Castle | ECC                | Bump to v1.66     | CLOSED |
 
 
 2. Open issues - [ECC](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/issues), [DataApp](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/issues)
-3. Changelogs (Closed implemented issues) - [ECC](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.7/CHANGELOG.md),[DataApp](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/blob/0.3.8/CHANGELOG.md), [UCDataApp](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/blob/1.7.8/CHANGELOG.md)
+3. Changelogs (Closed implemented issues) - [ECC](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.8/CHANGELOG.md),[DataApp](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/blob/0.3.8/CHANGELOG.md), [UCDataApp](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/blob/1.7.9/CHANGELOG.md)
 

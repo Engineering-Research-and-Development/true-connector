@@ -1,6 +1,6 @@
 ## Firewall <a href="#firewall" id="firewall"></a>
 
-TRUE Connector allows setting up HttpFirewall through Spring Security. Firewall is used both in Execution Core Container (ECC) and DataApp. To turn it on/off, please take a look at following properties in **.env** file: 
+TRUE Connector allows setting up HttpFirewall through Spring Security, and it is enabled by default configuration. Firewall is used both in Execution Core Container (ECC) and DataApp. To turn it off, please change following properties in **.env** file: 
 
 
 ```
@@ -13,7 +13,7 @@ CONSUMER_DATA_APP_FIREWALL=false
 CONSUMER_ECC_FIREWALL=false
 ```
 
-If Firewall is enabled, it will read properties defined in `firewall.properties` file located in Execution Core Container (ECC) and DataApp resources folder, which easily can be modified by needs of setup.
+When Firewall is enabled, it will read properties defined in `firewall.properties` file located in Execution Core Container (ECC) and DataApp resources folder, which easily can be modified by needs of setup.
 
 ```
 #Set which HTTP header names should be allowed (if want to allow all header names, keep it empty)

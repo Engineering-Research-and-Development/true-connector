@@ -4,10 +4,10 @@ TRUE Connector is build using Java11, and use following libraries:
 
 | Component                                                                                                                         						| Version       |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| [Execution core container](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/releases/tag/1.14.7)   		| 1.14.7 		|
+| [Execution core container](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/releases/tag/1.14.8)   		| 1.14.8 		|
 | [Basic data app](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app/releases/tag/0.3.8) 								| 0.3.8 		|
-| [Usage control app](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/releases/tag/1.7.8)   						| 1.7.8 		|
-| [Pip](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/tree/1.7.8/Docker_Tecnalia_DataUsage/pip) 				| 1.0.0 		|
+| [Usage control app](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/releases/tag/1.7.9)   						| 1.7.9 		|
+| [Pip](https://github.com/Engineering-Research-and-Development/true-connector-uc_data_app_platoon/tree/1.7.9/Docker_Tecnalia_DataUsage/pip) 				| 1.0.0 		|
 | [Multipart Message Library](https://github.com/Engineering-Research-and-Development/true-connector-multipart_message_library/releases/tag/1.0.17)   		| 1.0.17 		|
 | [Websocket Message Streamer](https://github.com/Engineering-Research-and-Development/true-connector-websocket_message_streamer/releases/tag/1.0.17) 		| 1.0.17 		|
 | [Information model](https://github.com/International-Data-Spaces-Association/InformationModel)                                    						| 4.2.7         |

@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   ecc-provider:
-    image: rdlabengpa/ids_execution_core_container:v1.14.7
+    image: rdlabengpa/ids_execution_core_container:v1.14.8
     deploy:
       resources:
         limits:
@@ -43,6 +43,7 @@ services:
       - TRUSTORE_PASSWORD=${TRUSTORE_PASSWORD}
       - FIREWALL=${PROVIDER_ECC_FIREWALL}
       - TZ=Europe/Rome
+      - AES256-SECRET-KEY=${AES_SECRET_KEY}
     volumes:
       - ./ecc_resources_provider:/config
       - ./ecc_cert:/cert
@@ -51,7 +52,7 @@ services:
       - "ecc-provider:172.17.0.1"
 
   uc-dataapp-provider:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.8
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.9
     deploy:
       resources:
         limits:
@@ -72,6 +73,7 @@ services:
       - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
       - ALIAS=${ALIAS}
       - TZ=Europe/Rome
+      - AES256-SECRET-KEY=${AES_SECRET_KEY}
     expose:
       - "8080"
     volumes:
@@ -138,7 +140,7 @@ services:
       - ./ecc_cert:/cert
       
   ecc-consumer:
-    image: rdlabengpa/ids_execution_core_container:v1.14.7
+    image: rdlabengpa/ids_execution_core_container:v1.14.8
     deploy:
       resources:
         limits:
@@ -180,6 +182,7 @@ services:
       - TRUSTORE_PASSWORD=${TRUSTORE_PASSWORD}
       - FIREWALL=${CONSUMER_ECC_FIREWALL}
       - TZ=Europe/Rome
+      - AES256-SECRET-KEY=${AES_SECRET_KEY}
     volumes:
       - ./ecc_resources_consumer:/config
       - ./ecc_cert:/cert
@@ -188,7 +191,7 @@ services:
       - "ecc-consumer:172.17.0.1"
 
   uc-dataapp-consumer:
-    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.8
+    image: rdlabengpa/ids_uc_data_app_platoon:v1.7.9
     deploy:
       resources:
         limits:
@@ -209,6 +212,7 @@ services:
       - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
       - ALIAS=${ALIAS}
       - TZ=Europe/Rome
+      - AES256-SECRET-KEY=${AES_SECRET_KEY}
     expose:
       - "8080"
     volumes:

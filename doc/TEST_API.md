@@ -75,7 +75,7 @@ curl --location -k 'https://localhost:8090/about/version'
 and expected response:
 
 ```
-1.14.7
+1.14.8
 ```
 
 ## Self Description API

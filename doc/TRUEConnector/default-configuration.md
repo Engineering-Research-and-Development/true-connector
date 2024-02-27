@@ -9,7 +9,7 @@ TRUE Connector comes pre-configured with following:
 * Disabled Clearing House
 * Disabled validate protocol in Forward-To header
 * Disabled CheckSum validation
-* Disabled Firewall
+* Enabled Firewall
 * Disabled Self Description validation
 
 

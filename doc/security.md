@@ -4,7 +4,7 @@ The TRUE Connector uses state-of-the-art TLS 1.3 encryption for https/wss commun
 
 ## Public Key Infrastructure - PKI
 
-TRUE Connector supports both self signed (to be used for non production environment) and certificates provided by trusted Certificate Authority, like Let'sEncrypt, which are recommended for production environment. This certificate will be used to enable TLS channel between components.
+For a proper set-up of the TRUE Connector, it is required to provide a certificate from a trusted Certificate Authority, such as Let's Encrypt, which is mandatory for production environments. This certificate will be used to enable a TLS channel between components.
 
 If requested, you can create one for consumer side and one for provider side of the TRUE Connector. In that case, SAN should be split to match (consumer and provider ones should be separated)
 
@@ -68,7 +68,7 @@ Once certificate is generated, following instruction from previous link, you can
 TRUE Connector has several ways to check the integrity:
 
  * [Docker cosing check](cosign.md)
- * [Healthcheck](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.7/doc/HEALTHCHECK.md)
+ * [Healthcheck](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container/blob/1.14.8/doc/HEALTHCHECK.md)
  * Verification of the components itself, that will check if current version of subcomponent is verified or not;
  
  Each component (Execution Core Container, Basic DataApp and Platoon Usage Control) should on startup log somethign like following:

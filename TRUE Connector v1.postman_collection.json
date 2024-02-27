@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "de10144c-f87c-4bd2-84e1-5b8247e5266a",
+		"_postman_id": "1f605a99-5d26-4c2a-bd89-c4d185c3c860",
 		"name": "TRUE Connector v1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "21815221"
+		"_exporter_id": "2326106"
 	},
 	"item": [
 		{
@@ -1837,19 +1837,58 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "Audit API",
+			"item": [
+				{
+					"name": "Get all audit logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Audit_URL}}",
+							"host": [
+								"{{Audit_URL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get audit logs by day",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Audit_URL}}?date=YYYY-MM-DD",
+							"host": [
+								"{{Audit_URL}}"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "YYYY-MM-DD"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"auth": {
 		"type": "basic",
 		"basic": [
 			{
-				"key": "username",
-				"value": "apiUser",
+				"key": "password",
+				"value": "passwordApiUser",
 				"type": "string"
 			},
 			{
-				"key": "password",
-				"value": "passwordApiUser",
+				"key": "username",
+				"value": "apiUser",
 				"type": "string"
 			}
 		]

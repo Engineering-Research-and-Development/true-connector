@@ -1,6 +1,6 @@
 ![](doc/TRUE_Connector_Logo.png?raw=true)
 <div align="right" style="color: black; font-size: 25px;">
-   <strong> Version 1.0.6 </strong>
+   <strong> Version 1.0.7 </strong>
 </div>
 
 </br></br>
@@ -65,7 +65,6 @@ Please [click here](https://engineering-ing-inf-rd.gitbook.io/true-connector/), 
   * [Docker image signing and verification](doc/cosign.md)
   * [Life cycle](doc/life_cycle.md)
   * [Security](doc/security.md)
-  * [IDS-criteria](doc/IDS-criteria.md)
   * [Roadmap](doc/roadmap.md)
   * [Traceability matrix](doc/traceability_matrix.md)
   * [License](doc/license.md)
