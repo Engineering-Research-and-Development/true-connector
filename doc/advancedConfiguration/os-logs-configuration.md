@@ -44,7 +44,7 @@ In addition to configuring access to system logs, it's important to establish ru
   
   
   In this command:
-	- `-w /path/to/TRUEConnector/*` specifies the path to the TRUE Connector directory and the asterisk (`*`) wildcard to monitor all files within it.
+	- `-w /path/to/TRUEConnector` specifies the path to the TRUE Connector directory
 	- `-p war `  makes sure that all write, attribute change and read operations are logged.
 	- `-k trueconnector` assigns a unique key (`trueconnector`) which makes the changes searchable via ausearch.
   
