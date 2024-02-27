@@ -40,12 +40,15 @@ In addition to configuring access to system logs, it's important to establish ru
 
 - **Create Monitoring Rules with auditctl**: `auditctl` is a command-line utility that allows you to interact with the Linux audit framework, enabling you to define rules for monitoring system activities, for more details please refer to [manual page](https://manpages.ubuntu.com/manpages/xenial/en/man8/auditctl.8.html). When setting up monitoring for the TRUE Connector, you can use `auditctl` to create specific rules that define which files or directories to monitor and what actions to audit.
 
-  For example, you can use the following command to create a rule for monitoring all files within the TRUE Connector directory: `auditctl -w /path/to/TRUEConnector/* -k trueconnector`
+  For example, you can use the following command to create a rule for monitoring all files within the TRUE Connector directory: `auditctl -w /path/to/TRUEConnector -p war -k trueconnector`
   
   
   In this command:
 	- `-w /path/to/TRUEConnector/*` specifies the path to the TRUE Connector directory and the asterisk (`*`) wildcard to monitor all files within it.
-	- `-k trueconnector` assigns a unique key (`trueconnector`) to the rule for easier identification in audit logs.
+	- `-p war `  makes sure that all write, attribute change and read operations are logged.
+	- `-k trueconnector` assigns a unique key (`trueconnector`) which makes the changes searchable via ausearch.
+  
+  The logs can be searched by using ausearch on the key: `ausearch -ts today -k trueconnector`
 
 ***NOTE:*** Make sure to replace `/path/to/TRUEConnector/` with the actual location where the TRUE Connector is deployed.
 
