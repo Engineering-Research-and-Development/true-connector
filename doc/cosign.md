@@ -40,7 +40,7 @@ The following checks were performed on each of these signatures:
                 "docker-reference": "index.docker.io/rdlabengpa/ids_execution_core_container"
             },
             "image": {
-                "docker-manifest-digest": "sha256:17cb1512a22448326e74df3ab4df3e82cdddcd7cbbb8a8e81cb177455586df7c"
+                "docker-manifest-digest": "sha256:9435112a13ecde7fc3bb2ccdfabc3178866c88685462c3c7b399726fb40bf6ed"
             },
             "type": "cosign container image signature"
         },
@@ -90,7 +90,7 @@ The following checks were performed on each of these signatures:
 				"docker-reference": "index.docker.io/rdlabengpa/ids_uc_data_app_platoon"
 			},
 			"image": {
-				"docker-manifest-digest": "sha256:5303a5216dcf1d658f04bc5e5cf934bf2c8faaf2f0c402b392df167d37330162"
+				"docker-manifest-digest": "sha256:ca669f04dfb4248ce92a9da99d77a096f7837b754f0b4b320d340e2ad212cfc6"
 			},
 			"type": "cosign container image signature"
 		},
