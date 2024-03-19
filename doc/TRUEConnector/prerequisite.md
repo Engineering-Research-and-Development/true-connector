@@ -64,8 +64,7 @@ AllowUsers sshUser1 sshUser2...
 
 ### Create SSH public and private keys for user accessing host machine
 
-As a first step, a key-pair needs to be created. This is usually done on the server. 
-With the following command a new key-pair is created. 
+As the first step, a key pair needs to be created. Following best security practices, each ***user*** generates their asymmetric key pair and securely shares the public key with the OS administrator for implementation at the OS level. The following command is used to create a new key pair.
 
 ```
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/desktop_key-rsa
@@ -76,8 +75,8 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/desktop_key-rsa
 * `-b 4096` - specifies the key length, 4096 offers a good balance between security and performance, providing strong protection against brute-force attacks without being overly taxing on system resources.
 * `-f ~/.ssh/desktop_key-rsa` -  specifies the filename for the key file
 
-In order to create the key, you will be asked for a password. This is the password for your key. It is recommended and considered as best practice (and also security related) to enter passphrase. It will be used as security step, avoiding the usage of a stolen or lost private key. The result of this command should be two files. The file "\~/.ssh/desktop_key-rsa" which is the private-key file, and the file "~/.ssh/desktop_key-rsa.pub" which contains your public-key file. 
-This public-key and private-key will be securely transferred to the client. This means that keys are transferred to the client machine without exposing the content of the file, following best practices for delivering files containing sensitive data, such are password protected zip archive, uploading to some storage, and providing link to the responsible user, admin approaching to the client and copying key file from USB stick, or whatever is applicable and most suitable for the company.
+In order to create the key, you will be asked for a password. This is the password for your key. It is recommended and considered as best practice (and also security related) to enter passphrase. It will be used as security step, avoiding the usage of a stolen or lost private key. The result of this command should be two files. The file "\~/.ssh/desktop_key-rsa" which is the private-key file, and the file "~/.ssh/desktop_key-rsa.pub" which contains your public-key file.
+After the process is completed, the ***user*** must securely transfer the public-key to the OS administrator. This entails transferring the public-key without exposing the file's contents, following best practices for delivering files containing sensitive data. These practices may include using a password-protected zip archive, uploading to secure storage and providing a link to the responsible OS administrator, physically approaching the OS administrator and copying the key file from a USB stick, or employing any other applicable and suitable method for the company.
 
 public-key needs to be added to the authorized keys. To make sure we do not override any already configured authorized key, 
 we add the public-key to the authorized_keys file. If the file does not yet exist, it will create it automatically:
@@ -116,13 +115,13 @@ AllowUsers sshUser1 sshUser2...
 
 ### Periodic SSH Key Update Procedure
 
-For maintaining security administrators should perform a periodic refresh of SSH keys. This process should be conducted every three months (minimal, or even on lesser time frame if security policy requires). During each update cycle, the administrator is responsible for generating new SSH keys for all end users and ensuring the invalidation of previous keys. This practice ensures that any potential security risks associated with compromised or outdated keys are mitigated.
+To maintain security, OS administrators should periodically refresh SSH keys. This process should occur every tthree months (minimal, or even on lesser time frame if security policy requires). During each update cycle, administrators are responsible for informing users that they need to generate a new key pair and securely transfer the new public key. Failure to do so will make previous keys invalid. This practice ensures that potential security risks associated with compromised or outdated keys are mitigated.
 
 To facilitate this process, the following steps should be diligently followed:
 
-* Generate New SSH Keys: Admins should create new SSH key pairs for each user.
+* Generate New SSH Keys: Users should create new SSH key pairs.
 
-* Distribute New Keys Securely: Once new keys are generated, they should be securely transferred to the end users.
+* Distribute New Keys Securely: Once new keys are generated, the public-key should be securely transferred to OS administrator.
 
 * Update the authorized_keys File: The new public keys must be added to the authorized_keys file on the server, replacing the old keys.
 
@@ -135,7 +134,7 @@ To facilitate this process, the following steps should be diligently followed:
 * Review and Test: After updating, conduct a thorough review and testing to ensure that only the new keys are operational and that server access is functioning as expected with the updated keys.
 
 
-By regularly updating SSH keys every three months, administrators will enhance the security of server access, making sure these keys effectively protect against unauthorized entry.
+By regularly updating SSH keys every three months, OS administrators will enhance the security of server access, making sure these keys effectively protect against unauthorized entry.
 
 ## Secure DB
 
