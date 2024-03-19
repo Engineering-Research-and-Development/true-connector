@@ -115,13 +115,13 @@ AllowUsers sshUser1 sshUser2...
 
 ### Periodic SSH Key Update Procedure
 
-To maintain security, OS administrators should periodically refresh SSH keys. This process should occur every tthree months (minimal, or even on lesser time frame if security policy requires). During each update cycle, administrators are responsible for informing users that they need to generate a new key pair and securely transfer the new public key. Failure to do so will make previous keys invalid. This practice ensures that potential security risks associated with compromised or outdated keys are mitigated.
+To maintain security, OS administrators must periodically refresh SSH keys. This process must occur every three months (minimal, or even on lesser time frame if security policy requires). During each update cycle, administrators are responsible for informing users that they need to generate a new key pair and securely transfer the new public key. Failure to do so will make previous authorized keys invalid. This practice ensures that potential security risks associated with compromised or outdated keys are mitigated.
 
-To facilitate this process, the following steps should be diligently followed:
+To facilitate this process, the following steps must be diligently followed:
 
-* Generate New SSH Keys: Users should create new SSH key pairs.
+* Generate New SSH Keys: Users must create new SSH key pairs.
 
-* Distribute New Keys Securely: Once new keys are generated, the public-key should be securely transferred to OS administrator.
+* Distribute New Keys Securely: Once new keys are generated, the public-key must be securely transferred to OS administrator.
 
 * Update the authorized_keys File: The new public keys must be added to the authorized_keys file on the server, replacing the old keys.
 

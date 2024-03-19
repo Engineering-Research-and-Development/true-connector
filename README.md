@@ -1,6 +1,6 @@
 ![](doc/TRUE_Connector_Logo.png?raw=true)
 <div align="right" style="color: black; font-size: 25px;">
-   <strong> Version 1.0.7 </strong>
+   <strong> Version 1.0.8 </strong>
 </div>
 
 </br></br>
