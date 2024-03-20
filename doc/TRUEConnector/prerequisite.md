@@ -64,7 +64,7 @@ AllowUsers sshUser1 sshUser2...
 
 ### Create SSH public and private keys for user accessing host machine
 
-As the first step, a key pair needs to be created. Following best security practices, each ***user*** generates their asymmetric key pair and securely shares the public key with the OS administrator for implementation at the OS level. The following command is used to create a new key pair.
+As the first step, a key pair needs to be created. Following best security practices, each ***user*** generates their asymmetric key pair and securely shares the public key with the OS administrator for implementation at the OS level.  The following command is used to create a new key pair.
 
 ```
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/desktop_key-rsa
@@ -74,6 +74,8 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/desktop_key-rsa
 * `-t rsa` - command used to create RSA (Rivest-Shamir-Adleman) key-pair widely used for secure data transmission, known for their security and efficiency
 * `-b 4096` - specifies the key length, 4096 offers a good balance between security and performance, providing strong protection against brute-force attacks without being overly taxing on system resources.
 * `-f ~/.ssh/desktop_key-rsa` -  specifies the filename for the key file
+
+Using `-t rsa -b 4096` with `ssh-keygen` is essential for creating RSA keys of 4096 bits, improving security. The algorithm employed in the SSH communication protocol is the 4096-bit RSA asymmetric encryption algorithm. This method of key generation guarantees that the SSH keys for authentication are robust and secure against unauthorized access
 
 In order to create the key, you will be asked for a password. This is the password for your key. It is recommended and considered as best practice (and also security related) to enter passphrase. It will be used as security step, avoiding the usage of a stolen or lost private key. The result of this command should be two files. The file "\~/.ssh/desktop_key-rsa" which is the private-key file, and the file "~/.ssh/desktop_key-rsa.pub" which contains your public-key file.
 After the process is completed, the ***user*** must securely transfer the public-key to the OS administrator. This entails transferring the public-key without exposing the file's contents, following best practices for delivering files containing sensitive data. These practices may include using a password-protected zip archive, uploading to secure storage and providing a link to the responsible OS administrator, physically approaching the OS administrator and copying the key file from a USB stick, or employing any other applicable and suitable method for the company.

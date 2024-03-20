@@ -4,7 +4,7 @@ This document contains an iterative table providing details on the certification
 
 | TRUE Connector version  | Release Date   | Submodules version                                                      | Source code | Evaluation evidence| 
 |:-----------------------:|:--------------:|:-----------------------------------------------------------------------:|:----------:|:-------------------|
-| v1.0.8                  | 2024-04-19     | ECC (v1.14.8), DataApp (v0.3.8), UCApp (v1.7.9), PIP (v1.0.0)           |[Link](https://github.com/Engineering-Research-and-Development/true-connector/releases/tag/v1.0.8) | Email conversations |
+| v1.0.8                  | 2024-03-20     | ECC (v1.14.8), DataApp (v0.3.8), UCApp (v1.7.9), PIP (v1.0.0)           |[Link](https://github.com/Engineering-Research-and-Development/true-connector/releases/tag/v1.0.8) | Email conversations |
 | v1.0.7                  | 2024-02-27     | ECC (v1.14.8), DataApp (v0.3.8), UCApp (v1.7.9), PIP (v1.0.0)           |[Link](https://github.com/Engineering-Research-and-Development/true-connector/releases/tag/v1.0.7) |Teams meetings, Email conversations |
 | v1.0.6                  | 2024-01-25     | ECC (v1.14.7), DataApp (v0.3.8), UCApp (v1.7.8), PIP (v1.0.0)           |[Link](https://github.com/Engineering-Research-and-Development/true-connector/releases/tag/v1.0.6) |TRUE Connector evaluation clarification points TC/v1/v2/v3/v4/v5/v6, Email conversations |
 | v1.0.5                  | 2023-12-13     | ECC (v1.14.6), DataApp (v0.3.7), UCApp (v1.7.8), PIP (v1.0.0)           |[Link](https://github.com/Engineering-Research-and-Development/true-connector/releases/tag/v1.0.5) | JIRA issues, Email conversations |
