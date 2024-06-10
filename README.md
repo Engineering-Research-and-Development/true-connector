@@ -3,9 +3,11 @@
    <strong> Version 1.0.8 </strong>
 </div>
 
+<img src="doc/idsa-sign-component-certification-small.png" alt="drawing" width="200"/>
+
 </br></br>
 
-**TRUE** (**TRU**sted **E**ngineering) **Connector** for the IDS (International Data Space) ecosystem
+**TRUE** (**TRU**sted **E**ngineering) **Connector** for the IDS (International Data Space) ecosystem is certified by The certification body of the IDSA as Trust Level 1, Assurance Level 2 IDS Certification for connectors. Certificate can be downloaded [here.](doc/IDSA_certificate_ENG_final.pdf)
 
 The TRUE Connector is composed of three components:
 
