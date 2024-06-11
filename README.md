@@ -7,7 +7,15 @@
 
 </br></br>
 
-**TRUE** (**TRU**sted **E**ngineering) **Connector** for the IDS (International Data Space) ecosystem is certified by The certification body of the IDSA as Trust Level 1, Assurance Level 2 IDS Certification for connectors. Certificate can be downloaded [here.](doc/IDSA_certificate_ENG_final.pdf)
+<h1>
+TRUE ('TRU'sted 'E'ngineering) Connector for the IDS (International Data Space) ecosystem 
+</h1>
+
+The International Data Spaces Association (IDSA) announces the successful completion of IDS certification for Engineering Group’s TRUE Connector as the fourth connector that receives the [IDS Certificate.](doc/IDSA_certificate_ENG_final.pdf)
+ 
+The TRUE Connector is developed by Engineering, a leading digital transformation company based in Italy. The connector is an open-source solution designed to enable self-determined data sharing while ensuring compliance with regulations such as GDPR. Initially focused on the manufacturing domain, the TRUE Connector has proven its versatility across diverse sectors including circular economy, energy, smart buildings, and agri-food domains.
+ 
+The certification process, overseen by IDSA and conducted by the independent evaluation facility SQS, ensures adherence to highest functionality and security standards.
 
 The TRUE Connector is composed of three components:
 
