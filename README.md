@@ -10,7 +10,7 @@
 TRUE ('TRU'sted 'E'ngineering) Connector for the IDS (International Data Space) ecosystem 
 </h1>
 
-<img src="doc/idsa-sign-component-certification-small.png" alt="certified" width="150" align="right"/>
+<img src="doc/idsa-sign-component-certification-small.png" alt="certified" width="170" align="right"/>
 
 The International Data Spaces Association (IDSA) announces the successful completion of IDS certification for Engineering Group’s TRUE Connector as the fourth connector that receives the [IDS Certificate](doc/IDSA_certificate_ENG_final.pdf).
 
