@@ -10,20 +10,14 @@
 TRUE ('TRU'sted 'E'ngineering) Connector for the IDS (International Data Space) ecosystem 
 </h1>
 
-<div class="container" style="display: flex; align-items: center; justify-content: center">
-	<div class="text" style="padding-left: 20px;">
-The International Data Spaces Association (IDSA) announces the successful completion of IDS certification for Engineering Group’s TRUE Connector as the fourth connector that receives the 
-<a href="https://github.com/Engineering-Research-and-Development/true-connector/tree/main/doc/IDSA_certificate_ENG_final.pdf">IDS Certificate.
-</a>
+<img src="doc/idsa-sign-component-certification-small.png" alt="certified" width="150" align="right"/>
+
+The International Data Spaces Association (IDSA) announces the successful completion of IDS certification for Engineering Group’s TRUE Connector as the fourth connector that receives the [IDS Certificate](doc/IDSA_certificate_ENG_final.pdf).
 
 The TRUE Connector is developed by Engineering, a leading digital transformation company based in Italy. The connector is an open-source solution designed to enable self-determined data sharing while ensuring compliance with regulations such as GDPR. Initially focused on the manufacturing domain, the TRUE Connector has proven its versatility across diverse sectors including circular economy, energy, smart buildings, and agri-food domains.
  
 The certification process, overseen by IDSA and conducted by the independent evaluation facility SQS, ensures adherence to highest functionality and security standards.
-      </div>
-	<div class="image">
-		<img src="doc/idsa-sign-component-certification-small.png" alt="certified" width="150"/>
-	</div>
-</div>
+		
 
 
 The TRUE Connector is composed of three components:
