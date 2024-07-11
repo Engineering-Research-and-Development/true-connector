@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   ecc-provider:
-    image: rdlabengpa/ids_execution_core_container:v1.14.8
+    image: rdlabengpa/ids_execution_core_container:v1.14.9
     deploy:
       resources:
         limits:
@@ -21,7 +21,7 @@ services:
     environment:
       - "JDK_JAVA_OPTIONS=-Xmx1024m"
       - "SPRING_PROFILES_ACTIVE=docker"
-      - DATA_APP_ENDPOINT=${PROVIDER_DATA_APP_ENDPOINT} #Data APP enpoint for consuming received data
+      - DATA_APP_ENDPOINT=${PROVIDER_DATA_APP_ENDPOINT} #Data APP endpoint for consuming received data
       - MULTIPART_EDGE=${PROVIDER_MULTIPART_EDGE} #Data APP endpoint multipart/mixed content type
       - MULTIPART_ECC=${MULTIPART_ECC}
       - CONNECTOR_ID=${PROVIDER_ISSUER_CONNECTOR_URI}
@@ -32,15 +32,15 @@ services:
       - BROKER_URL=${BROKER_URL}
       - CACHE_TOKEN=${CACHE_TOKEN}
       - FETCH_TOKEN_ON_STARTUP=${FETCH_TOKEN_ON_STARTUP}
-      - KEYSTORE_NAME=${KEYSTORE_NAME}
-      - KEY_PASSWORD=${KEY_PASSWORD}
-      - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
-      - ALIAS=${ALIAS}
+      - KEYSTORE_NAME=${PROVIDER_KEYSTORE_NAME}
+      - KEY_PASSWORD=${PROVIDER_KEY_PASSWORD}
+      - KEYSTORE_PASSWORD=${PROVIDER_KEYSTORE_PASSWORD}
+      - ALIAS=${PROVIDER_ALIAS}
       - DAPS_KEYSTORE_NAME=${PROVIDER_DAPS_KEYSTORE_NAME}
       - DAPS_KEYSTORE_PASSWORD=${PROVIDER_DAPS_KEYSTORE_PASSWORD}
       - DAPS_KEYSTORE_ALIAS=${PROVIDER_DAPS_KEYSTORE_ALIAS}
-      - TRUSTORE_NAME=${TRUSTORE_NAME}
-      - TRUSTORE_PASSWORD=${TRUSTORE_PASSWORD}
+      - TRUSTORE_NAME=${PROVIDER_TRUSTORE_NAME}
+      - TRUSTORE_PASSWORD=${PROVIDER_TRUSTORE_PASSWORD}
       - FIREWALL=${PROVIDER_ECC_FIREWALL}
       - TZ=Europe/Rome
       - AES256-SECRET-KEY=${AES_SECRET_KEY}
@@ -68,10 +68,10 @@ services:
       - "JDK_JAVA_OPTIONS=-Xmx256m"
       - ECC_PORT=8449
       - ECC_SELF_DESCRIPTION_URL=${PROVIDER_ECC_SELF_DESCRIPTION_URL}
-      - KEYSTORE_NAME=${KEYSTORE_NAME}
-      - KEY_PASSWORD=${KEY_PASSWORD}
-      - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
-      - ALIAS=${ALIAS}
+      - KEYSTORE_NAME=${PROVIDER_KEYSTORE_NAME}
+      - KEY_PASSWORD=${PROVIDER_KEY_PASSWORD}
+      - KEYSTORE_PASSWORD=${PROVIDER_KEYSTORE_PASSWORD}
+      - ALIAS=${PROVIDER_ALIAS}
       - TZ=Europe/Rome
       - AES256-SECRET-KEY=${AES_SECRET_KEY}
     expose:
@@ -103,7 +103,7 @@ services:
       - ./uc-dataapp-pip_resources_provider:/etc
 
   be-dataapp-provider:
-    image: rdlabengpa/ids_be_data_app:v0.3.8
+    image: rdlabengpa/ids_be_data_app:v0.3.9
     deploy:
       resources:
         limits:
@@ -123,10 +123,10 @@ services:
       - "JDK_JAVA_OPTIONS=-Xmx512m"
       - "SPRING_PROFILES_ACTIVE=docker"
       - DATA_APP_MULTIPART=${PROVIDER_MULTIPART_EDGE}
-      - KEYSTORE_NAME=${KEYSTORE_NAME}
-      - KEY_PASSWORD=${KEY_PASSWORD}
-      - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
-      - ALIAS=${ALIAS}
+      - KEYSTORE_NAME=${PROVIDER_KEYSTORE_NAME}
+      - KEY_PASSWORD=${PROVIDER_KEY_PASSWORD}
+      - KEYSTORE_PASSWORD=${PROVIDER_KEYSTORE_PASSWORD}
+      - ALIAS=${PROVIDER_ALIAS}
       - ECC_HOSTNAME=ecc-provider
       - EXTRACT_PAYLOAD_FROM_RESPONSE=${EXTRACT_PAYLOAD_FROM_RESPONSE}
       - ECC_PORT=8887
@@ -135,12 +135,72 @@ services:
       - FIREWALL=${PROVIDER_DATA_APP_FIREWALL}
       - VALIDATE_SELF_DESCRIPTION=${VALIDATE_SELF_DESCRIPTION}
     volumes:
-      - ./be-dataapp_resources:/config
+      - ./be-dataapp_resources_provider:/config
       - trueconnector_be_dataapp_provider_data:/home/nobody/data/
       - ./ecc_cert:/cert
+  
+  ui-provider:
+    image: rdlabengpa/ids_true_connector_ui:1.0.0
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 512M    
+    container_name: ui-provider
+    networks:
+      - provider
+      - consumer    
+    ports:
+      - "4200:80" # HTTP port
+      - "4201:443" # HTTPS port
+    environment:
+      - SELF_DESCRIPTION_URL=https://localhost:8090
+      - PROXY_ENDPOINT_URL=https://localhost:8184/proxy
+      - SELF_DESCRIPTION_API=/api/selfDescription/
+      - CONTRACT_OFFER_API=/api/contractOffer/
+      - OFFERED_RESOURCE_API=/api/offeredResource/
+      - REPRESENTATION_API=/api/representation/
+      - MULTIPART_TYPE=${PROVIDER_MULTIPART_EDGE}
+      - FORWARD_TO=https://ecc-provider:8889/data
+     ## Optional environments in container to show Connector with prefix TC_
+      - TC_DATA_APP_ENDPOINT=${PROVIDER_DATA_APP_ENDPOINT} #Data APP endpoint for consuming received data
+      - TC_MULTIPART_EDGE=${PROVIDER_MULTIPART_EDGE} #Data APP endpoint multipart/mixed content type
+      - TC_MULTIPART_ECC=${MULTIPART_ECC}
+      - TC_CONNECTOR_ID=${PROVIDER_ISSUER_CONNECTOR_URI}
+      - TC_IDSCP2=${IDSCP2}
+      - TC_WS_EDGE=${PROVIDER_WS_EDGE}
+      - TC_WS_ECC=${WS_ECC}
+      - TC_UC_DATAAPP_URI=https://uc-dataapp-provider:8080/platoontec/PlatoonDataUsage/1.0/
+      - TC_BROKER_URL=${BROKER_URL}
+      - TC_CACHE_TOKEN=${CACHE_TOKEN}
+      - TC_FETCH_TOKEN_ON_STARTUP=${FETCH_TOKEN_ON_STARTUP}
+      - TC_ECC_KEYSTORE_NAME=${PROVIDER_KEYSTORE_NAME}
+      - TC_ECC_KEY_PASSWORD=${PROVIDER_KEY_PASSWORD}
+      - TC_ECC_KEYSTORE_PASSWORD=$PROVIDER_{KEYSTORE_PASSWORD}
+      - TC_ECC_ALIAS=${PROVIDER_ALIAS}
+      - TC_DAPS_KEYSTORE_NAME=${PROVIDER_DAPS_KEYSTORE_NAME}
+      - TC_DAPS_KEYSTORE_PASSWORD=${PROVIDER_DAPS_KEYSTORE_PASSWORD}
+      - TC_DAPS_KEYSTORE_ALIAS=${PROVIDER_DAPS_KEYSTORE_ALIAS}
+      - TC_ECC_TRUSTORE_NAME=${PROVIDER_TRUSTORE_NAME}
+      - TC_ECC_TRUSTORE_PASSWORD=${PROVIDER_TRUSTORE_PASSWORD}
+      - TC_ECC_FIREWALL=${PROVIDER_ECC_FIREWALL}
+      - TC_AES_SECRET_KEY=${AES_SECRET_KEY}	
+      - TC_DA_KEYSTORE_NAME=${PROVIDER_KEYSTORE_NAME}
+      - TC_DA_KEY_PASSWORD=${PROVIDER_KEY_PASSWORD}
+      - TC_DA_KEYSTORE_PASSWORD=${PROVIDER_KEYSTORE_PASSWORD}
+      - TC_DA_ALIAS=${PROVIDER_ALIAS}
+      - TC_EXTRACT_PAYLOAD_FROM_RESPONSE=${EXTRACT_PAYLOAD_FROM_RESPONSE}
+      - TC_ISSUER_CONNECTOR_URI=${PROVIDER_ISSUER_CONNECTOR_URI}
+      - TC_DA_FIREWALL=${PROVIDER_DATA_APP_FIREWALL}
+      - TC_VALIDATE_SELF_DESCRIPTION=${VALIDATE_SELF_DESCRIPTION}
+      - TZ=Europe/Rome
+    volumes:
+      - ./ecc_cert/ui-cert.crt:/etc/nginx/ssl/ui-cert.crt
+      - ./ecc_cert/ui-cert.key:/etc/nginx/ssl/ui-cert.key
+      - ./ui_resources/nginx.conf:/etc/nginx/nginx.conf
       
   ecc-consumer:
-    image: rdlabengpa/ids_execution_core_container:v1.14.8
+    image: rdlabengpa/ids_execution_core_container:v1.14.9
     deploy:
       resources:
         limits:
@@ -160,7 +220,7 @@ services:
     environment:
       - "JDK_JAVA_OPTIONS=-Xmx1024m"
       - "SPRING_PROFILES_ACTIVE=docker"
-      - DATA_APP_ENDPOINT=${CONSUMER_DATA_APP_ENDPOINT} #Data APP enpoint for consuming received data
+      - DATA_APP_ENDPOINT=${CONSUMER_DATA_APP_ENDPOINT} #Data APP endpoint for consuming received data
       - MULTIPART_EDGE=${CONSUMER_MULTIPART_EDGE} #Data APP endpoint multipart/mixed content type
       - MULTIPART_ECC=${MULTIPART_ECC}
       - CONNECTOR_ID=${CONSUMER_ISSUER_CONNECTOR_URI}
@@ -171,15 +231,15 @@ services:
       - BROKER_URL=${BROKER_URL}
       - CACHE_TOKEN=${CACHE_TOKEN}
       - FETCH_TOKEN_ON_STARTUP=${FETCH_TOKEN_ON_STARTUP}
-      - KEYSTORE_NAME=${KEYSTORE_NAME}
-      - KEY_PASSWORD=${KEY_PASSWORD}
-      - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
-      - ALIAS=${ALIAS}
+      - KEYSTORE_NAME=${CONSUMER_KEYSTORE_NAME}
+      - KEY_PASSWORD=${CONSUMER_KEY_PASSWORD}
+      - KEYSTORE_PASSWORD=${CONSUMER_KEYSTORE_PASSWORD}
+      - ALIAS=${CONSUMER_ALIAS}
       - DAPS_KEYSTORE_NAME=${CONSUMER_DAPS_KEYSTORE_NAME}
       - DAPS_KEYSTORE_PASSWORD=${CONSUMER_DAPS_KEYSTORE_PASSWORD}
       - DAPS_KEYSTORE_ALIAS=${CONSUMER_DAPS_KEYSTORE_ALIAS}
-      - TRUSTORE_NAME=${TRUSTORE_NAME}
-      - TRUSTORE_PASSWORD=${TRUSTORE_PASSWORD}
+      - TRUSTORE_NAME=${CONSUMER_TRUSTORE_NAME}
+      - TRUSTORE_PASSWORD=${CONSUMER_TRUSTORE_PASSWORD}
       - FIREWALL=${CONSUMER_ECC_FIREWALL}
       - TZ=Europe/Rome
       - AES256-SECRET-KEY=${AES_SECRET_KEY}
@@ -207,10 +267,10 @@ services:
       - "JDK_JAVA_OPTIONS=-Xmx256m"
       - ECC_PORT=8449
       - ECC_SELF_DESCRIPTION_URL=${CONSUMER_ECC_SELF_DESCRIPTION_URL}
-      - KEYSTORE_NAME=${KEYSTORE_NAME}
-      - KEY_PASSWORD=${KEY_PASSWORD}
-      - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
-      - ALIAS=${ALIAS}
+      - KEYSTORE_NAME=${CONSUMER_KEYSTORE_NAME}
+      - KEY_PASSWORD=${CONSUMER_KEY_PASSWORD}
+      - KEYSTORE_PASSWORD=${CONSUMER_KEYSTORE_PASSWORD}
+      - ALIAS=${CONSUMER_ALIAS}
       - TZ=Europe/Rome
       - AES256-SECRET-KEY=${AES_SECRET_KEY}
     expose:
@@ -242,7 +302,7 @@ services:
       - ./uc-dataapp-pip_resources_consumer:/etc
 
   be-dataapp-consumer:
-    image: rdlabengpa/ids_be_data_app:v0.3.8
+    image: rdlabengpa/ids_be_data_app:v0.3.9
     deploy:
       resources:
         limits:
@@ -262,10 +322,10 @@ services:
       - "JDK_JAVA_OPTIONS=-Xmx512m"
       - "SPRING_PROFILES_ACTIVE=docker"
       - DATA_APP_MULTIPART=${CONSUMER_MULTIPART_EDGE}
-      - KEYSTORE_NAME=${KEYSTORE_NAME}
-      - KEY_PASSWORD=${KEY_PASSWORD}
-      - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
-      - ALIAS=${ALIAS}
+      - KEYSTORE_NAME=${CONSUMER_KEYSTORE_NAME}
+      - KEY_PASSWORD=${CONSUMER_KEY_PASSWORD}
+      - KEYSTORE_PASSWORD=${CONSUMER_KEYSTORE_PASSWORD}
+      - ALIAS=${CONSUMER_ALIAS}
       - ECC_HOSTNAME=ecc-consumer
       - EXTRACT_PAYLOAD_FROM_RESPONSE=${EXTRACT_PAYLOAD_FROM_RESPONSE}
       - ECC_PORT=8887
@@ -274,9 +334,64 @@ services:
       - FIREWALL=${CONSUMER_DATA_APP_FIREWALL}
       - VALIDATE_SELF_DESCRIPTION=${VALIDATE_SELF_DESCRIPTION}
     volumes:
-      - ./be-dataapp_resources:/config
+      - ./be-dataapp_resources_consumer:/config
       - ./ecc_cert:/cert
       - be_dataapp_consumer_data:/home/nobody/data
+
+  ui-consumer:
+    image: rdlabengpa/ids_true_connector_ui:1.0.0
+    container_name: ui-consumer
+    networks:
+      - provider
+      - consumer    
+    ports:
+      - "4300:80" # HTTP port
+      - "4301:443" # HTTPS port
+    environment:
+      - SELF_DESCRIPTION_URL=https://localhost:8091
+      - PROXY_ENDPOINT_URL=https://localhost:8183/proxy
+      - SELF_DESCRIPTION_API=/api/selfDescription/
+      - CONTRACT_OFFER_API=/api/contractOffer/
+      - OFFERED_RESOURCE_API=/api/offeredResource/
+      - REPRESENTATION_API=/api/representation/
+      - MULTIPART_TYPE=${CONSUMER_MULTIPART_EDGE}
+      - FORWARD_TO=https://ecc-provider:8890/data
+      ## Optional environments in container to show Connector with prefix TC_
+      - TC_DATA_APP_ENDPOINT=${CONSUMER_DATA_APP_ENDPOINT} #Data APP endpoint for consuming received data
+      - TC_MULTIPART_EDGE=${CONSUMER_MULTIPART_EDGE} #Data APP endpoint multipart/mixed content type
+      - TC_MULTIPART_ECC=${MULTIPART_ECC}
+      - TC_CONNECTOR_ID=${CONSUMER_ISSUER_CONNECTOR_URI}
+      - TC_IDSCP2=${IDSCP2}
+      - TC_WS_EDGE=${CONSUMER_WS_EDGE}
+      - TC_WS_ECC=${WS_ECC}
+      - TC_UC_DATAAPP_URI=https://uc-dataapp-consumer:8080/platoontec/PlatoonDataUsage/1.0/
+      - TC_BROKER_URL=${BROKER_URL}
+      - TC_CACHE_TOKEN=${CACHE_TOKEN}
+      - TC_FETCH_TOKEN_ON_STARTUP=${FETCH_TOKEN_ON_STARTUP}
+      - TC_ECC_KEYSTORE_NAME=${CONSUMER_KEYSTORE_NAME}
+      - TC_ECC_KEY_PASSWORD=${CONSUMER_KEY_PASSWORD}
+      - TC_ECC_KEYSTORE_PASSWORD=${CONSUMER_KEYSTORE_PASSWORD}
+      - TC_ECC_ALIAS=${CONSUMER_ALIAS}
+      - TC_DAPS_KEYSTORE_NAME=${CONSUMER_DAPS_KEYSTORE_NAME}
+      - TC_DAPS_KEYSTORE_PASSWORD=${CONSUMER_DAPS_KEYSTORE_PASSWORD}
+      - TC_DAPS_KEYSTORE_ALIAS=${CONSUMER_DAPS_KEYSTORE_ALIAS}
+      - TC_ECC_TRUSTORE_NAME=${CONSUMER_TRUSTORE_NAME}
+      - TC_ECC_TRUSTORE_PASSWORD=${CONSUMER_TRUSTORE_PASSWORD}
+      - TC_ECC_FIREWALL=${CONSUMER_ECC_FIREWALL}
+      - TC_AES_SECRET_KEY=${AES_SECRET_KEY}	
+      - TC_DA_KEYSTORE_NAME=${CONSUMER_KEYSTORE_NAME}
+      - TC_DA_KEY_PASSWORD=${CONSUMER_KEY_PASSWORD}
+      - TC_DA_KEYSTORE_PASSWORD=${CONSUMER_KEYSTORE_PASSWORD}
+      - TC_DA_ALIAS=${CONSUMER_ALIAS}
+      - TC_EXTRACT_PAYLOAD_FROM_RESPONSE=${EXTRACT_PAYLOAD_FROM_RESPONSE}
+      - TC_ISSUER_CONNECTOR_URI=${CONSUMER_ISSUER_CONNECTOR_URI}
+      - TC_DA_FIREWALL=${CONSUMER_DATA_APP_FIREWALL}
+      - TC_VALIDATE_SELF_DESCRIPTION=${VALIDATE_SELF_DESCRIPTION}
+      - TZ=Europe/Rome
+    volumes:
+      - ./ecc_cert/ui-cert.crt:/etc/nginx/ssl/ui-cert.crt
+      - ./ecc_cert/ui-cert.key:/etc/nginx/ssl/ui-cert.key
+      - ./ui_resources/nginx.conf:/etc/nginx/nginx.conf
 
 networks:
   consumer: {}
