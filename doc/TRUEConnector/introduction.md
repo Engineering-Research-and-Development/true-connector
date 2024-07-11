@@ -5,7 +5,8 @@ Once you clone or download repository, you will have following directory structu
 ```
 be-dataapp_data_receiver - containing data needed for receiver/provider dataApp, files to share...
 be-dataapp_data_sender
-be-dataapp_resources - directory containing property file used for advanced configuration for both dataApps
+be-dataapp_resources_provider - directory containing property file used for advanced configuration for provider DataApp
+be-dataapp_resources_consumer - directory containing property file used for advanced configuration for consumer DataApp
 ecc_cert - directory used to store certificate files (DAPS certificate, HTTPS certificate, truststore...)
 ecc_resources_consumer - directory containing property file for consumer ECC advanced configuration
 ecc_resources_provider - directory containing property file for provider ECC advanced configuration

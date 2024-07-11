@@ -6,7 +6,7 @@ To use MyData Usage Control set the following property to **mydata**.
 application.usageControlVersion=mydata
 ```
 
-It is located in  **application-docker.properties** in folders *be-dataapp_resources*, *ecc_resources_consumer* and *ecc_resources_provider*.
+It is located in  **application-docker.properties** in folders *be-dataapp_resources_provider*, *be-dataapp_resources_consumer* *ecc_resources_consumer* and *ecc_resources_provider*.
 
 Edit the **docker-compose.yml** file and replace existing *uc-dataapp-provider* and *uc-dataapp-consumer* services with following:
 

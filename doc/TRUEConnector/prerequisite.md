@@ -164,3 +164,60 @@ application.selfdescription.curator=http://consumer.curatorURI.com
 application.selfdescription.maintainer=http://consumer.maintainerURI.com
 
 ```
+
+# Enable Self-Signed Certificates
+
+When using self-signed certificates on the backend side (ECC and DataApp), modern browsers will not establish a connection by default due to security concerns. To overcome this issue, you can follow one of the two solutions provided below:
+
+## Solution 1: Allow Invalid Certificates for Resources Loaded from Localhost
+
+### Chrome and Edge
+For Google Chrome and Microsoft Edge, you can allow invalid certificates for resources loaded from `localhost`:
+
+1. Open Chrome/Edge and go to the address bar.
+2. Type `chrome://flags` or `edge://flags` and press Enter.
+3. In the search box at the top, type "Allow invalid certificates".
+4. Find the flag `Allow invalid certificates for resources loaded from localhost`.
+5. Set this flag to `Enabled`.
+6. Restart the browser.
+
+### Firefox
+For Mozilla Firefox, you can allow invalid certificates by following these steps:
+
+1. Open Firefox and go to the address bar.
+2. Type `about:config` and press Enter.
+3. If prompted, accept the risk and continue.
+4. In the search bar at the top, type `security.ssl.enable_ocsp_stapling`.
+5. Find the setting `security.ssl.enable_ocsp_stapling` and set it to `false` by double-clicking it.
+6. Restart Firefox.
+
+Note: Disabling OCSP stapling can reduce security, so it is advisable to use this only for development purposes.
+
+## Solution 2: Install Certificate on Machine Level
+
+Installing the self-signed certificate on your machine will allow your browser to trust it, bypassing the security warnings. Here's how to do it:
+
+### Windows
+1. Double-click the self-signed certificate file (usually with a `.crt` or `.cer` extension).
+2. Click "Install Certificate".
+3. Select "Local Machine" and click "Next".
+4. Choose "Place all certificates in the following store" and click "Browse".
+5. Select "Trusted Root Certification Authorities" and click "OK".
+6. Complete the wizard by clicking "Next" and then "Finish".
+
+### macOS
+1. Open the `Keychain Access` application.
+2. Drag and drop the self-signed certificate file into the `System` keychain.
+3. Locate the certificate in the list and double-click it.
+4. Expand the "Trust" section.
+5. Set "When using this certificate" to "Always Trust".
+6. Close the certificate window and enter your password to confirm the changes.
+
+### Linux
+1. Copy the self-signed certificate file to `/usr/local/share/ca-certificates/` (with a `.crt` extension).
+2. Run the command `sudo update-ca-certificates`.
+
+After completing these steps, your browser should recognize the self-signed certificate as valid, allowing you to establish a connection with your backend services without warnings.
+
+***NOTE***: This should be applied only for local development, for production purpose, use valid trusted certificates.
+

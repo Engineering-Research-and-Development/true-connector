@@ -51,7 +51,7 @@ ECC `users.properties` can be found in next folders: [***ecc_resources_provider 
 
 [here](../ecc_resources_consumer/users.properties)
 
-DataApp `users.properties` can be found in next folder: [***be-dataapp_resouces***](../be-dataapp_resources/users.properties)
+DataApp `users.properties` can be found in next folders: [***be-dataapp_resouces_provider***](../be-dataapp_resources_provider/users.properties) and [***be-dataapp_resouces_consumer***](../be-dataapp_resources_consumer/users.properties)
 
 
 ### Usernames naming convention

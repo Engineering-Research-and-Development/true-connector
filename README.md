@@ -1,6 +1,6 @@
 ![](doc/TRUE_Connector_Logo.png?raw=true)
 <div align="right" style="color: black; font-size: 25px;">
-   <strong> Version 1.0.8 </strong>
+   <strong> Version 1.0.9 </strong>
 </div>
 
 
@@ -10,8 +10,6 @@
 TRUE ('TRU'sted 'E'ngineering) Connector for the IDS (International Data Space) ecosystem 
 </h1>
 
-<img src="doc/idsa-sign-component-certification-small.png" alt="certified" width="200" align="right"/>
-
 The International Data Spaces Association (IDSA) announces the successful completion of IDS certification for Engineering Group’s TRUE Connector as the fourth connector that receives the [IDS Certificate](doc/IDSA_certificate_ENG_final.pdf).
 
 The TRUE Connector is developed by Engineering, a leading digital transformation company based in Italy. The connector is an open-source solution designed to enable self-determined data sharing while ensuring compliance with regulations such as GDPR. Initially focused on the manufacturing domain, the TRUE Connector has proven its versatility across diverse sectors including circular economy, energy, smart buildings, and agri-food domains.
@@ -19,11 +17,12 @@ The TRUE Connector is developed by Engineering, a leading digital transformation
 The certification process, overseen by IDSA and conducted by the independent evaluation facility SQS, ensures adherence to highest functionality and security standards.
 
 
-The TRUE Connector is composed of three components:
+The TRUE Connector is composed of four components:
 
 * [Execution Core Container (ECC)](https://github.com/Engineering-Research-and-Development/true-connector-execution_core_container), open-source project designed by ENG. It is in charge of the data exchange through the IDS ecosystem representing data using the IDS Information Model and interacting with an external Identity Provider. It is also able to communicate with an IDS Broker for registering and querying information.
 * [Back-End (BE) Data Application](https://github.com/Engineering-Research-and-Development/true-connector-basic_data_app), open-source project designed by ENG. It represents a trivial data application for generating and consuming data on top of the ECC component.
 * [Usage-Control (UC) Data Application](https://github.com/Engineering-Research-and-Development/true-connector-uc\_data\_app\_platoon), a customized version of the Platoon base application for integrating Usage Control functionality. This version of Usage control application requires persistence layer, and it this setup, it is H2 in memory database, with file persistence, but if required, it can be changed with PostgreSQL database.
+* [TRUE Connector UI](https://github.com/Engineering-Research-and-Development/true-connector-ui), open-source project designed by ENG. It is front-end application for managing different parts of TRUE Connector suite, such are self-description management, artifact consumption.
 
 ![TRUE Connector Architecture](doc/TRUE\_Connector\_Architecture.png)
 
@@ -62,6 +61,7 @@ Please [click here](https://engineering-ing-inf-rd.gitbook.io/true-connector/), 
     * [MyData Usage Control](doc/advancedConfiguration/mydata.md)
     * [Audit logs](doc/advancedConfiguration/auditlogs.md)
     * [Firewall](doc/advancedConfiguration/firewall.md)
+    * [CORS configuration](doc/advancedConfiguration/cors.md)
   * [Contract Negotiation - simple flow](doc/contractNegotiation/contract-negotiation.md)
     * [Get offered resource](doc/contractNegotiation/get_offered_resource.md)
     * [Description Request Message](doc/contractNegotiation/description_request_message.md)
